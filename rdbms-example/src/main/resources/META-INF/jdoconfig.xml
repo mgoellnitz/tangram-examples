@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jdoconfig xmlns="http://java.sun.com/xml/ns/jdo/jdoconfig"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:noNamespaceSchemaLocation="http://java.sun.com/xml/ns/jdo/jdoconfig">
+
+   <persistence-manager-factory name="transactions-optional">
+       <property name="javax.jdo.PersistenceManagerFactoryClass"
+           value="org.datanucleus.api.jdo.JDOPersistenceManagerFactory"/>
+       <property name="javax.jdo.option.ConnectionDriverName" value="org.postgresql.Driver" />
+       <property name="javax.jdo.option.ConnectionURL" value="jdbc:postgresql://localhost:5432/postgres"/>
+       <property name="javax.jdo.option.ConnectionUserName" value="tex" />
+       <property name="javax.jdo.option.ConnectionPassword" value="tex" />
+       <property name="javax.jdo.option.Mapping" value="postgres" />
+       <property name="datanucleus.autoCreateSchema" value="true" />
+       <property name="datanucleus.validateTables" value="true" />
+       <property name="datanucleus.validateConstraints" value="true" />
+   </persistence-manager-factory>
+
+</jdoconfig>
