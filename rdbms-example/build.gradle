@@ -4,12 +4,14 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
+apply plugin: 'jetty'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
 tangram_version = '0.6-SNAPSHOT'
 
+datanucleus_version = '3.0.0-m3';
 servlet_spec = "2.5"
 jsp_spec = "2.0"
 
@@ -35,8 +37,6 @@ repositories {
  
 }
 
-compileJava.options.compilerArgs = ['-processor', 'org.datanucleus.enhancer.EnhancerProcessor'] 
-
 jar.enabled = true 
 
 configurations {
@@ -50,21 +50,19 @@ artifacts {
 }
 
 dependencies {
-  webapp "tangram:gae-webapp:$tangram_version"
+  webapp "tangram:rdbms-webapp:$tangram_version"
   
-  /*
-  compile "org.apache.geronimo.specs:geronimo-jpa_3.0_spec:1.1.1"
-  compile "javax.jdo:jdo2-api:2.3-eb"
-  compile "org.datanucleus:datanucleus-core:1.1.5"
-  compile "org.datanucleus:datanucleus-jpa:1.1.5"  
-  compile "com.google.appengine.orm:datanucleus-appengine:1.0.8"
-  */
-  providedCompile "org.datanucleus:datanucleus-enhancer:1.1.4"
+  providedCompile "org.datanucleus:datanucleus-enhancer:$datanucleus_version"
   
   providedCompile "javax.servlet:servlet-api:$servlet_spec"
   providedCompile "javax.servlet:jsp-api:$jsp_spec"
-  compile "tangram:gae:$tangram_version"
+  
+  // compile "postgresql:postgresql:8.4-702.jdbc4"
+  
+  compile "tangram:rdbms:$tangram_version"
 }
+
+compileJava.options.compilerArgs = ['-processor', 'org.datanucleus.enhancer.EnhancerProcessor'] 
 
 jar.doFirst {
   // JDO Enhancing is not really done when we start this - sorry
@@ -104,3 +102,6 @@ war {
 war.doLast {
   ant.unzip(src: war.archivePath, dest: "$buildDir/war")
 }
+
+stopPort = 12390
+httpPort = 12380

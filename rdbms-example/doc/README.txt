@@ -32,11 +32,12 @@ gradle jettyRunWar
 # Variant I - use demo data
 
 # import data
-
+# data is ready to use with pre-configured hsqldb
 
 # call
 http://localhost:12380/s/
 
+# user is admin and password is opal - in default state the whole application is protected
 
 # Variant II - start with empty system
 
@@ -49,3 +50,7 @@ http://localhost:12380/s/list?cms.editor.class.name=org.tangram.rdbms.Code
 
 # call
 http://localhost:12380/s/
+
+
+# hsqldb tool:
+java -cp build/war/WEB-INF/lib/hsqldb-1.8.0.10.jar org.hsqldb.util.DatabaseManager

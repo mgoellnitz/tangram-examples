@@ -24,7 +24,6 @@
 					</property>
 					<property name="allowedUsers">
 						<set>
-							<value>martin@goellnitz.de</value>
 							<value>rod</value>
 							<value>peter</value>
 							<value>admin</value>
@@ -32,7 +31,6 @@
 					</property>
 					<property name="adminUsers">
 						<set>
-							<value>martin@goellnitz.de</value>
 							<value>admin</value>
 						</set>
 					</property>
