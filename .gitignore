@@ -2,3 +2,6 @@
 /rdbms-example/build
 /gae-example/build
 /.gradle
+/coma-example/target
+/coma-example/build
+/coma-example/.gradle
