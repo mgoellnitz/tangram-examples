@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<!-- project specifics -->
+        
+  <!--
+	<bean id="comaCommon" class="de.tum.coma.infoterminal.ComaCommon" />
+  -->
+
+	<!--  optional: coma -->
+	<bean id="comaBeanPopulator" class="org.tangram.examples.coma.menusite.MenuSiteBeanPopulator" />
+
+	<!--  optional  tangram -->
+	<bean id="customViews" class="java.util.HashSet">
+		<constructor-arg>
+			<set>
+				<value>NULL</value>
+			</set>
+		</constructor-arg>
+	</bean>
+
+
+	<!-- non generics -->
+
+	<bean name="interceptors" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="org.tangram.monitor.MeasureTimeInterceptor">
+					<property name="freeUrls">
+						<set>
+							<value>${spring.dispatcher.servlet.path}/stats</value>
+						</set>
+					</property>
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="beanFactory" class="org.tangram.coma.ComaBeanFactory">
+		<property name="dbDriver" value="${coma.db.driver}" />
+		<property name="dbUrl" value="${coma.db.url}" />
+		<property name="dbUser" value="${coma.db.user}" />
+		<property name="dbPassword" value="${coma.db.password}" />
+		<property name="additionalProperties">
+			<map>
+  <!--
+				<entry key="common" value-ref="comaCommon" />
+  -->
+			</map>
+		</property>
+	</bean>
+
+	<bean id="comaJspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+	</bean>
+
+	<bean id="documentTypeViewResolver" class="org.tangram.coma.DocumentTypeResourceViewResolver">
+		<property name="order" value="5" />
+		<property name="delegate" ref="comaJspViewResolver" />
+		<property name="prefix" value="/WEB-INF/templates/" />
+		<property name="suffix" value=".jsp" />
+		<property name="packageName" value="com.coremedia.examples.cae.beans" />
+		<property name="parents">
+			<map>
+				<entry key="Dish" value="Document" />
+				<entry key="Picture" value="Document" />
+				<entry key="Page" value="Document" />
+				<entry key="Category" value="Document" />
+				<entry key="ContentRule" value="Document" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="classBasedViewResolver" class="org.tangram.view.ModelAwareInternalResourceViewResolver">
+		<property name="order" value="50" />
+		<property name="delegate" ref="comaJspViewResolver" />
+		<property name="prefix" value="/WEB-INF/templates/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+</beans>
