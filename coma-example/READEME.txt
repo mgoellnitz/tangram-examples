@@ -1,0 +1,26 @@
+This example is a little more complicated than compiling and starting like the others.
+
+This is due to the fact that we rely on your CoreMedia CMS Database and Content being in place. Coma is  no replacement but an addendum to your existing CoreMedia CMS infrastructure!
+
+For this very small example thus you need the very small example from coremedia, the menusite. We took Version CMS 2008 (5.2) just to avoid a maven build.
+
+Prerequisites:
+
+A menusite database create with a coremedia content server.
+
+This is achived by installing a content management server, copying license file and menusite doctypes to the installation and importing the example content. We used the postgresql database in this example but you are more or less free to use any dastabase supported by the CoreMedia CMS.
+
+
+content management server:
+
+postgres menusite/menusite
+
+licensefile anpassen
+
+copy cap-examples\cae\menusite\misc\menu-doctypes.xml target\contentserver\properties\corem
+
+cap.server.documentTypes=resourcecontainer:config/contentserver/framework/*-config.jar|/framework/doctypes/*.xml,properties/corem/menu-doctypes.xml
+
+copy postgresql-8.4-702.jdbc4.jar target\contentserver\lib
+
+target\contentserver\bin\cm serverimport -r -u admin -p admin cap-examples/cae/menusite/misc/data
