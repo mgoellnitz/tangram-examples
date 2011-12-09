@@ -22,7 +22,7 @@ create schema tex authorization tex;
 compile "postgresql:postgresql:8.4-702.jdbc4"
 
 # build example project
-gradle
+gradle build
 
 # optionally devploy war/webapp directory
 
