@@ -18,14 +18,12 @@ jsp_spec = "2.0"
 webAppDirName = 'disabled'
 
 repositories {
-
   mavenLocal()
 
   // most of the usual stuff
   maven { url "http://repo1.maven.org/maven2" }
   // needed for latest spring framework and security versions
   maven { url "http://repository.springsource.com/maven/bundles/release" }
-  
 }
 
 jar.enabled = true 

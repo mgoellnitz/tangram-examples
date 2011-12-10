@@ -17,22 +17,13 @@ jsp_spec = "2.0"
 webAppDirName = 'disabled'
 
 repositories {
-
   mavenLocal()
-
   // most of the usual stuff
   maven { url "http://repo1.maven.org/maven2" }
   // needed for latest spring framework and security versions
   maven { url "http://repository.springsource.com/maven/bundles/release" }
   // needed for latest datanucleus versions
   maven { url "http://www.datanucleus.org/downloads/maven2" }
-  
-  /* maybe unused
-  maven { url "http://repository.jboss.org/maven2" }
-  maven { url "http://repository.codehaus.org" }
-  maven { url "http://fornax.itemis.de/nexus/content/repositories/thirdparty" }
-  */
- 
 }
 
 compileJava.options.compilerArgs = ['-processor', 'org.datanucleus.enhancer.EnhancerProcessor'] 
@@ -52,13 +43,6 @@ artifacts {
 dependencies {
   webapp "tangram:gae-webapp:$tangram_version"
   
-  /*
-  compile "org.apache.geronimo.specs:geronimo-jpa_3.0_spec:1.1.1"
-  compile "javax.jdo:jdo2-api:2.3-eb"
-  compile "org.datanucleus:datanucleus-core:1.1.5"
-  compile "org.datanucleus:datanucleus-jpa:1.1.5"  
-  compile "com.google.appengine.orm:datanucleus-appengine:1.0.8"
-  */
   providedCompile "org.datanucleus:datanucleus-enhancer:1.1.4"
   
   providedCompile "javax.servlet:servlet-api:$servlet_spec"
@@ -68,7 +52,7 @@ dependencies {
 
 jar.doFirst {
   // JDO Enhancing is not really done when we start this - sorry
-  Thread.currentThread().sleep(5000)
+  Thread.currentThread().sleep(3000)
 }
 
 war.doFirst {
@@ -83,7 +67,7 @@ war.doFirst {
     ant.unzip(src: archiveFileName, dest: "$buildDir/target")  
   } // if
   
-  // TODO: YUICompressor!
+  // TODO: YUICompressor - see base system
   copy {
     from 'src/main/webapp'
     into "$buildDir/target"

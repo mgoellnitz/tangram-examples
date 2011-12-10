@@ -9,7 +9,7 @@ apply plugin: 'jetty'
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
-tangram_version = '0.6'
+tangram_version = '0.7-SNAPSHOT'
 
 datanucleus_version = '3.0.0-m3';
 servlet_spec = "2.5"
@@ -19,7 +19,6 @@ jsp_spec = "2.0"
 webAppDirName = 'disabled'
 
 repositories {
-
   mavenLocal()
 
   // most of the usual stuff
@@ -28,13 +27,6 @@ repositories {
   maven { url "http://repository.springsource.com/maven/bundles/release" }
   // needed for latest datanucleus versions
   maven { url "http://www.datanucleus.org/downloads/maven2" }
-  
-  /* maybe unused
-  maven { url "http://repository.jboss.org/maven2" }
-  maven { url "http://repository.codehaus.org" }
-  maven { url "http://fornax.itemis.de/nexus/content/repositories/thirdparty" }
-  */
- 
 }
 
 jar.enabled = true 
