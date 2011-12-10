@@ -9,7 +9,7 @@ apply plugin: 'jetty'
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
-tangram_version = '0.6-SNAPSHOT'
+tangram_version = '0.6'
 
 datanucleus_version = '3.0.0-m3';
 servlet_spec = "2.5"
