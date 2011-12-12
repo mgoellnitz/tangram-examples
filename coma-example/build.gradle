@@ -49,6 +49,63 @@ dependencies {
   compile "tangram:coma:$tangram_version"
 }
 
+// TODO: this looks a little bit redundnant...
+buildscript {
+    repositories {
+        mavenLocal()
+  
+        // most of the usual stuff
+        maven { url "http://repo1.maven.org/maven2" }
+    }
+
+    dependencies {
+        // TODO: how to use the yui_version variable above?
+        classpath "com.yahoo.platform.yui:yuicompressor:2.4.6"
+    }
+}
+
+class JavaScriptMinify extends FilterReader {
+
+    Reader inputReader
+
+    public JavaScriptMinify(Reader inputReader) {
+        super(inputReader);
+        if (inputReader!=null) {
+            try {
+                com.yahoo.platform.yui.compressor.JavaScriptCompressor jsc = new com.yahoo.platform.yui.compressor.JavaScriptCompressor(inputReader, null);
+                StringWriter out = new StringWriter();
+                jsc.compress(out, 80, false, false, false, false);
+                out.close();
+                super.in = new StringReader(out.getBuffer().toString());
+            } catch (Exception e) {
+                ; // who cares
+            } // try/catch
+        } // if
+    } // JavaScriptMinify()
+
+} // JavaScriptMinify
+
+class CSSMinify extends FilterReader {
+
+    Reader inputReader
+
+    public CSSMinify(Reader inputReader) {
+        super(inputReader);
+        if (inputReader!=null) {
+            try {
+                com.yahoo.platform.yui.compressor.CssCompressor csc = new com.yahoo.platform.yui.compressor.CssCompressor(inputReader);
+                StringWriter out = new StringWriter();
+                csc.compress(out, 0);
+                out.close();
+                super.in = new StringReader(out.getBuffer().toString());
+            } catch (Exception e) {
+                ; // who cares
+            } // try/catch
+        } // if
+    } // CSSMinify()
+
+} // CSSMinify
+
 war.doFirst {
   // Strange way of overwriting things
   if (configurations.webapp.dependencies.size() == 1) {
@@ -61,11 +118,25 @@ war.doFirst {
     ant.unzip(src: archiveFileName, dest: "$buildDir/target")  
   } // if
   
-  // TODO: YUICompressor!
   copy {
     from 'src/main/webapp'
     into "$buildDir/target"
     include '**/**'
+    // exclude '**/*.js'
+    exclude '**/*.css'
+  }
+  copy {
+    from 'src/main/webapp'
+    into "$buildDir/target"
+    include '**/*.js'
+    exclude 'editor/ckeditor/**'
+    filter(JavaScriptMinify)
+  }
+  copy {
+    from 'src/main/webapp'
+    into "$buildDir/target"
+    include '**/*.css'
+    filter(CSSMinify)
   }
   
   into ('') {

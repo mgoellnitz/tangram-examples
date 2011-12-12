@@ -50,7 +50,7 @@ dependencies {
   compile "tangram:gae:$tangram_version"
 }
 
-jar.doFirst {
+compileJava.doLast {
   // JDO Enhancing is not really done when we start this - sorry
   Thread.currentThread().sleep(3000)
 }
@@ -67,7 +67,9 @@ war.doFirst {
     ant.unzip(src: archiveFileName, dest: "$buildDir/target")  
   } // if
   
-  // TODO: YUICompressor - see base system
+  // Missing: YUICompressor - see base system
+  // It's not really that important since we don't have any
+  // static Stylesheets or JavaScripts are in the examples.
   copy {
     from 'src/main/webapp'
     into "$buildDir/target"
