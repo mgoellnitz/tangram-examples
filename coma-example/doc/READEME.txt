@@ -24,3 +24,6 @@ cap.server.documentTypes=resourcecontainer:config/contentserver/framework/*-conf
 copy postgresql-8.4-702.jdbc4.jar target\contentserver\lib
 
 target\contentserver\bin\cm serverimport -r -u admin -p admin cap-examples/cae/menusite/misc/data
+
+
+# http://download.coremedia.com/release/coremedia/5.2/1259/
