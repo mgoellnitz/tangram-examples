@@ -9,10 +9,10 @@ apply plugin: 'jetty'
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
-tangram_version = '0.7-SNAPSHOT'
+ext.tangram_version = '0.7-SNAPSHOT'
 
-servlet_spec = "2.5"
-jsp_spec = "2.0"
+ext.servlet_spec = "2.5"
+ext.jsp_spec = "2.0"
 
 // don't let gradle work with its defaults on my files...
 webAppDirName = 'disabled'
@@ -109,8 +109,8 @@ class CSSMinify extends FilterReader {
 war.doFirst {
   // Strange way of overwriting things
   if (configurations.webapp.dependencies.size() == 1) {
-    archiveFileName = configurations.webapp.asPath
-    idx = archiveFileName.indexOf(';')
+    String archiveFileName = configurations.webapp.asPath
+    int idx = archiveFileName.indexOf(';')
     if (idx >= 0) {
       archiveFileName = archiveFileName.substring(0, idx)
     } // if
