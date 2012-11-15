@@ -28,6 +28,9 @@ repositories {
 
 jar.enabled = true 
 
+// Project specific default output directory
+eclipse.classpath.conventionMapping.defaultOutputDir = { new File(project.projectDir, 'build/classes/main') }
+
 configurations {
   libs 
   webapp
@@ -108,7 +111,7 @@ class CSSMinify extends FilterReader {
 
 war.doFirst {
   // Strange way of overwriting things
-  if (configurations.webapp.dependencies.size() == 1) {
+  if (configurations.webapp.dependencies.size() > 0) {
     String archiveFileName = configurations.webapp.asPath
     int idx = archiveFileName.indexOf(';')
     if (idx >= 0) {
