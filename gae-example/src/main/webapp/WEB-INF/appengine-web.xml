@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
 
-	<application></application>
+	<application>gaeexample</application>
 	<version>1</version>
 
-            <!-- If you want to use protected areas you will have to set this to true -->
+    <!-- If you want to use protected areas you will have to set this to true -->
 	<sessions-enabled>true</sessions-enabled>
 	
-            <!-- tell google app engine the static parts of the project, so that they can be efficiently cached -->
+    <!-- tell google app engine the static parts of the project, so that they can be efficiently cached -->
 	<static-files>
 		<include path="/ckeditor/**.*" expiration="30d" />
 		<include path="/editor/**.*" expiration="1h" />
@@ -20,7 +20,7 @@
 		 -->
 	</static-files>
 
-            <!-- present some error handler pages  -->
+    <!-- present some error handler pages  -->
 	<static-error-handlers>
 		<handler file="/t/e/defaultError.html" />
 		<handler file="/t/e/overQuotaError.html" error-code="over_quota" />
@@ -28,10 +28,10 @@
 		<handler file="/t/e/timeoutError.html" error-code="timeout" />
 	</static-error-handlers>
 	
-            <!-- extend the admin console with some usefull stuff -->
+    <!-- extend the admin console with some usefull stuff -->
 	<admin-console>
 		<page name="Tangram Statistics" url="/s/stats" />
-		<page name="Tangram Clear Caches" url="/s/clear/caches/caches?tangramAdminUser=12" />
+		<page name="Tangram Clear Caches" url="/s/clear/caches?tangramAdminUser=12" />
 		<page name="Tangram Clear Google Sessions" url="/s/clear/sessions?tangramAdminUser=12" />
 	</admin-console>
 

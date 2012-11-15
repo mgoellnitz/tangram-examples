@@ -6,7 +6,7 @@
    <persistence-manager-factory name="transactions-optional">
        <property name="javax.jdo.PersistenceManagerFactoryClass"
            value="org.datanucleus.api.jdo.JDOPersistenceManagerFactory"/>
-           <!--
+       <!-- postgresql example
        <property name="javax.jdo.option.ConnectionDriverName" value="org.postgresql.Driver" />
        <property name="javax.jdo.option.ConnectionURL" value="jdbc:postgresql://localhost:5432/postgres"/>
        <property name="javax.jdo.option.ConnectionUserName" value="tex" />

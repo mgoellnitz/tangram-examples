@@ -54,8 +54,10 @@ dependencies {
   providedCompile "javax.servlet:servlet-api:$servlet_spec"
   providedCompile "javax.servlet:jsp-api:$jsp_spec"
   
-    providedCompile "org.apache.ant:ant:1.8.4"
-    providedCompile "org.datanucleus:datanucleus-enhancer:$datanucleus_enhancer_version"
+  testCompile "junit:junit:4.10"
+
+  providedCompile "org.apache.ant:ant:1.8.4"
+  providedCompile "org.datanucleus:datanucleus-enhancer:$datanucleus_enhancer_version"
 }
 
 compileJava.doLast {
