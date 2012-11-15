@@ -5,3 +5,12 @@
 /coma-example/target
 /coma-example/build
 /coma-example/.gradle
+/coma-example/.classpath
+/coma-example/.project
+/coma-example/.settings/org.eclipse.jdt.core.prefs
+/gae-example/.classpath
+/gae-example/.project
+/gae-example/.settings/org.eclipse.jdt.core.prefs
+/rdbms-example/.classpath
+/rdbms-example/.project
+/rdbms-example/.settings/org.eclipse.jdt.core.prefs
