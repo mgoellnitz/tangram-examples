@@ -2,14 +2,13 @@ package org.tangram.examples.coma.menusite;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.tangram.coma.ComaContent;
 import org.tangram.coma.ComaBeanFactory;
 import org.tangram.coma.ComaBeanPopulator;
+import org.tangram.coma.ComaContent;
 
 public class MenuSiteBeanPopulator implements ComaBeanPopulator {
 

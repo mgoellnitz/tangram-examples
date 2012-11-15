@@ -109,10 +109,10 @@ public class Topic extends Linkable implements ProtectedContent {
             if (subTopics!=null) {
                 for (Topic x : subTopics) {
                     if (x!=null) {
-                        List<Topic> path = getPathRecursive(x);
-                        if (path!=null) {
-                            path.add(0, t);
-                            return path;
+                        List<Topic> p = getPathRecursive(x);
+                        if (p!=null) {
+                            p.add(0, t);
+                            return p;
                         } // if
                     } else {
                         log.error("getPathRecursive() "+t.getId()+" has null pointer subtopic");
@@ -150,10 +150,10 @@ public class Topic extends Linkable implements ProtectedContent {
     public List<Container> getInheritedRelatedContainers() {
         List<Container> result = new ArrayList<Container>();
         if (inheritedRelatedContainers==null) {
-            List<Topic> path = getPath();
-            int i = path.size();
+            List<Topic> p = getPath();
+            int i = p.size();
             while (( --i>=0)&&(result.size()==0)) {
-                result = path.get(i).getRelatedContainers();
+                result = p.get(i).getRelatedContainers();
             } // while
             inheritedRelatedContainers = result;
         } else {
