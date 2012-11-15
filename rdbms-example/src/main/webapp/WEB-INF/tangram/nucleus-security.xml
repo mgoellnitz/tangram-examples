@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/security 
-        http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+        http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
     <!--
     Usernames/Passwords are
@@ -22,10 +22,12 @@
         </authentication-provider>
     </authentication-manager>
 
+	<http use-expressions="true" security="none" pattern="/editor/**" />
+
+	<http use-expressions="true" security="none" pattern="/t/**" />
+
 	<http use-expressions="true">
 		<intercept-url pattern="/" access="permitAll" />
-		<intercept-url pattern="/editor/**" filters="none" />
-		<intercept-url pattern="/t/**" filters="none" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 		<form-login />
 		<logout />

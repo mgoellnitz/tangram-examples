@@ -54,3 +54,5 @@ http://localhost:12380/s/
 
 # hsqldb tool:
 java -cp build/war/WEB-INF/lib/hsqldb-1.8.0.10.jar org.hsqldb.util.DatabaseManager
+
+# issue shutdown to compress database again

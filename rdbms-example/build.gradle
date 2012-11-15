@@ -9,11 +9,13 @@ apply plugin: 'jetty'
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
-ext.tangram_version = '0.7-SNAPSHOT'
-
-ext.datanucleus_version = '3.0.1';
 ext.servlet_spec = "2.5"
 ext.jsp_spec = "2.0"
+
+ext.tangram_version = '0.7-SNAPSHOT'
+
+ext.datanucleus_version = '3.1.0-release';
+ext.datanucleus_enhancer_version = '3.1.0-release';
 
 // don't let gradle work with its defaults on my files...
 webAppDirName = 'disabled'
@@ -31,6 +33,9 @@ repositories {
 
 jar.enabled = true 
 
+// Project specific default output directory
+eclipse.classpath.conventionMapping.defaultOutputDir = { new File(project.projectDir, 'build/classes/main') }
+
 configurations {
   libs 
   webapp
@@ -44,26 +49,39 @@ artifacts {
 dependencies {
   webapp "tangram:rdbms-webapp:$tangram_version"
   
-  providedCompile "org.datanucleus:datanucleus-enhancer:$datanucleus_version"
+  compile "tangram:rdbms:$tangram_version"
   
   providedCompile "javax.servlet:servlet-api:$servlet_spec"
   providedCompile "javax.servlet:jsp-api:$jsp_spec"
   
-  // compile "postgresql:postgresql:8.4-702.jdbc4"
-  
-  compile "tangram:rdbms:$tangram_version"
+    providedCompile "org.apache.ant:ant:1.8.4"
+    providedCompile "org.datanucleus:datanucleus-enhancer:$datanucleus_enhancer_version"
 }
 
-compileJava.options.compilerArgs = ['-processor', 'org.datanucleus.enhancer.EnhancerProcessor'] 
-
 compileJava.doLast {
-  // JDO Enhancing is not really done when we start this - sorry
-  Thread.currentThread().sleep(3000)
+    try {
+        ant.taskdef(name: 'enhance', classpath: sourceSets['main'].compileClasspath.asPath, classname: 'org.datanucleus.enhancer.tools.EnhancerTask')
+        ant.enhance(failonerror: true, verbose: true, checkonly: false, dir: sourceSets['main'].output.classesDir.canonicalPath) {
+            classpath {
+                // for the log configuration...
+                pathelement(path: '.')
+                // The classes to be enhanced need to be on the class path
+                pathelement(path: sourceSets['main'].output.classesDir.canonicalPath)
+                // this is the real class path for the tool (s.a.)
+                pathelement(path: sourceSets['main'].compileClasspath.asPath)
+            }
+            fileset(dir: sourceSets['main'].output.classesDir.canonicalPath)
+        }
+    } catch(Exception e) {
+        println ''
+        e.printStackTrace(System.out);
+        throw new GradleException('An error occurred enhancing persistence capable classes.', e)
+    }
 }
 
 war.doFirst {
-  // Strange way of overwriting things
-  if (configurations.webapp.dependencies.size() == 1) {
+  // Strange way of overwriting things - it must be the first webapp dependency
+  if (configurations.webapp.dependencies.size() > 0) {
     String archiveFileName = configurations.webapp.asPath
     int idx = archiveFileName.indexOf(';')
     if (idx >= 0) {
