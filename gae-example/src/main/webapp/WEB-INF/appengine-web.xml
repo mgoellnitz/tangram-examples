@@ -6,6 +6,8 @@
 
     <!-- If you want to use protected areas you will have to set this to true -->
 	<sessions-enabled>true</sessions-enabled>
+	<!-- We consider tangram apps thread safe -->
+	<threadsafe>true</threadsafe>
 	
     <!-- tell google app engine the static parts of the project, so that they can be efficiently cached -->
 	<static-files>
