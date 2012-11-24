@@ -57,7 +57,6 @@ dependencies {
 
 compileJava.doLast {
     try {
-        // println 'configurations: '+configurations.dn.asPath
         ant.taskdef(name: 'enhance', classpath: configurations.dn.asPath, classname: 'org.datanucleus.enhancer.tools.EnhancerTask')
         ant.enhance(failonerror: true, verbose: true, checkonly: false, dir: sourceSets['main'].output.classesDir.canonicalPath) {
             classpath {

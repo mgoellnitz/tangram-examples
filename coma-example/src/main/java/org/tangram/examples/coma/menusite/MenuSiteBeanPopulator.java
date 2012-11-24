@@ -12,6 +12,7 @@ import org.tangram.coma.ComaContent;
 
 public class MenuSiteBeanPopulator implements ComaBeanPopulator {
 
+    @SuppressWarnings("unused")
     private static Log log = LogFactory.getLog(MenuSiteBeanPopulator.class);
 
     @Autowired
@@ -32,6 +33,7 @@ public class MenuSiteBeanPopulator implements ComaBeanPopulator {
         if ("Category".equals(content.getDocumentType())) {
             String folderId = beanFactory.getChildId("/MenuSite/"+content.get("name"));
             idCollection = beanFactory.getChildrenIds(folderId, "Dish", null);
+            @SuppressWarnings("rawtypes")
             Collection beanCollection = new ArrayList<ComaContent>();
             for (String id : idCollection) {
                 beanCollection.add(beanFactory.getBean(id));
