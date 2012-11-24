@@ -20,8 +20,10 @@ package org.tangram.rdbms.solution;
 
 import javax.jdo.annotations.PersistenceCapable;
 
+import org.tangram.jdo.util.MimedBlob;
+
 @PersistenceCapable
-public class ImageData extends Linkable {
+public class ImageData extends Linkable implements MimedBlob {
 
     private byte[] data;
 
@@ -42,6 +44,7 @@ public class ImageData extends Linkable {
     }
 
 
+    @Override
     public String getMimeType() {
         return mimeType;
     }
@@ -71,8 +74,10 @@ public class ImageData extends Linkable {
         this.height = height;
     }
 
+
+    @Override
     public byte[] getBytes() {
         return getData();
     } // getBytes()
 
-} // Image
+} // ImageData

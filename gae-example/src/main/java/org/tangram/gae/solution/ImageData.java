@@ -1,17 +1,21 @@
 package org.tangram.gae.solution;
 
+import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
 import com.google.appengine.api.datastore.Blob;
 
+import org.tangram.jdo.util.MimedBlob;
+
 @PersistenceCapable
-public class ImageData extends Linkable {
+@Inheritance(customStrategy = "complete-table")
+public class ImageData extends Linkable implements MimedBlob {
 
     @Persistent
     private Blob data;
-
+    
     private String mimeType;
 
     private String width;
@@ -29,6 +33,7 @@ public class ImageData extends Linkable {
     }
 
 
+    @Override
     public String getMimeType() {
         return mimeType;
     }
@@ -61,12 +66,12 @@ public class ImageData extends Linkable {
     @NotPersistent
     byte[] bytes = null;
 
-
+    @Override
     public byte[] getBytes() {
-        if (bytes==null) {
+        if (bytes == null) {
             bytes = getData().getBytes();
         } // if
         return bytes;
     } // getBytes()
 
-} // Image
+} // ImageData
