@@ -110,6 +110,7 @@ war {
   excludes = [ "classes/**" ]
 }
 
+// to use the local dev_appserver in this directory
 war.doLast {
   ant.unzip(src: war.archivePath, dest: "$buildDir/war")
 }

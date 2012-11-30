@@ -10,7 +10,7 @@ gradle
 # start app server
 dev_appserver -p 12380 build\war
 
-# (optionally deploy war/ to google app engine system)
+# (optionally deploy war/ to google app engine system - you seem to have to use 32bit Java for this!)
 
 # Variant I - use demo data
 
@@ -25,6 +25,7 @@ http://localhost:12380/s/
 
 # call the editor and log in
 http://localhost:12380/s/list?cms.editor.class.name=org.tangram.gae.Code
+http://localhost:12380/s/list?cms.editor.class.name=org.tangram.gae.solution.RootTopic
 
 # create an instance of type "RootTopic"
 
