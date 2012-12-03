@@ -12,6 +12,7 @@ ext.tangram_version = '0.7-SNAPSHOT'
 
 ext.servlet_spec = "2.5"
 ext.jsp_spec = "2.0"
+ext.yui_version="2.4.6"
 
 // don't let gradle work with its defaults on my files...
 webAppDirName = 'disabled'
@@ -49,6 +50,9 @@ dependencies {
   
   providedCompile "javax.servlet:servlet-api:$servlet_spec"
   providedCompile "javax.servlet:jsp-api:$jsp_spec"
+  
+  // To exclude original YUICompressor jar from output war
+  providedCompile "com.yahoo.platform.yui:yuicompressor:$yui_version"
   
   testCompile "junit:junit:4.10"
 
@@ -97,6 +101,19 @@ war.doFirst {
     from 'src/main/webapp'
     into "$buildDir/target"
     include '**/**'
+  }
+  
+  // ...and to again include those YUICompressor's dependencies with a different name
+  copy {
+    from "$buildDir/target"
+    into "$buildDir/target"
+    include '**/yui*'
+    rename 'yui', 'aaa-yui'
+  }
+  into ('') {
+    from "$buildDir/target"
+    include 'WEB-INF/lib/aaa-*'
+    include 'WEB-INF/lib/js-*'
   }
   
   into ('') {
