@@ -11,6 +11,7 @@ targetCompatibility = 1.6
 
 ext.servlet_spec = "2.5"
 ext.jsp_spec = "2.0"
+ext.yui_version="2.4.6"
 
 ext.tangram_version = '0.7-SNAPSHOT'
 
@@ -120,5 +121,5 @@ war.doLast {
   ant.unzip(src: war.archivePath, dest: "$buildDir/war")
 }
 
-stopPort = 12390
-httpPort = 12380
+ext.stopPort = 12390
+ext.httpPort = 12380
