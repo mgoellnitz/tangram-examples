@@ -23,7 +23,6 @@ webAppDirName = 'disabled'
 
 repositories {
   mavenLocal()
-
   // most of the usual stuff
   maven { url "http://repo1.maven.org/maven2" }
   // needed for latest spring framework and security versions
@@ -104,6 +103,19 @@ war.doFirst {
     from 'src/main/webapp'
     into "$buildDir/target"
     include '**/**'
+  }
+  
+  // ...and to again include those YUICompressor's dependencies with a different name
+  copy {
+    from "$buildDir/target"
+    into "$buildDir/target"
+    include '**/yui*'
+    rename 'yui', 'aaa-yui'
+  }
+  into ('') {
+    from "$buildDir/target"
+    include 'WEB-INF/lib/aaa-*'
+    include 'WEB-INF/lib/js-*'
   }
   
   into ('') {
