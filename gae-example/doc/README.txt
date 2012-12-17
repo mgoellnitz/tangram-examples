@@ -15,7 +15,7 @@ dev_appserver -p 12380 build\war
 # Variant I - use demo data
 
 # import data
-bulkloader.py --restore --application=<aeid> --url=http://localhost:12380/remote_api --filename=gae-example.db
+bulkloader.py --restore --url=http://localhost:12380/remote_api --filename=gae-example.db
 
 # call
 http://localhost:12380/s/
