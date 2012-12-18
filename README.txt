@@ -12,4 +12,4 @@ can be started via
 gradle jettyRunWar
 
 and are running as a default on port 12380 - unless you changed that. They don't 
-depend on anygthing else running on your system than tangram itself.
+depend on anything else running on your system than tangram itself.
