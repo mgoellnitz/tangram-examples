@@ -9,7 +9,7 @@ apply plugin: 'jetty'
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
-ext.tangram_version = '0.7-SNAPSHOT'
+ext.tangram_version = '0.7'
 
 ext.servlet_spec = "2.5"
 ext.jsp_spec = "2.0"
