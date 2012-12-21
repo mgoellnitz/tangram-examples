@@ -18,13 +18,14 @@ ext.tangram_version = '0.7'
 webAppDirName = 'disabled'
 
 repositories {
-  mavenLocal()
   // most of the usual stuff
   maven { url "http://repo1.maven.org/maven2" }
-  // needed for latest spring framework and security versions
-  maven { url "http://repository.springsource.com/maven/bundles/release" }
   // needed for latest datanucleus versions
   maven { url "http://www.datanucleus.org/downloads/maven2" }
+  // the tangram stuff
+  maven { url "http://my-amor.appspot.com/repository" }
+  // needed for latest spring framework and security versions
+  maven { url "http://repository.springsource.com/maven/bundles/release" }
 }
 
 jar.enabled = true 
