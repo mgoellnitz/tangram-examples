@@ -37,6 +37,7 @@ configurations {
   libs 
   webapp
   dn
+  yui
 }
 
 artifacts {
@@ -54,6 +55,7 @@ dependencies {
   
   // To exclude original YUICompressor jar from output war
   providedCompile "com.yahoo.platform.yui:yuicompressor:$yui_version"
+  yui "com.yahoo.platform.yui:yuicompressor:$yui_version"
   
   testCompile "junit:junit:4.10"
 
@@ -105,21 +107,17 @@ war.doFirst {
   }
   
   // ...and to again include those YUICompressor's dependencies with a different name
-  copy {
-    from "$buildDir/target"
-    into "$buildDir/target"
-    include '**/yui*'
-    rename 'yui', 'aaa-yui'
-  }
-  into ('') {
-    from "$buildDir/target"
-    include 'WEB-INF/lib/aaa-*'
-    include 'WEB-INF/lib/js-*'
+  for (f in configurations.yui.files) {
+    copy {
+      from f.absolutePath
+      into "$buildDir/target/WEB-INF/lib"
+      rename 'yui', 'aaa-yui'
+    }
   }
   
   into ('') {
     from "$buildDir/target"
-    exclude 'WEB-INF/lib/**'
+    exclude 'WEB-INF/lib/tangram-**'
   }
 }
 
