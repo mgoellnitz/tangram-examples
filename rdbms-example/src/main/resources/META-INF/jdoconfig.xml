@@ -6,12 +6,20 @@
    <persistence-manager-factory name="transactions-optional">
        <property name="javax.jdo.PersistenceManagerFactoryClass"
            value="org.datanucleus.api.jdo.JDOPersistenceManagerFactory"/>
+       <!-- odf example - does not support arrays like we use for text and the like
+       <property name="javax.jdo.option.ConnectionURL" value="odf:file:myfile.ods"/>
+       -->
+       <!-- xls example - does not support arrays like we use for text and the like
+       <property name="javax.jdo.option.ConnectionURL" value="excel:file:myfile.xls"/>
+       -->
        <!-- postgresql example
        <property name="javax.jdo.option.ConnectionDriverName" value="org.postgresql.Driver" />
        <property name="javax.jdo.option.ConnectionURL" value="jdbc:postgresql://localhost:5432/postgres"/>
        <property name="javax.jdo.option.ConnectionUserName" value="tex" />
        <property name="javax.jdo.option.ConnectionPassword" value="tex" />
        <property name="javax.jdo.option.Mapping" value="postgres" />
+       -->
+       <!-- hsqldb example - content provided
        -->
        <property name="javax.jdo.option.ConnectionDriverName" value="org.hsqldb.jdbcDriver" />
        <property name="javax.jdo.option.ConnectionURL" value="jdbc:hsqldb:file:tangram-rdbms"/>
