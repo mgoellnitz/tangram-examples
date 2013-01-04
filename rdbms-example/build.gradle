@@ -13,15 +13,17 @@ ext.servlet_spec = "2.5"
 ext.jsp_spec = "2.0"
 ext.yui_version="2.4.6"
 
-ext.tangram_version = '0.7'
+ext.tangram_version = '0.8-SNAPSHOT'
 
-ext.datanucleus_version = '3.1.0-release';
-ext.datanucleus_enhancer_version = '3.1.0-release';
+// For experiments with other data store types
+// ext.datanucleus_version = '3.1.1';
+ext.datanucleus_enhancer_version = '3.1.1';
 
 // don't let gradle work with its defaults on my files...
 webAppDirName = 'disabled'
 
 repositories {
+  mavenLocal()
   // most of the usual stuff
   maven { url "http://repo1.maven.org/maven2" }
   // needed for latest datanucleus versions
@@ -52,6 +54,10 @@ dependencies {
   webapp "tangram:rdbms-webapp:$tangram_version"
   
   compile "tangram:rdbms:$tangram_version"
+  
+  // For experiments with other data store types
+  // compile "org.datanucleus:datanucleus-odf:$datanucleus_version"
+  // compile "org.datanucleus:datanucleus-excel:$datanucleus_version"
   
   providedCompile "javax.servlet:servlet-api:$servlet_spec"
   providedCompile "javax.servlet:jsp-api:$jsp_spec"
