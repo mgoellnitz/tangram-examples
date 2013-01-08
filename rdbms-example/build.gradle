@@ -11,7 +11,8 @@ targetCompatibility = 1.6
 
 ext.servlet_spec = "2.5"
 ext.jsp_spec = "2.0"
-ext.yui_version="2.4.6"
+ext.yui_version = "2.4.6"
+ext.junit_version = "4.10"
 
 ext.tangram_version = '0.8-SNAPSHOT'
 
@@ -66,7 +67,7 @@ dependencies {
   providedCompile "com.yahoo.platform.yui:yuicompressor:$yui_version"
   yui "com.yahoo.platform.yui:yuicompressor:$yui_version"
   
-  testCompile "junit:junit:4.10"
+  testCompile "junit:junit:$junit_version"
 
   providedCompile "org.apache.ant:ant:1.8.4"
   providedCompile "org.datanucleus:datanucleus-enhancer:$datanucleus_enhancer_version"
