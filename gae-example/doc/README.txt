@@ -9,6 +9,8 @@ gradle
 
 # start app server
 dev_appserver -p 12380 build\war
+# with new HRD sematics needed for all future versions of this example and no update check for the local SDK
+dev_appserver --hvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=20 --disable_update_check -p 12380 build\war
 
 # (optionally deploy war/ to google app engine system - you seem to have to use 32bit Java for this!)
 

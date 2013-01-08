@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	<!-- application protection -->
 
-            <!-- we consider it common that you will want to leave the measure time interceptor for measurement of timings
-               and results on the /stats page and the password interceptor to define allowed users and the list of admin users
-               for this application. By default this will be google accounts. You might tweak this to OpenID and use 
-               protections from within the application to setup protected areas and not so protect the whole system -->
+	<!-- we consider it common that you will want to leave the measure time 
+		interceptor for measurement of timings and results on the /stats page and 
+		the password interceptor to define allowed users and the list of admin users 
+		for this application. By default this will be google accounts. You might 
+		tweak this to OpenID and use protections from within the application to setup 
+		protected areas and not so protect the whole system -->
 	<bean name="interceptors" class="java.util.ArrayList">
 		<constructor-arg>
 			<list>
