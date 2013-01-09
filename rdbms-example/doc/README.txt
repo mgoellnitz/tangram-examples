@@ -1,5 +1,54 @@
 Setup system:
 
+# build example project
+gradle build
+
+# optionally deploy war/webapp directory to a JSP/Servlet Container of your choice
+
+# start webapp container or use integrated jetty
+gradle jettyRunWar
+
+# Variant I - use demo data
+###########################
+
+# import data
+# data is ready to use with pre-configured hsqldb
+
+# call
+http://localhost:12380/s/
+
+# user is admin and password is opal - in default state the whole application is protected
+
+# hsqldb tool:
+java -cp build/war/WEB-INF/lib/hsqldb-1.8.0.10.jar org.hsqldb.util.DatabaseManager
+
+# issue shutdown to compress database again
+
+# or directly like
+java -cp build/war/WEB-INF/lib/hsqldb-1.8.0.10.jar org.hsqldb.util.SqlTool --inlineRc url=jdbc:hsqldb:file:tangram-rdbms,password=,user=sa --sql "shutdown;"
+
+
+
+# Variant II - start with empty system
+######################################
+
+# call the editor and log in
+http://localhost:12380/rdbms-example/s/list?cms.editor.class.name=org.tangram.rdbms.solution.RootTopic
+
+# user is admin and password is opal - in default state the whole application is protected
+
+# create an instance of type "RootTopic"
+
+# create an instance of type Code with mime-type "text/html" and annotation "org.tangram.rdbms.solution.RootTopic"
+
+# call
+http://localhost:12380/s/id_RootTopic:1
+
+
+
+# Customize Database System to use
+##################################
+
 # Setup database user with schema and sufficient write persmissions
 
 # PostgreSQL example:
@@ -21,41 +70,3 @@ create schema tex authorization tex;
 # update build.gradle to include db driver in project
 compile "postgresql:postgresql:8.4-702.jdbc4"
 
-# build example project
-gradle build
-
-# optionally devploy war/webapp directory
-
-# start webapp container or use integrated jetty
-gradle jettyRunWar
-
-# Variant I - use demo data
-
-# import data
-# data is ready to use with pre-configured hsqldb
-
-# call
-http://localhost:12380/s/
-
-# user is admin and password is opal - in default state the whole application is protected
-
-# Variant II - start with empty system
-
-# call the editor and log in
-http://localhost:12380/s/list?cms.editor.class.name=org.tangram.rdbms.Code
-
-# create an instance of type "RootTopic"
-
-# create an instance of type Code with mime-type "text/html" and annotation "org.tangram.rdbms.solution.RootTopic"
-
-# call
-http://localhost:12380/s/
-
-
-# hsqldb tool:
-java -cp build/war/WEB-INF/lib/hsqldb-1.8.0.10.jar org.hsqldb.util.DatabaseManager
-
-# issue shutdown to compress database again
-
-# or directly like
-java -cp build/war/WEB-INF/lib/hsqldb-1.8.0.10.jar org.hsqldb.util.SqlTool --inlineRc url=jdbc:hsqldb:file:tangram-rdbms,password=,user=sa --sql "shutdown;"
