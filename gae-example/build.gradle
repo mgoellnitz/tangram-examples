@@ -5,19 +5,24 @@ apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
 
+
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
+
+ext.tangram_version = '0.8-SNAPSHOT'
 
 ext.servlet_spec = "2.5"
 ext.jsp_spec = "2.0"
 ext.yui_version = "2.4.6"
+ext.junit_version="4.10"
 
-ext.tangram_version = '0.7'
+ext.datanucleus_enhancer_version = '3.1.1';
 
 // don't let gradle work with its defaults on my files...
 webAppDirName = 'disabled'
 
 repositories {
+  mavenLocal()
   // most of the usual stuff
   maven { url "http://repo1.maven.org/maven2" }
   // needed for latest datanucleus versions
@@ -36,7 +41,6 @@ eclipse.classpath.conventionMapping.defaultOutputDir = { new File(project.projec
 configurations {
   libs 
   webapp
-  dn
   yui
 }
 
@@ -57,22 +61,21 @@ dependencies {
   providedCompile "com.yahoo.platform.yui:yuicompressor:$yui_version"
   yui "com.yahoo.platform.yui:yuicompressor:$yui_version"
   
-  testCompile "junit:junit:4.10"
+  testCompile "junit:junit:$junit_version"
 
-  dn "org.datanucleus:datanucleus-enhancer:1.1.4"
+  providedCompile "org.apache.ant:ant:1.8.4"
+  providedCompile "org.datanucleus:datanucleus-enhancer:$datanucleus_enhancer_version"
 }
 
 compileJava.doLast {
     try {
-        ant.taskdef(name: 'enhance', classpath: configurations.dn.asPath, classname: 'org.datanucleus.enhancer.tools.EnhancerTask')
+        ant.taskdef(name: 'enhance', classpath: sourceSets['main'].compileClasspath.asPath, classname: 'org.datanucleus.enhancer.tools.EnhancerTask')
         ant.enhance(failonerror: true, verbose: true, checkonly: false, dir: sourceSets['main'].output.classesDir.canonicalPath) {
             classpath {
                 // for the log configuration...
                 pathelement(path: '.')
                 // The classes to be enhanced need to be on the class path
                 pathelement(path: sourceSets['main'].output.classesDir.canonicalPath)
-                // this is the real class path for the tool (s.a.)
-                pathelement(path: configurations.dn.asPath)
                 // this is the real class path for the tool (s.a.)
                 pathelement(path: sourceSets['main'].compileClasspath.asPath)
             }
