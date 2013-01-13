@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright 2011 Martin Goellnitz
+ * Copyright 2011-2013 Martin Goellnitz
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,16 +25,16 @@ import javax.jdo.annotations.PersistenceCapable;
 @PersistenceCapable
 public class Container extends Linkable {
 
-    private List<Topic> contents;
+    private List<String> contentIds;
 
 
     public List<Topic> getContents() {
-        return contents;
+        return getContents(Topic.class, contentIds);
     }
 
 
     public void setContents(List<Topic> contents) {
-        this.contents = contents;
+        this.contentIds = getIds(contents);
     }
 
 } // Container

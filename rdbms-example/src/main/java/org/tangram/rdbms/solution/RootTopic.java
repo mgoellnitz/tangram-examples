@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright 2011 Martin Goellnitz
+ * Copyright 2011-2013 Martin Goellnitz
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ public class RootTopic extends Topic {
 
     private List<String> jsIds;
 
-    private String logoId;
+    private ImageData logo;
 
 
     public List<Topic> getBottomLinks() {
@@ -67,12 +67,12 @@ public class RootTopic extends Topic {
 
 
     public ImageData getLogo() {
-        return getContent(ImageData.class, logoId);
+        return logo;
     }
 
 
     public void setLogo(ImageData logo) {
-        this.logoId = logo.getId();
+        this.logo = logo;
     }
 
 

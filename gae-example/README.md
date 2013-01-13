@@ -29,7 +29,7 @@ Start the development application server
 # dev_appserver -p 12380 build\war
 #
 # with new HRD sematics needed for all future versions of this example and no update check for the local SDK
-dev_appserver --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=20 --disable_update_check -p 12380 build\war
+dev_appserver --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=1 --disable_update_check -p 12380 build\war
 ```
 
 The HRD flags are mandatory with this very example but they actually depend on your data model.
@@ -41,7 +41,11 @@ Variant I - start with empty system
 
 Call the editor and log in
 
-http://localhost:12380/s/list?cms.editor.class.name=org.tangram.gae.solution.RootTopic
+http://localhost:12380/s/list
+
+Click on the Typename org.tangram.gae.solution.RootTopic
+
+(Or directly call http://localhost:12380/s/list?cms.editor.class.name=org.tangram.gae.solution.RootTopic)
 
 Create an instance of class org.tangram.gae.solution.RootTopic
 
