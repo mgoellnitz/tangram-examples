@@ -25,16 +25,16 @@ import javax.jdo.annotations.PersistenceCapable;
 @PersistenceCapable
 public class Container extends Linkable {
 
-    private List<String> contentIds;
+    private List<String> contents;
 
 
-    public List<Topic> getContents() {
-        return getContents(Topic.class, contentIds);
+    public List<String> getContents() {
+        return contents;
     }
 
 
-    public void setContents(List<Topic> contents) {
-        contentIds = getIds(contents);
+    public void setContents(List<String> contents) {
+        this.contents = contents;
     }
 
 } // Container

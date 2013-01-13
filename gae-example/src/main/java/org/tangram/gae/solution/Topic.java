@@ -37,45 +37,45 @@ public class Topic extends Linkable implements ProtectedContent {
 
     private static final Log log = LogFactory.getLog(Topic.class);
 
-    private List<String> subTopicIds;
+    private List<Topic> subTopics;
 
-    private List<String> contentIds;
+    private List<Topic> contents;
 
-    private String thumbnailId; /* ImageData */
+    private ImageData thumbnail;
 
     @Persistent
     private Text teaser;
 
-    private List<String> relatedContainerIds;
+    private List<Container> relatedContainers;
 
 
     public List<Topic> getSubTopics() {
-        return getContents(Topic.class, subTopicIds);
+        return subTopics;
     }
 
 
     public void setSubTopics(List<Topic> subTopics) {
-        subTopicIds = getIds(subTopics);
+        this.subTopics = subTopics;
     }
 
 
-    public List<Linkable> getContents() {
-        return getContents(Linkable.class, contentIds);
+    public List<Topic> getContents() {
+        return contents;
     }
 
 
-    public void setContents(List<Linkable> contents) {
-        contentIds = getIds(contents);
+    public void setContents(List<Topic> contents) {
+        this.contents = contents;
     }
 
 
     public ImageData getThumbnail() {
-        return getContent(ImageData.class, thumbnailId);
+        return thumbnail;
     }
 
 
     public void setThumbnail(ImageData thumbnail) {
-        this.thumbnailId = thumbnail.getId();
+        this.thumbnail = thumbnail;
     }
 
 
@@ -90,12 +90,12 @@ public class Topic extends Linkable implements ProtectedContent {
 
 
     public List<Container> getRelatedContainers() {
-        return getContents(Container.class, relatedContainerIds);
+        return relatedContainers;
     }
 
 
     public void setRelatedContainers(List<Container> relatedContainers) {
-        relatedContainerIds = getIds(relatedContainers);
+        this.relatedContainers = relatedContainers;
     }
 
     /************************************/
@@ -123,9 +123,9 @@ public class Topic extends Linkable implements ProtectedContent {
             result = new ArrayList<Topic>();
             result.add(t);
         } else {
-            List<Topic> subTopics = t.getSubTopics();
-            if (subTopics!=null) {
-                for (Topic x : subTopics) {
+            List<Topic> subs = t.getSubTopics();
+            if (subs!=null) {
+                for (Topic x : subs) {
                     if (x!=null) {
                         List<Topic> p = getPathRecursive(x);
                         if (p!=null) {

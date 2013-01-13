@@ -1,3 +1,21 @@
+/**
+ * 
+ * Copyright 2011-2012 Martin Goellnitz
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
 package org.tangram.gae.solution;
 
 import java.util.List;
@@ -9,52 +27,52 @@ import org.tangram.gae.Code;
 @PersistenceCapable
 public class RootTopic extends Topic {
 
-    private List<String> bottomLinkIds;
+    private List<Topic> bottomLinks;
 
-    private List<String> cssIds;
+    private List<Code> css;
 
-    private List<String> jsIds;
+    private List<Code> js;
 
-    private String logoId;
+    private ImageData logo;
 
 
     public List<Topic> getBottomLinks() {
-        return getContents(Topic.class, bottomLinkIds);
+        return bottomLinks;
     }
 
 
     public void setBottomLinks(List<Topic> bottomLinks) {
-        bottomLinkIds = getIds(bottomLinks);
+        this.bottomLinks = bottomLinks;
     }
 
 
     public List<Code> getCss() {
-        return getContents(Code.class, cssIds);
+        return css;
     }
 
 
     public void setCss(List<Code> css) {
-        cssIds = getIds(css);
+        this.css = css;
     }
 
 
     public List<Code> getJs() {
-        return getContents(Code.class, jsIds);
+        return js;
     }
 
 
     public void setJs(List<Code> js) {
-        jsIds = getIds(js);
+        this.js = js;
     }
 
 
     public ImageData getLogo() {
-        return getContent(ImageData.class, logoId);
+        return logo;
     }
 
 
     public void setLogo(ImageData logo) {
-        this.logoId = logo.getId();
+        this.logo = logo;
     }
 
 
