@@ -22,7 +22,7 @@ import java.util.List;
 
 import javax.jdo.annotations.PersistenceCapable;
 
-import org.tangram.content.CodeResource;
+import org.tangram.rdbms.Code;
 
 @PersistenceCapable
 public class RootTopic extends Topic {
@@ -46,22 +46,22 @@ public class RootTopic extends Topic {
     }
 
 
-    public List<CodeResource> getCss() {
-        return getContents(CodeResource.class, cssIds);
+    public List<Code> getCss() {
+        return getContents(Code.class, cssIds);
     }
 
 
-    public void setCss(List<CodeResource> css) {
+    public void setCss(List<Code> css) {
         cssIds = getIds(css);
     }
 
 
-    public List<CodeResource> getJs() {
-        return getContents(CodeResource.class, jsIds);
+    public List<Code> getJs() {
+        return getContents(Code.class, jsIds);
     }
 
 
-    public void setJs(List<CodeResource> js) {
+    public void setJs(List<Code> js) {
         jsIds = getIds(js);
     }
 

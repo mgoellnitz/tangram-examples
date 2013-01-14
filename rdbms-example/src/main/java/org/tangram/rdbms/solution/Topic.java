@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright 2011 Martin Goellnitz
+ * Copyright 2011-2013 Martin Goellnitz
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
 package org.tangram.rdbms.solution;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.jdo.annotations.NotPersistent;
@@ -36,9 +37,9 @@ public class Topic extends Linkable implements ProtectedContent {
 
     private List<String> subTopicIds;
 
-    private List<String> contentIds;
+    private List<String> elementIds;
 
-    private String thumbnailId; /* ImageData */
+    private ImageData thumbnail;
 
     private char[] teaser;
 
@@ -51,27 +52,27 @@ public class Topic extends Linkable implements ProtectedContent {
 
 
     public void setSubTopics(List<Topic> subTopics) {
-        subTopicIds = getIds(subTopics);
+        this.subTopicIds = getIds(subTopics);
     }
 
 
-    public List<Linkable> getContents() {
-        return getContents(Linkable.class, contentIds);
+    public List<Linkable> getElements() {
+        return getContents(Linkable.class, elementIds);
     }
 
 
-    public void setContents(List<Linkable> contents) {
-        contentIds = getIds(contents);
+    public void setElements(List<Linkable> elements) {
+        this.elementIds = getIds(elements);
     }
 
 
     public ImageData getThumbnail() {
-        return getContent(ImageData.class, thumbnailId);
+        return thumbnail;
     }
 
 
     public void setThumbnail(ImageData thumbnail) {
-        this.thumbnailId = thumbnail.getId();
+        this.thumbnail = thumbnail;
     }
 
 
@@ -91,7 +92,7 @@ public class Topic extends Linkable implements ProtectedContent {
 
 
     public void setRelatedContainers(List<Container> relatedContainers) {
-        relatedContainerIds = getIds(relatedContainers);
+        this.relatedContainerIds = getIds(relatedContainers);
     }
 
     /************************************/
@@ -119,9 +120,9 @@ public class Topic extends Linkable implements ProtectedContent {
             result = new ArrayList<Topic>();
             result.add(t);
         } else {
-            List<Topic> subTopics = t.getSubTopics();
-            if (subTopics!=null) {
-                for (Topic x : subTopics) {
+            List<Topic> subs = t.getSubTopics();
+            if (subs!=null) {
+                for (Topic x : subs) {
                     if (x!=null) {
                         List<Topic> p = getPathRecursive(x);
                         if (p!=null) {
@@ -137,6 +138,14 @@ public class Topic extends Linkable implements ProtectedContent {
 
         return result;
     } // getPath()
+
+
+    @Override
+    public String toString() {
+        return "Topic [subTopics="+subTopicIds+", elements="+elementIds+", thumbnail="+thumbnail+", teaser="+Arrays.toString(teaser)
+                +", relatedContainers="+relatedContainerIds+", rootTopic="+rootTopic+", path="+path+", inheritedRelatedContainers="
+                +inheritedRelatedContainers+"]";
+    } // toString()
 
     @NotPersistent
     private List<Topic> path;
