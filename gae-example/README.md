@@ -27,14 +27,37 @@ Start the development application server
 
 ```bash
 # dev_appserver -p 12380 build\war
-#
-# with new HRD sematics needed for all future versions of this example and no update check for the local SDK
-dev_appserver --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=1 --disable_update_check -p 12380 build\war
+```
+
+Leave out the update check on every startup
+
+```bash
+dev_appserver --disable_update_check -p 12380 build\war
+```
+
+With new HRD sematics needed for all future versions of this example you have to extend the call to
+
+```bash
+dev_appserver --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=1  -p 12380 build\war
+```
+
+which we have a shurtcut for in the build script
+
+```bash
+gradle runWar
 ```
 
 The HRD flags are mandatory with this very example but they actually depend on your data model.
 
 (optionally deploy war/ to google app engine system - you seem to have to use 32bit Java for this!)
+
+If for your later data model you are definetely sure not to use HRD semantics, JDO 3.0, and so on you can set in your projects's config properties file
+
+
+```
+use.hdr.datastore=false
+```
+
 
 Variant I - start with empty system
 =======================

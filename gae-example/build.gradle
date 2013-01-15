@@ -16,6 +16,8 @@ ext.jsp_spec = "2.0"
 ext.yui_version = "2.4.6"
 ext.junit_version = "4.10"
 
+ext.httpPort = 12380
+
 ext.datanucleus_enhancer_version = '3.1.1';
 
 // don't let gradle work with its defaults on my files...
@@ -132,4 +134,9 @@ war {
 // to use the local dev_appserver in this directory
 war.doLast {
   ant.unzip(src: war.archivePath, dest: "$buildDir/war")
+}
+
+// Sorry, just for windows for now
+task runWar (type :Exec) {
+    commandLine 'cmd', '/c', 'dev_appserver --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=1 --disable_update_check -p 12380 build\\war'
 }
