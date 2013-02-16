@@ -45,6 +45,7 @@ configurations {
   webapp
   enhance
   yui
+  yuideps
 }
 
 artifacts {
@@ -67,6 +68,7 @@ dependencies {
   // To exclude original YUICompressor jar from output war
   providedCompile "com.yahoo.platform.yui:yuicompressor:$yui_version"
   yui "com.yahoo.platform.yui:yuicompressor:$yui_version"
+  yuideps "rhino:js:1.6R7"
   
   testCompile "junit:junit:$junit_version"
 
@@ -119,7 +121,7 @@ war.doFirst {
   }
   
   // ...and to again include those YUICompressor's dependencies with a different name
-  for (f in configurations.yui.files) {
+  for (f in configurations.yui.files - configurations.yuideps.files) {
     copy {
       from f.absolutePath
       into "$buildDir/target/WEB-INF/lib"

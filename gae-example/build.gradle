@@ -45,6 +45,7 @@ configurations {
   webapp
   enhance
   yui
+  yuideps
 }
 
 artifacts {
@@ -63,11 +64,20 @@ dependencies {
   // To exclude original YUICompressor jar from output war
   providedCompile "com.yahoo.platform.yui:yuicompressor:$yui_version"
   yui "com.yahoo.platform.yui:yuicompressor:$yui_version"
+  yuideps "rhino:js:1.6R7"
   
   testCompile "junit:junit:$junit_version"
 
   enhance "org.apache.ant:ant:1.8.4"
   enhance "org.datanucleus:datanucleus-enhancer:$datanucleus_enhancer_version"
+}
+
+clean.doFirst {
+    copy {
+        from "$buildDir/war/WEB-INF/appengine-generated"
+        into 'local-db'
+        include '**/**'
+    }
 }
 
 compileJava.doLast {
@@ -113,7 +123,7 @@ war.doFirst {
   }
   
   // ...and to again include those YUICompressor's dependencies with a different name
-  for (f in configurations.yui.files) {
+  for (f in configurations.yui.files - configurations.yuideps.files) {
     copy {
       from f.absolutePath
       into "$buildDir/target/WEB-INF/lib"
@@ -134,6 +144,11 @@ war {
 // to use the local dev_appserver in this directory
 war.doLast {
   ant.unzip(src: war.archivePath, dest: "$buildDir/war")
+  copy {
+    from 'local-db'
+    into "$buildDir/war/WEB-INF/appengine-generated"
+    include '**/**'
+  }
 }
 
 // Sorry, just for windows for now
