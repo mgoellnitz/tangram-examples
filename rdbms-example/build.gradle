@@ -13,7 +13,6 @@ ext.tangram_version = '0.8-SNAPSHOT'
 
 ext.servlet_spec = "2.5"
 ext.jsp_spec = "2.0"
-ext.yui_version = "2.4.6"
 ext.junit_version = "4.10"
 
 // For experiments with other data store types
@@ -44,8 +43,6 @@ configurations {
   libs 
   webapp
   enhance
-  yui
-  yuideps
 }
 
 artifacts {
@@ -64,11 +61,6 @@ dependencies {
   
   providedCompile "javax.servlet:servlet-api:$servlet_spec"
   providedCompile "javax.servlet:jsp-api:$jsp_spec"
-  
-  // To exclude original YUICompressor jar from output war
-  providedCompile "com.yahoo.platform.yui:yuicompressor:$yui_version"
-  yui "com.yahoo.platform.yui:yuicompressor:$yui_version"
-  yuideps "rhino:js:1.6R7"
   
   testCompile "junit:junit:$junit_version"
 
@@ -120,14 +112,6 @@ war.doFirst {
     include '**/**'
   }
   
-  // ...and to again include those YUICompressor's dependencies with a different name
-  for (f in configurations.yui.files - configurations.yuideps.files) {
-    copy {
-      from f.absolutePath
-      into "$buildDir/target/WEB-INF/lib"
-      rename 'yui', 'aaa-yui'
-    }
-  }  
   into ('') {
     from "$buildDir/target"
     exclude 'WEB-INF/lib/tangram-**'
