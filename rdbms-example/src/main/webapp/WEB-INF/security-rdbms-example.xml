@@ -10,14 +10,15 @@
     Usernames/Passwords are
         rod/koala
         peter/opal
+        admin/admin
     -->
     <authentication-manager>
         <authentication-provider>
             <password-encoder hash="md5"/>
             <user-service>
                 <user name="rod" password="a564de63c2d0da68cf47586ee05984d7" authorities="ROLE_USER" />
-                <user name="admin" password="22b5c9accc6e1ba628cedc63a72d57f8" authorities="ROLE_SUPERVISOR, ROLE_USER" />
                 <user name="peter" password="22b5c9accc6e1ba628cedc63a72d57f8" authorities="ROLE_SUPERVISOR, ROLE_USER" />
+                <user name="admin" password="21232f297a57a5a743894a0e4a801fc3" authorities="ROLE_SUPERVISOR, ROLE_USER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
