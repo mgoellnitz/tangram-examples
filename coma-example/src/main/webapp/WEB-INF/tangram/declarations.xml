@@ -13,7 +13,7 @@
   -->
 
 	<!--  optional: coma -->
-	<bean id="comaBeanPopulator" class="org.tangram.examples.coma.menusite.MenuSiteBeanPopulator" />
+	<bean id="comaBeanPopulator" class="org.tangram.examples.menusite.MenuSiteBeanPopulator" />
 
 	<!--  optional  tangram -->
 	<bean id="customViews" class="java.util.HashSet">
