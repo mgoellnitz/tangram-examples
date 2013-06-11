@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright 2012 Martin Goellnitz
+ * Copyright 2012-2013 Martin Goellnitz
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,8 +24,11 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 import org.tangram.gae.solution.RootTopic;
 
-public class ExampleContentTest {
+public class EnhancerTest {
 
+    /**
+     * From time to time we ran into the problem that classes didn't get enhanced
+     */
     @Test
     public void testIsEnhanced() {
         Method[] methods = RootTopic.class.getMethods();
@@ -39,4 +42,4 @@ public class ExampleContentTest {
         Assert.isTrue(flag, "Classes not enhanced - output unusable");
     } // testIsEnhanced()
 
-} // ExampleContentTest
+} // EnhancerTest

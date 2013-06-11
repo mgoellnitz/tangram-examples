@@ -5,7 +5,6 @@ apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
 
-
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
@@ -51,9 +50,9 @@ artifacts {
 }
 
 dependencies {
-  webapp "tangram:gae-webapp:$tangram_version"
+  webapp "tangram:tangram-gae:$tangram_version"
   
-  compile "tangram:gae:$tangram_version"
+  compile "tangram:tangram-gae:$tangram_version"
   
   providedCompile "javax.servlet:servlet-api:$servlet_spec"
   providedCompile "javax.servlet:jsp-api:$jsp_spec"
