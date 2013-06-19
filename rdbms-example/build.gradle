@@ -50,7 +50,7 @@ artifacts {
 }
 
 dependencies {
-  webapp "tangram:tangram-rdbms:$tangram_version"
+  webapp "tangram:tangram-rdbms:$tangram_version:war@war"
   
   compile "tangram:tangram-rdbms:$tangram_version"
   

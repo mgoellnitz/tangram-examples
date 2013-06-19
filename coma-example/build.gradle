@@ -43,7 +43,7 @@ artifacts {
 }
 
 dependencies {
-  webapp "tangram:tangram-coma:$tangram_version"
+  webapp "tangram:tangram-coma:$tangram_version:war@war"
 
   compile "tangram:tangram-coma:$tangram_version"
   
