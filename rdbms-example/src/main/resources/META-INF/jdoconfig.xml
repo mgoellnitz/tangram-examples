@@ -19,6 +19,9 @@
        <property name="javax.jdo.option.ConnectionPassword" value="tex" />
        <property name="javax.jdo.option.Mapping" value="postgres" />
        -->
+       <!-- jndi datasource example (run@cloudbees)
+       <property name="datanucleus.ConnectionFactoryName" value="java:comp/env/jdbc/mydb" />
+       -->
        <!-- hsqldb example - content provided
        -->
        <property name="javax.jdo.option.ConnectionDriverName" value="org.hsqldb.jdbcDriver" />
