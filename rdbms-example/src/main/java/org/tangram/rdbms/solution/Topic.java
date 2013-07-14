@@ -143,7 +143,7 @@ public class Topic extends Linkable implements ProtectedContent {
     @Override
     public String toString() {
         return "Topic [subTopics="+subTopicIds+", elements="+elementIds+", thumbnail="+thumbnail+", teaser="+Arrays.toString(teaser)
-                +", relatedContainers="+relatedContainerIds+", rootTopic="+rootTopic+", path="+path+", inheritedRelatedContainers="
+                +", relatedContainers="+relatedContainerIds+", rootTopic="+rootTopic+", inheritedRelatedContainers="
                 +inheritedRelatedContainers+"]";
     } // toString()
 
