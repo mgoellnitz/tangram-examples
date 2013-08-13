@@ -12,7 +12,7 @@ ext.tangram_version = '0.8-SNAPSHOT'
 
 ext.servlet_spec = "2.5"
 ext.jsp_spec = "2.0"
-ext.junit_version = "4.10"
+ext.junit_version = "4.11"
 
 ext.httpPort = 12380
 
