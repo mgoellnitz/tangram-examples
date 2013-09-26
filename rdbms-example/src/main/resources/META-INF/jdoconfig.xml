@@ -29,6 +29,8 @@
        <property name="javax.jdo.option.ConnectionUserName" value="sa" />
        <property name="javax.jdo.option.ConnectionPassword" value="" />
        <property name="javax.jdo.option.Mapping" value="hsqldb" />
+       
+       <!-- common stuff -->
        <property name="datanucleus.autoCreateSchema" value="true" />
        <property name="datanucleus.validateTables" value="true" />
        <property name="datanucleus.manageRelationships" value="true" />
