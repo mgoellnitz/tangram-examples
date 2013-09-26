@@ -22,15 +22,16 @@ ext.datanucleus_enhancer_version = '3.1.1';
 webAppDirName = 'disabled'
 
 repositories {
-  mavenLocal()
   // most of the usual stuff
   maven { url "http://repo1.maven.org/maven2" }
   // needed for latest datanucleus versions
   maven { url "http://www.datanucleus.org/downloads/maven2" }
-  // the tangram stuff
-  maven { url "http://my-amor.appspot.com/repository" }
+  // for tangram snapshots
+  mavenLocal()
   // needed for latest spring framework and security versions
   maven { url "http://repository.springsource.com/maven/bundles/release" }
+  // the tangram stuff
+  maven { url "http://my-amor.appspot.com/repository" }
 }
 
 jar.enabled = true 

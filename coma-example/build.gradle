@@ -18,13 +18,14 @@ ext.jsp_spec = "2.0"
 webAppDirName = 'disabled'
 
 repositories {
-  mavenLocal()
   // most of the usual stuff
   maven { url "http://repo1.maven.org/maven2" }
-  // the tangram stuff
-  maven { url "http://my-amor.appspot.com/repository" }
+  // for tangram snapshots
+  mavenLocal()
   // needed for latest spring framework and security versions
   maven { url "http://repository.springsource.com/maven/bundles/release" }
+  // the tangram stuff
+  maven { url "http://my-amor.appspot.com/repository" }
 }
 
 jar.enabled = true 
@@ -111,7 +112,7 @@ class CSSMinify extends FilterReader {
 } // CSSMinify
 
 war.doFirst {
-  // Strange way of overwriting things
+  // Strange way of overwriting things - it must be the first webapp dependency
   if (configurations.webapp.dependencies.size() > 0) {
     String archiveFileName = configurations.webapp.asPath
     int idx = archiveFileName.indexOf(';')
