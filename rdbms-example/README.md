@@ -7,7 +7,7 @@ Build the example project
 gradle build
 ```
 
-(Optionally deploy thw build\war directory to a JSP/Servlet Container of your choice)
+(Optionally deploy the build\war directory to a JSP/Servlet Container of your choice)
 
 Start this container of your choice or use integrated jetty
 
@@ -24,7 +24,7 @@ Call with your browser the URL
 
 http://localhost:12380/s/
 
-The user is "admin" and password is "opal" as you might find in the config files later - in default state the whole application is protected
+The user is "admin" and password is "admin" as you might find in the config files later - in default state the whole application is protected
 
 With hsqldb this tool might be helpfull:
 
@@ -47,9 +47,9 @@ Variant II - start with empty system
 
 Call the editor and log in
 
-http://localhost:12380/rdbms-example/s/list?cms.editor.class.name=org.tangram.rdbms.solution.RootTopic
+http://localhost:12380/rdbms-example/s/list
 
-The user is "admin" and password is "opal" as you might find in the config files later - in default state the whole application is protected
+The user is "admin" and password is "admin" as you might find in the config files later - in default state the whole application is protected
 
 Create an instance of type "org.tangram.rdbms.solution.RootTopic"
 
