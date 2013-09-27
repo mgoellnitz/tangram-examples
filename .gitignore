@@ -14,3 +14,7 @@
 /rdbms-example/.classpath
 /rdbms-example/.project
 /rdbms-example/.settings/org.eclipse.jdt.core.prefs
+/mongo-example/build
+/mongo-example/.settings
+/mongo-example/.classpath
+/mongo-example/.project
