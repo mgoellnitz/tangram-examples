@@ -1,1 +1,1 @@
-include 'gae-example', 'rdbms-example', 'coma-example'
+include 'gae-example', 'mongo-example', 'rdbms-example', 'coma-example'

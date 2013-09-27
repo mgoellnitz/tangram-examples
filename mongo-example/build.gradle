@@ -1,0 +1,120 @@
+defaultTasks 'clean', 'build'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'jetty'
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+ext.tangram_version = '0.8-SNAPSHOT'
+
+ext.servlet_spec = "2.5"
+ext.jsp_spec = "2.0"
+ext.junit_version = "4.11"
+
+ext.datanucleus_enhancer_version = '3.1.1';
+
+// don't let gradle work with its defaults on my files...
+webAppDirName = 'disabled'
+
+repositories {
+  // most of the usual stuff
+  maven { url "http://repo1.maven.org/maven2" }
+  // needed for latest datanucleus versions
+  maven { url "http://www.datanucleus.org/downloads/maven2" }
+  // for tangram snapshots
+  mavenLocal()
+  // needed for latest spring framework and security versions
+  maven { url "http://repository.springsource.com/maven/bundles/release" }
+  // the tangram stuff
+  maven { url "http://my-amor.appspot.com/repository" }
+}
+
+jar.enabled = true 
+
+// Project specific default output directory
+eclipse.classpath.conventionMapping.defaultOutputDir = { new File(project.projectDir, 'build/classes/main') }
+
+configurations {
+  libs 
+  webapp
+}
+
+artifacts {
+  archives war
+  libs jar
+}
+
+dependencies {
+  webapp "tangram:tangram-mongo:$tangram_version:war@war"
+  
+  compile "tangram:tangram-mongo:$tangram_version"
+  
+  providedCompile "javax.servlet:servlet-api:$servlet_spec"
+  providedCompile "javax.servlet:jsp-api:$jsp_spec"
+  
+  testCompile "junit:junit:$junit_version"
+
+  providedCompile "org.apache.ant:ant:1.8.4"
+  providedCompile "org.datanucleus:datanucleus-enhancer:$datanucleus_enhancer_version"
+}
+
+compileJava.doLast {
+    try {
+        ant.taskdef(name: 'enhance', classpath: sourceSets['main'].compileClasspath.asPath, classname: 'org.datanucleus.enhancer.tools.EnhancerTask')
+        ant.enhance(failonerror: true, verbose: true, checkonly: false, dir: sourceSets['main'].output.classesDir.canonicalPath) {
+            classpath {
+                // for the log configuration...
+                pathelement(path: '.')
+                // The classes to be enhanced need to be on the class path
+                pathelement(path: project.sourceSets['main'].output.classesDir.canonicalPath)
+                // this is the real class path for the tool (s.a.)
+                pathelement(path: project.sourceSets['main'].compileClasspath.asPath)
+            }
+            fileset(dir: sourceSets['main'].output.classesDir.canonicalPath)
+        }
+    } catch(Exception e) {
+        println e.message
+        e.printStackTrace(System.out)
+        throw new GradleException('An error occurred enhancing persistence capable classes.', e)
+    }
+}
+
+war.doFirst {
+  // Strange way of overwriting things - it must be the first webapp dependency
+  if (configurations.webapp.dependencies.size() > 0) {
+    String archiveFileName = configurations.webapp.asPath
+    int idx = archiveFileName.indexOf(';')
+    if (idx >= 0) {
+      archiveFileName = archiveFileName.substring(0, idx)
+    } // if
+    println "unzipping $archiveFileName"
+    ant.unzip(src: archiveFileName, dest: "$buildDir/target")  
+  } // if
+  
+  copy {
+    from 'src/main/webapp'
+    into "$buildDir/target"
+    include '**/**'
+  }
+  
+  into ('') {
+    from "$buildDir/target"
+    exclude 'WEB-INF/lib/tangram-**'
+  }
+}
+
+war {
+  classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
+  excludes = [ "classes/**" ]
+}
+
+war.doLast {
+  ant.unzip(src: war.archivePath, dest: "$buildDir/war")
+}
+
+stopPort = 12390
+httpPort = 12380

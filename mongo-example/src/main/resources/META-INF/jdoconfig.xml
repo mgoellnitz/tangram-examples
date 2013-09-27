@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jdoconfig xmlns="http://java.sun.com/xml/ns/jdo/jdoconfig"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:noNamespaceSchemaLocation="http://java.sun.com/xml/ns/jdo/jdoconfig">
+
+   <persistence-manager-factory name="transactions-optional">
+       <property name="javax.jdo.PersistenceManagerFactoryClass"
+           value="org.datanucleus.api.jdo.JDOPersistenceManagerFactory"/>
+       <!-- jndi datasource for mongodb -->
+       <property name="datanucleus.ConnectionURL" value="mongodb:host:port/collection" />
+       <property name="datanucleus.ConnectionUserName" value="username" />
+       <property name="datanucleus.ConnectionPassword" value="password" />
+       
+       <property name="datanucleus.autoCreateSchema" value="true" />
+       <property name="datanucleus.validateTables" value="true" />
+       <property name="datanucleus.manageRelationships" value="true" />
+       <property name="datanucleus.validateConstraints" value="true" />
+   </persistence-manager-factory>
+
+</jdoconfig>
