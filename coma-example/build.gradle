@@ -9,7 +9,7 @@ apply plugin: 'jetty'
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
-ext.tangram_version = '0.8-SNAPSHOT'
+ext.tangram_version = '0.8'
 
 ext.servlet_spec = "2.5"
 ext.jsp_spec = "2.0"
@@ -20,12 +20,10 @@ webAppDirName = 'disabled'
 repositories {
   // most of the usual stuff
   maven { url "http://repo1.maven.org/maven2" }
-  // for tangram snapshots
-  mavenLocal()
-  // needed for latest spring framework and security versions
-  maven { url "http://repository.springsource.com/maven/bundles/release" }
   // the tangram stuff
   maven { url "http://my-amor.appspot.com/repository" }
+  // needed for latest spring framework and security versions
+  maven { url "http://repository.springsource.com/maven/bundles/release" }
 }
 
 jar.enabled = true 
