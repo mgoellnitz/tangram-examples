@@ -25,7 +25,7 @@ import org.tangram.jdo.util.MimedBlob;
 @PersistenceCapable
 public class ImageData extends Linkable implements MimedBlob {
 
-    private byte[] data;
+    private String data;
 
     private String mimeType;
 
@@ -35,12 +35,12 @@ public class ImageData extends Linkable implements MimedBlob {
 
 
     public byte[] getData() {
-        return data;
+        return stringToByteArray(data);
     }
 
 
     public void setData(byte[] data) {
-        this.data = data;
+        this.data = byteArraytoString(data);
     }
 
 

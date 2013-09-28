@@ -23,16 +23,16 @@ import javax.jdo.annotations.PersistenceCapable;
 @PersistenceCapable
 public class Article extends Linkable {
 
-    private char[] text;
+    private String text;
 
 
     public char[] getText() {
-        return text;
+        return stringToCharArray(text);
     }
 
 
     public void setText(char[] text) {
-        this.text = text;
+        this.text = charArraytoString(text);
     }
 
 } // Article

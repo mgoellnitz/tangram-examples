@@ -19,7 +19,6 @@
 package org.tangram.mongo.solution;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.jdo.annotations.NotPersistent;
@@ -41,7 +40,7 @@ public class Topic extends Linkable implements ProtectedContent {
 
     private ImageData thumbnail;
 
-    private char[] teaser;
+    private String teaser;
 
     private List<Container> relatedContainers;
 
@@ -77,12 +76,12 @@ public class Topic extends Linkable implements ProtectedContent {
 
 
     public char[] getTeaser() {
-        return teaser;
+        return stringToCharArray(teaser);
     }
 
 
     public void setTeaser(char[] teaser) {
-        this.teaser = teaser;
+        this.teaser = charArraytoString(teaser);
     }
 
 
@@ -142,9 +141,9 @@ public class Topic extends Linkable implements ProtectedContent {
 
     @Override
     public String toString() {
-        return "Topic [subTopics="+getSubTopics()+", elements="+elementIds+", thumbnail="+thumbnail+", teaser="
-                +Arrays.toString(teaser)+", relatedContainers="+getRelatedContainers()+", rootTopic="+rootTopic+", path="+path
-                +", inheritedRelatedContainers="+inheritedRelatedContainers+"]";
+        return "Topic [subTopics="+getSubTopics()+", elements="+elementIds+", thumbnail="+thumbnail+", teaser="+teaser
+                +", relatedContainers="+getRelatedContainers()+", rootTopic="+rootTopic+", path="+path+", inheritedRelatedContainers="
+                +inheritedRelatedContainers+"]";
     } // toString()
 
     @NotPersistent

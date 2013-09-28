@@ -1,3 +1,12 @@
+Limitations of the MongoDB Implementation
+=========================================
+
+While the MongoDB mapping of the datanucleus implementation we use here happily stores byte[] as blobs and char[] as longer text elements, it files on reading them.
+
+So for now we internally use String for text and return it as char[] in the getters to the tangram framework and do similar stuff to the byte[] sort of things.
+
+We will investigate this issue since we up to now think this is a datanucleus bug.
+
 Setup system
 =========
 
