@@ -1,0 +1,35 @@
+# ========= CoreMedia install and configuration script file ==========
+#
+# Just as an example how we did the installation here
+#
+# Suited for good old CoreMedia CMS 2008
+#
+
+destinationDirectory=./target/contentserver
+
+components=contentserver,editor
+
+servertype=contentmanagement
+
+licensefile=./5.2_..._license.zip
+
+cap.server.feeder.enable=false
+
+cap.client.server.ior.url=http://localhost:12341/coremedia/ior
+
+cap.server.multipleLiveServers=false
+
+cap.server.documentTypes=properties/corem/menu-doctypes.xml
+cap.server.documentTypes.xmlSchema.enable=true
+
+cap.server.http.host=localhost
+cap.server.http.port=12341
+
+cap.server.ORBServerHost=localhost
+cap.server.ORBServerPort=12344
+
+sql.store.driver=org.postgresql.Driver
+sql.store.url=jdbc:postgresql://localhost:5432/postgres
+sql.store.user=menusite
+sql.store.password=menusite
+sql.store.dbProperties=corem/postgresql
