@@ -65,7 +65,14 @@ public abstract class Linkable extends RdbmsContent {
 
     @Override
     public int compareTo(Content o) {
-        return (o instanceof Linkable) ? ((getTitle()==null||((Linkable)o).getTitle()==null) ? 0 : getTitle()
-                .compareTo(((Linkable)o).getTitle())) : super.compareTo(o);
+        return (o instanceof Linkable) ? ((getTitle()==null||((Linkable)o).getTitle()==null) ? 0 : getTitle().compareTo(
+                ((Linkable)o).getTitle())) : super.compareTo(o);
     } // compareTo()
+
+
+    @Override
+    public String toString() {
+        return getId();
+    } // toString()
+
 } // Linkable
