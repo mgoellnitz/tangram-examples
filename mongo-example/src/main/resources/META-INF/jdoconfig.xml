@@ -6,7 +6,7 @@
    <persistence-manager-factory name="transactions-optional">
        <property name="javax.jdo.PersistenceManagerFactoryClass"
            value="org.datanucleus.api.jdo.JDOPersistenceManagerFactory"/>
-       <!-- jndi datasource for mongodb -->
+       <!-- connection parameters for mongodb -->
        <property name="datanucleus.ConnectionURL" value="mongodb:host:port/database" />
        <property name="datanucleus.ConnectionUserName" value="username" />
        <property name="datanucleus.ConnectionPassword" value="password" />

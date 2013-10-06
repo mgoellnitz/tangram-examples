@@ -23,6 +23,9 @@ import javax.jdo.annotations.PersistenceCapable;
 @PersistenceCapable
 public class Article extends Linkable {
 
+    /**
+     * Until we discover how to deal with large, structured text blocks
+     */
     private String text;
 
 

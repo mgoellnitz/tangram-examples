@@ -25,6 +25,9 @@ import org.tangram.jdo.util.MimedBlob;
 @PersistenceCapable
 public class ImageData extends Linkable implements MimedBlob {
 
+    /**
+     * Until we discover how to deal with blobs we use this one and base64-encode stuff
+     */
     private String data;
 
     private String mimeType;

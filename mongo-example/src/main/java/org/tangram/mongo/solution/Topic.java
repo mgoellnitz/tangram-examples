@@ -40,6 +40,9 @@ public class Topic extends Linkable implements ProtectedContent {
 
     private ImageData thumbnail;
 
+    /**
+     * Until we discover how to deal with large, structured text blocks
+     */
     private String teaser;
 
     private List<Container> relatedContainers;
