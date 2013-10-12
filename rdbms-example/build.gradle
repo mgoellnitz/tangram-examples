@@ -11,9 +11,9 @@ targetCompatibility = 1.6
 
 ext.tangram_version = '0.8'
 
-ext.servlet_spec = "2.5"
-ext.jsp_spec = "2.0"
-ext.junit_version = "4.11"
+ext.servlet_spec = '2.5'
+ext.jsp_spec = '2.0'
+ext.junit_version = '4.11'
 ext.datanucleus_enhancer_version = '3.1.1';
 
 
