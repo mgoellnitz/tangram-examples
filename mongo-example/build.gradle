@@ -1,3 +1,14 @@
+/**
+ * 
+ * Copyright (C) 2011-2013 Martin Goellnitz
+ * 
+ * This work is licensed under the Creative Commons Attribution 3.0 
+ * Unported License. To view a copy of this license, visit 
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+ * California, 94041, USA.
+ * 
+ */
 defaultTasks 'clean', 'build'
 
 apply plugin: 'java'
@@ -111,9 +122,11 @@ war {
   excludes = [ "classes/**" ]
 }
 
+/* find the equivalent in $buildDir/tmp/jettyRunWar after the first start
 war.doLast {
   ant.unzip(src: war.archivePath, dest: "$buildDir/war")
 }
+*/
 
 stopPort = 12390
 httpPort = 12380
