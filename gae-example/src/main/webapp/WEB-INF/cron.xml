@@ -12,14 +12,14 @@
 -->
 <cronentries>
   <!-- google decides to shutdown your application from time to time.
-        since warm up requests are use quite some time you might
+        since warm up requests are using quite some time you might
         want to call your app via cron jobs to let it startup again -->
   <cron>
     <url>/s/stats</url>
     <description>Hit statistics page to keep tangram active</description>
     <schedule>every 1 minutes</schedule>
   </cron>
-  <!--  if sessions are used, this might be still a nice idea
+  <!--  if sessions are used, this was some day in the past a good idea
   <cron>
     <url>/s/clear/sessions?tangramAdminUser=12</url>
     <description>Clear all sessions every two days</description>
