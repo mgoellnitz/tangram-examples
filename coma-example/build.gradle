@@ -30,7 +30,7 @@ webAppDirName = 'disabled'
 
 repositories {
   // most of the usual stuff
-  maven { url "http://repo1.maven.org/maven2" }
+  mavenCentral()
   // the tangram stuff
   maven { url "http://my-amor.appspot.com/repository" }
   // needed for latest spring framework and security versions
@@ -69,7 +69,7 @@ buildscript {
         mavenLocal()
   
         // most of the usual stuff
-        maven { url "http://repo1.maven.org/maven2" }
+        mavenCentral()
     }
 
     dependencies {
