@@ -60,6 +60,7 @@ dependencies {
   webapp "tangram:tangram-rdbms:$tangram_version:war@war"
   
   compile "tangram:tangram-rdbms:$tangram_version"
+  compile "javax.inject:javax.inject:1"
   
   compile "hsqldb:hsqldb:$hsqldb_version"
   

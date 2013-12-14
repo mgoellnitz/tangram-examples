@@ -14,7 +14,7 @@ package org.tangram.rdbms.solution.test;
 import java.lang.reflect.Method;
 
 import org.junit.Test;
-import org.springframework.util.Assert;
+import org.junit.Assert;
 import org.tangram.rdbms.solution.RootTopic;
 
 public class EnhancerTest {
@@ -32,7 +32,7 @@ public class EnhancerTest {
                 flag = true;
             } // if
         } // for
-        Assert.isTrue(flag, "Classes not enhanced - output unusable");
+        Assert.assertTrue("Classes not enhanced - output unusable", flag);
     } // testIsEnhanced()
 
 } // EnhancerTest

@@ -60,7 +60,8 @@ dependencies {
   webapp "tangram:tangram-gae:$tangram_version:war@war"
   
   compile "tangram:tangram-gae:$tangram_version"
-  
+  compile "javax.inject:javax.inject:1"
+    
   providedCompile "javax.servlet:servlet-api:$servlet_spec"
   providedCompile "javax.servlet:jsp-api:$jsp_spec"
   

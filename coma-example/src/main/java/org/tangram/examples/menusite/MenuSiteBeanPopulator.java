@@ -16,7 +16,7 @@ import java.util.Collection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
 import org.tangram.coma.ComaBeanFactory;
 import org.tangram.coma.ComaBeanPopulator;
 import org.tangram.coma.ComaContent;
@@ -26,7 +26,7 @@ public class MenuSiteBeanPopulator implements ComaBeanPopulator {
     @SuppressWarnings("unused")
     private static Log log = LogFactory.getLog(MenuSiteBeanPopulator.class);
 
-    @Autowired
+    @Inject
     private ComaBeanFactory beanFactory;
 
     @Override
