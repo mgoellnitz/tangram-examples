@@ -1,0 +1,117 @@
+/**
+ * 
+ * Copyright (C) 2011-2013 Martin Goellnitz
+ * 
+ * This work is licensed under the Creative Commons Attribution 3.0 
+ * Unported License. To view a copy of this license, visit 
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+ * California, 94041, USA.
+ * 
+ */
+defaultTasks 'clean', 'build'
+
+ext.tangram_version = '0.9-SNAPSHOT'
+ext.tangram_backend = 'dinistiq' // spring or dinistiq
+
+buildscript {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
+  }
+  dependencies {
+    classpath "tangram:gradle-plugin:0.9-SNAPSHOT"
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'maven'
+apply plugin: 'jetty'
+apply plugin: 'tangram'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+// don't let gradle work with its defaults on my files...
+webAppDirName = 'disabled'
+jar.enabled = true 
+
+repositories {
+  mavenLocal()
+  // most of the usual stuff
+  mavenCentral()
+  // tangram snapshots
+  maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
+  // tangram releases
+  maven { url "http://my-amor.appspot.com/repository" }
+}
+
+configurations {
+  libs 
+  webapp
+}
+
+artifacts {
+  archives war
+  libs jar
+}
+
+dependencies {
+  webapp "tangram:tangram-core:$tangram_version:war@war"  
+  compile "tangram:tangram-ebean:$tangram_version"
+  compile "com.h2database:h2:1.3.174"
+  compile "log4j:log4j:$versions.log4j"
+  
+  compile "tangram:tangram-${tangram_backend}:$tangram_version"
+  
+  // turn on editor
+  webapp "tangram:tangram-editor:$tangram_version:war@war"
+  compile "tangram:tangram-editor:$tangram_version"
+  
+  /* For the FTP Service
+  compile "tangram:tangram-ftp:$tangram_version"
+  compile "org.slf4j:slf4j-log4j12:1.6.6"
+   */
+    
+  /* Spring security for springframework version
+  compile "org.springframework.security:spring-security-config:$versions.springsecurity"
+  // avoid dependencies to spring 3.0.7
+  compile ("org.springframework.security:spring-security-web:$versions.springsecurity") {
+    exclude module: 'spring-jdbc'
+    exclude module: 'spring-tx'
+  }
+   */
+  
+  /* Apache Shiro most likely to be used together with dinistiq
+  */
+  compile "org.apache.shiro:shiro-core:$versions.shiro"
+  compile "org.apache.shiro:shiro-web:$versions.shiro"
+  compile "org.slf4j:slf4j-api:1.6.6"
+  compile "org.slf4j:slf4j-log4j12:1.6.6"
+  
+  providedCompile "javax.servlet:servlet-api:$versions.servlet"
+  providedCompile "javax.servlet:jsp-api:$versions.jsp"
+  
+  testCompile "junit:junit:$versions.junit"
+}
+
+compileJava.doLast { ebeanEnhance() }
+
+war.doFirst { overlayWebapp(war) }
+
+war {
+  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
+  classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
+  excludes = [ "classes/**", "WEB-INF/web*.xml" ]
+}
+
+stopPort = 12390
+httpPort = 12380
+
+/* for the users of this legacy tool
+apply plugin: 'eclipse'
+// Project specific default output directory
+eclipse.classpath.conventionMapping.defaultOutputDir = { new File(project.projectDir, 'build/classes/main') }
+ */

@@ -1,1 +1,1 @@
-include 'gae-example', 'mongo-example', 'rdbms-example', 'coma-example'
+include 'example-jdo-gae', 'example-jdo-dn', 'example-ebean', 'example-coma-spring'

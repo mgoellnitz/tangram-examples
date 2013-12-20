@@ -1,0 +1,88 @@
+/**
+ * 
+ * Copyright (C) 2011-2013 Martin Goellnitz
+ * 
+ * This work is licensed under the Creative Commons Attribution 3.0 
+ * Unported License. To view a copy of this license, visit 
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+ * California, 94041, USA.
+ * 
+ */
+defaultTasks 'clean', 'build'
+
+buildscript {
+  repositories {
+    mavenCentral()
+    maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
+  }
+  dependencies {
+    classpath "tangram:gradle-plugin:0.9-SNAPSHOT"
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'maven'
+apply plugin: 'jetty'
+apply plugin: 'tangram'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+ext.tangram_version = '0.9-SNAPSHOT'
+
+// don't let gradle work with its defaults on my files...
+webAppDirName = 'disabled'
+
+repositories {
+  // most of the usual stuff
+  mavenCentral()
+  // tangram snapshots
+  maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
+  // the tangram stuff
+  maven { url "http://my-amor.appspot.com/repository" }
+}
+
+jar.enabled = true 
+
+configurations {
+  libs 
+  webapp
+}
+
+artifacts {
+  archives war
+  libs jar
+}
+
+dependencies {
+  webapp "tangram:tangram-coma:$tangram_version:war@war"
+  compile "tangram:tangram-coma:$tangram_version"
+  
+  providedCompile "javax.servlet:servlet-api:$versions.servlet"
+  providedCompile "javax.servlet:jsp-api:$versions.jsp"
+  
+  compile "postgresql:postgresql:8.4-702.jdbc4"
+}
+
+war.doFirst { overlayWebapp(war) }
+
+war {
+  classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
+  excludes = [ "classes/**" ]
+}
+
+/** Optional step to debug things
+war.doLast {
+  ant.unzip(src: war.archivePath, dest: "$buildDir/war")
+}
+*/
+
+stopPort = 12390
+httpPort = 12380
+
+// For the users of a the legacy IDE Eclipse
+// apply plugin: 'eclipse'
+// Project specific default output directory
+// eclipse.classpath.conventionMapping.defaultOutputDir = { new File(project.projectDir, 'build/classes/main') }
