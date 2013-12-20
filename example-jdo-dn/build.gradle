@@ -1,0 +1,90 @@
+/**
+ * 
+ * Copyright (C) 2011-2013 Martin Goellnitz
+ * 
+ * This work is licensed under the Creative Commons Attribution 3.0 
+ * Unported License. To view a copy of this license, visit 
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+ * California, 94041, USA.
+ * 
+ */
+defaultTasks 'clean', 'build'
+
+ext.tangram_version = '0.9-SNAPSHOT'
+ext.tangram_backend = 'spring'
+
+buildscript {
+  repositories {
+    mavenCentral()
+    maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
+  }
+  dependencies {
+    classpath "tangram:gradle-plugin:0.9-SNAPSHOT"
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'maven'
+apply plugin: 'jetty'
+apply plugin: 'tangram'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+ext.hsqldb_version = '1.8.0.10'
+
+// don't let gradle work with its defaults on my files...
+webAppDirName = 'disabled'
+jar.enabled = true 
+
+repositories {
+  mavenLocal()
+  // most of the usual stuff
+  mavenCentral()
+  // tangram snapshots
+  maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
+  // tangram releases
+  maven { url "http://my-amor.appspot.com/repository" }
+}
+
+configurations {
+  libs 
+  webapp
+}
+
+artifacts {
+  archives war
+  libs jar
+}
+
+dependencies {
+  webapp "tangram:tangram-mutable:$tangram_version:war@war"
+  compile "tangram:tangram-nucleus:$tangram_version"
+
+  compile "hsqldb:hsqldb:$hsqldb_version"
+  
+  providedCompile "javax.servlet:servlet-api:$versions.servlet"
+  providedCompile "javax.servlet:jsp-api:$versions.jsp"
+  
+  testCompile "junit:junit:$versions.junit"
+}
+
+compileJava.doLast { nucleusJdoEnhance() }
+
+war.doFirst { overlayWebapp(war) }
+
+war {
+  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
+  classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
+  excludes = [ "classes/**", "WEB-INF/web*.xml" ]
+}
+
+stopPort = 12390
+httpPort = 12380
+
+// For the users of a the legacy IDE Eclipse
+// apply plugin: 'eclipse'
+// Project specific default output directory
+// eclipse.classpath.conventionMapping.defaultOutputDir = { new File(project.projectDir, 'build/classes/main') }
