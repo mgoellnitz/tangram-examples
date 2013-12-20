@@ -9,6 +9,7 @@
  * California, 94041, USA.
  * 
  */
+ 
 allprojects {
   defaultTasks 'clean', 'build'
 }
