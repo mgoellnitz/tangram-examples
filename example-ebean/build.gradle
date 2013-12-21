@@ -16,7 +16,6 @@ ext.tangram_backend = 'dinistiq' // spring or dinistiq
 
 buildscript {
   repositories {
-    mavenLocal()
     mavenCentral()
     maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
   }
@@ -42,9 +41,9 @@ repositories {
   mavenLocal()
   // most of the usual stuff
   mavenCentral()
-  // tangram snapshots
+  // the tangram snapshots
   maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
-  // tangram releases
+  // the tangram releases
   maven { url "http://my-amor.appspot.com/repository" }
 }
 
@@ -76,6 +75,7 @@ dependencies {
    */
     
   /* Spring security for springframework version
+  // this is more like a runtime dependency since we for now only use it by configuration
   compile "org.springframework.security:spring-security-config:$versions.springsecurity"
   // avoid dependencies to spring 3.0.7
   compile ("org.springframework.security:spring-security-web:$versions.springsecurity") {
@@ -110,8 +110,7 @@ war {
 stopPort = 12390
 httpPort = 12380
 
-/* for the users of this legacy tool
-apply plugin: 'eclipse'
+// If you are still using eclipse, you might want to use these
+// apply plugin: 'eclipse'
 // Project specific default output directory
-eclipse.classpath.conventionMapping.defaultOutputDir = { new File(project.projectDir, 'build/classes/main') }
- */
+// eclipse.classpath.conventionMapping.defaultOutputDir = { new File(project.projectDir, 'build/classes/main') }

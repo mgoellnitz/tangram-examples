@@ -12,7 +12,9 @@
 package org.tangram.nucleus.solution;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import org.apache.commons.logging.Log;
@@ -21,20 +23,22 @@ import org.tangram.components.TangramServices;
 import org.tangram.content.Content;
 import org.tangram.feature.protection.ProtectedContent;
 
-
 @PersistenceCapable
 public class Topic extends Linkable implements ProtectedContent {
 
     private static final Log log = LogFactory.getLog(Topic.class);
 
+    @Join
     private List<Topic> subTopics;
 
-    private List<Article> elements;
+    @Join
+    private List<Linkable> elements;
 
     private ImageData thumbnail;
 
     private char[] teaser;
 
+    @Join
     private List<Container> relatedContainers;
 
 
@@ -48,12 +52,12 @@ public class Topic extends Linkable implements ProtectedContent {
     }
 
 
-    public List<Article> getElements() {
-        return this.elements;
+    public List<Linkable> getElements() {
+        return elements;
     }
 
 
-    public void setElements(List<Article> elements) {
+    public void setElements(List<Linkable> elements) {
         this.elements = elements;
     }
 
@@ -87,9 +91,7 @@ public class Topic extends Linkable implements ProtectedContent {
         this.relatedContainers = relatedContainers;
     }
 
-    /**
-     * *********************************
-     */
+    /************************************/
 
     @NotPersistent
     RootTopic rootTopic = null;
@@ -134,6 +136,13 @@ public class Topic extends Linkable implements ProtectedContent {
     } // getPath()
 
 
+    @Override
+    public String toString() {
+        return "Topic [subTopics="+getSubTopics()+", elements="+getElements()+", thumbnail="+thumbnail+", teaser="
+                +Arrays.toString(getTeaser())+", relatedContainers="+getRelatedContainers()+", rootTopic="+rootTopic
+                +", inheritedRelatedContainers="+inheritedRelatedContainers+"]";
+    } // toString()
+
     @NotPersistent
     private List<Topic> path;
 
@@ -162,7 +171,7 @@ public class Topic extends Linkable implements ProtectedContent {
         if (inheritedRelatedContainers==null) {
             List<Topic> p = getPath();
             int i = p.size();
-            while ((--i>=0)&&(result.size()==0)) {
+            while (( --i>=0)&&(result.size()==0)) {
                 result = p.get(i).getRelatedContainers();
             } // while
             inheritedRelatedContainers = result;
@@ -173,9 +182,7 @@ public class Topic extends Linkable implements ProtectedContent {
     } // getInheritedRelatedContainers
 
 
-    /**
-     * ** Protections **
-     */
+    /**** Protections ***/
 
     @Override
     public List<? extends Content> getProtectionPath() {

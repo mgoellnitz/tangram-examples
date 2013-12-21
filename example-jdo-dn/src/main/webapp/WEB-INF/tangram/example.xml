@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  
+  Copyright (C) 2011-2013 Martin Goellnitz
+  
+  This work is licensed under the Creative Commons Attribution 3.0 
+  Unported License. To view a copy of this license, visit 
+  http://creativecommons.org/licenses/by/3.0/ or send a letter to 
+  Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+  California, 94041, USA.
+  
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+        
+  <!--
+       Tangram supports spring request interceptors. As a default we use a password interceptor 
+       for the security feature in core and a measure time interceptor for performance checks  
+  -->
+  <bean id="loginSupport" class="org.tangram.security.GenericLoginSupport">
+    <property name="staticLoginURL" value="spring_security_login"/>
+  </bean>
+  
+  
+  <!-- to make the whole application login protected this will be the list of read capable persons 
+  <bean id="allowedUsers" class="java.util.HashSet">
+    <constructor-arg>
+      <set>
+        <value>user</value>
+        <value>admin</value>
+      </set>
+    </constructor-arg>
+  </bean>
+  -->
+  
+  <bean id="adminUsers" class="java.util.HashSet">
+    <constructor-arg>
+      <set>
+        <value>admin</value>
+      </set>
+    </constructor-arg>
+  </bean>
+  
+  <bean id="jdoConfigOverrides" class="java.util.HashMap">
+    <constructor-arg>
+      <map>
+        <!-- 
+             JNDI based datasource config example for run@cloudbees, meaning to use a MySQL rdbms storage as database layer.
+             This could be perfectly directly placed in a jdoconfig.xml an is only mentioned here, since we decided not
+             to do some configurastions here and some in jdoconfig.xml.
+             
+        <entry key="datanucleus.ConnectionFactoryName" value="java:comp/env/jdbc/mydb"/>
+        -->
+        <!--
+             MongoDB config example for run@cloudbees. Since they use one environment variable for the setup and we are encouraged 
+             to use it, we split this URL apart and pass the parts to the JDO layer with jdoconfig.xml overrides.
+        
+             Connect MongoDB with application with bees tool:
+               bees app:bind -a <APPID> -r mongohq:<MONGOHQ_RESOURCE> -as MYDB
+        
+        <entry key="javax.jdo.option.ConnectionURL" 
+               value="mongodb:${MONGOHQ_URL_TANGRAM.host}:${MONGOHQ_URL_MYBD.port}/${MONGOHQ_URL_MYDB.uri}"/>
+        <entry key="javax.jdo.option.ConnectionUserName" value="${MONGOHQ_URL_MYDB.username}"/>
+        <entry key="javax.jdo.option.ConnectionPassword" value="${MONGOHQ_URL_MYBD.password}"/>
+        -->
+        <!--
+              MongoDB config example for OpenShift. Since they use environment variables for the setup and we are encouraged to use
+              them, we pass the to the JDO layer with jdoconfig.xml overrides.
+        
+        <entry key="javax.jdo.option.ConnectionURL" value="mongodb:${OPENSHIFT_MONGODB_DB_HOST}:${OPENSHIFT_MONGODB_DB_PORT}/test"/>
+        <entry key="javax.jdo.option.ConnectionUserName" value="${OPENSHIFT_MONGODB_DB_USERNAME}"/>
+        <entry key="javax.jdo.option.ConnectionPassword" value="${OPENSHIFT_MONGODB_DB_PASSWORD}"/>
+        -->
+        <!--
+              MySQL config example for OpenShift. Since they use environment variables for the setup and we are encouraged to use
+              them, we pass the to the JDO layer with jdoconfig.xml overrides.
+        
+        <entry key="javax.jdo.option.ConnectionDriverName" value="com.mysql.jdbc.Driver"/>
+        <entry key="javax.jdo.option.ConnectionURL" value="jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/test"/>
+        <entry key="javax.jdo.option.ConnectionUserName" value="${OPENSHIFT_MYSQL_DB_USERNAME}"/>
+        <entry key="javax.jdo.option.ConnectionPassword" value="${OPENSHIFT_MYSQL_DB_PASSWORD}"/>
+        <entry key="javax.jdo.option.Mapping" value="mysql"/>
+        -->
+        <!-- 
+             Example to use an ODF (.ods) document as storage. 
+             This option does not support large character fields.
+             
+        <entry key="javax.jdo.option.ConnectionURL" value="odf:file:db/file/tangram.ods"/>
+        -->
+        <!-- 
+             Example to use an XLS file as storage. 
+             This option does not support large character fields.
+             
+        <entry key="javax.jdo.option.ConnectionURL" value="file:db/file/tangram.xls"/>
+        -->
+       
+        <!-- 
+             hsqldb config example. Content provided when directly running in the development environment.
+             
+        -->
+        <entry key="javax.jdo.option.ConnectionDriverName" value="org.hsqldb.jdbcDriver"/>
+        <entry key="javax.jdo.option.ConnectionURL" value="jdbc:hsqldb:file:db/hsqldb/tangram"/>
+        <entry key="javax.jdo.option.ConnectionUserName" value="sa"/>
+        <entry key="javax.jdo.option.ConnectionPassword" value=""/>
+        <entry key="javax.jdo.option.Mapping" value="hsqldb"/>
+        <!-- 
+             h2sql config example. Content provided when directly in the development environment.
+             
+        <entry key="javax.jdo.option.ConnectionDriverName" value="org.h2.Driver"/>
+        <entry key="javax.jdo.option.ConnectionURL" value="jdbc:h2:file:db/h2/tangram"/>
+        <entry key="javax.jdo.option.ConnectionUserName" value="sa"/>
+        <entry key="javax.jdo.option.ConnectionPassword" value=""/>
+        <entry key="javax.jdo.option.Mapping" value="hsqldb"/>
+        -->
+        <!-- 
+              PostgreSQL onfig example for standalone installation.
+              
+        <entry key="javax.jdo.option.ConnectionDriverName" value="org.postgresql.Driver"/>
+        <entry key="javax.jdo.option.ConnectionURL" value="jdbc:postgresql://localhost:5432/postgres"/>
+        <entry key="javax.jdo.option.ConnectionUserName" value="tex"/>
+        <entry key="javax.jdo.option.ConnectionPassword" value="tex"/>
+        <entry key="javax.jdo.option.Mapping" value="postgres"/>
+        -->
+      </map>
+    </constructor-arg>
+  </bean>
+
+</beans>

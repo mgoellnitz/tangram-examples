@@ -1,20 +1,22 @@
 /**
- *
+ * 
  * Copyright (C) 2011-2013 Martin Goellnitz
- *
- * This work is licensed under the Creative Commons Attribution 3.0
- * Unported License. To view a copy of this license, visit
- * http://creativecommons.org/licenses/by/3.0/ or send a letter to
- * Creative Commons, 444 Castro Street, Suite 900, Mountain View,
+ * 
+ * This work is licensed under the Creative Commons Attribution 3.0 
+ * Unported License. To view a copy of this license, visit 
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
  * California, 94041, USA.
- *
+ * 
  */
 package org.tangram.nucleus.solution;
 
 import java.util.List;
+
+import org.tangram.nucleus.Code;
+
 import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
-import org.tangram.nucleus.Code;
 
 @PersistenceCapable
 public class RootTopic extends Topic {
@@ -32,7 +34,7 @@ public class RootTopic extends Topic {
 
 
     public List<Topic> getBottomLinks() {
-        return this.bottomLinks;
+        return bottomLinks;
     }
 
 
@@ -42,7 +44,7 @@ public class RootTopic extends Topic {
 
 
     public List<Code> getCss() {
-        return this.css;
+        return css;
     }
 
 
@@ -52,7 +54,7 @@ public class RootTopic extends Topic {
 
 
     public List<Code> getJs() {
-        return this.js;
+        return js;
     }
 
 
@@ -74,6 +76,6 @@ public class RootTopic extends Topic {
     @Override
     public RootTopic getRootTopic() {
         return this;
-    } // getRootTopic()
+    }
 
 } // RootTopic
