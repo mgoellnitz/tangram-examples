@@ -37,7 +37,7 @@
     <!-- the tangram servlet, everything except static files is handled here -->
     <servlet>
         <servlet-name>spring</servlet-name>
-        <servlet-class>org.tangram.TangramServlet</servlet-class>
+        <servlet-class>org.tangram.spring.TangramServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>

@@ -24,7 +24,9 @@ First Input and Test
 
 Call the editor and log in
 
+```
 http://localhost:12380/example-jdo-dn/s/list
+```
 
 The user is "admin" and password is "admin" as you might find in the config files later - in default state the whole application is protected
 
@@ -34,7 +36,9 @@ Create an instance of type Code with mime-type "text/html" and annotation "org.t
 
 Call with your browser the URL
 
+```
 http://localhost:12380/example-jdo-dn/s/id_RootTopic:1
+```
 
 Customize Database System to use
 --------------------------------
