@@ -3,7 +3,8 @@ Very small Examples for Tangram Usage
 
 These are the example applications for the different usage flavours of tangram.
 
-They are intended as a quick as possible demo to see something running, but in the comments you will find the options to tweak this to use:
+They are intended as a quick as possible demo to see something running, but in the 
+comments  you will find the options to tweak this to use:
 
 * JPA or JDO as Persistence Interfaces
 * RDBMS, Office Files, or MongoDB as the database.
@@ -16,7 +17,11 @@ The target platforms are
 * OpenShift
 * Google App Engine
 
-This would result in some 20 examples for any of the combinations so some of the switches can be found in the gradle build files to change a spring example into a non-spring example. The storage backends all got their separate example while the target platforms should be handled within the storage solution chosen. - Always with the exception of the Google App Engine, which is very special in many respects.
+This would result in some 20 examples for any of the combinations so some of the switches 
+can be found in the gradle build files to change a spring example into a non-spring example. 
+The storage backends all got their separate example while the target platforms should be 
+handled within the storage solution chosen. - Always with the exception of the Google App 
+Engine, which is very special in many respects.
 
 The examples are also meant as a starting point for your own projects.
 
