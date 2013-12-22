@@ -11,7 +11,8 @@ Build the example project
 ```bash
 gradle build
 ```
-(Optionally deploy the build\war directory to a JSP/Servlet Container of your choice)
+
+(Optionally deploy the created war file to a JSP/Servlet Container of your choice)
 
 Start this container of your choice or use integrated jetty
 
@@ -43,7 +44,7 @@ http://localhost:12380/example-jdo-dn/s/id_RootTopic:1
 Customize Database System to use
 --------------------------------
 
-Any Configuration for the database system is done through the tangram config files - not with a jdoconfig.xml - to jave the setup in one place. One for dinistiq and one for spring. You will find many examples for database setup and target plattforms like cloudbees there.
+Any configuration for the database system is done through the tangram config files - not with a jdoconfig.xml - to jave the setup in one place. One for dinistiq and one for spring. You will find many examples for database setup and target plattforms like cloudbees there.
 
 With hsqldb this tool might be helpfull:
 

@@ -1,0 +1,84 @@
+/**
+ *
+ * Copyright 2013 Martin Goellnitz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+defaultTasks 'clean', 'build'
+
+buildscript {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+  }
+  dependencies {
+    classpath "tangram:gradle-plugin:0.9-SNAPSHOT"
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'maven'
+apply plugin: 'tangram'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+  mavenLocal()
+  // most of the usual stuff
+  mavenCentral()
+}
+
+configurations {
+  libs 
+  webapp
+}
+
+artifacts {
+  archives war
+  libs jar
+}
+
+dependencies {
+  webapp "tangram:tangram-mutable:0.9-SNAPSHOT:war@war"
+  webapp "tangram:tangram-editor:0.9-SNAPSHOT:war@war"
+  compile "tangram:tangram-jpa:0.9-SNAPSHOT"
+  compile "tangram:tangram-editor:0.9-SNAPSHOT"
+  compile "tangram:tangram-servlet:0.9-SNAPSHOT"
+  compile "dinistiq:dinistiq:0.1-SNAPSHOT"
+  
+  compile "hsqldb:hsqldb:1.8.0.10"
+  compile "log4j:log4j:1.2.17"
+  
+  testCompile "junit:junit:4.11"
+  
+  providedCompile "javax.servlet:servlet-api:2.5"
+  providedCompile "javax.servlet:jsp-api:2.0"
+}
+
+jar.doFirst { 
+  openjpaEnhance()
+}
+
+war.doFirst { 
+  overlayWebapp(war) 
+}
+
+war {
+  classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
+  excludes = [ "WEB-INF/classes/**" ]
+}

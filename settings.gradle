@@ -1,1 +1,1 @@
-include 'example-jdo-gae', 'example-jdo-dn', 'example-ebean', 'example-coma-spring'
+include 'example-jpa-gae', 'example-jpa', 'example-jdo-gae', 'example-jdo-dn', 'example-ebean', 'example-coma-spring'

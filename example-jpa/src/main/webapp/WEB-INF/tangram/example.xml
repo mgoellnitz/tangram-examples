@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  
+  Copyright (C) 2011-2013 Martin Goellnitz
+  
+  This work is licensed under the Creative Commons Attribution 3.0 
+  Unported License. To view a copy of this license, visit 
+  http://creativecommons.org/licenses/by/3.0/ or send a letter to 
+  Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+  California, 94041, USA.
+  
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+        
+  <!--
+       Tangram supports spring request interceptors. As a default we use a password interceptor 
+       for the security feature in core and a measure time interceptor for performance checks  
+  -->
+  <bean id="loginSupport" class="org.tangram.security.GenericLoginSupport">
+    <property name="staticLoginURL" value="spring_security_login"/>
+  </bean>
+  
+  
+  <!-- to make the whole application login protected this will be the list of read capable persons 
+  <bean id="allowedUsers" class="java.util.HashSet">
+    <constructor-arg>
+      <set>
+        <value>user</value>
+        <value>admin</value>
+      </set>
+    </constructor-arg>
+  </bean>
+  -->
+  
+  <bean id="adminUsers" class="java.util.HashSet">
+    <constructor-arg>
+      <set>
+        <value>admin</value>
+      </set>
+    </constructor-arg>
+  </bean>
+  
+  <bean id="jpaConfigOverrides" class="java.util.HashMap">
+    <constructor-arg>
+      <map>
+        <!-- 
+             hsqldb config example for OpenJPA. Content provided when directly in the development environment.
+             
+        <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+        <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:openjpa/hsqldb/tangram"/>
+        <entry key="javax.persistence.jdbc.user" value="sa"/>
+        <entry key="javax.persistence.jdbc.password" value=""/>
+        <entry key="openjpa.RuntimeUnenhancedClasses" value="supported"/>
+        <entry key="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>
+        -->
+        <!-- 
+             h2sql config example for OpenJPA. Content provided when directly in the development environment.
+             
+        <entry key="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+        <entry key="javax.persistence.jdbc.url" value="jdbc:h2:./openjpa/h2/tangram"/>
+        <entry key="javax.persistence.jdbc.user" value="sa"/>
+        <entry key="javax.persistence.jdbc.password" value=""/>
+        <entry key="openjpa.Log" value="File=build/openjpa.log, DefaultLevel=WARN, Runtime=INFO, SQL=TRACE"/>
+        <entry key="openjpa.RuntimeUnenhancedClasses" value="supported"/>
+        <entry key="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>
+        -->
+        <!-- 
+             hsqldb config example for EclipseLink. Content provided when directly in the development environment.
+             
+        <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+        <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:eclipselink/hsqldb/tangram"/>
+        <entry key="javax.persistence.jdbc.user" value="sa"/>
+        <entry key="javax.persistence.jdbc.password" value=""/>
+        -->
+        <!-- 
+             h2sql config example for EclipseLink. Content provided when directly in the development environment.
+             
+        <entry key="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+        <entry key="javax.persistence.jdbc.url" value="jdbc:h2:./eclipselink/h2/tangram"/>
+        <entry key="javax.persistence.jdbc.user" value="sa"/>
+        <entry key="javax.persistence.jdbc.password" value=""/>
+        -->
+        <!--
+             EclipseLink config example. These should be added in any environment using eclipselink
+               weaving: e.g. static or false
+               ddl-generation: create-and-drop-tables or create-tables
+             
+        <entry key="eclipselink.ddl-generation" value="create-tables"/>
+        <entry key="eclipselink.weaving" value="static"/>
+        -->
+      </map>
+    </constructor-arg>
+  </bean>
+
+</beans>
