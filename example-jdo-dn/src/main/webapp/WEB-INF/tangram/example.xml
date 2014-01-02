@@ -67,7 +67,7 @@
         -->
         <!--
               MongoDB config example for OpenShift. Since they use environment variables for the setup and we are encouraged to use
-              them, we pass the to the JDO layer with jdoconfig.xml overrides.
+              them, we pass them to the JDO layer with jdoconfig.xml overrides.
         
         <entry key="javax.jdo.option.ConnectionURL" value="mongodb:${OPENSHIFT_MONGODB_DB_HOST}:${OPENSHIFT_MONGODB_DB_PORT}/test"/>
         <entry key="javax.jdo.option.ConnectionUserName" value="${OPENSHIFT_MONGODB_DB_USERNAME}"/>
@@ -75,7 +75,7 @@
         -->
         <!--
               MySQL config example for OpenShift. Since they use environment variables for the setup and we are encouraged to use
-              them, we pass the to the JDO layer with jdoconfig.xml overrides.
+              them, we pass them to the JDO layer with jdoconfig.xml overrides.
         
         <entry key="javax.jdo.option.ConnectionDriverName" value="com.mysql.jdbc.Driver"/>
         <entry key="javax.jdo.option.ConnectionURL" value="jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/test"/>
