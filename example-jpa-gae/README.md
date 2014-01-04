@@ -1,12 +1,16 @@
-Google App Engine example or starting point
-===========================================
+Tangram JPA Test with Google App Engine
+=======================================
 
-Prerequisites
--------------
+This will only be usable with the DataNucleus Access Platform since only this JPA implementation supports the 
+Google App Engine storage backend. For now this is only a test how things should be assembled.
 
-* Java
-* Google App Engine SDK Java AND Python (for the bulkloader.py you definetely want to use)
-* Gradle 1.6 and up
+Customize JPA Implementation
+----------------------------
+
+The tangram jpa jar comes with NO dependency for the implementations OpenJPA, EclipseLink, 
+or DataNucleus. 
+
+Any application using the module will have to add these dependencies - DataNucleus in this case - itself.
 
 Setup system
 ------------

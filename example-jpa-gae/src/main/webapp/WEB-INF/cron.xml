@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  
+  Copyright  (C)  2011-2013  Martin  Goellnitz
+  
+  This  work  is  licensed  under  the  Creative  Commons  Attribution  3.0  
+  Unported  License.  To  view  a  copy  of  this  license,  visit  
+  http://creativecommons.org/licenses/by/3.0/  or  send  a  letter  to  
+  Creative  Commons,  444  Castro  Street,  Suite  900,  Mountain  View,  
+  California,  94041,  USA.
+  
+-->
+<cronentries>
+  <!-- google decides to shutdown your application from time to time.
+        since warm up requests are using quite some time you might
+        want to call your app via cron jobs to let it startup again -->
+  <cron>
+    <url>/s/stats</url>
+    <description>Hit statistics page to keep tangram active</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+  <!--  if sessions are used, this was some day in the past a good idea
+  <cron>
+    <url>/s/clear/sessions?tangramAdminUser=12</url>
+    <description>Clear all sessions every two days</description>
+    <schedule>every 48 hours</schedule>
+  </cron>
+   -->
+</cronentries>

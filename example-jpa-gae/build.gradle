@@ -12,7 +12,7 @@
 defaultTasks 'clean', 'build'
 
 ext.tangram_version = '0.9-SNAPSHOT'
-ext.tangram_backend = 'spring'
+ext.tangram_backend = 'spring' // spring or dinistiq
 
 buildscript {
   repositories {
@@ -40,7 +40,7 @@ jar.enabled = true
 repositories {
   // most of the usual stuff
   mavenCentral()
-  // tangram snapshots
+  // the tangram snapshots
   maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
   // the tangram stuff
   maven { url "http://my-amor.appspot.com/repository" }
@@ -58,8 +58,11 @@ artifacts {
 
 dependencies {
   webapp "tangram:tangram-gae:$tangram_version:war@war"
-  compile "tangram:tangram-gae:$tangram_version"
+  // compile "tangram:tangram-gae:$tangram_version"
   compile "tangram:tangram-$tangram_backend:$tangram_version"
+  
+  compile "tangram:tangram-jpa:$tangram_version:nucleus"
+  compile "org.datanucleus:datanucleus-api-jpa:$versions.datanucleus"
     
   providedCompile "javax.servlet:servlet-api:$versions.servlet"
   providedCompile "javax.servlet:jsp-api:$versions.jsp"
@@ -75,7 +78,7 @@ clean.doFirst {
   }
 }
 
-compileJava.doLast { nucleusJdoEnhance() }
+compileJava.doLast { nucleusJpaEnhance() }
 
 war.doFirst { overlayWebapp(war) }
 

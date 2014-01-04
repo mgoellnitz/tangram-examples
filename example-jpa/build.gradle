@@ -16,8 +16,8 @@ ext.tangram_backend = 'dinistiq' // spring or dinistiq
 
 buildscript {
   repositories {
-    mavenLocal()
     mavenCentral()
+    maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
   }
   dependencies {
     classpath "tangram:gradle-plugin:0.9-SNAPSHOT"
@@ -26,8 +26,8 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'jetty'
 apply plugin: 'maven'
+apply plugin: 'jetty'
 apply plugin: 'tangram'
 
 sourceCompatibility = 1.7
@@ -38,7 +38,6 @@ webAppDirName = 'disabled'
 jar.enabled = true 
 
 repositories {
-  mavenLocal()
   // most of the usual stuff
   mavenCentral()
   // the tangram snapshots
