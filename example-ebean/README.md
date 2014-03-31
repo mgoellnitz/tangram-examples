@@ -1,5 +1,5 @@
 Tangram Ebean Example
-================
+=====================
 
 Very small tangram example application using the EBean ORM module.
 
