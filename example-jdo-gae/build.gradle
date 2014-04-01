@@ -85,7 +85,7 @@ war {
   excludes = [ "classes/**", "WEB-INF/web*.xml" ]
 }
 
-// to use the local dev_appserver in this directory
+// to use the local dev_appserver in this directory and to copy the db files back and forth
 war.doLast {
   ant.unzip(src: war.archivePath, dest: "$buildDir/war")
   copy {
@@ -95,9 +95,12 @@ war.doLast {
   }
 }
 
-// Sorry, just for windows for now
 task runWar (type :Exec) {
+  if (System.properties['os.name'].toLowerCase().contains('windows')) {
     commandLine 'cmd', '/c', 'dev_appserver --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=1 --disable_update_check -p 12380 build\\war'
+  } else {
+    commandLine 'bash', '-c', 'dev_appserver.sh --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=1 --disable_update_check -p 12380 build/war'
+  } // if
 }
 
 // For the users of a the legacy IDE Eclipse
