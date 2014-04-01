@@ -5,7 +5,8 @@
 /*/.settings
 /*/.classpath
 /*/.project
-/coma-example/target
-/.nb-gradle/profiles/private/
-/src/main/.nb-gradle/profiles/private/
+/.nb-gradle*
+*.log
 tangram-restart-cache.ser
+/example-ebean/tangram-create.sql
+/example-ebean/tangram-drop.sql

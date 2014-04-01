@@ -1,6 +1,8 @@
 Tangram JPA Test with Google App Engine
 =======================================
 
+This example is not yet completed, but it should be possible to build such a solution!
+
 This will only be usable with the DataNucleus Access Platform since only this JPA implementation supports the 
 Google App Engine storage backend. For now this is only a test how things should be assembled.
 

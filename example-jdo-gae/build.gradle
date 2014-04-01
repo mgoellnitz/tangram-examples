@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright (C) 2011-2013 Martin Goellnitz
+ * Copyright (C) 2011-2014 Martin Goellnitz
  * 
  * This work is licensed under the Creative Commons Attribution 3.0 
  * Unported License. To view a copy of this license, visit 
@@ -12,7 +12,7 @@
 defaultTasks 'clean', 'build'
 
 ext.tangram_version = '0.9-SNAPSHOT'
-ext.tangram_backend = 'spring' // spring or dinistiq
+ext.tangram_backend = 'dinistiq' // spring or dinistiq
 
 buildscript {
   repositories {

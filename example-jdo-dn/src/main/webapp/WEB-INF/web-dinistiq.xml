@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   
-  Copyright  (C)  2011-2013  Martin  Goellnitz
+  Copyright  (C)  2011-2014 Martin  Goellnitz
   
   This  work  is  licensed  under  the  Creative  Commons  Attribution  3.0  
   Unported  License.  To  view  a  copy  of  this  license,  visit  
@@ -16,15 +16,6 @@
          version="2.5">
   
   <display-name>Tangram JDO Example using DataNucleus - dinistiq version</display-name>
-
-  <!-- location of the bootstrap logging configuration -->
-  <listener>
-    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-  </listener>
-  <context-param>
-    <param-name>log4jConfigLocation</param-name>
-    <param-value>/WEB-INF/log4j.properties</param-value>
-  </context-param>
 
   <!-- basic dinistiq web setup -->
   <listener>
