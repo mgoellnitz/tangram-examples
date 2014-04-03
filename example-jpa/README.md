@@ -47,14 +47,23 @@ http://localhost:12380/example-jpa/s/id_RootTopic:1
 Customize JPA Implementation
 ----------------------------
 
-The tangram jpa jar comes with NO dependency for the implementations OpenJPA, EclipseLink, 
-or DataNucleus. 
+The tangram jpa jar comes with NO dependency for the implementations OpenJPA, 
+EclipseLink, or DataNucleus. 
 
 Any application using the module will have to add these dependencies itself. This 
 also holds true, when you select any of the variations of the JPA module with
 byte-transformed/enhanced/woven (synonyms!) classes since they carry all the same
 set of dependencies.
 
+When changing the JPA backend, you have to prepare two things. The byte-code 
+transformation is implementation specific and carries different names as well.
+The persistence.xml for the specific implementation as well. This cannot be achieved
+by different persistence units since elements required by 
+
+The example has a property "jpa_backend" which tries to switch everything needed
+in one place. This again hides the feature that you can have different persistence.xml
+files for the byte-code transformation and the packaged product. - See details in
+build.gradle and make it fit your needs.
 
 Customize Database System to use
 --------------------------------
@@ -63,8 +72,11 @@ Most configuration for the database system is done through the tangram config
 files - not within the persistence.xml - to have the setup in one place as much 
 as possible. 
 
-One for dinistiq and one for spring. You will find many examples for database 
-setup and target plattforms like cloudbees there.
+For spring the "jpaConfigOverrides" are placed in the example.xml bean configuration
+for the example application. For dinisiq the same set of values can be configured in
+the separate jpaConfigOverrides.properties.
+
+You will find many examples for database setup and target plattforms like cloudbees there.
 
 With hsqldb this tool might be helpfull:
 

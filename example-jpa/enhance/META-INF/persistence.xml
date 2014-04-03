@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright  (C)  2011-2013  Martin  Goellnitz
+  Copyright  (C)  2011-2014 Martin  Goellnitz
   
   This  work  is  licensed  under  the  Creative  Commons  Attribution  3.0  
   Unported  License.  To  view  a  copy  of  this  license,  visit  
@@ -13,35 +13,13 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
         
   <persistence-unit name="tangram" transaction-type="RESOURCE_LOCAL">
-    <!-- OpenJPA
-    -->
-    <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-    <!-- EclipseLink
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>org.tangram.jpa.JpaContent</class>
-    <class>org.tangram.jpa.Code</class>
-    -->
+    <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>    
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <!--
-      <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:eclipselink/hsqldb/tangram"/>
-      <property name="javax.persistence.jdbc.user" value="sa"/>
-      <property name="javax.persistence.jdbc.password" value=""/>
-      -->
-      <!-- OpenJPA -->
+      <!-- These values are taken from tangram / bean factory config -->
       <!--
       <property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
       <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>    
-      -->
-      <!-- EclipseLink  -->
-      <!-- weaving: e.g. static or false -->
-      <!--
-      <property name="eclipselink.weaving" value="static"/>
-      -->
-      <!-- ddl-generation: create-and-drop-tables or create-tables -->
-      <!--
-      <property name="eclipselink.ddl-generation" value="create-tables"/>
       -->
     </properties>
   </persistence-unit>

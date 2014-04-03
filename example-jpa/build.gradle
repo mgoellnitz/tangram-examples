@@ -13,6 +13,7 @@ defaultTasks 'clean', 'build'
 
 ext.tangram_version = '0.9-SNAPSHOT'
 ext.tangram_backend = 'dinistiq' // spring or dinistiq
+ext.jpa_backend = 'eclipselink' // openjpa, eclipselink, or nucleus
 
 buildscript {
   repositories {
@@ -115,11 +116,11 @@ dependencies {
 
 jar.doFirst { 
   // include this when using "OpenJPA enhanced" block in the dependencies
-  // openjpaEnhance()
+  if (jpa_backend.equals('openjpa')) openjpaEnhance()
   // include this when using "EclipseLInk woven" block in the dependencies
-  eclipselinkWeave()
+  if (jpa_backend.equals('eclipselink')) eclipselinkWeave() 
   // This is farily untested
-  // nucleusJpaEnhance()
+  if (jpa_backend.equals('nucleus')) nucleusJpaEnhance() 
 }
 
 war.doFirst { 
@@ -130,6 +131,14 @@ war {
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   excludes = [ "classes/**", "WEB-INF/web*.xml" ]
+  // Use backend specific persistence.xml for JPA 
+  // In this example use the same pesistence.xml which was used for enhancing or weaving
+  jpa_method = 'none'
+  if (jpa_backend.equals('openjpa')) jpa_method='enhance'
+  if (jpa_backend.equals('eclipselink')) jpa_method='weave' 
+  into ('classes') {
+    from "$project.rootDir/$jpa_method"
+  }
 }
 
 stopPort = 12390

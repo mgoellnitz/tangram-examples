@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright  (C)  2011-2014 Martin  Goellnitz
+  
+  This  work  is  licensed  under  the  Creative  Commons  Attribution  3.0  
+  Unported  License.  To  view  a  copy  of  this  license,  visit  
+  http://creativecommons.org/licenses/by/3.0/  or  send  a  letter  to  
+  Creative  Commons,  444  Castro  Street,  Suite  900,  Mountain  View,  
+  California,  94041,  USA.
+-->  
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+        
+  <persistence-unit name="tangram" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <!-- EclipseLink needs at least these two for the unwoven use case-->
+    <class>org.tangram.jpa.JpaContent</class>
+    <class>org.tangram.jpa.Code</class>
+    
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <!-- These values are taken from tangram / bean factory config -->
+      <!-- weaving: e.g. static or false -->
+      <!--
+      <property name="eclipselink.weaving" value="static"/>
+      -->
+      <!-- ddl-generation: create-and-drop-tables or create-tables -->
+      <!--
+      <property name="eclipselink.ddl-generation" value="create-tables"/>
+      -->
+    </properties>
+  </persistence-unit>
+    
+</persistence>
