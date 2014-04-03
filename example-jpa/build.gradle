@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright (C) 2011-2013 Martin Goellnitz
+ * Copyright (C) 2011-2014 Martin Goellnitz
  * 
  * This work is licensed under the Creative Commons Attribution 3.0 
  * Unported License. To view a copy of this license, visit 
@@ -13,7 +13,8 @@ defaultTasks 'clean', 'build'
 
 ext.tangram_version = '0.9-SNAPSHOT'
 ext.tangram_backend = 'dinistiq' // spring or dinistiq
-ext.jpa_backend = 'eclipselink' // openjpa, eclipselink, or nucleus
+ext.jpa_backend = 'openjpa' // openjpa, eclipselink, or nucleus
+ext.do_bytecode_transform = true; // JPA can optionally be used without
 
 buildscript {
   repositories {
@@ -60,7 +61,8 @@ artifacts {
 dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"
   
-  /* Unenhanced JPA for any of the implementations
+  /* JPA without byte-code transformed classes for any of the 
+     implementations supporting this.
   compile "tangram:tangram-jpa:$tangram_version"
    */
   
@@ -115,12 +117,14 @@ dependencies {
 }
 
 jar.doFirst { 
-  // include this when using "OpenJPA enhanced" block in the dependencies
-  if (jpa_backend.equals('openjpa')) openjpaEnhance()
-  // include this when using "EclipseLInk woven" block in the dependencies
-  if (jpa_backend.equals('eclipselink')) eclipselinkWeave() 
-  // This is farily untested
-  if (jpa_backend.equals('nucleus')) nucleusJpaEnhance() 
+  if (do_bytecode_transform) {
+    // include this when using "OpenJPA enhanced" block in the dependencies
+    if (jpa_backend.equals('openjpa')) openjpaEnhance()
+    // include this when using "EclipseLInk woven" block in the dependencies
+    if (jpa_backend.equals('eclipselink')) eclipselinkWeave() 
+    // This is farily untested
+    if (jpa_backend.equals('nucleus')) nucleusJpaEnhance() 
+  }
 }
 
 war.doFirst { 
