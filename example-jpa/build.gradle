@@ -13,8 +13,8 @@ defaultTasks 'clean', 'build'
 
 ext.tangram_version = '0.9-SNAPSHOT'
 ext.tangram_backend = 'dinistiq' // spring or dinistiq
-ext.jpa_backend = 'openjpa' // openjpa, eclipselink, or nucleus
-ext.do_bytecode_transform = true; // JPA can optionally be used without
+ext.jpa_backend = 'eclipselink' // openjpa, eclipselink, or nucleus
+ext.do_bytecode_transform = true; // JPA can optionally be used without except for datanucleus
 
 buildscript {
   repositories {
@@ -67,18 +67,17 @@ dependencies {
    */
   
   /* Enhanced OpenJPA
-   */
   compile "tangram:tangram-jpa:$tangram_version:openjpa"
   compile ("org.apache.openjpa:openjpa:$versions.openjpa") {
     exclude group: 'asm'
   }
+   */
   
   /* Woven EclipseLink
+   */
   compile "tangram:tangram-jpa:$tangram_version:eclipselink"
-  // EclipseLink
   compile "org.eclipse.persistence:org.eclipse.persistence.jpa:$versions.eclipselink"
   compile "$versions.persistence_api"
-   */
   
   compile "hsqldb:hsqldb:1.8.0.10"
  
@@ -127,7 +126,7 @@ jar.doFirst {
   }
 }
 
-war.doFirst { 
+war.doFirst {
   overlayWebapp(war) 
 }
 
@@ -137,11 +136,11 @@ war {
   excludes = [ "classes/**", "WEB-INF/web*.xml" ]
   // Use backend specific persistence.xml for JPA 
   // In this example use the same pesistence.xml which was used for enhancing or weaving
-  String jpa_method = 'none'
+  String jpa_method = jpa_backend
   if (jpa_backend.equals('openjpa')) jpa_method='enhance'
   if (jpa_backend.equals('eclipselink')) jpa_method='weave' 
-  into ('classes/WEB-INF') {
-    from "$project.rootDir/$jpa_method"
+  into ('WEB-INF/classes') {
+    from "$project.projectDir/$jpa_method"
   }
 }
 

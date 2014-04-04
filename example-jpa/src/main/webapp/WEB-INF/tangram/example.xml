@@ -47,7 +47,7 @@
     <constructor-arg>
       <map>
         <!-- 
-             hsqldb config example for OpenJPA. Content provided when directly in the development environment.
+             hsqldb config example for OpenJPA. Content provided when run directly in the development environment.
              
         <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:openjpa/hsqldb/tangram"/>
@@ -57,7 +57,7 @@
         <entry key="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>
         -->
         <!-- 
-             h2sql config example for OpenJPA. Content provided when directly in the development environment.
+             h2sql config example for OpenJPA. Content provided when run directly in the development environment.
              
         <entry key="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:h2:./openjpa/h2/tangram"/>
@@ -68,7 +68,7 @@
         <entry key="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>
         -->
         <!-- 
-             hsqldb config example for EclipseLink. Content provided when directly in the development environment.
+             hsqldb config example for EclipseLink. Content provided when run directly in the development environment.
              
         <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:eclipselink/hsqldb/tangram"/>
@@ -76,7 +76,7 @@
         <entry key="javax.persistence.jdbc.password" value=""/>
         -->
         <!-- 
-             h2sql config example for EclipseLink. Content provided when directly in the development environment.
+             h2sql config example for EclipseLink. Content provided when run directly in the development environment.
              
         <entry key="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:h2:./eclipselink/h2/tangram"/>
@@ -90,6 +90,22 @@
              
         <entry key="eclipselink.ddl-generation" value="create-tables"/>
         <entry key="eclipselink.weaving" value="static"/>
+        -->
+        <!-- 
+             hsqldb config example for datanucleus Content provided when run directly in the development environment.
+             
+        <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+        <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:jpa-nucleus/hsqldb/tangram"/>
+        <entry key="javax.persistence.jdbc.user" value="sa"/>
+        <entry key="javax.persistence.jdbc.password" value=""/>
+        -->
+        <!--
+             DataNucleus config example. These should be added in any environment using datanucleus
+             
+        <entry key="datanucleus.autoCreateSchema" value="true"/>
+        <entry key="datanucleus.validateTables" value="true"/>
+        <entry key="datanucleus.manageRelationships" value="true"/>
+        <entry key="datanucleus.validateConstraints" value="true"/>
         -->
       </map>
     </constructor-arg>

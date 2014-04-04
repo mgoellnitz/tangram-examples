@@ -17,6 +17,14 @@
     <!-- EclipseLink needs at least these two for the unwoven use case-->
     <class>org.tangram.jpa.JpaContent</class>
     <class>org.tangram.jpa.Code</class>
+    <!-- Needs to be explicitly listed when leaving out weaving
+    -->
+    <class>org.tangram.jpa.solution.Linkable</class>
+    <class>org.tangram.jpa.solution.Article</class>
+    <class>org.tangram.jpa.solution.Container</class>
+    <class>org.tangram.jpa.solution.ImageData</class>
+    <class>org.tangram.jpa.solution.RootTopic</class>
+    <class>org.tangram.jpa.solution.Topic</class>
     
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
