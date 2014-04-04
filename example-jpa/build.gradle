@@ -13,7 +13,7 @@ defaultTasks 'clean', 'build'
 
 ext.tangram_version = '0.9-SNAPSHOT'
 ext.tangram_backend = 'dinistiq' // spring or dinistiq
-ext.jpa_backend = 'eclipselink' // openjpa, eclipselink, or nucleus
+ext.jpa_backend = 'nucleus' // openjpa, eclipselink, or nucleus
 ext.do_bytecode_transform = true; // JPA can optionally be used without except for datanucleus
 
 buildscript {
@@ -74,10 +74,19 @@ dependencies {
    */
   
   /* Woven EclipseLink
-   */
   compile "tangram:tangram-jpa:$tangram_version:eclipselink"
   compile "org.eclipse.persistence:org.eclipse.persistence.jpa:$versions.eclipselink"
   compile "$versions.persistence_api"
+   */
+  
+  /* For JPA with DataNucleus
+  */
+  compile ("tangram:tangram-jpa:$tangram_version:nucleus");
+  compile "org.datanucleus:datanucleus-api-jpa:$versions.datanucleus"
+  compile "org.datanucleus:datanucleus-core:$versions.datanucleus"
+  compile "$versions.jdo_api"
+  compile "$versions.persistence_api"
+  compile "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
   
   compile "hsqldb:hsqldb:1.8.0.10"
  
