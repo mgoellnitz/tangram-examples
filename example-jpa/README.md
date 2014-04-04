@@ -2,7 +2,7 @@ Tangram JPA Example
 ===================
 
 To be used with bytecode enhanced / woven or plain implementations for OpenJPA, 
-EclipseLink and perhaps DataNucleus Access Plattform.
+EclipseLink and DataNucleus Access Plattform.
 
 Setup system
 ------------
@@ -57,8 +57,12 @@ set of dependencies.
 
 When changing the JPA backend, you have to prepare two things. The byte-code 
 transformation is implementation specific and carries different names as well.
-The persistence.xml for the specific implementation as well. This cannot be achieved
-by different persistence units since elements required by 
+The persistence.xml despite the few thing which need to be set here for tangram 
+(to have everything in one place most of the stuff - as with jdo - moved to
+a jpaConfigOverride element in the application configuration) it hast to be 
+specific to the used implementation implementation as well. This cannot be achieved
+by different persistence units since elements required by one implementation interfere 
+with the persistence.xml reading of the other.
 
 The example has a property "jpa_backend" which tries to switch everything needed
 in one place. This again hides the feature that you can have different persistence.xml
