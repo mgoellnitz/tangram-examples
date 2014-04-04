@@ -77,8 +77,8 @@ dependencies {
   compile "tangram:tangram-jpa:$tangram_version:eclipselink"
   // EclipseLink
   compile "org.eclipse.persistence:org.eclipse.persistence.jpa:$versions.eclipselink"
-   */
   compile "$versions.persistence_api"
+   */
   
   compile "hsqldb:hsqldb:1.8.0.10"
  
@@ -137,10 +137,10 @@ war {
   excludes = [ "classes/**", "WEB-INF/web*.xml" ]
   // Use backend specific persistence.xml for JPA 
   // In this example use the same pesistence.xml which was used for enhancing or weaving
-  jpa_method = 'none'
+  String jpa_method = 'none'
   if (jpa_backend.equals('openjpa')) jpa_method='enhance'
   if (jpa_backend.equals('eclipselink')) jpa_method='weave' 
-  into ('classes') {
+  into ('classes/WEB-INF') {
     from "$project.rootDir/$jpa_method"
   }
 }

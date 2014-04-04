@@ -15,6 +15,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import org.tangram.jpa.Code;
@@ -26,14 +27,20 @@ public class RootTopic extends Topic {
 
     // Annotation needed for OpenJPA
     @OneToMany
+    // Otherwise Eclipselink builds one Join Table for Topic.elements and RootTopic.bottomLinks alike with non-null attributes - br
+    @JoinTable(name = "RootTopicBottomLinks")
     private List<Topic> bottomLinks;
 
     // Annotation needed for OpenJPA
     @OneToMany
+    // Otherwise Eclipselink builds one Join Table for CSS and JS alike with non-null attributes - br
+    @JoinTable(name = "RootTopicCSS")
     private List<Code> css;
 
     // Annotation needed for OpenJPA
     @OneToMany
+    // Otherwise Eclipselink builds one Join Table for CSS and JS alike with non-null attributes - br
+    @JoinTable(name = "RootTopicJS")
     private List<Code> js;
 
     // Annotation needed for OpenJPA
