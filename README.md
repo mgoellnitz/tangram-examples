@@ -3,8 +3,9 @@ Very small Examples for Tangram Usage
 
 These are the example applications for the different usage flavours of tangram.
 
-They are intended as a quick as possible demo to see something running, but in the 
-comments  you will find the options to tweak this to use:
+They are intended as a quick as possible demo to see something running. In the 
+comments of the build files you will additionally find the options to tweak the 
+application to use the full bandwidth of flavours:
 
 * JPA or JDO as Persistence Interfaces
 * RDBMS, Office Files, or MongoDB as the database.
