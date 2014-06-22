@@ -12,7 +12,7 @@
 defaultTasks 'clean', 'build'
 
 ext.tangram_version = '0.9-SNAPSHOT'
-ext.tangram_backend = 'dinistiq' // spring or dinistiq
+ext.tangram_backend = 'spring' // spring or dinistiq
 ext.jpa_backend = 'nucleus' // openjpa, eclipselink, or nucleus
 ext.do_bytecode_transform = true; // JPA can optionally be used without except for datanucleus
 
@@ -101,21 +101,19 @@ dependencies {
    */
     
   /* Spring security framework
+   */
   // this is more like a runtime dependency since we for now only use it by configuration
   compile "org.springframework.security:spring-security-config:$versions.springsecurity"
-  // avoid dependencies to spring 3.0.7
-  compile ("org.springframework.security:spring-security-web:$versions.springsecurity") {
-    exclude module: 'spring-jdbc'
-    exclude module: 'spring-tx'
-  }
-   */
+  compile "org.springframework.security:spring-security-web:$versions.springsecurity"
 
   /* Apache Shiro most likely to be used together with dinistiq
-   */
   compile "org.apache.shiro:shiro-core:$versions.shiro"
   compile "org.apache.shiro:shiro-web:$versions.shiro"
   compile "org.slf4j:slf4j-api:1.6.6"
   compile "org.slf4j:slf4j-log4j12:1.6.6"
+   */
+  
+  compile "log4j:log4j:$versions.log4j"
   
   testCompile "junit:junit:$versions.junit"
   

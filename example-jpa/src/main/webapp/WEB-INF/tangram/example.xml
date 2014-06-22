@@ -93,20 +93,20 @@
         -->
         <!-- 
              hsqldb config example for datanucleus Content provided when run directly in the development environment.
+        -->
              
         <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:datanucleus/hsqldb/tangram"/>
         <entry key="javax.persistence.jdbc.user" value="sa"/>
         <entry key="javax.persistence.jdbc.password" value=""/>
-        -->
         <!--
              DataNucleus config example. These should be added in any environment using datanucleus
+        -->
              
         <entry key="datanucleus.autoCreateSchema" value="true"/>
         <entry key="datanucleus.validateTables" value="true"/>
         <entry key="datanucleus.manageRelationships" value="true"/>
         <entry key="datanucleus.validateConstraints" value="true"/>
-        -->
       </map>
     </constructor-arg>
   </bean>

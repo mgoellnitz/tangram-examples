@@ -1,12 +1,13 @@
 /.gradle
+/.nb-gradle*
+*.log
+tangram-restart-cache.ser
 /*/.gradle
 /*/db
 /*/build
 /*/.settings
 /*/.classpath
 /*/.project
-/.nb-gradle*
-*.log
-tangram-restart-cache.ser
+/*/private/cache
 /example-ebean/tangram-create.sql
 /example-ebean/tangram-drop.sql
