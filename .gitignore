@@ -9,5 +9,7 @@ tangram-restart-cache.ser
 /*/.classpath
 /*/.project
 /*/private/cache
+/example-coma-spring/material
+/example-coma-spring/src/main/webapp
 /example-ebean/tangram-create.sql
 /example-ebean/tangram-drop.sql

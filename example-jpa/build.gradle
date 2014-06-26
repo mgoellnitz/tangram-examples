@@ -61,6 +61,10 @@ artifacts {
 dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"
   
+  compile "org.slf4j:slf4j-log4j12:$versions.slf4j"  
+  compile "log4j:log4j:$versions.log4j"  
+  compile "hsqldb:hsqldb:1.8.0.10"
+ 
   /* JPA without byte-code transformed classes for any of the 
      implementations supporting this.
   compile "tangram:tangram-jpa:$tangram_version"
@@ -88,8 +92,6 @@ dependencies {
   compile "$versions.persistence_api"
   compile "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
   
-  compile "hsqldb:hsqldb:1.8.0.10"
- 
   compile "tangram:tangram-${tangram_backend}:$tangram_version"
   
   webapp "tangram:tangram-editor:$tangram_version:war@war"
@@ -97,7 +99,6 @@ dependencies {
   
   /* For the FTP Service
   compile "tangram:tangram-ftp:$tangram_version"
-  compile "org.slf4j:slf4j-log4j12:1.6.6"
    */
     
   /* Spring security framework
@@ -109,11 +110,7 @@ dependencies {
   /* Apache Shiro most likely to be used together with dinistiq
   compile "org.apache.shiro:shiro-core:$versions.shiro"
   compile "org.apache.shiro:shiro-web:$versions.shiro"
-  compile "org.slf4j:slf4j-api:1.6.6"
-  compile "org.slf4j:slf4j-log4j12:1.6.6"
    */
-  
-  compile "log4j:log4j:$versions.log4j"
   
   testCompile "junit:junit:$versions.junit"
   

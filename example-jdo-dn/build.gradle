@@ -38,7 +38,6 @@ webAppDirName = 'disabled'
 jar.enabled = true 
 
 repositories {
-  mavenLocal()
   // most of the usual stuff
   mavenCentral()
   // the tangram snapshots
@@ -65,6 +64,7 @@ dependencies {
   // e.g. rdbms of datanucleus and any db driver you'd like and which is supported
   compile "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"  
   compile "hsqldb:hsqldb:1.8.0.10"
+  compile "org.slf4j:slf4j-log4j12:$versions.slf4j"  
   // compile "mysql:mysql-connector-java:5.1.21"
 
   compile "tangram:tangram-${tangram_backend}:$tangram_version"
@@ -81,7 +81,6 @@ dependencies {
 
   /* For the FTP Service
   compile "tangram:tangram-ftp:$tangram_version"
-  compile "org.slf4j:slf4j-log4j12:1.6.6"
    */
     
   /* Spring security framework
@@ -94,8 +93,6 @@ dependencies {
   */
   compile "org.apache.shiro:shiro-core:$versions.shiro"
   compile "org.apache.shiro:shiro-web:$versions.shiro"
-  compile "org.slf4j:slf4j-api:1.6.6"
-  compile "org.slf4j:slf4j-log4j12:1.6.6"
   
   // This fixes a problem with the WAR lib directory calculation needed for run@cloudbees:
   // reallyNeeded "org.ow2.asm:asm:4.0"

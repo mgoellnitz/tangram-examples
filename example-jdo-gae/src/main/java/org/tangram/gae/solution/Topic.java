@@ -1,35 +1,32 @@
 /**
- * 
- * Copyright (C) 2011-2013 Martin Goellnitz
- * 
- * This work is licensed under the Creative Commons Attribution 3.0 
- * Unported License. To view a copy of this license, visit 
- * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
- * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+ *
+ * Copyright (C) 2011-2014 Martin Goellnitz
+ *
+ * This work is licensed under the Creative Commons Attribution 3.0
+ * Unported License. To view a copy of this license, visit
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View,
  * California, 94041, USA.
- * 
+ *
  */
 package org.tangram.gae.solution;
 
+import com.google.appengine.api.datastore.Text;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tangram.components.TangramServices;
 import org.tangram.content.Content;
 import org.tangram.feature.protection.ProtectedContent;
 
-import com.google.appengine.api.datastore.Text;
-
 @PersistenceCapable
 public class Topic extends Linkable implements ProtectedContent {
 
-    private static final Log log = LogFactory.getLog(Topic.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Topic.class);
 
     private List<Topic> subTopics;
 
@@ -127,7 +124,7 @@ public class Topic extends Linkable implements ProtectedContent {
                             return p;
                         } // if
                     } else {
-                        log.error("getPathRecursive() "+t.getId()+" has null pointer subtopic");
+                        LOG.error("getPathRecursive() "+t.getId()+" has null pointer subtopic");
                     } // if
                 } // for
             } // if
@@ -141,8 +138,8 @@ public class Topic extends Linkable implements ProtectedContent {
 
 
     public List<Topic> getPath() {
-        if (log.isDebugEnabled()) {
-            log.debug(getClass().getName()+".getPath("+getId()+") "+getRootTopic().getClass().getName());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(getClass().getName()+".getPath("+getId()+") "+getRootTopic().getClass().getName());
         } // if
         if (path==null) {
             path = getPathRecursive(getRootTopic());

@@ -10,7 +10,7 @@ For this very small example thus you need the very small example from coremedia,
 Prerequisites
 =============
 
-A menusite database create with a coremedia content (management) server.
+A menusite database created with a coremedia content (management) server.
 
 This is achived by installing a content management server, copying license file and menusite doctypes to the installation and importing the example content. We used the postgresql database in this example but you are more or less free to use any dastabase supported by the CoreMedia CMS.
 

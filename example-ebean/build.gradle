@@ -38,7 +38,6 @@ webAppDirName = 'disabled'
 jar.enabled = true 
 
 repositories {
-  mavenLocal()
   // most of the usual stuff
   mavenCentral()
   // the tangram snapshots
@@ -61,6 +60,8 @@ dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"  
   compile "tangram:tangram-ebean:$tangram_version"
   compile "com.h2database:h2:1.3.174"
+  
+  compile "org.slf4j:slf4j-log4j12:$versions.slf4j"  
   compile "log4j:log4j:$versions.log4j"
   
   compile "tangram:tangram-${tangram_backend}:$tangram_version"
@@ -71,7 +72,6 @@ dependencies {
   
   /* For the FTP Service
   compile "tangram:tangram-ftp:$tangram_version"
-  compile "org.slf4j:slf4j-log4j12:1.6.6"
    */
     
   /* Spring security for springframework version
@@ -84,8 +84,6 @@ dependencies {
   */
   compile "org.apache.shiro:shiro-core:$versions.shiro"
   compile "org.apache.shiro:shiro-web:$versions.shiro"
-  compile "org.slf4j:slf4j-api:1.6.6"
-  compile "org.slf4j:slf4j-log4j12:1.6.6"
   
   providedCompile "javax.servlet:servlet-api:$versions.servlet"
   providedCompile "javax.servlet:jsp-api:$versions.jsp"

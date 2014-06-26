@@ -19,8 +19,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tangram.components.TangramServices;
 import org.tangram.content.Content;
 import org.tangram.feature.protection.ProtectedContent;
@@ -31,7 +31,7 @@ import org.tangram.feature.protection.ProtectedContent;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Topic extends Linkable implements ProtectedContent {
 
-    private static final Log log = LogFactory.getLog(Topic.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Topic.class);
 
     // Annotation needed for OpenJPA
     @OneToMany
@@ -138,7 +138,7 @@ public class Topic extends Linkable implements ProtectedContent {
                             return p;
                         } // if
                     } else {
-                        log.error("getPathRecursive() "+t.getId()+" has null pointer subtopic");
+                        LOG.error("getPathRecursive() "+t.getId()+" has null pointer subtopic");
                     } // if
                 } // for
             } // if
@@ -162,8 +162,8 @@ public class Topic extends Linkable implements ProtectedContent {
 
 
     public List<Topic> getPath() {
-        if (log.isDebugEnabled()) {
-            log.debug(getClass().getName()+".getPath("+getId()+") "+getRootTopic().getClass().getName());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(getClass().getName()+".getPath("+getId()+") "+getRootTopic().getClass().getName());
         } // if
         if (path==null) {
             path = getPathRecursive(getRootTopic());
