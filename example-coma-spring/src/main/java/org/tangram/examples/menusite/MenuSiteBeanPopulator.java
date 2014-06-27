@@ -1,30 +1,25 @@
 /**
- * 
- * Copyright (C) 2011-2013 Martin Goellnitz
- * 
- * This work is licensed under the Creative Commons Attribution 3.0 
- * Unported License. To view a copy of this license, visit 
- * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
- * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+ *
+ * Copyright (C) 2011-2014 Martin Goellnitz
+ *
+ * This work is licensed under the Creative Commons Attribution 3.0
+ * Unported License. To view a copy of this license, visit
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View,
  * California, 94041, USA.
- * 
+ *
  */
 package org.tangram.examples.menusite;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import javax.inject.Inject;
 import org.tangram.coma.ComaBeanFactory;
 import org.tangram.coma.ComaBeanPopulator;
 import org.tangram.coma.ComaContent;
 
 public class MenuSiteBeanPopulator implements ComaBeanPopulator {
-
-    @SuppressWarnings("unused")
-    private static Log log = LogFactory.getLog(MenuSiteBeanPopulator.class);
 
     @Inject
     private ComaBeanFactory beanFactory;

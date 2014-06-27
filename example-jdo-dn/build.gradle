@@ -62,40 +62,41 @@ dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"  
   compile "tangram:tangram-nucleus:$tangram_version"
   // e.g. rdbms of datanucleus and any db driver you'd like and which is supported
-  compile "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"  
-  compile "hsqldb:hsqldb:1.8.0.10"
-  compile "org.slf4j:slf4j-log4j12:$versions.slf4j"  
-  // compile "mysql:mysql-connector-java:5.1.21"
+  runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"  
 
-  compile "tangram:tangram-${tangram_backend}:$tangram_version"
+  runtime "tangram:tangram-${tangram_backend}:$tangram_version"
   
   // mongodb
-  // compile "org.datanucleus:datanucleus-mongodb:$versions.datanucleus"
+  // runtime "org.datanucleus:datanucleus-mongodb:$versions.datanucleus"
   // flat file formats
-  // compile "org.datanucleus:datanucleus-xml:$versions.datanucleus"
-  // compile "org.datanucleus:datanucleus-odf:$versions.datanucleus"
-  // compile "org.datanucleus:datanucleus-excel:$versions.datanucleus"
+  // runtime "org.datanucleus:datanucleus-xml:$versions.datanucleus"
+  // runtime "org.datanucleus:datanucleus-odf:$versions.datanucleus"
+  // runtime "org.datanucleus:datanucleus-excel:$versions.datanucleus"
   
   webapp "tangram:tangram-editor:$tangram_version:war@war"  
-  compile "tangram:tangram-editor:$tangram_version"
+  runtime "tangram:tangram-editor:$tangram_version"
 
   /* For the FTP Service
-  compile "tangram:tangram-ftp:$tangram_version"
+  runtime "tangram:tangram-ftp:$tangram_version"
    */
     
   /* Spring security framework
   // this is more like a runtime dependency since we for now only use it by configuration
-  compile "org.springframework.security:spring-security-config:$versions.springsecurity"
-  compile "org.springframework.security:spring-security-web:$versions.springsecurity"
+  runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
+  runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
   */
 
   /* Apache Shiro most likely to be used together with dinistiq
   */
-  compile "org.apache.shiro:shiro-core:$versions.shiro"
-  compile "org.apache.shiro:shiro-web:$versions.shiro"
+  runtime "org.apache.shiro:shiro-core:$versions.shiro"
+  runtime "org.apache.shiro:shiro-web:$versions.shiro"
   
   // This fixes a problem with the WAR lib directory calculation needed for run@cloudbees:
   // reallyNeeded "org.ow2.asm:asm:4.0"
+  
+  runtime "hsqldb:hsqldb:1.8.0.10"
+  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
+  // compile "mysql:mysql-connector-java:5.1.21"
   
   testCompile "junit:junit:$versions.junit"
   

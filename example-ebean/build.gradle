@@ -59,31 +59,31 @@ artifacts {
 dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"  
   compile "tangram:tangram-ebean:$tangram_version"
-  compile "com.h2database:h2:1.3.174"
   
-  compile "org.slf4j:slf4j-log4j12:$versions.slf4j"  
-  compile "log4j:log4j:$versions.log4j"
-  
-  compile "tangram:tangram-${tangram_backend}:$tangram_version"
+  runtime "tangram:tangram-${tangram_backend}:$tangram_version"
   
   // turn on editor
   webapp "tangram:tangram-editor:$tangram_version:war@war"
-  compile "tangram:tangram-editor:$tangram_version"
+  runtime "tangram:tangram-editor:$tangram_version"
   
   /* For the FTP Service
-  compile "tangram:tangram-ftp:$tangram_version"
+  runtime "tangram:tangram-ftp:$tangram_version"
    */
     
   /* Spring security for springframework version
   // this is more like a runtime dependency since we for now only use it by configuration
-  compile "org.springframework.security:spring-security-config:$versions.springsecurity"
-  compile "org.springframework.security:spring-security-web:$versions.springsecurity"
+  runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
+  runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
    */
   
   /* Apache Shiro most likely to be used together with dinistiq
   */
-  compile "org.apache.shiro:shiro-core:$versions.shiro"
-  compile "org.apache.shiro:shiro-web:$versions.shiro"
+  runtime "org.apache.shiro:shiro-core:$versions.shiro"
+  runtime "org.apache.shiro:shiro-web:$versions.shiro"
+  
+  runtime "com.h2database:h2:1.3.174"
+  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
+  runtime "log4j:log4j:$versions.log4j"
   
   providedCompile "javax.servlet:servlet-api:$versions.servlet"
   providedCompile "javax.servlet:jsp-api:$versions.jsp"

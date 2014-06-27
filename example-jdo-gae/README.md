@@ -4,9 +4,9 @@ Google App Engine example or starting point
 Prerequisites
 -------------
 
-* Java
+* Java 7
 * Google App Engine SDK Java AND Python (for the bulkloader.py you definetely want to use)
-* Gradle 1.6 and up
+* Gradle 1.8 and up (Including 2.0)
 
 Setup system
 ------------
@@ -41,10 +41,10 @@ With HRD sematics needed for this example with the JDO 3 features you have to ex
 dev_appserver --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=1  -p 12380 build\war
 ```
 
-which we have a shurtcut for in the build script
+which we have a shortcut for in the build script in sync with the usual jettyRun or tomcatRun
 
 ```bash
-gradle runWar
+gradle appserverRun
 ```
 
 The HRD flags are mandatory with this very example but they actually depend on your data model.

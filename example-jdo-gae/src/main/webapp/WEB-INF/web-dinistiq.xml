@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   
-  Copyright  (C)  2011-2013  Martin  Goellnitz
+  Copyright (C) 2011-2014 Martin Goellnitz
   
-  This  work  is  licensed  under  the  Creative  Commons  Attribution  3.0  
-  Unported  License.  To  view  a  copy  of  this  license,  visit  
-  http://creativecommons.org/licenses/by/3.0/  or  send  a  letter  to  
-  Creative  Commons,  444  Castro  Street,  Suite  900,  Mountain  View,  
-  California,  94041,  USA.
+  This work is licensed under the Creative Commons Attribution 3.0 
+  Unported License. To view a copy of this license, visit 
+  http://creativecommons.org/licenses/by/3.0/ or send a letter to 
+  Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+  California, 94041, USA.
   
 -->
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -15,7 +15,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
   
-  <display-name>Tangram GAE Example using JDO form DataNucleus - dinistiq version</display-name>
+  <display-name>Tangram GAE Example using JDO through DataNucleus - dinistiq version</display-name>
 
   <!-- basic dinistiq web setup -->
   <listener>
@@ -39,23 +39,6 @@
 
   <!-- TODO: Character Encoding Filter -->
 
-  <!-- Apache shiro example - shiro.ini config file and more tangram setup missing -->
-  <listener>
-    <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
-  </listener>
-  <filter>
-    <filter-name>ShiroFilter</filter-name>
-    <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>ShiroFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher> 
-    <dispatcher>FORWARD</dispatcher> 
-    <dispatcher>INCLUDE</dispatcher> 
-    <dispatcher>ERROR</dispatcher>
-  </filter-mapping>  
-  
   <!-- tangram password filter -->
   <filter>
     <filter-name>TangramProtections</filter-name>

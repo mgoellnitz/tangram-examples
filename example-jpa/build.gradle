@@ -61,10 +61,6 @@ artifacts {
 dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"
   
-  compile "org.slf4j:slf4j-log4j12:$versions.slf4j"  
-  compile "log4j:log4j:$versions.log4j"  
-  compile "hsqldb:hsqldb:1.8.0.10"
- 
   /* JPA without byte-code transformed classes for any of the 
      implementations supporting this.
   compile "tangram:tangram-jpa:$tangram_version"
@@ -90,28 +86,32 @@ dependencies {
   compile "org.datanucleus:datanucleus-core:$versions.datanucleus"
   compile "$versions.jdo_api"
   compile "$versions.persistence_api"
-  compile "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
+  runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
   
-  compile "tangram:tangram-${tangram_backend}:$tangram_version"
+  runtime "tangram:tangram-${tangram_backend}:$tangram_version"
   
   webapp "tangram:tangram-editor:$tangram_version:war@war"
-  compile "tangram:tangram-editor:$tangram_version"
+  runtime "tangram:tangram-editor:$tangram_version"
   
   /* For the FTP Service
-  compile "tangram:tangram-ftp:$tangram_version"
+  runtime "tangram:tangram-ftp:$tangram_version"
    */
     
   /* Spring security framework
    */
   // this is more like a runtime dependency since we for now only use it by configuration
-  compile "org.springframework.security:spring-security-config:$versions.springsecurity"
-  compile "org.springframework.security:spring-security-web:$versions.springsecurity"
+  runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
+  runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
 
   /* Apache Shiro most likely to be used together with dinistiq
-  compile "org.apache.shiro:shiro-core:$versions.shiro"
-  compile "org.apache.shiro:shiro-web:$versions.shiro"
+  runtime "org.apache.shiro:shiro-core:$versions.shiro"
+  runtime "org.apache.shiro:shiro-web:$versions.shiro"
    */
   
+  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
+  runtime "log4j:log4j:$versions.log4j"  
+  runtime "hsqldb:hsqldb:1.8.0.10"
+ 
   testCompile "junit:junit:$versions.junit"
   
   // your container will have this for you

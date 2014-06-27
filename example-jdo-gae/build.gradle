@@ -12,7 +12,7 @@
 defaultTasks 'clean', 'build'
 
 ext.tangram_version = '0.9-SNAPSHOT'
-ext.tangram_backend = 'dinistiq' // spring or dinistiq
+ext.tangram_backend = 'spring' // spring or dinistiq
 
 buildscript {
   repositories {
@@ -59,8 +59,9 @@ artifacts {
 dependencies {
   webapp "tangram:tangram-gae:$tangram_version:war@war"
   compile "tangram:tangram-gae:$tangram_version"
-  compile "tangram:tangram-$tangram_backend:$tangram_version"
-    
+  runtime "tangram:tangram-$tangram_backend:$tangram_version"
+  runtime "org.slf4j:slf4j-jdk14:$versions.slf4j"  
+  
   providedCompile "javax.servlet:servlet-api:$versions.servlet"
   providedCompile "javax.servlet:jsp-api:$versions.jsp"
   
@@ -95,7 +96,7 @@ war.doLast {
   }
 }
 
-task runWar (type :Exec) {
+task appserverRun (type :Exec) {
   if (System.properties['os.name'].toLowerCase().contains('windows')) {
     commandLine 'cmd', '/c', 'dev_appserver --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=1 --disable_update_check -p 12380 build\\war'
   } else {
