@@ -56,6 +56,17 @@ artifacts {
   libs jar
 }
 
+/* Spring security framework */
+if (tangram_backend.equals("dinistiq")) {
+  ext.security_core = "org.apache.shiro:shiro-core:$versions.shiro"
+  ext.security_web = "org.apache.shiro:shiro-web:$versions.shiro"
+}
+/* Apache Shiro most likely to be used together with dinistiq */
+if (tangram_backend.equals("spring")) {
+  ext.security_core = "org.springframework.security:spring-security-config:$versions.springsecurity"
+  ext.security_web = "org.springframework.security:spring-security-web:$versions.springsecurity"
+}
+
 dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"  
   compile "tangram:tangram-ebean:$tangram_version"
@@ -70,16 +81,8 @@ dependencies {
   runtime "tangram:tangram-ftp:$tangram_version"
    */
     
-  /* Spring security for springframework version
-  // this is more like a runtime dependency since we for now only use it by configuration
-  runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
-  runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
-   */
-  
-  /* Apache Shiro most likely to be used together with dinistiq
-  */
-  runtime "org.apache.shiro:shiro-core:$versions.shiro"
-  runtime "org.apache.shiro:shiro-web:$versions.shiro"
+  runtime "$security_core"
+  runtime "$security_web"
   
   runtime "com.h2database:h2:1.3.174"
   runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
