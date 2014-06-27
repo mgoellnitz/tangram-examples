@@ -15,6 +15,8 @@
 
   <!-- application protection -->
 
+  <!-- remove this definition if you don't want generic login for all pages
+  -->
   <bean id="allowedUsers" class="java.util.HashSet">
     <constructor-arg>
       <set>

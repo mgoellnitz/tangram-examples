@@ -13,11 +13,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
         
+  <!--
+       Tangram supports spring request interceptors. As a default we use a password interceptor 
+       for the security feature in core and a measure time interceptor for performance checks  
+  -->
   <bean id="loginSupport" class="org.tangram.security.GenericLoginSupport">
     <property name="staticLoginURL" value="spring_security_login"/>
   </bean>
   
-  <!--
+  <!-- to make the whole application login protected this will be the list of read capable persons 
   <bean name="allowedUsers" class="java.util.HashSet">
     <constructor-arg>
       <set>

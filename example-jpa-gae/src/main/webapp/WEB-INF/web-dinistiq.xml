@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   
-  Copyright  (C)  2011-2013  Martin  Goellnitz
+  Copyright  (C)  2011-2014  Martin  Goellnitz
   
   This  work  is  licensed  under  the  Creative  Commons  Attribution  3.0  
   Unported  License.  To  view  a  copy  of  this  license,  visit  
@@ -39,23 +39,6 @@
 
   <!-- TODO: Character Encoding Filter -->
 
-  <!-- Apache shiro example - shiro.ini config file and more tangram setup missing -->
-  <listener>
-    <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
-  </listener>
-  <filter>
-    <filter-name>ShiroFilter</filter-name>
-    <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>ShiroFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher> 
-    <dispatcher>FORWARD</dispatcher> 
-    <dispatcher>INCLUDE</dispatcher> 
-    <dispatcher>ERROR</dispatcher>
-  </filter-mapping>  
-  
   <!-- tangram password filter -->
   <filter>
     <filter-name>TangramProtections</filter-name>
@@ -66,14 +49,14 @@
         /s/stats
       </param-value>
     </init-param>
-    <!-- add this to generically protect the whole application
+    <!-- remove this parameter if you don't want generic login for all pages
+    -->
     <init-param>
       <param-name>allowed.users</param-name>
       <param-value>
         test@example.com
       </param-value>
     </init-param>
-    -->
     <init-param>
       <param-name>admin.users</param-name>
       <param-value>
