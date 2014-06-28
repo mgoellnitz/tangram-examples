@@ -51,6 +51,8 @@ repositories {
 configurations {
   libs 
   webapp
+  // this is only relevant for spring scenarios since spring still uses jcl
+  all*.exclude module: 'commons-logging'
 }
 
 artifacts {
