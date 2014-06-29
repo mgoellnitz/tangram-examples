@@ -2,6 +2,9 @@
 /.nb-gradle*
 *.log
 tangram-restart-cache.ser
+/*/*/hsqldb/*
+/*/local-db/*
+/*/h2/*
 /*/.gradle
 /*/db
 /*/build
@@ -10,6 +13,7 @@ tangram-restart-cache.ser
 /*/.project
 /*/private/cache
 /example-coma-spring/material
-/example-coma-spring/src/main/webapp
+/example-coma-spring/src/main/webapp/css
+/example-coma-spring/src/main/webapp/WEB-INF/templates
 /example-ebean/tangram-create.sql
 /example-ebean/tangram-drop.sql

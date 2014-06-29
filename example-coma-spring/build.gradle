@@ -49,6 +49,8 @@ jar.enabled = true
 configurations {
   libs 
   webapp
+  // this is only relevant for spring scenarios since spring still uses jcl
+  all*.exclude module: 'commons-logging'
 }
 
 artifacts {
@@ -63,7 +65,9 @@ dependencies {
   providedCompile "javax.servlet:servlet-api:$versions.servlet"
   providedCompile "javax.servlet:jsp-api:$versions.jsp"
   
-  compile "postgresql:postgresql:8.4-702.jdbc4"
+  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
+  runtime "log4j:log4j:$versions.log4j"  
+  runtime "mysql:mysql-connector-java:5.1.31"
 }
 
 war.doFirst { overlayWebapp(war) }
@@ -71,13 +75,48 @@ war.doFirst { overlayWebapp(war) }
 war {
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   excludes = [ "classes/**" ]
+  
+  // https://releases.coremedia.com/cmv/16/cms/5.2.1456/cap-examples.jar
+  FileTree cmapp = zipTree('material/cap-examples.jar')
+  
+  // complicated stuff until http://issues.gradle.org/browse/GRADLE-3025 gets solved
+  into('') {
+    from cmapp
+    include 'cae/menusite/src/css/**'
+    eachFile { FileCopyDetails fcp ->
+      if (fcp.relativePath.pathString.startsWith('cae/menusite/src/css')) {
+        def segments = fcp.relativePath.segments
+        def pathsegments = segments[3..-1] as String[]
+        fcp.relativePath = new RelativePath(!fcp.file.isDirectory(), pathsegments)
+      }
+      else {
+        println "c $fcp.relativePath.pathString"
+        fcp.exclude()
+      }
+    }
+  }
+  into('WEB-INF') {
+    from cmapp
+    include 'cae/menusite/src/templates/**'
+    eachFile { FileCopyDetails fcp ->
+      if (fcp.relativePath.pathString.startsWith('WEB-INF/cae/menusite/src/templates')) {
+        def segments = fcp.relativePath.segments
+        def pathsegments = segments[0,4..-1] as String[]
+        fcp.relativePath = new RelativePath(!fcp.file.isDirectory(), pathsegments)
+      }
+      else {
+        println "t $fcp.relativePath.pathString"
+        fcp.exclude()
+      }
+    }
+  }
 }
 
 /** Optional step to debug things
 war.doLast {
-  ant.unzip(src: war.archivePath, dest: "$buildDir/war")
+ant.unzip(src: war.archivePath, dest: "$buildDir/war")
 }
-*/
+ */
 
 stopPort = 12390
 httpPort = 12380
