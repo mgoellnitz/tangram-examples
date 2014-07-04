@@ -19,14 +19,17 @@ import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tangram.components.TangramServices;
+import org.tangram.content.BeanFactory;
+import org.tangram.content.BeanFactoryAware;
 import org.tangram.content.Content;
 import org.tangram.feature.protection.ProtectedContent;
 
 @PersistenceCapable
-public class Topic extends Linkable implements ProtectedContent {
+public class Topic extends Linkable implements ProtectedContent, BeanFactoryAware {
 
     private static final Logger LOG = LoggerFactory.getLogger(Topic.class);
+
+    private BeanFactory beanFactory;
 
     @Join
     private List<Topic> subTopics;
@@ -40,6 +43,11 @@ public class Topic extends Linkable implements ProtectedContent {
 
     @Join
     private List<Container> relatedContainers;
+
+
+    public void setBeanFactory(BeanFactory beanFactory) {
+        this.beanFactory = beanFactory;
+    }
 
 
     public List<Topic> getSubTopics() {
@@ -99,7 +107,7 @@ public class Topic extends Linkable implements ProtectedContent {
 
     public RootTopic getRootTopic() {
         if (rootTopic==null) {
-            List<RootTopic> rootTopics = TangramServices.getBeanFactory().listBeans(RootTopic.class, null);
+            List<RootTopic> rootTopics = beanFactory.listBeans(RootTopic.class, null);
             if (rootTopics!=null) {
                 if (rootTopics.size()>0) {
                     rootTopic = rootTopics.get(0);
