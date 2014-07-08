@@ -24,12 +24,11 @@ import org.tangram.content.BeanFactoryAware;
 import org.tangram.content.Content;
 import org.tangram.feature.protection.ProtectedContent;
 
+
 @PersistenceCapable
 public class Topic extends Linkable implements ProtectedContent, BeanFactoryAware {
 
     private static final Logger LOG = LoggerFactory.getLogger(Topic.class);
-
-    private BeanFactory beanFactory;
 
     private List<Topic> subTopics;
 
@@ -42,10 +41,8 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
     private List<Container> relatedContainers;
 
-
-    public void setBeanFactory(BeanFactory beanFactory) {
-        this.beanFactory = beanFactory;
-    }
+    @NotPersistent
+    private BeanFactory beanFactory;
 
 
     public List<Topic> getSubTopics() {
@@ -97,7 +94,17 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
         this.relatedContainers = relatedContainers;
     }
 
-    /************************************/
+
+    public void setBeanFactory(BeanFactory beanFactory) {
+        // This is in fact only necessary when you want to use the deprecated methods in JdoContent
+        super.setBeanFactory(beanFactory);
+        this.beanFactory = beanFactory;
+    }
+
+
+    /**
+     * *********************************
+     */
 
     @NotPersistent
     RootTopic rootTopic = null;
@@ -169,7 +176,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
         if (inheritedRelatedContainers==null) {
             List<Topic> p = getPath();
             int i = p.size();
-            while (( --i>=0)&&(result.size()==0)) {
+            while ((--i>=0)&&(result.size()==0)) {
                 result = p.get(i).getRelatedContainers();
             } // while
             inheritedRelatedContainers = result;
@@ -180,7 +187,9 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     } // getInheritedRelatedContainers
 
 
-    /**** Protections ***/
+    /**
+     * ** Protections **
+     */
 
     @Override
     public List<? extends Content> getProtectionPath() {
