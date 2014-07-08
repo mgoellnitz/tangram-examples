@@ -11,12 +11,14 @@
  */
 package org.tangram.ebean.solution;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import org.tangram.feature.blob.MimedBlob;
 
 @Entity
 public class ImageData extends Linkable implements MimedBlob {
 
+    @Column(length = 3000000)
     private byte[] data;
 
     private String mimeType;

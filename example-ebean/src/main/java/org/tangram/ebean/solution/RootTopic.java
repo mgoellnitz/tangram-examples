@@ -12,16 +12,22 @@
 package org.tangram.ebean.solution;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import org.tangram.ebean.Code;
+
 
 @Entity
 public class RootTopic extends Topic {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bottomLinkOf")
     private List<Topic> bottomLinks;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codeOf")
     private List<Code> css;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codeOf")
     private List<Code> js;
 
     private ImageData logo;

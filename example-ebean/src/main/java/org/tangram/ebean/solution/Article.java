@@ -12,11 +12,16 @@
 package org.tangram.ebean.solution;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Article extends Linkable {
 
     private char[] text;
+
+    // dummy references since EBean only supports bidirectional OneToMany relations
+    @ManyToOne
+    private Topic elementOf;
 
 
     public char[] getText() {

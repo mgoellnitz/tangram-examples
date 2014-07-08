@@ -16,6 +16,7 @@ ext.tangram_backend = 'dinistiq' // spring or dinistiq
 
 buildscript {
   repositories {
+  mavenLocal()
     mavenCentral()
     maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
   }
@@ -38,6 +39,7 @@ webAppDirName = 'disabled'
 jar.enabled = true 
 
 repositories {
+  mavenLocal()
   // most of the usual stuff
   mavenCentral()
   // the tangram snapshots

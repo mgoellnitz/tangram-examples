@@ -13,7 +13,10 @@ package org.tangram.ebean.solution;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,27 +25,35 @@ import org.tangram.content.BeanFactoryAware;
 import org.tangram.content.Content;
 import org.tangram.feature.protection.ProtectedContent;
 
+
 @Entity
 public class Topic extends Linkable implements ProtectedContent, BeanFactoryAware {
 
     private static final Logger LOG = LoggerFactory.getLogger(Topic.class);
 
-    private BeanFactory beanFactory;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subTopicOf")
     private List<Topic> subTopics;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "elementOf")
     private List<Article> elements;
 
     private ImageData thumbnail;
 
     private char[] teaser;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "containerOf")
     private List<Container> relatedContainers;
 
+    // dummy references since EBean only supports bidirectional OneToMany relations
+    @ManyToOne
+    private Topic bottomLinkOf; // RootTopic.bottomLink
+    @ManyToOne
+    private Topic subTopicOf; // Topic.subTopic
+    @ManyToOne
+    private Topic contentOf; // Container.content
 
-    public void setBeanFactory(BeanFactory beanFactory) {
-        this.beanFactory = beanFactory;
-    }
+    @Transient
+    private BeanFactory beanFactory;
 
 
     public List<Topic> getSubTopics() {
@@ -94,7 +105,15 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
         this.relatedContainers = relatedContainers;
     }
 
-    /************************************/
+
+    public void setBeanFactory(BeanFactory beanFactory) {
+        this.beanFactory = beanFactory;
+    }
+
+
+    /**
+     * *********************************
+     */
 
     @Transient
     RootTopic rootTopic = null;
@@ -167,7 +186,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
         if (inheritedRelatedContainers==null) {
             List<Topic> p = getPath();
             int i = p.size();
-            while (( --i>=0)&&(result.size()==0)) {
+            while ((--i>=0)&&(result.size()==0)) {
                 result = p.get(i).getRelatedContainers();
             } // while
             inheritedRelatedContainers = result;
@@ -178,7 +197,9 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     } // getInheritedRelatedContainers
 
 
-    /**** Protections ***/
+    /*
+     * Protections
+     */
 
     @Override
     public List<? extends Content> getProtectionPath() {
