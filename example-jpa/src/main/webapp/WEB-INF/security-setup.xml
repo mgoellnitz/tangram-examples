@@ -35,7 +35,7 @@
     <intercept-url pattern="/" access="permitAll" />
     <intercept-url pattern="/s/" access="permitAll" />
     <intercept-url pattern="/s/create**" access="isAuthenticated()" />
-    <intercept-url pattern="/s/editor**" access="isAuthenticated()" />
+    <intercept-url pattern="/s/edit**" access="isAuthenticated()" />
     <intercept-url pattern="/s/link**" access="isAuthenticated()" />
     <intercept-url pattern="/s/list**" access="isAuthenticated()" />
     <intercept-url pattern="/s/store**" access="isAuthenticated()" />
