@@ -39,7 +39,6 @@ webAppDirName = 'disabled'
 jar.enabled = true 
 
 repositories {
-  mavenLocal()
   // most of the usual stuff
   mavenCentral()
   // the tangram snapshots
