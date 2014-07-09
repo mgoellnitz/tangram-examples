@@ -76,6 +76,7 @@ war {
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   excludes = [ "classes/**" ]
   
+  /*
   // https://releases.coremedia.com/cmv/16/cms/5.2.1456/cap-examples.jar
   FileTree cmapp = zipTree('material/cap-examples.jar')
   
@@ -110,6 +111,7 @@ war {
       }
     }
   }
+  */
 }
 
 /** Optional step to debug things
