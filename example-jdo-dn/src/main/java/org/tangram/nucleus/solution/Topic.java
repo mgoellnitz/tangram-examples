@@ -98,8 +98,6 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
 
     public void setBeanFactory(BeanFactory beanFactory) {
-        // This is in fact only necessary when you want to use the deprecated methods in JdoContent
-        super.setBeanFactory(beanFactory);
         this.beanFactory = beanFactory;
     }
 

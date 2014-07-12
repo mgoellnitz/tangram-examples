@@ -96,7 +96,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
 
     public void setBeanFactory(BeanFactory beanFactory) {
-        // This is in fact only necessary when you want to use the deprecated methods in JdoContent
+        // The super-call is in fact only necessary if you want to use the deprecated methods in GaeContent
         super.setBeanFactory(beanFactory);
         this.beanFactory = beanFactory;
     }
