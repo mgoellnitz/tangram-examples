@@ -70,7 +70,7 @@ dependencies {
   runtime "mysql:mysql-connector-java:5.1.31"
 }
 
-war.doFirst { overlayWebapp(war) }
+// war.doFirst { overlayWebapp(war) }
 
 war {
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime

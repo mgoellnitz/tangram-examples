@@ -13,7 +13,5 @@ tangram-restart-cache.ser
 /*/.project
 /*/private/cache
 /example-coma-spring/material
-/example-coma-spring/src/main/webapp/css
-/example-coma-spring/src/main/webapp/WEB-INF/templates
 /example-ebean/tangram-create.sql
 /example-ebean/tangram-drop.sql
