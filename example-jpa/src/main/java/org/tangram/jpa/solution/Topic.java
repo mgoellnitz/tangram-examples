@@ -34,8 +34,6 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
     private static final Logger LOG = LoggerFactory.getLogger(Topic.class);
 
-    private BeanFactory beanFactory;
-
     // Annotation needed for OpenJPA
     @OneToMany
     private List<Topic> subTopics;
@@ -54,10 +52,8 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     @OneToMany
     private List<Container> relatedContainers;
 
-
-    public void setBeanFactory(BeanFactory beanFactory) {
-        this.beanFactory = beanFactory;
-    }
+    @Transient
+    private BeanFactory beanFactory;
 
 
     public List<Topic> getSubTopics() {
@@ -107,6 +103,11 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
     public void setRelatedContainers(List<Container> relatedContainers) {
         this.relatedContainers = relatedContainers;
+    }
+
+
+    public void setBeanFactory(BeanFactory beanFactory) {
+        this.beanFactory = beanFactory;
     }
 
     /**
