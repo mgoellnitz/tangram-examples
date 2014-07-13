@@ -11,12 +11,13 @@
  */
 defaultTasks 'clean', 'build'
 
-ext.tangram_version = '0.9-SNAPSHOT'
-ext.tangram_backend = 'dinistiq' // spring or dinistiq
+def tangram_version = '0.9-SNAPSHOT'
+
+// Switch to have the options in one example project - optional external override
+def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
 
 buildscript {
   repositories {
-  mavenLocal()
     mavenCentral()
     maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
   }
@@ -59,15 +60,18 @@ artifacts {
   libs jar
 }
 
-/* Spring security framework */
-if (tangram_backend.equals("dinistiq")) {
-  ext.security_core = "org.apache.shiro:shiro-core:$versions.shiro"
-  ext.security_web = "org.apache.shiro:shiro-web:$versions.shiro"
-}
+// Different backends need different security solutions - convert this into constant dependencies in your copy
+def security_core = ""
+def security_web = ""
 /* Apache Shiro most likely to be used together with dinistiq */
-if (tangram_backend.equals("spring")) {
-  ext.security_core = "org.springframework.security:spring-security-config:$versions.springsecurity"
-  ext.security_web = "org.springframework.security:spring-security-web:$versions.springsecurity"
+if (tangram_backend == "dinistiq") {
+  security_core = "org.apache.shiro:shiro-core:$versions.shiro"
+  security_web = "org.apache.shiro:shiro-web:$versions.shiro"
+}
+/* Spring security framework */
+if (tangram_backend == "spring") {
+  security_core = "org.springframework.security:spring-security-config:$versions.springsecurity"
+  security_web = "org.springframework.security:spring-security-web:$versions.springsecurity"
 }
 
 dependencies {
@@ -88,8 +92,7 @@ dependencies {
   runtime "$security_web"
   
   runtime "com.h2database:h2:1.3.174"
-  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
-  runtime "log4j:log4j:$versions.log4j"
+  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"
   
   providedCompile "javax.servlet:servlet-api:$versions.servlet"
   providedCompile "javax.servlet:jsp-api:$versions.jsp"
@@ -102,6 +105,7 @@ compileJava.doLast { ebeanEnhance() }
 war.doFirst { overlayWebapp(war) }
 
 war {
+  archiveName = "${project.name}-${tangram_backend[0]}.war"
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   excludes = [ "classes/**", "WEB-INF/web*.xml" ]

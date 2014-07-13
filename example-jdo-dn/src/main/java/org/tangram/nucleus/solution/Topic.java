@@ -1,6 +1,6 @@
 /**
  *
- * Copyright (C) 2011-2013 Martin Goellnitz
+ * Copyright (C) 2011-2014 Martin Goellnitz
  *
  * This work is licensed under the Creative Commons Attribution 3.0
  * Unported License. To view a copy of this license, visit
@@ -34,7 +34,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     private List<Topic> subTopics;
 
     @Join
-    private List<Linkable> elements;
+    private List<Article> elements;
 
     private ImageData thumbnail;
 
@@ -57,12 +57,12 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     }
 
 
-    public List<Linkable> getElements() {
-        return elements;
+    public List<Article> getElements() {
+        return this.elements;
     }
 
 
-    public void setElements(List<Linkable> elements) {
+    public void setElements(List<Article> elements) {
         this.elements = elements;
     }
 

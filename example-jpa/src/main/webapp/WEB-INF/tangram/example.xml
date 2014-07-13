@@ -18,7 +18,7 @@
        for the security feature in core and a measure time interceptor for performance checks  
   -->
   <bean id="loginSupport" class="org.tangram.security.GenericLoginSupport">
-    <property name="staticLoginURL" value="spring_security_login"/>
+    <property name="staticLoginURL" value="/spring_security_login"/>
   </bean>
   
   
@@ -47,24 +47,28 @@
         <!-- 
              hsqldb config example for OpenJPA. Content provided when run directly in the development environment.
              
+        -->
         <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:openjpa/hsqldb/tangram"/>
         <entry key="javax.persistence.jdbc.user" value="sa"/>
         <entry key="javax.persistence.jdbc.password" value=""/>
-        <entry key="openjpa.RuntimeUnenhancedClasses" value="supported"/>
-        <entry key="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>
-        -->
         <!-- 
-             h2sql config example for OpenJPA. Content provided when run directly in the development environment.
+             h2sql config example for OpenJPA.
              
         <entry key="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:h2:./openjpa/h2/tangram"/>
         <entry key="javax.persistence.jdbc.user" value="sa"/>
         <entry key="javax.persistence.jdbc.password" value=""/>
+        -->
+        <!--
+             OpenJPA config example. These should be added in any environment using OpenJPA
+                openjpa.Log configures the OpenJPA way of logging - can configure file details or e.g. simply say "log4j"
+                openjpa.RuntimeUnenhancedClasses can be set to "supported"
+        -->
         <entry key="openjpa.Log" value="File=build/openjpa.log, DefaultLevel=WARN, Runtime=INFO, SQL=TRACE"/>
         <entry key="openjpa.RuntimeUnenhancedClasses" value="supported"/>
         <entry key="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>
-        -->
+        
         <!-- 
              hsqldb config example for EclipseLink. Content provided when run directly in the development environment.
              
@@ -74,7 +78,7 @@
         <entry key="javax.persistence.jdbc.password" value=""/>
         -->
         <!-- 
-             h2sql config example for EclipseLink. Content provided when run directly in the development environment.
+             h2sql config example for EclipseLink.
              
         <entry key="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:h2:./eclipselink/h2/tangram"/>
@@ -84,23 +88,29 @@
         <!--
              EclipseLink config example. These should be added in any environment using eclipselink
                weaving: e.g. static or false
-               ddl-generation: create-and-drop-tables or create-tables
-             
+               ddl-generation: create-and-drop-tables or create-tables             
+        -->
         <entry key="eclipselink.ddl-generation" value="create-tables"/>
         <entry key="eclipselink.weaving" value="static"/>
-        -->
+        
         <!-- 
-             hsqldb config example for datanucleus Content provided when run directly in the development environment.
-        -->
-             
+             hsqldb config example for datanucleus. Content provided when run directly in the development environment.
         <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:datanucleus/hsqldb/tangram"/>
         <entry key="javax.persistence.jdbc.user" value="sa"/>
         <entry key="javax.persistence.jdbc.password" value=""/>
+        -->
+        <!-- 
+             h2sql config example for datanucleus.         
+        <entry key="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+        <entry key="javax.persistence.jdbc.url" value="jdbc:h2:./datanucleus/h2/tangram"/>
+        <entry key="javax.persistence.jdbc.user" value="sa"/>
+        <entry key="javax.persistence.jdbc.password" value=""/>
+        -->
+        
         <!--
              DataNucleus config example. These should be added in any environment using datanucleus
-        -->
-             
+        -->     
         <entry key="datanucleus.autoCreateSchema" value="true"/>
         <entry key="datanucleus.validateTables" value="true"/>
         <entry key="datanucleus.manageRelationships" value="true"/>

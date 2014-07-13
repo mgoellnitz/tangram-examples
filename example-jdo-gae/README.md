@@ -26,19 +26,19 @@ gradle build
 Start the development application server.
 
 ```bash
-# dev_appserver -p 12380 build\war
+# dev_appserver -p 12380 build/war
 ```
 
 Perhaps you want to leave out the update check on every startup.
 
 ```bash
-dev_appserver --disable_update_check -p 12380 build\war
+dev_appserver --disable_update_check -p 12380 build/war
 ```
 
 With HRD sematics needed for this example with the JDO 3 features you have to extend the call to
 
 ```bash
-dev_appserver --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=1  -p 12380 build\war
+dev_appserver --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=1  -p 12380 build/war
 ```
 
 which we have a shortcut for in the build script in sync with the usual jettyRun or tomcatRun
@@ -60,7 +60,7 @@ Deployment
 ----------
 
 ```
-appcfg update build\war
+appcfg update build/war
 ```
 
 

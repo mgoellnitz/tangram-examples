@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright (C) 2011-2013 Martin Goellnitz
+ * Copyright (C) 2011-2014 Martin Goellnitz
  * 
  * This work is licensed under the Creative Commons Attribution 3.0 
  * Unported License. To view a copy of this license, visit 
@@ -30,7 +30,7 @@ apply plugin: 'tangram'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-ext.tangram_version = '0.9-SNAPSHOT'
+def tangram_version = '0.9-SNAPSHOT'
 
 // don't let gradle work with its defaults on my files...
 webAppDirName = 'disabled'
@@ -66,7 +66,6 @@ dependencies {
   providedCompile "javax.servlet:jsp-api:$versions.jsp"
   
   runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
-  runtime "log4j:log4j:$versions.log4j"  
   runtime "mysql:mysql-connector-java:5.1.31"
 }
 

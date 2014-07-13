@@ -7,9 +7,9 @@ They are intended as a quick as possible demo to see something running. In the
 comments of the build files you will additionally find the options to tweak the 
 application to use the full bandwidth of flavours:
 
-* JPA or JDO as Persistence Interfaces
-* RDBMS, Office Files, or MongoDB as the database.
-* Spring or non-spring environments
+* JPA, JDO, or EBean as Persistence APIs and automated Class-Files enhancing/weaving.
+* RDBMS, Office Files, Google App Engine, or MongoDB as the database.
+* Springframework or non-spring (dinistiq) environments
 
 The target platforms are
 
@@ -32,8 +32,9 @@ A
 gradle build
 ```
 
-in this directory should do the job. Except the Google App Engine one, all examples
-can be started via
+in this directory should do the job. 
+
+Except for the Google App Engine one all examples can be started via
 
 ```bash
 gradle jettyRunWar
@@ -48,11 +49,11 @@ Spring or not Spring
 Many of the examples have a switch 
 
 ```java
-ext.tangram_backend = 'spring' // spring or dinistiq
+def tangram_backend = 'spring' // spring or dinistiq
 ```
 
 This switches from the use of the spring framework for the component configuration 
-done with dependency injection to the dinistiq way to so this.
+done with dependency injection to the dinistiq way to do this.
 
 With this switch changed the files in WEB-INF/tangram/ are not used anymore but 
 the resources from dinistiq/.
@@ -66,20 +67,38 @@ shiro block.
   /* Spring security for springframework version
   // this is more like a runtime dependency since we for now only use it by configuration
   compile "org.springframework.security:spring-security-config:$versions.springsecurity"
-  // avoid dependencies to spring 3.0.7
-  compile ("org.springframework.security:spring-security-web:$versions.springsecurity") {
-    exclude module: 'spring-jdbc'
-    exclude module: 'spring-tx'
-  }
+  compile "org.springframework.security:spring-security-web:$versions.springsecurity"
    */
   
   /* Apache Shiro most likely to be used together with dinistiq
   */
   compile "org.apache.shiro:shiro-core:$versions.shiro"
   compile "org.apache.shiro:shiro-web:$versions.shiro"
-  compile "org.slf4j:slf4j-api:1.6.6"
-  compile "org.slf4j:slf4j-log4j12:1.6.6"
 ```
 
 The files in shiro/ and the shiro.ini are only used in this setup and the files 
 WEB-INF/security-*.xml are only used by spring security.
+
+Build backend switches
+----------------------
+
+The build files for gradle are a little bit more complicated than necessary to allow for
+the mentioned switches which are also build-time overridable by gradle properties. So you 
+can override the default backend to use 'dinistiq' or 'spring' by a simple
+
+```bash
+gradle -Pbackend=spring build
+```
+
+This also changes the security dependencies between Spring Security and Apache Shiro.
+
+The JPA example has additional options since there are three supported libraries implementing
+this API: OpenJPA, EclipseLink, and DataNucleus. So again you can override the default from
+the build file by a simple
+
+```bash
+gradle -Pjpa=openjpa build
+```
+
+Also note that OpenJPA is fully supported with unenhanced beans while the support is - due
+to the setup of EclipseLink itself - limitted for EclipseLink.

@@ -18,7 +18,7 @@
        for the security feature in core and a measure time interceptor for performance checks  
   -->
   <bean id="loginSupport" class="org.tangram.security.GenericLoginSupport">
-    <property name="staticLoginURL" value="spring_security_login"/>
+    <property name="staticLoginURL" value="/spring_security_login"/>
   </bean>
   
   <!-- to make the whole application login protected this will be the list of read capable persons 
@@ -103,13 +103,12 @@
         <entry key="javax.jdo.option.ConnectionPassword" value=""/>
         <entry key="javax.jdo.option.Mapping" value="hsqldb"/>
         <!-- 
-             h2sql config example. Content provided when directly in the development environment.
+             h2sql config example.
              
         <entry key="javax.jdo.option.ConnectionDriverName" value="org.h2.Driver"/>
         <entry key="javax.jdo.option.ConnectionURL" value="jdbc:h2:file:db/h2/tangram"/>
         <entry key="javax.jdo.option.ConnectionUserName" value="sa"/>
         <entry key="javax.jdo.option.ConnectionPassword" value=""/>
-        <entry key="javax.jdo.option.Mapping" value="hsqldb"/>
         -->
         <!-- 
               PostgreSQL onfig example for standalone installation.

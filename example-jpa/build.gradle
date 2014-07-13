@@ -11,10 +11,12 @@
  */
 defaultTasks 'clean', 'build'
 
-ext.tangram_version = '0.9-SNAPSHOT'
-ext.tangram_backend = 'spring' // spring or dinistiq
-ext.jpa_backend = 'nucleus' // openjpa, eclipselink, or nucleus
-ext.do_bytecode_transform = true; // JPA can optionally be used without except for datanucleus
+def tangram_version = '0.9-SNAPSHOT'
+
+// Some switches to have all options in one example project - with optional external override
+def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
+def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, or nucleus
+def do_bytecode_transform = true; // JPA can optionally be used without except for datanucleus
 
 buildscript {
   repositories {
@@ -60,15 +62,18 @@ artifacts {
   libs jar
 }
 
-/* Spring security framework */
-if (tangram_backend.equals("dinistiq")) {
-  ext.security_core = "org.apache.shiro:shiro-core:$versions.shiro"
-  ext.security_web = "org.apache.shiro:shiro-web:$versions.shiro"
-}
+// Different backends need different security solutions - convert this into constant dependencies in your copy
+def security_core = ""
+def security_web = ""
 /* Apache Shiro most likely to be used together with dinistiq */
-if (tangram_backend.equals("spring")) {
-  ext.security_core = "org.springframework.security:spring-security-config:$versions.springsecurity"
-  ext.security_web = "org.springframework.security:spring-security-web:$versions.springsecurity"
+if (tangram_backend == "dinistiq") {
+  security_core = "org.apache.shiro:shiro-core:$versions.shiro"
+  security_web = "org.apache.shiro:shiro-web:$versions.shiro"
+}
+/* Spring security framework */
+if (tangram_backend == "spring") {
+  security_core = "org.springframework.security:spring-security-config:$versions.springsecurity"
+  security_web = "org.springframework.security:spring-security-web:$versions.springsecurity"
 }
 
 dependencies {
@@ -80,11 +85,11 @@ dependencies {
    */
   
   /* Enhanced OpenJPA
+   */
   compile "tangram:tangram-jpa:$tangram_version:openjpa"
   compile ("org.apache.openjpa:openjpa:$versions.openjpa") {
     exclude group: 'asm'
   }
-   */
   
   /* Woven EclipseLink
   compile "tangram:tangram-jpa:$tangram_version:eclipselink"
@@ -93,13 +98,13 @@ dependencies {
    */
   
   /* For JPA with DataNucleus
-  */
   compile ("tangram:tangram-jpa:$tangram_version:nucleus");
   compile "org.datanucleus:datanucleus-api-jpa:$versions.datanucleus"
   compile "org.datanucleus:datanucleus-core:$versions.datanucleus"
   compile "$versions.jdo_api"
   compile "$versions.persistence_api"
   runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
+  */
   
   runtime "tangram:tangram-${tangram_backend}:$tangram_version"
   
@@ -113,9 +118,8 @@ dependencies {
   runtime "$security_core"
   runtime "$security_web"
   
-  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
-  runtime "log4j:log4j:$versions.log4j"  
   runtime "hsqldb:hsqldb:1.8.0.10"
+  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
  
   testCompile "junit:junit:$versions.junit"
   
@@ -140,14 +144,15 @@ war.doFirst {
 }
 
 war {
+  archiveName = "${project.name}-${jpa_backend}-${tangram_backend[0]}.war"
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   excludes = [ "classes/**", "WEB-INF/web*.xml" ]
   // Use backend specific persistence.xml for JPA 
   // In this example use the same pesistence.xml which was used for enhancing or weaving
-  String jpa_method = jpa_backend
-  if (jpa_backend.equals('openjpa')) jpa_method='enhance'
-  if (jpa_backend.equals('eclipselink')) jpa_method='weave' 
+  def jpa_method = jpa_backend
+  if (jpa_backend == 'openjpa') jpa_method='enhance'
+  if (jpa_backend == 'eclipselink') jpa_method='weave' 
   into ('WEB-INF/classes') {
     from "$project.projectDir/$jpa_method"
   }

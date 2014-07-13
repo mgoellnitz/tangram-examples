@@ -57,9 +57,9 @@ set of dependencies.
 
 When changing the JPA backend, you have to prepare two things. The byte-code 
 transformation is implementation specific and carries different names as well.
-The persistence.xml despite the few thing which need to be set here for tangram 
+The persistence.xml despite the few things which need to be set here for tangram 
 (to have everything in one place most of the stuff - as with jdo - moved to
-a jpaConfigOverride element in the application configuration) it hast to be 
+a jpaConfigOverride element in the application configuration) it has to be 
 specific to the used implementation implementation as well. This cannot be achieved
 by different persistence units since elements required by one implementation interfere 
 with the persistence.xml reading of the other.
