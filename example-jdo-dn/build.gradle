@@ -62,20 +62,6 @@ artifacts {
   libs jar
 }
 
-// Different backends need different security solutions - convert this into constant dependencies in your copy
-def security_core = ""
-def security_web = ""
-/* Apache Shiro most likely to be used together with dinistiq */
-if (tangram_backend == "dinistiq") {
-  security_core = "org.apache.shiro:shiro-core:$versions.shiro"
-  security_web = "org.apache.shiro:shiro-web:$versions.shiro"
-}
-/* Spring security framework */
-if (tangram_backend == "spring") {
-  security_core = "org.springframework.security:spring-security-config:$versions.springsecurity"
-  security_web = "org.springframework.security:spring-security-web:$versions.springsecurity"
-}
-
 dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"  
   compile "tangram:tangram-nucleus:$tangram_version"
@@ -98,8 +84,16 @@ dependencies {
   runtime "tangram:tangram-ftp:$tangram_version"
    */
     
-  runtime "$security_core"
-  runtime "$security_web"
+  /* Apache Shiro most likely to be used together with dinistiq */
+  if (tangram_backend == "dinistiq") {
+    runtime "org.apache.shiro:shiro-core:$versions.shiro"
+    runtime "org.apache.shiro:shiro-web:$versions.shiro"
+  }
+  /* Spring security framework */
+  if (tangram_backend == "spring") {
+    runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
+    runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
+  }
   
   // This fixes a problem with the WAR lib directory calculation needed for run@cloudbees:
   // reallyNeeded "org.ow2.asm:asm:4.0"

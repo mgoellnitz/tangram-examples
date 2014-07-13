@@ -62,20 +62,6 @@ artifacts {
   libs jar
 }
 
-// Different backends need different security solutions - convert this into constant dependencies in your copy
-def security_core = ""
-def security_web = ""
-/* Apache Shiro most likely to be used together with dinistiq */
-if (tangram_backend == "dinistiq") {
-  security_core = "org.apache.shiro:shiro-core:$versions.shiro"
-  security_web = "org.apache.shiro:shiro-web:$versions.shiro"
-}
-/* Spring security framework */
-if (tangram_backend == "spring") {
-  security_core = "org.springframework.security:spring-security-config:$versions.springsecurity"
-  security_web = "org.springframework.security:spring-security-web:$versions.springsecurity"
-}
-
 dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"
   
@@ -84,27 +70,38 @@ dependencies {
   compile "tangram:tangram-jpa:$tangram_version"
    */
   
-  /* Enhanced OpenJPA
-   */
-  compile "tangram:tangram-jpa:$tangram_version:openjpa"
-  compile ("org.apache.openjpa:openjpa:$versions.openjpa") {
-    exclude group: 'asm'
+  /* OpenJPA */
+  if (jpa_backend == "openjpa") {
+    if (do_bytecode_transform) {
+      compile "tangram:tangram-jpa:$tangram_version:openjpa"
+    } else {
+      compile "tangram:tangram-jpa:$tangram_version"
+    }
+    compile ("org.apache.openjpa:openjpa:$versions.openjpa") {
+      exclude group: 'asm'
+    }
   }
   
-  /* Woven EclipseLink
-  compile "tangram:tangram-jpa:$tangram_version:eclipselink"
-  compile "org.eclipse.persistence:org.eclipse.persistence.jpa:$versions.eclipselink"
-  compile "$versions.persistence_api"
-   */
+  /* EclipseLink */
+  if (jpa_backend == "eclipselink") {
+    if (do_bytecode_transform) {
+      compile "tangram:tangram-jpa:$tangram_version:eclipselink"
+    } else {
+      compile "tangram:tangram-jpa:$tangram_version"
+    }
+    compile "org.eclipse.persistence:org.eclipse.persistence.jpa:$versions.eclipselink"
+    compile "$versions.persistence_api"
+  }
   
-  /* For JPA with DataNucleus
-  compile ("tangram:tangram-jpa:$tangram_version:nucleus");
-  compile "org.datanucleus:datanucleus-api-jpa:$versions.datanucleus"
-  compile "org.datanucleus:datanucleus-core:$versions.datanucleus"
-  compile "$versions.jdo_api"
-  compile "$versions.persistence_api"
-  runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
-  */
+  /* For JPA with DataNucleus */
+  if (jpa_backend == "nucleus") {
+    compile ("tangram:tangram-jpa:$tangram_version:nucleus");
+    compile "org.datanucleus:datanucleus-api-jpa:$versions.datanucleus"
+    compile "org.datanucleus:datanucleus-core:$versions.datanucleus"
+    compile "$versions.jdo_api"
+    compile "$versions.persistence_api"
+    runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
+  }
   
   runtime "tangram:tangram-${tangram_backend}:$tangram_version"
   
@@ -115,8 +112,16 @@ dependencies {
   runtime "tangram:tangram-ftp:$tangram_version"
    */
     
-  runtime "$security_core"
-  runtime "$security_web"
+  /* Apache Shiro most likely to be used together with dinistiq */
+  if (tangram_backend == "dinistiq") {
+    runtime "org.apache.shiro:shiro-core:$versions.shiro"
+    runtime "org.apache.shiro:shiro-web:$versions.shiro"
+  }
+  /* Spring security framework */
+  if (tangram_backend == "spring") {
+    runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
+    runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
+  }
   
   runtime "hsqldb:hsqldb:1.8.0.10"
   runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
