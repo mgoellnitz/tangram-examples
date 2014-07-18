@@ -60,7 +60,7 @@
         -->
       </map>
     </property>
-  </bean>e
+  </bean>
 
   <bean id="comaJspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
