@@ -86,7 +86,7 @@ compileJava.doLast { nucleusJdoEnhance() }
 war.doFirst { overlayWebapp(war) }
 
 war {
-  archiveName = "${project.name}-${tangram_backend[0]}.war"
+  archiveName = "${project.name}-${tangram_backend}.war"
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   excludes = [ "classes/**", "WEB-INF/web*.xml" ]

@@ -75,12 +75,12 @@ dependencies {
    */
     
   /* Apache Shiro most likely to be used together with dinistiq */
-  if (tangram_backend == "dinistiq") {
+  if (tangram_backend == 'dinistiq') {
     runtime "org.apache.shiro:shiro-core:$versions.shiro"
     runtime "org.apache.shiro:shiro-web:$versions.shiro"
   }
   /* Spring security framework */
-  if (tangram_backend == "spring") {
+  if (tangram_backend == 'spring') {
     runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
     runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
   }
@@ -99,7 +99,7 @@ compileJava.doLast { ebeanEnhance() }
 war.doFirst { overlayWebapp(war) }
 
 war {
-  archiveName = "${project.name}-${tangram_backend[0]}.war"
+  archiveName = "${project.name}-${tangram_backend}.war"
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   excludes = [ "classes/**", "WEB-INF/web*.xml" ]

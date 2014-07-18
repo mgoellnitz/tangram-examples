@@ -63,16 +63,16 @@ artifacts {
 }
 
 dependencies {
-  webapp "tangram:tangram-core:$tangram_version:war@war"  
+  webapp "tangram:tangram-core:$tangram_version:war@war"
   compile "tangram:tangram-nucleus:$tangram_version"
   // e.g. rdbms of datanucleus and any db driver you'd like and which is supported
   runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"  
 
   runtime "tangram:tangram-${tangram_backend}:$tangram_version"
   
-  // mongodb
+  // For MongoDB
   // runtime "org.datanucleus:datanucleus-mongodb:$versions.datanucleus"
-  // flat file formats
+  // Flat File Formats
   // runtime "org.datanucleus:datanucleus-xml:$versions.datanucleus"
   // runtime "org.datanucleus:datanucleus-odf:$versions.datanucleus"
   // runtime "org.datanucleus:datanucleus-excel:$versions.datanucleus"
@@ -85,12 +85,12 @@ dependencies {
    */
     
   /* Apache Shiro most likely to be used together with dinistiq */
-  if (tangram_backend == "dinistiq") {
+  if (tangram_backend == 'dinistiq') {
     runtime "org.apache.shiro:shiro-core:$versions.shiro"
     runtime "org.apache.shiro:shiro-web:$versions.shiro"
   }
   /* Spring security framework */
-  if (tangram_backend == "spring") {
+  if (tangram_backend == 'spring') {
     runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
     runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
   }
@@ -113,7 +113,7 @@ compileJava.doLast { nucleusJdoEnhance() }
 war.doFirst { overlayWebapp(war) }
 
 war {
-  archiveName = "${project.name}-${tangram_backend[0]}.war"
+  archiveName = "${project.name}-${tangram_backend}.war"
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   // see explanation in dependencies section when this will be needed alternatively for the line above

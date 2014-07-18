@@ -65,13 +65,8 @@ artifacts {
 dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"
   
-  /* JPA without byte-code transformed classes for any of the 
-     implementations supporting this.
-  compile "tangram:tangram-jpa:$tangram_version"
-   */
-  
   /* OpenJPA */
-  if (jpa_backend == "openjpa") {
+  if (jpa_backend == 'openjpa') {
     if (do_bytecode_transform) {
       compile "tangram:tangram-jpa:$tangram_version:openjpa"
     } else {
@@ -83,7 +78,7 @@ dependencies {
   }
   
   /* EclipseLink */
-  if (jpa_backend == "eclipselink") {
+  if (jpa_backend == 'eclipselink') {
     if (do_bytecode_transform) {
       compile "tangram:tangram-jpa:$tangram_version:eclipselink"
     } else {
@@ -94,7 +89,7 @@ dependencies {
   }
   
   /* For JPA with DataNucleus */
-  if (jpa_backend == "nucleus") {
+  if (jpa_backend == 'nucleus') {
     compile ("tangram:tangram-jpa:$tangram_version:nucleus");
     compile "org.datanucleus:datanucleus-api-jpa:$versions.datanucleus"
     compile "org.datanucleus:datanucleus-core:$versions.datanucleus"
@@ -111,14 +106,14 @@ dependencies {
   /* For the FTP Service
   runtime "tangram:tangram-ftp:$tangram_version"
    */
-    
+  
   /* Apache Shiro most likely to be used together with dinistiq */
-  if (tangram_backend == "dinistiq") {
+  if (tangram_backend == 'dinistiq') {
     runtime "org.apache.shiro:shiro-core:$versions.shiro"
     runtime "org.apache.shiro:shiro-web:$versions.shiro"
   }
   /* Spring security framework */
-  if (tangram_backend == "spring") {
+  if (tangram_backend == 'spring') {
     runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
     runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
   }
@@ -135,13 +130,13 @@ dependencies {
 
 jar.doFirst { 
   if (do_bytecode_transform) {
-    // include this when using "OpenJPA enhanced" block in the dependencies
-    if (jpa_backend.equals('openjpa')) openjpaEnhance()
-    // include this when using "EclipseLInk woven" block in the dependencies
-    if (jpa_backend.equals('eclipselink')) eclipselinkWeave() 
-    // This is farily untested
-    if (jpa_backend.equals('nucleus')) nucleusJpaEnhance() 
+    // include this when using "OpenJPA" in enhanced mode
+    if (jpa_backend == 'openjpa') openjpaEnhance()
+    // trigger this when using "EclipseLink" in woven mode
+    if (jpa_backend == 'eclipselink') eclipselinkWeave()
   }
+  // trigger this when using "DataNucleus"
+  if (jpa_backend == 'nucleus') nucleusJpaEnhance() 
 }
 
 war.doFirst {
@@ -149,7 +144,7 @@ war.doFirst {
 }
 
 war {
-  archiveName = "${project.name}-${jpa_backend}-${tangram_backend[0]}.war"
+  archiveName = "${project.name}-${jpa_backend[0]}${jpa_backend[4]}-${tangram_backend}.war"
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   excludes = [ "classes/**", "WEB-INF/web*.xml" ]
