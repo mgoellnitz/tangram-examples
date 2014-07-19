@@ -12,6 +12,7 @@
 import org.gradle.api.file.FileCopyDetails
 import org.gradle.api.file.FileTree
 import org.gradle.api.file.RelativePath
+import de.undercouch.gradle.tasks.download.Download
 
 defaultTasks 'clean', 'build'
 
