@@ -34,18 +34,35 @@
 
   <!-- non generics -->
 
-  <bean name="interceptors" class="java.util.ArrayList">
+  <!--
+       Tangram supports spring request interceptors. As a default we use a password interceptor 
+       for the security feature in core and a measure time interceptor for performance checks  
+  -->
+  <bean id="loginSupport" class="org.tangram.security.GenericLoginSupport">
+    <property name="staticLoginURL" value="/spring_security_login"/>
+  </bean>
+  
+  <!-- to make the whole application login protected this will be the list of read capable persons 
+  <bean name="allowedUsers" class="java.util.HashSet">
     <constructor-arg>
-      <list>
-        <bean class="org.tangram.monitor.MeasureTimeInterceptor">
-          <property name="freeUrls">
-            <set>
-              <value>${spring.dispatcher.servlet.path}/stats</value>
-            </set>
-          </property>
-        </bean>
-      </list>
+      <set>
+        <value>user</value>
+        <value>admin</value>
+      </set>
     </constructor-arg>
+  </bean>
+  -->
+  
+  <bean name="adminUsers" class="java.util.HashSet">
+    <constructor-arg>
+      <set>
+        <value>admin</value>
+      </set>
+    </constructor-arg>
+  </bean>
+    
+  <bean id="persistentRestartCache" class="org.tangram.util.FileRestartCache">
+    <property name="filename" value="${tangram.restart.cache.file}"/>
   </bean>
   
   <bean id="beanFactory" class="org.tangram.coma.ComaBeanFactory">
@@ -74,11 +91,11 @@
     <property name="packageName" value="com.coremedia.examples.cae.beans" />
     <property name="parents">
       <map>
-        <entry key="Dish" value="Document" />
-        <entry key="Picture" value="Document" />
-        <entry key="Page" value="Document" />
-        <entry key="Category" value="Document" />
-        <entry key="ContentRule" value="Document" />
+        <entry key="Dish" value="AbstractContent" />
+        <entry key="Picture" value="AbstractContent" />
+        <entry key="Page" value="AbstractContent" />
+        <entry key="Category" value="AbstractContent" />
+        <entry key="ContentRule" value="AbstractContent" />
       </map>
     </property>
   </bean>
