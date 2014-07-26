@@ -89,7 +89,7 @@ war {
   
   def examplesFile = new File("$projectDir/cap-examples.jar")
  
-  if ((!examplesFile.exists()) &&("$coremediaUsername" != "")) {
+  if ((!examplesFile.exists()) && project.hasProperty("coremediaUsername")) {
     download {
       src 'https://releases.coremedia.com/cmv/16/cms/5.2.1456/cap-examples.jar'
       dest "$projectDir"
