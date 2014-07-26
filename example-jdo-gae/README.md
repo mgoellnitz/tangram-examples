@@ -5,17 +5,13 @@ Prerequisites
 -------------
 
 * Java 7
-* Google App Engine SDK Java AND Python (for the bulkloader.py you definetely want to use)
 * Gradle 1.8 and up (Including 2.0)
+* Google App Engine SDK Java AND Python (for the bulkloader.py you definetely want to use)
 
-Setup system
-------------
+This project is known not to work with the CapeDward Google App Engine Emulator.
 
-(git clone this repository)
-
-In Google App Engine create a new application with a app engine ID <aeid>. Leave the authentication set to "Google Accounts".
-
-Enter the application <aeid> into appengine-web.xml.
+Local Build
+-----------
 
 Build the example project.
 
@@ -49,7 +45,8 @@ gradle appserverRun
 
 The HRD flags are mandatory with this very example but they actually depend on your data model.
 
-If for your later data model you are definetely sure not to use HRD semantics, JDO 3.0, and so on you can set in your projects's config properties file
+If - for your later data model - you are definetely sure not to use HRD semantics, 
+JDO 3.0, and so on you can set in your project's config properties file
 
 src/main/webapp/WEB-INF/tangram/<application>.properties:
 ```
@@ -59,7 +56,13 @@ use.hdr.datastore=false
 Deployment
 ----------
 
+In Google App Engine create a new application with a app engine ID <aeid>. Leave 
+the authentication set to "Google Accounts".
+
+Enter the application <aeid> into appengine-web.xml, rebuild, and deploy.
+
 ```
+gradle clean build
 appcfg update build/war
 ```
 
