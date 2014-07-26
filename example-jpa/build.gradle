@@ -111,6 +111,7 @@ dependencies {
   if (tangram_backend == 'dinistiq') {
     runtime "org.apache.shiro:shiro-core:$versions.shiro"
     runtime "org.apache.shiro:shiro-web:$versions.shiro"
+    runtime "org.slf4j:jcl-over-slf4j:$versions.slf4j"
   }
   /* Spring security framework */
   if (tangram_backend == 'spring') {

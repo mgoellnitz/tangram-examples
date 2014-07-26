@@ -40,7 +40,6 @@ webAppDirName = 'disabled'
 jar.enabled = true 
 
 repositories {
-  mavenLocal()
   // most of the usual stuff
   mavenCentral()
   // tangram snapshots
@@ -65,7 +64,7 @@ dependencies {
   webapp "tangram:tangram-gae:$tangram_version:war@war"
   compile "tangram:tangram-gae:$tangram_version"
   runtime "tangram:tangram-$tangram_backend:$tangram_version"
-  runtime "org.slf4j:slf4j-jdk14:$versions.slf4j"  
+  compile "org.slf4j:slf4j-jdk14:$versions.slf4j"  
   
   providedCompile "javax.servlet:servlet-api:$versions.servlet"
   providedCompile "javax.servlet:jsp-api:$versions.jsp"
