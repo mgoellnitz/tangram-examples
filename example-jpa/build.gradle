@@ -15,8 +15,9 @@ def tangram_version = '0.9-SNAPSHOT'
 
 // Some switches to have all options in one example project - with optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
-def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, or nucleus
-def do_bytecode_transform = true; // JPA can optionally be used without except for datanucleus
+def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, hibernate, or datanucleus
+// JPA must be used without for Hibernate and can optionally be used without except for DataNucleus, 
+def do_bytecode_transform = false 
 
 buildscript {
   repositories {
@@ -88,9 +89,19 @@ dependencies {
     compile "$versions.persistence_api"
   }
   
+  // For JPA with Hibernate
+  if (jpa_backend == 'hibernate') {
+    if (do_bytecode_transform) {
+      compile "tangram:tangram-jpa:$tangram_version:hibernate"
+    } else {
+      compile "tangram:tangram-jpa:$tangram_version"
+    }
+    compile "org.hibernate:hibernate-core:$versions.hibernate"  
+  }
+    
   /* For JPA with DataNucleus */
-  if (jpa_backend == 'nucleus') {
-    compile ("tangram:tangram-jpa:$tangram_version:nucleus");
+  if (jpa_backend == 'datanucleus') {
+    compile "tangram:tangram-jpa:$tangram_version:nucleus"
     compile "org.datanucleus:datanucleus-api-jpa:$versions.datanucleus"
     compile "org.datanucleus:datanucleus-core:$versions.datanucleus"
     compile "$versions.jdo_api"
@@ -137,7 +148,7 @@ jar.doFirst {
     if (jpa_backend == 'eclipselink') eclipselinkWeave()
   }
   // trigger this when using "DataNucleus"
-  if (jpa_backend == 'nucleus') nucleusJpaEnhance() 
+  if (jpa_backend == 'datanucleus') nucleusJpaEnhance() 
 }
 
 war.doFirst {
@@ -151,11 +162,13 @@ war {
   excludes = [ "classes/**", "WEB-INF/web*.xml" ]
   // Use backend specific persistence.xml for JPA 
   // In this example use the same pesistence.xml which was used for enhancing or weaving
+  // For EclipseLink you might want to use two separate files though.
   def jpa_method = jpa_backend
   if (jpa_backend == 'openjpa') jpa_method='enhance'
   if (jpa_backend == 'eclipselink') jpa_method='weave' 
   into ('WEB-INF/classes') {
     from "$project.projectDir/$jpa_method"
+    include "META-INF/persistence.xml"
   }
 }
 

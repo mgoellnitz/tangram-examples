@@ -65,7 +65,7 @@ artifacts {
 dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"
   compile "tangram:tangram-nucleus:$tangram_version"
-  // e.g. rdbms of datanucleus and any db driver you'd like and which is supported
+  // e.g. rdbms of DataNucleus and any db driver you'd like and which is supported
   runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"  
 
   runtime "tangram:tangram-${tangram_backend}:$tangram_version"

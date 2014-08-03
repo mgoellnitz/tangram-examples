@@ -86,7 +86,7 @@
         <entry key="javax.persistence.jdbc.password" value=""/>
         -->
         <!--
-             EclipseLink config example. These should be added in any environment using eclipselink
+             EclipseLink config example. These should be added in any environment using EclipseLink
                weaving: e.g. static or false
                ddl-generation: create-and-drop-tables or create-tables             
         -->
@@ -94,14 +94,29 @@
         <entry key="eclipselink.weaving" value="static"/>
         
         <!-- 
-             hsqldb config example for datanucleus. Content provided when run directly in the development environment.
+             hsqldb config example for Hibernate.
+        <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+        <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:hibernate/hsqldb/tangram"/>
+        <entry key="javax.persistence.jdbc.user" value="sa"/>
+        <entry key="javax.persistence.jdbc.password" value=""/>
+        -->
+        <!-- 
+             h2sql config example for Hibernate.
+        <entry key="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+        <entry key="javax.persistence.jdbc.url" value="jdbc:h2:./hibernate/h2/tangram"/>
+        <entry key="javax.persistence.jdbc.user" value="sa"/>
+        <entry key="javax.persistence.jdbc.password" value=""/>
+        -->
+        
+        <!-- 
+             hsqldb config example for DataNucleus. Content provided when run directly in the development environment.
         <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:datanucleus/hsqldb/tangram"/>
         <entry key="javax.persistence.jdbc.user" value="sa"/>
         <entry key="javax.persistence.jdbc.password" value=""/>
         -->
         <!-- 
-             h2sql config example for datanucleus.         
+             h2sql config example for DataNucleus.         
         <entry key="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:h2:./datanucleus/h2/tangram"/>
         <entry key="javax.persistence.jdbc.user" value="sa"/>
@@ -109,7 +124,7 @@
         -->
         
         <!--
-             DataNucleus config example. These should be added in any environment using datanucleus
+             DataNucleus config example. These should be added in any environment using DataNucleus
         -->     
         <entry key="datanucleus.autoCreateSchema" value="true"/>
         <entry key="datanucleus.validateTables" value="true"/>
