@@ -17,7 +17,7 @@ def tangram_version = '0.9-SNAPSHOT'
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
 def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, hibernate, or datanucleus
 // JPA must be used without for Hibernate and can optionally be used without except for DataNucleus, 
-def do_bytecode_transform = false 
+def do_bytecode_transform = project.hasProperty('enhance') ? ("$enhance" == "true") : false 
 
 buildscript {
   repositories {
@@ -97,6 +97,8 @@ dependencies {
       compile "tangram:tangram-jpa:$tangram_version"
     }
     compile "org.hibernate:hibernate-core:$versions.hibernate"  
+    compile "org.hibernate:hibernate-entitymanager:$versions.hibernate"        
+    compile "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final"
   }
     
   /* For JPA with DataNucleus */

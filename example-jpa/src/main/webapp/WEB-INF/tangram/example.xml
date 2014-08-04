@@ -45,8 +45,7 @@
     <constructor-arg>
       <map>
         <!-- 
-             hsqldb config example for OpenJPA. Content provided when run directly in the development environment.
-             
+             hsqldb config example for OpenJPA. Content provided when run directly in the development environment.          
         -->
         <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:openjpa/hsqldb/tangram"/>
@@ -68,6 +67,7 @@
         <entry key="openjpa.Log" value="File=build/openjpa.log, DefaultLevel=WARN, Runtime=INFO, SQL=TRACE"/>
         <entry key="openjpa.RuntimeUnenhancedClasses" value="supported"/>
         <entry key="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>
+        
         
         <!-- 
              hsqldb config example for EclipseLink. Content provided when run directly in the development environment.
@@ -107,6 +107,11 @@
         <entry key="javax.persistence.jdbc.user" value="sa"/>
         <entry key="javax.persistence.jdbc.password" value=""/>
         -->
+        <!--
+             Hibernate config example. These should be added in any environment using Hibernate.
+        -->     
+        <entry key="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+        <entry key="hibernate.hbm2ddl.auto" value="create-drop"/>
         
         <!-- 
              hsqldb config example for DataNucleus. Content provided when run directly in the development environment.
@@ -122,7 +127,6 @@
         <entry key="javax.persistence.jdbc.user" value="sa"/>
         <entry key="javax.persistence.jdbc.password" value=""/>
         -->
-        
         <!--
              DataNucleus config example. These should be added in any environment using DataNucleus
         -->     
