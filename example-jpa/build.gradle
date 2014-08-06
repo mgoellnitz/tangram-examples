@@ -22,10 +22,12 @@ def do_bytecode_transform = project.hasProperty('enhance') ? ("$enhance" == "tru
 buildscript {
   repositories {
     mavenCentral()
-    maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
+    maven { url 'http://repository-tangram.forge.cloudbees.com/snapshot' }
   }
   dependencies {
-    classpath "tangram:gradle-plugin:0.9-SNAPSHOT"
+    classpath 'tangram:gradle-plugin:0.9-SNAPSHOT'
+    // Cannot work with the version from the tangram plugin here
+    classpath 'org.hibernate:hibernate-gradle-plugin:4.3.6.Final'
   }
 }
 
@@ -34,6 +36,9 @@ apply plugin: 'war'
 apply plugin: 'maven'
 apply plugin: 'jetty'
 apply plugin: 'tangram'
+if ((jpa_backend == 'hibernate') && (do_bytecode_transform)) {
+  apply plugin: 'hibernate'
+}
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -46,9 +51,9 @@ repositories {
   // most of the usual stuff
   mavenCentral()
   // the tangram snapshots
-  maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
+  maven { url 'http://repository-tangram.forge.cloudbees.com/snapshot' }
   // the tangram releases
-  maven { url "http://my-amor.appspot.com/repository" }
+  maven { url 'http://my-amor.appspot.com/repository' }
 }
 
 configurations {
@@ -92,7 +97,9 @@ dependencies {
   // For JPA with Hibernate
   if (jpa_backend == 'hibernate') {
     if (do_bytecode_transform) {
-      compile "tangram:tangram-jpa:$tangram_version:hibernate"
+      // There is no Hibernate ready byte-code transformed version of tangram-jpa.
+      // compile "tangram:tangram-jpa:$tangram_version:hibernate"
+      compile "tangram:tangram-jpa:$tangram_version"
     } else {
       compile "tangram:tangram-jpa:$tangram_version"
     }
@@ -103,6 +110,7 @@ dependencies {
     
   /* For JPA with DataNucleus */
   if (jpa_backend == 'datanucleus') {
+    // DataNucleus does not work without byte-code transformation.
     compile "tangram:tangram-jpa:$tangram_version:nucleus"
     compile "org.datanucleus:datanucleus-api-jpa:$versions.datanucleus"
     compile "org.datanucleus:datanucleus-core:$versions.datanucleus"
