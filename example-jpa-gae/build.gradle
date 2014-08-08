@@ -64,6 +64,7 @@ dependencies {
   webapp "tangram:tangram-gae:$tangram_version:war@war"
   // compile "tangram:tangram-gae:$tangram_version"
   compile "tangram:tangram-$tangram_backend:$tangram_version"
+  compile "org.slf4j:slf4j-jdk14:$versions.slf4j"  
   
   compile "tangram:tangram-jpa:$tangram_version:nucleus"
   compile "org.datanucleus:datanucleus-api-jpa:$versions.datanucleus"
@@ -84,15 +85,26 @@ clean.doFirst {
 
 compileJava.doLast { nucleusJpaEnhance() }
 
+jar {
+  if (tangram_backend == 'spring') {
+    excludes = [ "dinistiq/**" ]
+  }
+}
+
 war.doFirst { overlayWebapp(war) }
 
 war {
+  archiveName = "${project.name}-${tangram_backend}.war"
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
-  excludes = [ "classes/**", "WEB-INF/web*.xml" ]
+  if (tangram_backend == 'spring') {
+    excludes = [ "classes/**", "WEB-INF/web*.xml", "WEB-INF/shiro.ini", "shiro/**" ]
+  } else {
+    excludes = [ "classes/**", "WEB-INF/web*.xml", "WEB-INF/tangram/**", "WEB-INF/security-*.xml" ]
+  }
 }
 
-// to use the local dev_appserver in this directory
+// to use the local dev_appserver in this directory and to copy the db files back and forth
 war.doLast {
   ant.unzip(src: war.archivePath, dest: "$buildDir/war")
   copy {
@@ -102,9 +114,12 @@ war.doLast {
   }
 }
 
-// Sorry, just for windows for now
-task runWar (type :Exec) {
+task appserverRun (type :Exec) {
+  if (System.properties['os.name'].toLowerCase().contains('windows')) {
     commandLine 'cmd', '/c', 'dev_appserver --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=1 --disable_update_check -p 12380 build\\war'
+  } else {
+    commandLine 'bash', '-c', 'dev_appserver.sh --jvm_flag=-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=1 --disable_update_check -p 12380 build/war'
+  } // if
 }
 
 // For the users of a the legacy IDE Eclipse

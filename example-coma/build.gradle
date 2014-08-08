@@ -92,6 +92,12 @@ dependencies {
   providedCompile "javax.servlet:jsp-api:$versions.jsp"
 }
 
+jar {
+  if (tangram_backend == 'spring') {
+    excludes = [ "dinistiq/**" ]
+  }
+}
+
 war.doFirst { overlayWebapp(war) }
 
 /**
@@ -103,7 +109,11 @@ war {
   archiveName = "${project.name}-${tangram_backend}.war"
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
-  excludes = [ "classes/**", "WEB-INF/web*.xml" ]
+  if (tangram_backend == 'spring') {
+    excludes = [ "classes/**", "WEB-INF/web*.xml", "WEB-INF/shiro.ini", "shiro/**" ]
+  } else {
+    excludes = [ "classes/**", "WEB-INF/web*.xml", "WEB-INF/tangram/**", "WEB-INF/security-*.xml" ]
+  }
   
   def examplesFile = new File("$projectDir/cap-examples.jar")
  

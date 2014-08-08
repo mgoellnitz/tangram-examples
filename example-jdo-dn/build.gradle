@@ -111,6 +111,12 @@ dependencies {
 
 compileJava.doLast { nucleusJdoEnhance() }
 
+jar {
+  if (tangram_backend == 'spring') {
+    excludes = [ "dinistiq/**" ]
+  }
+}
+
 war.doFirst { overlayWebapp(war) }
 
 war {
@@ -119,7 +125,11 @@ war {
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   // see explanation in dependencies section when this will be needed alternatively for the line above
   // classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime + configurations.reallyNeeded
-  excludes = [ "classes/**", "WEB-INF/web*.xml" ]
+  if (tangram_backend == 'spring') {
+    excludes = [ "classes/**", "WEB-INF/web*.xml", "WEB-INF/shiro.ini", "shiro/**" ]
+  } else {
+    excludes = [ "classes/**", "WEB-INF/web*.xml", "WEB-INF/tangram/**", "WEB-INF/security-*.xml" ]
+  }
 }
 
 stopPort = 12390
