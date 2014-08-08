@@ -16,6 +16,11 @@ import de.undercouch.gradle.tasks.download.Download
 
 defaultTasks 'clean', 'build'
 
+def tangram_version = '0.9-SNAPSHOT'
+
+// Switch to have the options in one example project - optional external override
+def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
+
 buildscript {
   repositories {
     mavenCentral()
@@ -37,10 +42,9 @@ apply plugin: 'download-task'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-def tangram_version = '0.9-SNAPSHOT'
-
 // don't let gradle work with its defaults on my files...
 webAppDirName = 'disabled'
+jar.enabled = true 
 
 repositories {
   // most of the usual stuff
@@ -50,8 +54,6 @@ repositories {
   // the tangram stuff
   maven { url "http://my-amor.appspot.com/repository" }
 }
-
-jar.enabled = true 
 
 configurations {
   libs 
@@ -65,15 +67,29 @@ artifacts {
   libs jar
 }
 
+sourceSets {
+  main {
+    java {
+      srcDir "src/main/java"
+      srcDir "src/main/java-$tangram_backend"
+    }
+  }
+}
+
 dependencies {
   webapp "tangram:tangram-coma:$tangram_version:war@war"
   compile "tangram:tangram-coma:$tangram_version"
   
-  providedCompile "javax.servlet:servlet-api:$versions.servlet"
-  providedCompile "javax.servlet:jsp-api:$versions.jsp"
+  compile "tangram:tangram-${tangram_backend}:$tangram_version"
   
   runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
   runtime "mysql:mysql-connector-java:5.1.31"
+  
+  testCompile "junit:junit:$versions.junit"
+  
+  // your container will have this for you
+  providedCompile "javax.servlet:servlet-api:$versions.servlet"
+  providedCompile "javax.servlet:jsp-api:$versions.jsp"
 }
 
 war.doFirst { overlayWebapp(war) }
@@ -84,8 +100,10 @@ war.doFirst { overlayWebapp(war) }
  *  coremedia support staff for details.
  */
 war {
+  archiveName = "${project.name}-${tangram_backend}.war"
+  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
-  excludes = [ "classes/**" ]
+  excludes = [ "classes/**", "WEB-INF/web*.xml" ]
   
   def examplesFile = new File("$projectDir/cap-examples.jar")
  

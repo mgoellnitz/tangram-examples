@@ -22,16 +22,6 @@
   <!--  optional: coma -->
   <bean id="comaBeanPopulator" class="org.tangram.examples.menusite.MenuSiteBeanPopulator" />
 
-  <!--  optional  tangram -->
-  <bean id="customViews" class="java.util.HashSet">
-    <constructor-arg>
-      <set>
-        <value>NULL</value>
-      </set>
-    </constructor-arg>
-  </bean>
-
-
   <!-- non generics -->
 
   <!--

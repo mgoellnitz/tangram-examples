@@ -1,7 +1,6 @@
 /.gradle
 /.nb-gradle*
 *.log
-tangram-restart-cache.ser
 /*/*/hsqldb/*
 /*/local-db/*
 /*/h2/*
@@ -12,7 +11,7 @@ tangram-restart-cache.ser
 /*/.classpath
 /*/.project
 /*/private/cache
-/example-coma-spring/material
+/example-coma/material*
 /example-ebean/tangram-create.sql
 /example-ebean/tangram-drop.sql
-/example-coma-spring/cap-examples.jar
+/example-coma/cap-examples.jar

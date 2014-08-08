@@ -166,7 +166,8 @@ war.doFirst {
 }
 
 war {
-  archiveName = "${project.name}-${jpa_backend[0]}${jpa_backend[4]}-${tangram_backend}.war"
+  def index = jpa_backend.indexOf('i') > 0 ? jpa_backend.length()-4 : 4
+  archiveName = "${project.name}-${jpa_backend[0]}${jpa_backend[index]}-${tangram_backend}.war"
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   excludes = [ "classes/**", "WEB-INF/web*.xml" ]
