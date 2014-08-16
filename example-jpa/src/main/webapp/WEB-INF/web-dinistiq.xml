@@ -51,7 +51,7 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   
-  <!-- Apache shiro example - shiro.ini config file and more tangram setup missing -->
+  <!-- Apache Shiro integration -->
   <listener>
     <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
   </listener>
@@ -66,7 +66,7 @@
     <dispatcher>FORWARD</dispatcher> 
     <dispatcher>INCLUDE</dispatcher> 
     <dispatcher>ERROR</dispatcher>
-  </filter-mapping>  
+  </filter-mapping>
   
   <!-- tangram password filter -->
   <filter>
@@ -96,7 +96,7 @@
   <filter-mapping>
     <filter-name>TangramProtections</filter-name>
     <url-pattern>/s/*</url-pattern>
-  </filter-mapping>  
+  </filter-mapping>
   
   <!-- tangram measure time filter -->
   <filter>
@@ -112,7 +112,7 @@
   <filter-mapping>
     <filter-name>TangramMeasureTime</filter-name>
     <url-pattern>/s/*</url-pattern>
-  </filter-mapping>  
+  </filter-mapping>
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
