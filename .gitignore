@@ -1,14 +1,12 @@
-*-*.log
-v*.log
+*webapp.log
+velocity.log
 *.ser
 /create-references.sh
 /.gradle
 /.nb-gradle*
-/*/*/hsqldb/*
 /*/local-db/*
 /*/h2/*
 /*/.gradle
-/*/db
 /*/build
 /*/.settings
 /*/.classpath

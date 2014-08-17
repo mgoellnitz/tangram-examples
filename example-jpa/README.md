@@ -41,8 +41,10 @@ Create an instance of type Code with mime-type "text/html" and annotation
 Call with your browser the URL
 
 ```
-http://localhost:12380/example-jpa/s/id_RootTopic:1
+http://localhost:12380/example-jpa/s/id_RootTopic:xy
 ```
+
+where xy is the numeric ID of the root topic.
 
 Customize JPA Implementation
 ----------------------------

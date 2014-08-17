@@ -18,12 +18,12 @@
     <!-- Needs to be explicitly listed -->
     <class>org.tangram.jpa.JpaContent</class>
     <class>org.tangram.jpa.Code</class>
-    <class>org.tangram.jpa.solution.Linkable</class>
-    <class>org.tangram.jpa.solution.Article</class>
-    <class>org.tangram.jpa.solution.Container</class>
-    <class>org.tangram.jpa.solution.ImageData</class>
-    <class>org.tangram.jpa.solution.RootTopic</class>
-    <class>org.tangram.jpa.solution.Topic</class>
+    <class>org.tangram.example.Linkable</class>
+    <class>org.tangram.example.Article</class>
+    <class>org.tangram.example.Container</class>
+    <class>org.tangram.example.ImageData</class>
+    <class>org.tangram.example.RootTopic</class>
+    <class>org.tangram.example.Topic</class>
     <properties>
     </properties>
   </persistence-unit>

@@ -14,7 +14,7 @@ package org.tangram.nucleus.solution.test;
 import java.lang.reflect.Method;
 import org.junit.Assert;
 import org.junit.Test;
-import org.tangram.nucleus.solution.RootTopic;
+import org.tangram.example.RootTopic;
 
 
 public class JdoEnhancerTest {
