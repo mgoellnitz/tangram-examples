@@ -63,13 +63,17 @@ artifacts {
 dependencies {
   webapp "tangram:tangram-gae:$tangram_version:war@war"
   compile "tangram:tangram-gae:$tangram_version"
+  
+  webapp "tangram:tangram-editor:$tangram_version:war@war"
+  runtime "tangram:tangram-editor:$tangram_version"
+  
   runtime "tangram:tangram-$tangram_backend:$tangram_version"
   compile "org.slf4j:slf4j-jdk14:$versions.slf4j"  
   
-  providedCompile "javax.servlet:servlet-api:$versions.servlet"
-  providedCompile "javax.servlet:jsp-api:$versions.jsp"
-  
   testCompile "junit:junit:$versions.junit"
+  
+  providedCompile "$versions.servlet_api"
+  providedCompile "$versions.jsp_api"
 }
 
 clean.doFirst {

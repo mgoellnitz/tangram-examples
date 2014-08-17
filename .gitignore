@@ -1,6 +1,9 @@
+*-*.log
+v*.log
+*.ser
+/create-references.sh
 /.gradle
 /.nb-gradle*
-*.log
 /*/*/hsqldb/*
 /*/local-db/*
 /*/h2/*
@@ -11,7 +14,7 @@
 /*/.classpath
 /*/.project
 /*/private/cache
+/*/cap-examples.jar
 /example-coma/cap-examples.jar
-/example-coma/material*
 /example-ebean/tangram-create.sql
 /example-ebean/tangram-drop.sql

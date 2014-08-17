@@ -88,8 +88,8 @@ dependencies {
   testCompile "junit:junit:$versions.junit"
   
   // your container will have this for you
-  providedCompile "javax.servlet:servlet-api:$versions.servlet"
-  providedCompile "javax.servlet:jsp-api:$versions.jsp"
+  providedCompile "$versions.servlet_api"
+  providedCompile "$versions.jsp_api"
 }
 
 jar {
