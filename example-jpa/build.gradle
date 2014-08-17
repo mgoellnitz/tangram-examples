@@ -11,7 +11,7 @@
  */
 defaultTasks 'clean', 'build'
 
-def tangram_version = '0.9-SNAPSHOT'
+def tangram_version = '0.9'
 
 // Some switches to have all options in one example project - with optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
@@ -25,7 +25,7 @@ buildscript {
     maven { url 'http://repository-tangram.forge.cloudbees.com/snapshot' }
   }
   dependencies {
-    classpath 'tangram:gradle-plugin:0.9-SNAPSHOT'
+    classpath 'tangram:gradle-plugin:0.9'
     // Cannot work with the version from the tangram plugin here
     classpath 'org.hibernate:hibernate-gradle-plugin:4.3.6.Final'
   }

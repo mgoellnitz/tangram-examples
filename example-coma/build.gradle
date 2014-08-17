@@ -16,7 +16,7 @@ import de.undercouch.gradle.tasks.download.Download
 
 defaultTasks 'clean', 'build'
 
-def tangram_version = '0.9-SNAPSHOT'
+def tangram_version = '0.9'
 
 // Switch to have the options in one example project - optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
@@ -27,7 +27,7 @@ buildscript {
     maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
   }
   dependencies {
-    classpath "tangram:gradle-plugin:0.9-SNAPSHOT"
+    classpath 'tangram:gradle-plugin:0.9'
     classpath 'de.undercouch:gradle-download-task:1.0'
   }
 }
