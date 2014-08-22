@@ -113,7 +113,7 @@ compileJava.doLast { nucleusJdoEnhance() }
 
 jar {
   if (tangram_backend == 'spring') {
-    excludes = [ "dinistiq/**" ]
+    excludes = [ 'dinistiq/**' ]
   }
 }
 
@@ -126,9 +126,9 @@ war {
   // see explanation in dependencies section when this will be needed alternatively for the line above
   // classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime + configurations.reallyNeeded
   if (tangram_backend == 'spring') {
-    excludes = [ "classes/**", "WEB-INF/web*.xml", "WEB-INF/shiro.ini", "shiro/**" ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/shiro.ini', 'shiro/**' ]
   } else {
-    excludes = [ "classes/**", "WEB-INF/web*.xml", "WEB-INF/tangram/**", "WEB-INF/security-*.xml" ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml' ]
   }
 }
 

@@ -99,7 +99,7 @@ compileJava.doLast { ebeanEnhance() }
 
 jar {
   if (tangram_backend == 'spring') {
-    excludes = [ "dinistiq/**" ]
+    excludes = [ 'dinistiq/**' ]
   }
 }
 
@@ -110,9 +110,9 @@ war {
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
-    excludes = [ "classes/**", "WEB-INF/web*.xml", "WEB-INF/shiro.ini", "shiro/**" ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/shiro.ini', 'shiro/**' ]
   } else {
-    excludes = [ "classes/**", "WEB-INF/web*.xml", "WEB-INF/tangram/**", "WEB-INF/security-*.xml" ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml' ]
   }
 }
 

@@ -163,7 +163,7 @@ jar.doFirst {
 
 jar {
   if (tangram_backend == 'spring') {
-    excludes = [ "dinistiq/**" ]
+    excludes = [ 'dinistiq/**' ]
   }
   // Use backend specific persistence.xml for JPA 
   // In this example use the same pesistence.xml which was used for enhancing or weaving
@@ -173,7 +173,7 @@ jar {
   if (jpa_backend == 'eclipselink') jpa_method='weave' 
   into ('') {
     from "$project.projectDir/$jpa_method"
-    include "META-INF/persistence.xml"
+    include 'META-INF/persistence.xml'
   }
 }
 
@@ -187,9 +187,9 @@ war {
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
-    excludes = [ "classes/**", "WEB-INF/web*.xml", "WEB-INF/shiro.ini", "shiro/**" ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/shiro.ini', 'shiro/**' ]
   } else {
-    excludes = [ "classes/**", "WEB-INF/web*.xml", "WEB-INF/tangram/**", "WEB-INF/security-*.xml" ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml' ]
   }
 }
 
