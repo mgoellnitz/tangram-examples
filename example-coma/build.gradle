@@ -16,7 +16,7 @@ import de.undercouch.gradle.tasks.download.Download
 
 defaultTasks 'clean', 'build'
 
-def tangram_version = '0.9'
+def tangram_version = '1.0-SNAPSHOT'
 
 // Switch to have the options in one example project - optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
@@ -27,7 +27,7 @@ buildscript {
     maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
   }
   dependencies {
-    classpath 'tangram:gradle-plugin:0.9'
+    classpath 'tangram:gradle-plugin:1.0-SNAPSHOT'
     classpath 'de.undercouch:gradle-download-task:1.0'
   }
 }
@@ -42,8 +42,6 @@ apply plugin: 'download-task'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-// don't let gradle work with its defaults on my files...
-webAppDirName = 'disabled'
 jar.enabled = true 
 
 repositories {
@@ -56,8 +54,7 @@ repositories {
 }
 
 configurations {
-  libs 
-  webapp
+  libs
   // this is only relevant for spring scenarios since spring still uses jcl
   all*.exclude module: 'commons-logging'
 }
@@ -97,8 +94,6 @@ jar {
     excludes = [ 'dinistiq/**' ]
   }
 }
-
-war.doFirst { overlayWebapp(war) }
 
 /**
  *  coremediaUsername and coremediaPassword must be specified in your personal

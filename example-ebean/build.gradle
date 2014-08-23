@@ -11,7 +11,7 @@
  */
 defaultTasks 'clean', 'build'
 
-def tangram_version = '0.9'
+def tangram_version = '1.0-SNAPSHOT'
 
 // Switch to have the options in one example project - optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
@@ -22,7 +22,7 @@ buildscript {
     maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
   }
   dependencies {
-    classpath 'tangram:gradle-plugin:0.9'
+    classpath 'tangram:gradle-plugin:1.0-SNAPSHOT'
   }
 }
 
@@ -35,8 +35,6 @@ apply plugin: 'tangram'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-// don't let gradle work with its defaults on my files...
-webAppDirName = 'disabled'
 jar.enabled = true 
 
 repositories {
@@ -49,8 +47,7 @@ repositories {
 }
 
 configurations {
-  libs 
-  webapp
+  libs
   // this is only relevant for spring scenarios since spring still uses jcl
   all*.exclude module: 'commons-logging'
 }
@@ -95,15 +92,11 @@ dependencies {
   providedCompile "$versions.jsp_api"
 }
 
-compileJava.doLast { ebeanEnhance() }
-
 jar {
   if (tangram_backend == 'spring') {
     excludes = [ 'dinistiq/**' ]
   }
 }
-
-war.doFirst { overlayWebapp(war) }
 
 war {
   archiveName = "${project.name}-${tangram_backend}.war"
