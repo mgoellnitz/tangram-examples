@@ -56,6 +56,7 @@ artifacts {
 }
 
 dependencies {
+  webapp "tangram:tangram-core:$tangram_version:war@war"
   webapp "tangram:tangram-gae:$tangram_version:war@war"
   // compile "tangram:tangram-gae:$tangram_version"
   compile "tangram:tangram-$tangram_backend:$tangram_version"
@@ -93,21 +94,22 @@ war {
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
-    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/shiro.ini', 'shiro/**' ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
   } else {
     excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml' ]
   }
 }
 
 // to use the local dev_appserver in this directory and to copy the db files back and forth
-war.doLast {
-  ant.unzip(src: war.archivePath, dest: "$buildDir/war")
-  copy {
-    from 'local-db'
-    into "$buildDir/war/WEB-INF/appengine-generated"
-    include '**/**'
-  }
-}
+// commented until we get a working version
+//war.doLast {
+//  ant.unzip(src: war.archivePath, dest: "$buildDir/war")
+//  copy {
+//    from 'local-db'
+//    into "$buildDir/war/WEB-INF/appengine-generated"
+//    include '**/**'
+//  }
+//}
 
 task appserverRun (type :Exec) {
   if (System.properties['os.name'].toLowerCase().contains('windows')) {

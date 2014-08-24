@@ -72,6 +72,7 @@ sourceSets {
 }
 
 dependencies {
+  webapp "tangram:tangram-core:$tangram_version:war@war"
   webapp "tangram:tangram-coma:$tangram_version:war@war"
   compile "tangram:tangram-coma:$tangram_version"
   
