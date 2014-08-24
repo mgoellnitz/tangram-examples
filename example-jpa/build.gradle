@@ -43,8 +43,6 @@ if ((jpa_backend == 'hibernate') && (do_bytecode_transform)) {
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-jar.enabled = true 
-
 repositories {
   // most of the usual stuff
   mavenCentral()

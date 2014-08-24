@@ -35,8 +35,6 @@ apply plugin: 'tangram'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-jar.enabled = true 
-
 repositories {
   // most of the usual stuff
   mavenCentral()
