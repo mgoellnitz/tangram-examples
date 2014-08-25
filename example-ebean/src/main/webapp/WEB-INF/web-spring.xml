@@ -14,58 +14,77 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
     
-    <display-name>Tangram Ebean Example - Springframework version</display-name>
+  <display-name>Tangram Ebean Example - Springframework version</display-name>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            /WEB-INF/security-*.xml
-        </param-value>
-    </context-param>
-    
-    <servlet>
-        <servlet-name>spring</servlet-name>
-        <servlet-class>org.tangram.spring.TangramServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value> 
-            classpath*:tangram/*.xml, 
-            /WEB-INF/tangram/*.xml 
-            </param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>spring</servlet-name>
-        <url-pattern>/s/*</url-pattern>
-    </servlet-mapping>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <!-- just the path for the spring security configuration -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+      /WEB-INF/security-*.xml
+    </param-value>
+  </context-param>
+  
+  <!-- the tangram servlet, everything except static files is handled here -->
+  <servlet>
+    <servlet-name>spring</servlet-name>
+    <servlet-class>org.tangram.spring.TangramServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value> 
+        classpath*:tangram/*.xml, 
+        /WEB-INF/tangram/*.xml 
+      </param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>spring</servlet-name>
+    <url-pattern>/s/*</url-pattern>
+  </servlet-mapping>
 
-    <filter>
-        <filter-name>CharacterEncodingFilter</filter-name>
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>CharacterEncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+  <!-- you will definetely want this! -->
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+  <!-- Simple spring security integration -->
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
-    <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
+  <!-- example of static expiration rules depending on extensions -->
+  <filter>
+    <filter-name>expiryFilter</filter-name>
+    <filter-class>org.tangram.util.ExpirationHeaderFilter</filter-class>
+    <init-param>
+      <param-name>expirations</param-name>
+      <param-value>css=604800,js=604800,ico=604800,gif=604800,html=0,DEFAULT=86400</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>expiryFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- just to say hello and have a redirect to the root of the tangram servlet -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
 
 </web-app>

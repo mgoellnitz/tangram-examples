@@ -1,32 +1,28 @@
 /**
- * 
- * Copyright (C) 2011-2013 Martin Goellnitz
- * 
- * This work is licensed under the Creative Commons Attribution 3.0 
- * Unported License. To view a copy of this license, visit 
- * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
- * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+ *
+ * Copyright (C) 2011-2014 Martin Goellnitz
+ *
+ * This work is licensed under the Creative Commons Attribution 3.0
+ * Unported License. To view a copy of this license, visit
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View,
  * California, 94041, USA.
- * 
+ *
  */
 package org.tangram.gae.solution;
 
-import javax.jdo.annotations.Inheritance;
+import com.google.appengine.api.datastore.Blob;
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
-
-import com.google.appengine.api.datastore.Blob;
-
 import org.tangram.feature.blob.MimedBlob;
 
 @PersistenceCapable
-@Inheritance(customStrategy = "complete-table")
 public class ImageData extends Linkable implements MimedBlob {
 
     @Persistent
     private Blob data;
-    
+
     private String mimeType;
 
     private String width;

@@ -14,7 +14,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
   
-  <display-name>Tangram GAE Example using JDO through DataNucleus - dinistiq version</display-name>
+  <display-name>Tangram GAE Example using JDO with DataNucleus - dinistiq version</display-name>
 
   <!-- basic dinistiq web setup -->
   <listener>
