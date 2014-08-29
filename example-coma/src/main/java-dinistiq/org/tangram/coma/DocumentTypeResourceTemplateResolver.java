@@ -9,7 +9,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
@@ -22,9 +22,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tangram.servlet.JspTemplateResolver;
+import org.tangram.view.TemplateResolver;
+
 
 /**
  * View resolver avoiding the creation of a bean layer by using the document type and dummy package names.
@@ -33,9 +36,10 @@ public class DocumentTypeResourceTemplateResolver extends JspTemplateResolver {
 
     private static final Logger LOG = LoggerFactory.getLogger(DocumentTypeResourceTemplateResolver.class);
 
-    private String packageName;
+    @Inject
+    private AbstractComaBeanFactory beanFactory;
 
-    private Map<String, String> parents = new HashMap<String, String>();
+    private String packageName;
 
     private Map<String, String> packages = new HashMap<String, String>();
 
@@ -47,16 +51,6 @@ public class DocumentTypeResourceTemplateResolver extends JspTemplateResolver {
 
     public void setPackageName(String packageName) {
         this.packageName = packageName;
-    }
-
-
-    public Map<String, String> getParents() {
-        return parents;
-    }
-
-
-    public void setParents(Map<String, String> parents) {
-        this.parents = parents;
     }
 
 
@@ -74,7 +68,7 @@ public class DocumentTypeResourceTemplateResolver extends JspTemplateResolver {
     protected String lookupView(String viewName, Locale locale, Object content, String key) throws IOException {
         String view = null;
         if (content instanceof ComaContent) {
-            ComaContent cc = (ComaContent)content;
+            ComaContent cc = (ComaContent) content;
             if (LOG.isWarnEnabled()) {
                 LOG.warn("lookupView() have coma content "+cc.getId()+" :"+cc.getDocumentType());
             } // if
@@ -91,19 +85,25 @@ public class DocumentTypeResourceTemplateResolver extends JspTemplateResolver {
                 if (LOG.isWarnEnabled()) {
                     LOG.warn("lookupView() result "+view);
                 } // if
-                  // TODO: How about fake interfaces?
-                  // if (view==null) {
-                  // for (Class<? extends Object> c : cls.getInterfaces()) {
-                  // view = checkView(viewName, c.getPackage().getName(), c.getSimpleName(), key, locale);
-                  // if (view!=null) {
-                  // break;
-                  // } // if
-                  // } // for
-                  // } // if
-                documentType = parents.get(documentType);
+                // TODO: How about fake interfaces?
+                // if (view==null) {
+                // for (Class<? extends Object> c : cls.getInterfaces()) {
+                // view = checkView(viewName, c.getPackage().getName(), c.getSimpleName(), key, locale);
+                // if (view!=null) {
+                // break;
+                // } // if
+                // } // for
+                // } // if
+                documentType = beanFactory.getParents().get(documentType);
             } // while
         } // if
         return view;
     } // lookupView()
+
+
+    @Override
+    public int compareTo(TemplateResolver<String> o) {
+        return -1;
+    } // compareTo
 
 } // DocumentTypeResourceTemplateResolver

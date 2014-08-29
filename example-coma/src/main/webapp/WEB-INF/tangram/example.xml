@@ -51,9 +51,13 @@
     </constructor-arg>
   </bean>
     
+  <!--
   <bean id="persistentRestartCache" class="org.tangram.util.FileRestartCache">
     <property name="filename" value="${tangram.restart.cache.file}"/>
   </bean>
+  -->
+  
+  <bean id="persistentRestartCache" class="org.tangram.util.DummyRestartCache" />
   
   <bean id="beanFactory" class="org.tangram.coma.ComaBeanFactory">
     <property name="dbDriver" value="${coma.db.driver}" />
@@ -67,6 +71,16 @@
         -->
       </map>
     </property>
+    <!-- document type hierarchy - we don't read the full doctypes.xml -->
+    <property name="parents">
+      <map>
+        <entry key="Dish" value="Document" />
+        <entry key="Picture" value="Document" />
+        <entry key="Page" value="Document" />
+        <entry key="Category" value="Document" />
+        <entry key="ContentRule" value="Document" />
+      </map>
+    </property>
   </bean>
 
   <bean id="comaJspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -76,24 +90,15 @@
   <bean id="documentTypeViewResolver" class="org.tangram.coma.DocumentTypeResourceViewResolver">
     <property name="order" value="5" />
     <property name="delegate" ref="comaJspViewResolver" />
-    <property name="prefix" value="/WEB-INF/templates/" />
+    <property name="prefix" value="/WEB-INF/view/jsp/" />
     <property name="suffix" value=".jsp" />
     <property name="packageName" value="com.coremedia.examples.cae.beans" />
-    <property name="parents">
-      <map>
-        <entry key="Dish" value="AbstractContent" />
-        <entry key="Picture" value="AbstractContent" />
-        <entry key="Page" value="AbstractContent" />
-        <entry key="Category" value="AbstractContent" />
-        <entry key="ContentRule" value="AbstractContent" />
-      </map>
-    </property>
   </bean>
 
   <bean id="classBasedViewResolver" class="org.tangram.spring.view.ModelAwareInternalResourceViewResolver">
     <property name="order" value="50" />
     <property name="delegate" ref="comaJspViewResolver" />
-    <property name="prefix" value="/WEB-INF/templates/" />
+    <property name="prefix" value="/WEB-INF/view/jsp/" />
     <property name="suffix" value=".jsp" />
   </bean>
 

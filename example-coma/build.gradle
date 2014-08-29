@@ -43,6 +43,7 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 repositories {
+  mavenLocal()
   // most of the usual stuff
   mavenCentral()
   // tangram snapshots
@@ -125,6 +126,8 @@ war {
     FileTree cmexamples = zipTree("$projectDir/cap-examples.jar")
   
     // complicated stuff until http://issues.gradle.org/browse/GRADLE-3025 gets solved
+    
+    // map css into correct target path
     into('') {
       from cmexamples
       include 'cae/menusite/src/css/**'
@@ -138,13 +141,17 @@ war {
         } // if
       } // eachFile
     } // into
+    
+    // map templates into correct target path for standard tangram file layout
     into('WEB-INF') {
       from cmexamples
       include 'cae/menusite/src/templates/**'
       eachFile { FileCopyDetails fcp ->
         if (fcp.relativePath.pathString.startsWith('WEB-INF/cae/menusite/src/templates')) {
           def segments = fcp.relativePath.segments
-          def pathsegments = segments[0,4..-1] as String[]
+          def pathsegments = segments[0,3..-1] as String[]
+          pathsegments[1] = 'view'
+          pathsegments[2] = 'jsp'
           fcp.relativePath = new RelativePath(!fcp.file.isDirectory(), pathsegments)
         } else {
           fcp.exclude()
