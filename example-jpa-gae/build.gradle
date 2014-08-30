@@ -28,8 +28,6 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'maven'
-apply plugin: 'jetty'
 apply plugin: 'tangram'
 
 sourceCompatibility = 1.7
@@ -38,10 +36,8 @@ targetCompatibility = 1.7
 repositories {
   // most of the usual stuff
   mavenCentral()
-  // the tangram snapshots
-  maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
   // the tangram stuff
-  maven { url "http://my-amor.appspot.com/repository" }
+  maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
 }
 
 configurations {
