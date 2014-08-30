@@ -39,6 +39,9 @@
   <!-- TODO: Character Encoding Filter -->
 
   <!-- tangram password filter -->
+  <!-- Sad enough this doesn't work for CapeDwarf since the filters get their 
+       injections by Java EE CDI beneath the CapeDwarf framework regardless 
+       of other configuration options taken. -->
   <filter>
     <filter-name>TangramProtections</filter-name>
     <filter-class>org.tangram.components.servlet.PasswordFilter</filter-class>

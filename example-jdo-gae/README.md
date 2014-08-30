@@ -8,7 +8,22 @@ Prerequisites
 * Gradle 1.8 and up (Including 2.0)
 * Google App Engine SDK Java AND Python (for the bulkloader.py you definetely want to use)
 
+CapeDwarf
+---------
+
 This project is known not to work with the CapeDward Google App Engine Emulator.
+
+To give it a try you will need to compile tangram from a special CapeDwarf branch
+which gets rid of the already present Java EE CDI configurations. These interfere
+with the underlying Java EE server. (Don't forget to add mavenLocal() as a repository
+when building the example.)
+
+With the Springframework in use it is startable but the login fails (The UserService 
+API returns null despite the successful login)
+
+With dinistiq we use Servlet Filters which depend on injections which are in turn 
+interpreted by the CDI module in the underlying Java EE server regardless of other 
+options we might try to avoid this.
 
 Local Build
 -----------

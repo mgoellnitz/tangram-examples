@@ -15,6 +15,7 @@ def tangram_version = '1.0-SNAPSHOT'
 
 // Switch to have the options in one example project - optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
+def capedwarf = project.hasProperty('capedward') ? ("$capedwarf" == "true") : false 
 
 buildscript {
   repositories {
@@ -28,20 +29,19 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'maven'
-apply plugin: 'jetty'
 apply plugin: 'tangram'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 repositories {
+  if (capedwarf) {
+    mavenLocal()
+  }
   // most of the usual stuff
   mavenCentral()
-  // the tangram snapshots
-  maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
   // the tangram stuff
-  maven { url "http://my-amor.appspot.com/repository" }
+  maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
 }
 
 configurations {
@@ -63,6 +63,9 @@ dependencies {
   webapp "tangram:tangram-editor:$tangram_version:war@war"
   runtime "tangram:tangram-editor:$tangram_version"
   
+  if (capedwarf) {
+    runtime "dinistiq:dinistiq:0.3-SNAPSHOT"
+  }
   runtime "tangram:tangram-$tangram_backend:$tangram_version"
   compile "org.slf4j:slf4j-jdk14:$versions.slf4j"  
   
