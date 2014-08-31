@@ -15,7 +15,7 @@ def tangram_version = '1.0-SNAPSHOT'
 
 // Switch to have the options in one example project - optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
-def capedwarf = project.hasProperty('capedward') ? ("$capedwarf" == "true") : false 
+def prepapreCapedwarf = project.hasProperty('capedwarf') ? ("$capedwarf" == "true") : false 
 
 buildscript {
   repositories {
@@ -35,7 +35,7 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 repositories {
-  if (capedwarf) {
+  if (prepapreCapedwarf) {
     mavenLocal()
   }
   // most of the usual stuff
@@ -63,7 +63,7 @@ dependencies {
   webapp "tangram:tangram-editor:$tangram_version:war@war"
   runtime "tangram:tangram-editor:$tangram_version"
   
-  if (capedwarf) {
+  if (prepapreCapedwarf) {
     runtime "dinistiq:dinistiq:0.3-SNAPSHOT"
   }
   runtime "tangram:tangram-$tangram_backend:$tangram_version"
