@@ -45,6 +45,15 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     @NotPersistent
     private BeanFactory beanFactory;
 
+    @NotPersistent
+    private RootTopic rootTopic = null;
+
+    @NotPersistent
+    private List<Topic> path;
+    
+    @NotPersistent
+    private List<Container> inheritedRelatedContainers;
+
 
     public List<Topic> getSubTopics() {
         return subTopics;
@@ -101,21 +110,15 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     }
 
 
-    /**
+    /*
      * ********************************
      */
-
-    @NotPersistent
-    RootTopic rootTopic = null;
-
-
+    
     public RootTopic getRootTopic() {
         if (rootTopic==null) {
             List<RootTopic> rootTopics = beanFactory.listBeans(RootTopic.class, null);
-            if (rootTopics!=null) {
-                if (rootTopics.size()>0) {
-                    rootTopic = rootTopics.get(0);
-                } // if
+            if ((rootTopics!=null)&&(rootTopics.size()>0)) {
+                rootTopic = rootTopics.get(0);
             } // if
         } // if
         return rootTopic;
@@ -125,7 +128,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     public List<Topic> getPathRecursive(Topic t) {
         List<Topic> result = null;
         if (equals(t)) {
-            result = new ArrayList<Topic>();
+            result = new ArrayList<>();
             result.add(t);
         } else {
             List<Topic> subs = t.getSubTopics();
@@ -148,10 +151,6 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     } // getPath()
 
 
-    @NotPersistent
-    private List<Topic> path;
-
-
     public List<Topic> getPath() {
         if (LOG.isDebugEnabled()) {
             LOG.debug(getClass().getName()+".getPath("+getId()+") "+getRootTopic().getClass().getName());
@@ -167,16 +166,14 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
         return path;
     } // getPath()
 
-    @NotPersistent
-    private List<Container> inheritedRelatedContainers;
-
 
     public List<Container> getInheritedRelatedContainers() {
         List<Container> result = new ArrayList<Container>();
         if (inheritedRelatedContainers==null) {
             List<Topic> p = getPath();
             int i = p.size();
-            while ((--i>=0)&&(result.size()==0)) {
+            while ((i>0)&&(result.size()==0)) {
+                i--;
                 result = p.get(i).getRelatedContainers();
             } // while
             inheritedRelatedContainers = result;
@@ -190,7 +187,6 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     /**
      * ** Protections **
      */
-
     @Override
     public List<? extends Content> getProtectionPath() {
         return getPath();

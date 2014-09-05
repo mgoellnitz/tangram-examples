@@ -18,12 +18,9 @@ which gets rid of the already present Java EE CDI configurations. These interfer
 with the underlying Java EE server. (Don't forget to add mavenLocal() as a repository
 when building the example.)
 
-With the Springframework in use it is startable but the login fails (The UserService 
-API returns null despite the successful login)
-
-With dinistiq we use Servlet Filters which depend on injections which are in turn 
-interpreted by the CDI module in the underlying Java EE server regardless of other 
-options we might try to avoid this.
+After that preparation step the this example is startable but the login fails 
+(The UserService API returns null despite the successful login). You will only be
+able to view the statistics status page /s/stats
 
 Local Build
 -----------

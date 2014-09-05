@@ -17,6 +17,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import org.tangram.feature.blob.MimedBlob;
 
+
 @PersistenceCapable
 public class ImageData extends Linkable implements MimedBlob {
 
@@ -28,6 +29,9 @@ public class ImageData extends Linkable implements MimedBlob {
     private String width;
 
     private String height;
+
+    @NotPersistent
+    private byte[] bytes = null;
 
 
     public Blob getData() {
@@ -70,12 +74,10 @@ public class ImageData extends Linkable implements MimedBlob {
         this.height = height;
     }
 
-    @NotPersistent
-    byte[] bytes = null;
 
     @Override
     public byte[] getBytes() {
-        if (bytes == null) {
+        if (bytes==null) {
             bytes = getData().getBytes();
         } // if
         return bytes;

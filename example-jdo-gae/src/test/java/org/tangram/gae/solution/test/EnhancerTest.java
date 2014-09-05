@@ -12,9 +12,8 @@
 package org.tangram.gae.solution.test;
 
 import java.lang.reflect.Method;
-
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 import org.tangram.gae.solution.RootTopic;
 
 public class EnhancerTest {
@@ -27,7 +26,6 @@ public class EnhancerTest {
         Method[] methods = RootTopic.class.getMethods();
         boolean flag = false;
         for (Method method : methods) {
-            System.out.println(""+method.getName());
             if (method.getName().startsWith("jdo")) {
                 flag = true;
             } // if
