@@ -16,7 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.tangram.coma;
+package org.tangram.example.coma;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,6 +25,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.tangram.coma.AbstractComaBeanFactory;
+import org.tangram.coma.ComaContent;
 import org.tangram.servlet.JspTemplateResolver;
 import org.tangram.view.TemplateResolver;
 
@@ -41,7 +43,7 @@ public class DocumentTypeResourceTemplateResolver extends JspTemplateResolver {
 
     private String packageName;
 
-    private Map<String, String> packages = new HashMap<String, String>();
+    private Map<String, String> packages = new HashMap<>();
 
 
     public String getPackageName() {
@@ -69,8 +71,8 @@ public class DocumentTypeResourceTemplateResolver extends JspTemplateResolver {
         String view = null;
         if (content instanceof ComaContent) {
             ComaContent cc = (ComaContent) content;
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("lookupView() have coma content "+cc.getId()+" :"+cc.getDocumentType());
+            if (LOG.isInfoEnabled()) {
+                LOG.info("lookupView() have coma content "+cc.getId()+" :"+cc.getDocumentType());
             } // if
             String documentType = cc.getDocumentType();
             while ((view==null)&&(documentType!=null)) {
@@ -78,12 +80,12 @@ public class DocumentTypeResourceTemplateResolver extends JspTemplateResolver {
                 if (packName==null) {
                     packName = this.packageName;
                 } // if
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("lookupView() checking "+packName+"/"+documentType+"#"+viewName);
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("lookupView() checking "+packName+"/"+documentType+"#"+viewName);
                 } // if
                 view = checkView(viewName, packName, documentType, key, locale);
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("lookupView() result "+view);
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("lookupView() result "+view);
                 } // if
                 // TODO: How about fake interfaces?
                 // if (view==null) {

@@ -23,7 +23,8 @@
   <context-param>
     <param-name>dinistiq.packages</param-name>
     <param-value>
-      org.tangram.components
+      org.tangram.components,
+      org.tangram.example.menusite
     </param-value>
   </context-param>
   

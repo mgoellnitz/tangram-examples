@@ -9,16 +9,19 @@
  * California, 94041, USA.
  *
  */
-package org.tangram.examples.menusite;
+package org.tangram.example.menusite;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import org.tangram.coma.ComaBeanFactory;
 import org.tangram.coma.ComaBeanPopulator;
 import org.tangram.coma.ComaContent;
 
+@Named
+@Singleton
 public class MenuSiteBeanPopulator implements ComaBeanPopulator {
 
     @Inject
