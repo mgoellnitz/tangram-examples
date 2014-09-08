@@ -42,7 +42,13 @@ public class DocumentTypeResourceViewResolver extends ModelAwareInternalResource
 
     private String packageName;
 
-    private Map<String, String> packages = new HashMap<String, String>();
+    private Map<String, String> packages = new HashMap<>();
+
+
+    public DocumentTypeResourceViewResolver() {
+        // Due to cache key creation this resolver does not work with caching of template entries
+        setActivateCaching(false);
+    } // DocumentTypeResourceViewResolver()
 
 
     public String getPackageName() {

@@ -46,6 +46,12 @@ public class DocumentTypeResourceTemplateResolver extends JspTemplateResolver {
     private Map<String, String> packages = new HashMap<>();
 
 
+    public DocumentTypeResourceTemplateResolver() {
+        // Due to cache key creation this resolver does not work with caching of template entries
+        setActivateCaching(false);
+    } // DocumentTypeResourceTemplateResolver()
+
+
     public String getPackageName() {
         return packageName;
     }
@@ -69,6 +75,9 @@ public class DocumentTypeResourceTemplateResolver extends JspTemplateResolver {
     @Override
     protected String lookupView(String viewName, Locale locale, Object content, String key) throws IOException {
         String view = null;
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("lookupView() checking for coma content: "+content);
+        } // if
         if (content instanceof ComaContent) {
             ComaContent cc = (ComaContent) content;
             if (LOG.isInfoEnabled()) {
