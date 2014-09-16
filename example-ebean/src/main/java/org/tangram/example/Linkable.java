@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import org.tangram.content.Content;
 import org.tangram.ebean.EContent;
 
+
 @Entity
 public abstract class Linkable extends EContent {
 
@@ -57,8 +58,8 @@ public abstract class Linkable extends EContent {
 
     @Override
     public int compareTo(Content o) {
-        return (o instanceof Linkable) ? ((getTitle()==null||((Linkable)o).getTitle()==null) ? 0 : getTitle()
-                .compareTo(((Linkable)o).getTitle())) : super.compareTo(o);
+        return (o instanceof Linkable) ? ((getTitle()==null||((Linkable) o).getTitle()==null) ? 0 : getTitle()
+                .compareTo(((Linkable) o).getTitle())) : super.compareTo(o);
     } // compareTo()
 
 } // Linkable

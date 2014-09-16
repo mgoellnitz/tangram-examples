@@ -21,7 +21,7 @@ public class Article extends Linkable {
 
     // dummy references since EBean only supports bidirectional OneToMany relations
     @ManyToOne
-    private Topic elementOf;
+    protected Topic elementOf;
 
 
     public char[] getText() {

@@ -15,6 +15,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import org.tangram.feature.blob.MimedBlob;
 
+
 @Entity
 public class ImageData extends Linkable implements MimedBlob {
 

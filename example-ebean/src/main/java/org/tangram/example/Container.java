@@ -26,7 +26,7 @@ public class Container extends Linkable {
 
     // dummy references since EBean only supports bidirectional OneToMany relations
     @ManyToOne
-    private Topic containerOf;
+    protected Topic containerOf;
 
 
     public List<Topic> getContents() {

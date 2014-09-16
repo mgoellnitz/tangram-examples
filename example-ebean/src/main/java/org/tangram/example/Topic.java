@@ -46,11 +46,11 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
     // dummy references since EBean only supports bidirectional OneToMany relations
     @ManyToOne
-    private Topic bottomLinkOf; // RootTopic.bottomLink
+    protected Topic bottomLinkOf; // RootTopic.bottomLink
     @ManyToOne
-    private Topic subTopicOf; // Topic.subTopic
+    protected Topic subTopicOf; // Topic.subTopic
     @ManyToOne
-    private Topic contentOf; // Container.content
+    protected Topic contentOf; // Container.content
 
     @Transient
     private BeanFactory beanFactory;
