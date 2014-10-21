@@ -22,7 +22,7 @@ def do_bytecode_transform = project.hasProperty('enhance') ? ("$enhance" == "tru
 buildscript {
   repositories {
     mavenCentral()
-    maven { url 'http://repository-tangram.forge.cloudbees.com/snapshot' }
+    maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
   }
   dependencies {
     classpath 'tangram:gradle-plugin:1.0-SNAPSHOT'
@@ -46,7 +46,7 @@ repositories {
   // most of the usual stuff
   mavenCentral()
   // the tangram stuff
-  maven { url "http://repository-tangram.forge.cloudbees.com/snapshot" }
+  maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
 }
 
 configurations {
