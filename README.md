@@ -1,6 +1,8 @@
 Very small Examples for Tangram Usage
 =====================================
 
+[![Build Status](https://api.travis-ci.org/mgoellnitz/tangram-examples.svg?branch=master)](https://travis-ci.org/mgoellnitz/tangram-examples)
+
 These are the example applications for the different usage flavours of tangram.
 
 They are intended as a quick as possible demo to see something running. In the 
