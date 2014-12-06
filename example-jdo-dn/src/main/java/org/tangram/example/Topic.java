@@ -158,8 +158,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
         if (path==null) {
             path = getPathRecursive(getRootTopic());
             if (path==null) {
-                path = new ArrayList<Topic>();
-                // path.add(getRootTopic());
+                path = new ArrayList<>();
                 path.add(this);
             } // if
         } // if
@@ -168,11 +167,11 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
 
     public List<Container> getInheritedRelatedContainers() {
-        List<Container> result = new ArrayList<Container>();
+        List<Container> result = new ArrayList<>();
         if (inheritedRelatedContainers==null) {
             List<Topic> p = getPath();
             int i = p.size();
-            while ((i>0)&&(result.size()==0)) {
+            while ((i>0)&&(result.isEmpty())) {
                 i--;
                 result = p.get(i).getRelatedContainers();
             } // while
@@ -184,9 +183,10 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     } // getInheritedRelatedContainers
 
 
-    /**
+    /*
      * ** Protections **
      */
+    
     @Override
     public List<? extends Content> getProtectionPath() {
         return getPath();
