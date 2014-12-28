@@ -123,7 +123,6 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     /*
      * *********************************
      */
-    
     public RootTopic getRootTopic() {
         if (rootTopic==null) {
             List<RootTopic> rootTopics = beanFactory.listBeans(RootTopic.class, null);
@@ -162,9 +161,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
 
     public List<Topic> getPath() {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug(getClass().getName()+".getPath("+getId()+") "+getRootTopic().getClass().getName());
-        } // if
+        LOG.debug("{}.getPath({}) {}", getClass().getName(), getId(), getRootTopic().getClass().getName());
         if (path==null) {
             path = getPathRecursive(getRootTopic());
             if (path==null) {

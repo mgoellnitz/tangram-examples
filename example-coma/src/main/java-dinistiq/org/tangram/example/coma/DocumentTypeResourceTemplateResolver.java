@@ -75,27 +75,19 @@ public class DocumentTypeResourceTemplateResolver extends JspTemplateResolver {
     @Override
     protected String lookupView(String viewName, Locale locale, Object content, String key) throws IOException {
         String view = null;
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("lookupView() checking for coma content: "+content);
-        } // if
+        LOG.debug("lookupView() checking for coma content: {}", content);
         if (content instanceof ComaContent) {
             ComaContent cc = (ComaContent) content;
-            if (LOG.isInfoEnabled()) {
-                LOG.info("lookupView() have coma content "+cc.getId()+" :"+cc.getDocumentType());
-            } // if
+            LOG.info("lookupView() have coma content {} :{}", cc.getId(), cc.getDocumentType());
             String documentType = cc.getDocumentType();
             while ((view==null)&&(documentType!=null)) {
                 String packName = packages.get(documentType);
                 if (packName==null) {
                     packName = this.packageName;
                 } // if
-                if (LOG.isInfoEnabled()) {
-                    LOG.info("lookupView() checking "+packName+"/"+documentType+"#"+viewName);
-                } // if
+                LOG.info("lookupView() checking {}/{}#{}", packName, documentType, viewName);
                 view = checkView(viewName, packName, documentType, key, locale);
-                if (LOG.isInfoEnabled()) {
-                    LOG.info("lookupView() result "+view);
-                } // if
+                LOG.info("lookupView() result {}", view);
                 // TODO: How about fake interfaces?
                 // if (view==null) {
                 // for (Class<? extends Object> c : cls.getInterfaces()) {

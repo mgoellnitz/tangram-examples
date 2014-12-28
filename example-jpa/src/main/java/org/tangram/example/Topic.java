@@ -159,13 +159,11 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
         } // if
 
         return result;
-    } // getPath()
+    } // getPathRecursive()
 
 
     public List<Topic> getPath() {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug(getClass().getName()+".getPath("+getId()+") "+getRootTopic().getClass().getName());
-        } // if
+        LOG.debug("{}.getPath({}) {}", getClass().getName(), getId(), getRootTopic().getClass().getName());
         if (path==null) {
             path = getPathRecursive(getRootTopic());
             if (path==null) {

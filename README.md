@@ -16,7 +16,6 @@ application to use the full bandwidth of flavours:
 The target platforms are
 
 * Local/Custom server
-* Cloudbees
 * OpenShift
 * Google App Engine
 
