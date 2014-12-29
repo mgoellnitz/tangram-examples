@@ -147,7 +147,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
         } // if
 
         return result;
-    } // getPath()
+    } // getPathRecursive()
 
 
     public List<Topic> getPath() {
