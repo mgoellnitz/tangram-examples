@@ -76,22 +76,16 @@ public class DocumentTypeResourceViewResolver extends ModelAwareInternalResource
         View view = null;
         if (content instanceof ComaContent) {
             ComaContent cc = (ComaContent) content;
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("lookupView() have coma content "+cc.getId()+" :"+cc.getDocumentType());
-            } // if
+            LOG.info("lookupView() have coma content {} :{}", cc.getId(), cc.getDocumentType());
             String documentType = cc.getDocumentType();
             while ((view==null)&&(documentType!=null)) {
                 String packName = packages.get(documentType);
                 if (packName==null) {
                     packName = this.packageName;
                 } // if
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("lookupView() checking "+packName+"/"+documentType+"#"+viewName);
-                } // if
+                LOG.info("lookupView() checking {}/{}#{}", packName, documentType, viewName);
                 view = checkView(viewName, packName, documentType, key, locale);
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("lookupView() result "+view);
-                } // if
+                LOG.info("lookupView() result {}", view);
                 // TODO: How about fake interfaces?
                 // if (view==null) {
                 // for (Class<? extends Object> c : cls.getInterfaces()) {
