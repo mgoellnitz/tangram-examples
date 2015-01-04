@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright (C) 2011-2014 Martin Goellnitz
+ * Copyright (C) 2011-2015 Martin Goellnitz
  * 
  * This work is licensed under the Creative Commons Attribution 3.0 
  * Unported License. To view a copy of this license, visit 
@@ -27,7 +27,7 @@ buildscript {
   dependencies {
     classpath 'tangram:gradle-plugin:1.0-SNAPSHOT'
     // Cannot work with the version from the tangram plugin here
-    classpath 'org.hibernate:hibernate-gradle-plugin:4.3.6.Final'
+    classpath 'org.hibernate:hibernate-gradle-plugin:4.3.7.Final'
   }
 }
 
@@ -131,6 +131,10 @@ dependencies {
     runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
     runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
   }
+  /* Google Guice needs has editor and shiro as compile paths so only logging is added here */
+  if (tangram_backend == 'guicy') {
+    runtime "org.slf4j:jcl-over-slf4j:$versions.slf4j"
+  }
   
   runtime "hsqldb:hsqldb:1.8.0.10"
   runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
@@ -144,7 +148,13 @@ dependencies {
 
 jar {
   if (tangram_backend == 'spring') {
+    excludes = [ 'dinistiq/**', 'guice/**' ]
+  }
+  if (tangram_backend == 'guicy') {
     excludes = [ 'dinistiq/**' ]
+  }
+  if (tangram_backend == 'dinistiq') {
+    excludes = [ 'guice/**' ]
   }
   // Use backend specific persistence.xml for JPA 
   // In this example use the same pesistence.xml which was used for enhancing or weaving
@@ -165,8 +175,12 @@ war {
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
     excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/shiro.ini', 'shiro/**' ]
-  } else {
+  }
+  if (tangram_backend == 'dinstiq') {
     excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml' ]
+  }
+  if (tangram_backend == 'guicy') {
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml', 'WEB-INF/shiro.ini' ]
   }
 }
 

@@ -11,7 +11,7 @@ application to use the full bandwidth of flavours:
 
 * JPA, JDO, or EBean as Persistence APIs and automated Class-Files enhancing/weaving.
 * RDBMS, Office Files, Google App Engine, or MongoDB as the database.
-* Springframework or non-spring (dinistiq) environments
+* Springframework, Dinistiq, or Google Guice as DI environments.
 
 The target platforms are
 

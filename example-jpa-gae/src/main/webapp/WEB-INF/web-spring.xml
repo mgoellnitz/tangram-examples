@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   
- Copyright (C) 2011-2014 Martin Goellnitz
+ Copyright (C) 2011-2015 Martin Goellnitz
  
  This work is licensed under the Creative Commons Attribution 3.0 
  Unported License. To view a copy of this license, visit 
@@ -14,7 +14,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
-  <display-name>Tangram Google App Engine Example using JPA - Springframework version</display-name>
+  <display-name>not working Tangram Google App Engine Example using JPA - Springframework version</display-name>
   
   <!-- integrate remote API to let the data importer work -->
   <servlet>

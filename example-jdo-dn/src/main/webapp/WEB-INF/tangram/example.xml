@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   
-  Copyright (C) 2011-2014 Martin Goellnitz
+  Copyright (C) 2011-2015 Martin Goellnitz
   
   This work is licensed under the Creative Commons Attribution 3.0 
   Unported License. To view a copy of this license, visit 
@@ -43,25 +43,6 @@
   <bean id="jdoConfigOverrides" class="java.util.HashMap">
     <constructor-arg>
       <map>
-        <!-- 
-             JNDI based datasource config example for run@cloudbees, meaning to use a MySQL rdbms storage as database layer.
-             This could be perfectly directly placed in a jdoconfig.xml an is only mentioned here, since we decided not
-             to do some configurastions here and some in jdoconfig.xml.
-             
-        <entry key="datanucleus.ConnectionFactoryName" value="java:comp/env/jdbc/mydb"/>
-        -->
-        <!--
-             MongoDB config example for run@cloudbees. Since they use one environment variable for the setup and we are encouraged 
-             to use it, we split this URL apart and pass the parts to the JDO layer with jdoconfig.xml overrides.
-        
-             Connect MongoDB with application with bees tool:
-               bees app:bind -a <APPID> -r mongohq:<MONGOHQ_RESOURCE> -as MYDB
-        
-        <entry key="javax.jdo.option.ConnectionURL" 
-               value="mongodb:${MONGOHQ_URL_TANGRAM.host}:${MONGOHQ_URL_MYBD.port}/${MONGOHQ_URL_MYDB.uri}"/>
-        <entry key="javax.jdo.option.ConnectionUserName" value="${MONGOHQ_URL_MYDB.username}"/>
-        <entry key="javax.jdo.option.ConnectionPassword" value="${MONGOHQ_URL_MYBD.password}"/>
-        -->
         <!--
               MongoDB config example for OpenShift. Since they use environment variables for the setup and we are encouraged to use
               them, we pass them to the JDO layer with jdoconfig.xml overrides.

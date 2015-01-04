@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright (C) 2011-2014 Martin Goellnitz
+ * Copyright (C) 2011-2015 Martin Goellnitz
  * 
  * This work is licensed under the Creative Commons Attribution 3.0 
  * Unported License. To view a copy of this license, visit 
@@ -89,6 +89,12 @@ dependencies {
 
 jar {
   if (tangram_backend == 'spring') {
+    excludes = [ 'dinistiq/**', 'guice/**' ]
+  }
+  if (tangram_backend == 'dinistiq') {
+    excludes = [ 'guice/**' ]
+  }
+  if (tangram_backend == 'guicy') {
     excludes = [ 'dinistiq/**' ]
   }
 }

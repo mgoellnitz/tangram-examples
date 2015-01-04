@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright (C) 2011-2014 Martin Goellnitz
+ * Copyright (C) 2011-2015 Martin Goellnitz
  * 
  * This work is licensed under the Creative Commons Attribution 3.0 
  * Unported License. To view a copy of this license, visit 
@@ -87,6 +87,10 @@ dependencies {
     runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
     runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
   }
+  /* Google Guice needs has editor and shiro as compile paths so only logging is added here */
+  if (tangram_backend == 'guicy') {
+    runtime "org.slf4j:jcl-over-slf4j:$versions.slf4j"
+  }
   
   // This fixes a problem with the WAR lib directory calculation needed for run@cloudbees:
   // reallyNeeded "org.ow2.asm:asm:4.0"
@@ -103,6 +107,12 @@ dependencies {
 
 jar {
   if (tangram_backend == 'spring') {
+    excludes = [ 'dinistiq/**', 'guice/**' ]
+  }
+  if (tangram_backend == 'dinistiq') {
+    excludes = [ 'guice/**' ]
+  }
+  if (tangram_backend == 'guicy') {
     excludes = [ 'dinistiq/**' ]
   }
 }
@@ -115,8 +125,12 @@ war {
   // classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime + configurations.reallyNeeded
   if (tangram_backend == 'spring') {
     excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/shiro.ini', 'shiro/**' ]
-  } else {
+  }
+  if (tangram_backend == 'dinstiq') {
     excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml' ]
+  }
+  if (tangram_backend == 'guicy') {
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml', 'WEB-INF/shiro.ini' ]
   }
 }
 
