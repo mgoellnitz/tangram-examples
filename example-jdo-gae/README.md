@@ -11,16 +11,17 @@ Prerequisites
 CapeDwarf
 ---------
 
-This project is known not to work with the CapeDward Google App Engine Emulator.
+This project is known not to work with the CapeDwarf Google App Engine Emulator.
+You will only be able to view the statistics status page /s/stats.
 
-To give it a try you will need to compile tangram from a special CapeDwarf branch
-which gets rid of the already present Java EE CDI configurations. These interfere
-with the underlying Java EE server. (Don't forget to add mavenLocal() as a repository
-when building the example.)
+When building the example for CapeDwarf you will need to
 
-After that preparation step the this example is startable but the login fails 
-(The UserService API returns null despite the successful login). You will only be
-able to view the statistics status page /s/stats
+- use spring as a DI environment
+- to get rid of all META-INF/beans.xmlin the tangram-*.jars in build/war/WEB-INF/lib manually
+
+After that preparation step the this example is startable but the login fails. 
+CapeDwarf CR5 failes with the exception that the UserPrincipal implementing class
+is not serializable.
 
 Local Build
 -----------

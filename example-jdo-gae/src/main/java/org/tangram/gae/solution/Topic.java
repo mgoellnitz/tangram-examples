@@ -1,6 +1,6 @@
 /**
  *
- * Copyright (C) 2011-2014 Martin Goellnitz
+ * Copyright (C) 2011-2015 Martin Goellnitz
  *
  * This work is licensed under the Creative Commons Attribution 3.0
  * Unported License. To view a copy of this license, visit
@@ -148,18 +148,15 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
         } // if
 
         return result;
-    } // getPath()
+    } // getPathRecursive()
 
 
     public List<Topic> getPath() {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug(getClass().getName()+".getPath("+getId()+") "+getRootTopic().getClass().getName());
-        } // if
+        LOG.debug("{}.getPath({}) {}", getClass().getName(), getId(), getRootTopic().getClass().getName());
         if (path==null) {
             path = getPathRecursive(getRootTopic());
             if (path==null) {
-                path = new ArrayList<Topic>();
-                // path.add(getRootTopic());
+                path = new ArrayList<>();
                 path.add(this);
             } // if
         } // if
@@ -168,11 +165,11 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
 
     public List<Container> getInheritedRelatedContainers() {
-        List<Container> result = new ArrayList<Container>();
+        List<Container> result = new ArrayList<>();
         if (inheritedRelatedContainers==null) {
             List<Topic> p = getPath();
             int i = p.size();
-            while ((i>0)&&(result.size()==0)) {
+            while ((i>0)&&(result.isEmpty())) {
                 i--;
                 result = p.get(i).getRelatedContainers();
             } // while

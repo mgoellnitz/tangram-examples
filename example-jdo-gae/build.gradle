@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright (C) 2011-2014 Martin Goellnitz
+ * Copyright (C) 2011-2015 Martin Goellnitz
  * 
  * This work is licensed under the Creative Commons Attribution 3.0 
  * Unported License. To view a copy of this license, visit 
@@ -15,7 +15,7 @@ def tangram_version = '1.0-SNAPSHOT'
 
 // Switch to have the options in one example project - optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
-def prepapreCapedwarf = project.hasProperty('capedwarf') ? ("$capedwarf" == "true") : false 
+def prepareCapedwarf = project.hasProperty('capedwarf')
 
 buildscript {
   repositories {
@@ -35,7 +35,7 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 repositories {
-  if (prepapreCapedwarf) {
+  if (prepareCapedwarf) {
     mavenLocal()
   }
   // most of the usual stuff
@@ -63,8 +63,8 @@ dependencies {
   webapp "tangram:tangram-editor:$tangram_version:war@war"
   runtime "tangram:tangram-editor:$tangram_version"
   
-  if (prepapreCapedwarf) {
-    runtime "dinistiq:dinistiq:0.3-SNAPSHOT"
+  if (prepareCapedwarf) {
+    // runtime "dinistiq:dinistiq:0.3-SNAPSHOT"
   }
   runtime "tangram:tangram-$tangram_backend:$tangram_version"
   compile "org.slf4j:slf4j-jdk14:$versions.slf4j"  
