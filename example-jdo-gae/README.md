@@ -5,7 +5,7 @@ Prerequisites
 -------------
 
 * Java 7
-* Gradle 1.8 and up (Including 2.0)
+* Gradle 2.0 and up
 * Google App Engine SDK Java AND Python (for the bulkloader.py you definetely want to use)
 
 CapeDwarf
@@ -20,8 +20,8 @@ When building the example for CapeDwarf you will need to
 - to get rid of all META-INF/beans.xmlin the tangram-*.jars in build/war/WEB-INF/lib manually
 
 After that preparation step the this example is startable but the login fails. 
-CapeDwarf CR5 failes with the exception that the UserPrincipal implementing class
-is not serializable.
+CapeDwarf CR5 even fails with the exception that the UserPrincipal implementing 
+class is not serializable.
 
 Local Build
 -----------

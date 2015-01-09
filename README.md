@@ -19,11 +19,11 @@ The target platforms are
 * OpenShift
 * Google App Engine
 
-This would result in some 20 examples for any of the combinations so some of the switches 
-can be found in the gradle build files to change a spring example into a non-spring example. 
-The storage backends all got their separate example while the target platforms should be 
-handled within the storage solution chosen. - Always with the exception of the Google App 
-Engine, which is very special in many respects.
+This would result in some 20 examples for any of the combinations so some of the 
+switches can be found in the gradle build files to change a spring example into 
+a non-spring example. The storage backends all got their separate example while 
+the target platforms should be handled within the storage solution chosen. - Always 
+with the exception of the Google App Engine, which is very special in many respects.
 
 The examples are also meant as a starting point for your own projects.
 
@@ -33,7 +33,15 @@ A
 gradle build
 ```
 
-in this directory should do the job. 
+in this directory should do the job. Optionally you can use the property "backend"
+to switch the Dependency Injection framework used. Like with
+
+```bash
+gradle -Pbackend=spring build
+```
+
+to use the Spring Framework instead of the default "dinistiq". Another option
+would be Google Guice through the guicy tangram module.
 
 Except for the Google App Engine one all examples can be started via
 

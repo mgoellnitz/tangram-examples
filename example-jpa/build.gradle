@@ -14,7 +14,7 @@ defaultTasks 'clean', 'build'
 def tangram_version = '1.0-SNAPSHOT'
 
 // Some switches to have all options in one example project - with optional external override
-def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
+def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring, dinistiq, guicy
 def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, hibernate, or datanucleus
 // JPA must be used without for Hibernate and can optionally be used without except for DataNucleus.
 def do_bytecode_transform = project.hasProperty('enhance') ? ("$enhance" == "true") : false 

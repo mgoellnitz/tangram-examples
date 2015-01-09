@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright (C) 2011-2014 Martin Goellnitz
+ * Copyright (C) 2011-2015 Martin Goellnitz
  * 
  * This work is licensed under the Creative Commons Attribution 3.0 
  * Unported License. To view a copy of this license, visit 
@@ -14,7 +14,7 @@ defaultTasks 'clean', 'build'
 def tangram_version = '1.0-SNAPSHOT'
 
 // Switch to have the options in one example project - optional external override
-def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
+def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring, dinistiq, guicy
 
 buildscript {
   repositories {

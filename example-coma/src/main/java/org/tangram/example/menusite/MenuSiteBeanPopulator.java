@@ -1,6 +1,6 @@
 /**
  *
- * Copyright (C) 2011-2014 Martin Goellnitz
+ * Copyright (C) 2011-2015 Martin Goellnitz
  *
  * This work is licensed under the Creative Commons Attribution 3.0
  * Unported License. To view a copy of this license, visit
@@ -43,7 +43,7 @@ public class MenuSiteBeanPopulator implements ComaBeanPopulator {
             String folderId = beanFactory.getChildId("/MenuSite/"+content.get("name"));
             idCollection = beanFactory.getChildrenIds(folderId, "Dish", null);
             @SuppressWarnings("rawtypes")
-            Collection beanCollection = new ArrayList<ComaContent>();
+            Collection beanCollection = new ArrayList<>();
             for (String id : idCollection) {
                 beanCollection.add(beanFactory.getBean(id));
             } // for

@@ -2,7 +2,7 @@ Tangram JPA Example
 ===================
 
 To be used with bytecode enhanced / woven or plain implementations for OpenJPA, 
-EclipseLink and DataNucleus Access Plattform.
+EclipseLink, Hibernate or DataNucleus Access Plattform.
 
 Setup system
 ------------
@@ -19,6 +19,14 @@ Start this container of your choice or use integrated jetty
 
 ```bash
 gradle jettyRunWar
+```
+
+Since the Tangram JPA module supports several implementations of JPA, it is possible
+to select the implementation via the "jpa" property whith the possible values
+"openjpa", "eclipselink", "hibernate", and "datanucleus". E.g.
+
+```bash
+gradle -Pbackend=guicy -Pjpa=eclipselink clean build jettyRunWar
 ```
 
 First Input and Test
