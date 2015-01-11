@@ -14,7 +14,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
   
-  <display-name>Tangram Ebean Example - no working Google Guice version</display-name>
+  <display-name>Tangram Ebean Example - Google Guice version</display-name>
 
   <listener>
     <listener-class>org.tangram.guice.DefaultTangramContextListener</listener-class>

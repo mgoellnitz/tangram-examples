@@ -14,18 +14,14 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
   
-  <display-name>Tangram CoMA Example Application - not working Google Guice version</display-name>
+  <display-name>Tangram CoMA Example Application - Google Guice version</display-name>
 
   <listener>
     <listener-class>org.tangram.guice.DefaultTangramContextListener</listener-class>
   </listener>
   <context-param>
-    <param-name>shiro.web.module.class</param-name>
-    <param-value>org.tangram.guice.BasicShiroWebModule</param-value>
-  </context-param>
-  <context-param>
     <param-name>tangram.dispatcher.path</param-name>
-    <param-value>/s</param-value>
+    <param-value>/servlet</param-value>
   </context-param>   
   
   <filter>
