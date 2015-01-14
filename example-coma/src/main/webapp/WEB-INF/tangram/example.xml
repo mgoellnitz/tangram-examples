@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 
- Copyright (C) 2011-2014 Martin Goellnitz
+ Copyright (C) 2011-2015 Martin Goellnitz
  
  This work is licensed under the Creative Commons Attribution 3.0 
  Unported License. To view a copy of this license, visit 
@@ -25,6 +25,9 @@
   -->
   <bean id="loginSupport" class="org.tangram.security.GenericLoginSupport">
     <property name="staticLoginURL" value="/spring_security_login"/>
+    <property name="freeUrls" ref="freeUrls"/>
+    <property name="allowedUsers" ref="allowedUsers"/>
+    <property name="adminUsers" ref="adminUsers"/>
   </bean>
   
   <!-- to make the whole application login protected this will be the list of read capable persons 

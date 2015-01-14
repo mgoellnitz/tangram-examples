@@ -72,26 +72,6 @@
   <filter>
     <filter-name>TangramProtections</filter-name>
     <filter-class>org.tangram.components.dinistiq.TangramPasswordFilter</filter-class>
-    <init-param>
-      <param-name>free.urls</param-name>
-      <param-value>
-        /s/stats
-      </param-value>
-    </init-param>
-    <!-- add this to generically protect the whole application
-    <init-param>
-      <param-name>allowed.users</param-name>
-      <param-value>
-        user, admin
-      </param-value>
-    </init-param>
-    -->
-    <init-param>
-      <param-name>admin.users</param-name>
-      <param-value>
-        admin
-      </param-value>
-    </init-param>
   </filter>
   <filter-mapping>
     <filter-name>TangramProtections</filter-name>

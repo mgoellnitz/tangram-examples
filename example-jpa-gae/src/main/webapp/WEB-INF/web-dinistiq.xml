@@ -61,26 +61,6 @@
   <filter>
     <filter-name>TangramProtections</filter-name>
     <filter-class>org.tangram.components.dinistiq.TangramPasswordFilter</filter-class>
-    <init-param>
-      <param-name>free.urls</param-name>
-      <param-value>
-        /s/stats
-      </param-value>
-    </init-param>
-    <!-- remove this parameter if you don't want generic login for all pages
-    -->
-    <init-param>
-      <param-name>allowed.users</param-name>
-      <param-value>
-        test@example.com
-      </param-value>
-    </init-param>
-    <init-param>
-      <param-name>admin.users</param-name>
-      <param-value>
-        test@example.com
-      </param-value>
-    </init-param>
   </filter>
   <filter-mapping>
     <filter-name>TangramProtections</filter-name>

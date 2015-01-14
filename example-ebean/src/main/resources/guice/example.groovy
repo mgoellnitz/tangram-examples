@@ -31,7 +31,10 @@ log.info "configuring persistent restart cache"
 module.bind(PersistentRestartCache.class).toInstance(new DummyRestartCache())
 
 log.info("configuring login support")
+String admins = config.getProperty("adminUsers", "")
+Set<String> adminUsers = SetupUtils.stringSetFromParameterString(admins)
 LoginSupport loginSupport = new GenericLoginSupport()
+loginSupport.setAdminUsers(adminUsers)
 module.bind(LoginSupport.class).toInstance(loginSupport)
 
 log.info("configuring controller hooks")
@@ -42,9 +45,6 @@ module.addControllerHook(protectionHook)
 
 PasswordFilter passwordFilter = new PasswordFilter()
 log.info("configureServlets() password filter {} for {}", passwordFilter, dispatcherPath)
-String admins = config.getProperty("adminUsers", "")
-Set<String> adminUsers = SetupUtils.stringSetFromParameterString(admins)
-passwordFilter.setAdminUsers(adminUsers)
 passwordFilter.setLoginSupport(loginSupport)
 module.filter(dispatcherPath+"/*").through(passwordFilter)
 
