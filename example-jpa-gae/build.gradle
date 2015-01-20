@@ -67,8 +67,11 @@ dependencies {
     
   testCompile "junit:junit:$versions.junit"
   
+  // your container will have this for you
   providedCompile "$versions.servlet_api"
   providedCompile "$versions.jsp_api"
+  // dummy to keep IDEs calm about groovy scripts
+  providedCompile "com.google.inject:guice:$versions.guice"
 }
 
 clean.doFirst {

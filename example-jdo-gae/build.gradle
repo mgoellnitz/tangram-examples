@@ -63,16 +63,16 @@ dependencies {
   webapp "tangram:tangram-editor:$tangram_version:war@war"
   runtime "tangram:tangram-editor:$tangram_version"
   
-  if (prepareCapedwarf) {
-    // runtime "dinistiq:dinistiq:0.3-SNAPSHOT"
-  }
   runtime "tangram:tangram-$tangram_backend:$tangram_version"
   compile "org.slf4j:slf4j-jdk14:$versions.slf4j"  
   
   testCompile "junit:junit:$versions.junit"
-  
+
+  // your container will have this for you
   providedCompile "$versions.servlet_api"
   providedCompile "$versions.jsp_api"
+  // dummy to keep IDEs calm about groovy scripts
+  providedCompile "com.google.inject:guice:$versions.guice"
 }
 
 clean.doFirst {
