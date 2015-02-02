@@ -77,6 +77,12 @@ dependencies {
     runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
     runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
   }
+  /* Google Guice has editor and shiro as compile dependencies so only logging is added here */
+  if (tangram_backend == 'guicy') {
+    runtime "org.slf4j:jcl-over-slf4j:$versions.slf4j"
+    // dummies for compile scope to keep IDEs calm about groovy scripts
+    compile"tangram:tangram-${tangram_backend}:$tangram_version"
+  }
   
   runtime "com.h2database:h2:1.3.174"
   runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"
@@ -90,6 +96,7 @@ dependencies {
   providedCompile "com.google.inject:guice:$versions.guice"
   if (tangram_backend == 'spring') {
     providedCompile "tangram:tangram-servlet:$tangram_version"
+    compile "tangram:tangram-core:$tangram_version"
   }
 }
 

@@ -22,6 +22,7 @@ buildscript {
     maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
   }
   dependencies {
+    // Cannot work with the version labels from the tangram plugin here
     classpath 'tangram:gradle-plugin:1.0-SNAPSHOT'
   }
 }
@@ -70,8 +71,6 @@ dependencies {
   // your container will have this for you
   providedCompile "$versions.servlet_api"
   providedCompile "$versions.jsp_api"
-  // dummy to keep IDEs calm about groovy scripts
-  providedCompile "com.google.inject:guice:$versions.guice"
 }
 
 clean.doFirst {

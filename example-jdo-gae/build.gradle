@@ -72,7 +72,9 @@ dependencies {
   providedCompile "$versions.servlet_api"
   providedCompile "$versions.jsp_api"
   // dummy to keep IDEs calm about groovy scripts
-  providedCompile "com.google.inject:guice:$versions.guice"
+  if (tangram_backend != 'guicy') {
+    providedCompile "com.google.inject:guice:$versions.guice"
+  }
 }
 
 clean.doFirst {

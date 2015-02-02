@@ -14,7 +14,7 @@ defaultTasks 'clean', 'build'
 def tangram_version = '1.0-SNAPSHOT'
 
 // Switch to have the options in one example project - optional external override
-def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring, dinistiq, guicy
+def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
 
 buildscript {
   repositories {
@@ -87,9 +87,11 @@ dependencies {
     runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
     runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
   }
-  /* Google Guice needs has editor and shiro as compile paths so only logging is added here */
+  /* Google Guice has editor and shiro as compile dependencies so only logging is added here */
   if (tangram_backend == 'guicy') {
     runtime "org.slf4j:jcl-over-slf4j:$versions.slf4j"
+    // dummies for compile scope to keep IDEs calm about groovy scripts
+    compile"tangram:tangram-${tangram_backend}:$tangram_version"
   }
   
   // This fixes a problem with the WAR lib directory calculation needed for run@cloudbees:
@@ -103,11 +105,6 @@ dependencies {
   // your container will have this for you
   providedCompile "$versions.servlet_api"
   providedCompile "$versions.jsp_api"
-  // dummies to keep IDEs calm about groovy scripts
-  providedCompile "com.google.inject:guice:$versions.guice"
-  if (tangram_backend == 'spring') {
-    providedCompile "tangram:tangram-servlet:$tangram_version"
-  }
 }
 
 jar {
