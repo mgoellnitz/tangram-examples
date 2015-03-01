@@ -20,10 +20,6 @@
     <listener-class>org.tangram.guice.DefaultTangramContextListener</listener-class>
   </listener>
   <context-param>
-    <param-name>shiro.web.module.class</param-name>
-    <param-value>org.tangram.guice.BasicShiroWebModule</param-value>
-  </context-param>
-  <context-param>
     <param-name>tangram.dispatcher.path</param-name>
     <param-value>/s</param-value>
   </context-param>   

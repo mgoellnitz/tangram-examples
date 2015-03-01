@@ -11,9 +11,8 @@
  */
 package org.tangram.example;
 
-import org.tangram.feature.blob.MimedBlob;
-
 import javax.jdo.annotations.PersistenceCapable;
+import org.tangram.content.blob.MimedBlob;
 
 @PersistenceCapable
 public class ImageData extends Linkable implements MimedBlob {

@@ -20,7 +20,7 @@
   <bean id="allowedUsers" class="java.util.HashSet">
     <constructor-arg>
       <set>
-        <value>test@example.com</value>
+        <value>gae:test@example.com</value>
       </set>
     </constructor-arg>
   </bean>
@@ -28,7 +28,7 @@
   <bean id="adminUsers" class="java.util.HashSet">
     <constructor-arg>
       <set>
-        <value>test@example.com</value>
+        <value>gae:test@example.com</value>
       </set>
     </constructor-arg>
   </bean>

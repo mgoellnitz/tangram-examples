@@ -58,6 +58,9 @@ dependencies {
   
   runtime "tangram:tangram-${tangram_backend}:$tangram_version"
   
+  // For Yahoo OpenID example
+  compile "org.pac4j:pac4j-openid:$versions.pac4j"
+  
   // turn on editor
   webapp "tangram:tangram-editor:$tangram_version:war@war"
   runtime "tangram:tangram-editor:$tangram_version"
@@ -66,19 +69,17 @@ dependencies {
   runtime "tangram:tangram-ftp:$tangram_version"
    */
     
-  /* Apache Shiro most likely to be used together with dinistiq */
+  /* dinistiq */
   if (tangram_backend == 'dinistiq') {
-    runtime "org.apache.shiro:shiro-core:$versions.shiro"
-    runtime "org.apache.shiro:shiro-web:$versions.shiro"
-    runtime "org.slf4j:jcl-over-slf4j:$versions.slf4j"
   }
-  /* Spring security framework */
+  /* springframework */
   if (tangram_backend == 'spring') {
-    runtime "org.springframework.security:spring-security-config:$versions.springsecurity"
-    runtime "org.springframework.security:spring-security-web:$versions.springsecurity"
   }
-  /* Google Guice has editor and shiro as compile dependencies so only logging is added here */
+  /* Google Guice */
   if (tangram_backend == 'guicy') {
+    compile ("com.mycila.guice.extensions:mycila-guice-jsr250:$versions.mycila_guice") {
+      exclude module: 'sisu-guice'
+    }
     runtime "org.slf4j:jcl-over-slf4j:$versions.slf4j"
     // dummies for compile scope to keep IDEs calm about groovy scripts
     compile"tangram:tangram-${tangram_backend}:$tangram_version"

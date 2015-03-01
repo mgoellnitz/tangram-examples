@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.tangram.content.BeanFactory;
 import org.tangram.content.BeanFactoryAware;
 import org.tangram.content.Content;
-import org.tangram.feature.protection.ProtectedContent;
+import org.tangram.protection.ProtectedContent;
 
 
 @Entity

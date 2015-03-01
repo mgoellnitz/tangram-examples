@@ -1,249 +1,36 @@
-CREATE USER SA PASSWORD "" ADMIN
-/*C1*/SET SCHEMA PUBLIC
-CONNECT USER SA
-DISCONNECT
-/*C2*/SET SCHEMA PUBLIC
-CONNECT USER SA
-DISCONNECT
-/*C3*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE TABLE Article (id BIGINT NOT NULL, keywords VARCHAR(255), shortTitle VARCHAR(255), title VARCHAR(255), text VARCHAR(255), PRIMARY KEY (id))
-DISCONNECT
-/*C4*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE TABLE Code (id BIGINT NOT NULL, annotation VARCHAR(255), code VARCHAR(255), mimeType VARCHAR(255), PRIMARY KEY (id))
-DISCONNECT
-/*C5*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE TABLE Container (id BIGINT NOT NULL, keywords VARCHAR(255), shortTitle VARCHAR(255), title VARCHAR(255), PRIMARY KEY (id))
-DISCONNECT
-/*C6*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE TABLE Container_Topic (CONTAINER_ID BIGINT, CONTENTS_ID BIGINT)
-DISCONNECT
-/*C7*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE TABLE ImageData (id BIGINT NOT NULL, keywords VARCHAR(255), shortTitle VARCHAR(255), title VARCHAR(255), data VARBINARY, height VARCHAR(255), mimeType VARCHAR(255), width VARCHAR(255), PRIMARY KEY (id))
-DISCONNECT
-/*C8*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE TABLE OPENJPA_SEQUENCE_TABLE (ID TINYINT NOT NULL, SEQUENCE_VALUE BIGINT, PRIMARY KEY (ID))
-DISCONNECT
-/*C9*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE TABLE RootTopic (id BIGINT NOT NULL, keywords VARCHAR(255), shortTitle VARCHAR(255), title VARCHAR(255), teaser VARCHAR(255), THUMBNAIL_ID BIGINT, LOGO_ID BIGINT, PRIMARY KEY (id))
-DISCONNECT
-/*C10*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE TABLE RootTopicBottomLinks (ROOTTOPIC_ID BIGINT, BOTTOMLINKS_ID BIGINT)
-DISCONNECT
-/*C11*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE TABLE RootTopicCSS (ROOTTOPIC_ID BIGINT, CSS_ID BIGINT)
-DISCONNECT
-/*C12*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE TABLE RootTopicJS (ROOTTOPIC_ID BIGINT, JS_ID BIGINT)
-DISCONNECT
-/*C13*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE TABLE RootTopic_Article (ROOTTOPIC_ID BIGINT, ELEMENTS_ID BIGINT)
-DISCONNECT
-/*C14*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE TABLE RootTopic_Container (ROOTTOPIC_ID BIGINT, RELATEDCONTAINERS_ID BIGINT)
-DISCONNECT
 /*C15*/SET SCHEMA PUBLIC
 CONNECT USER SA
-CREATE TABLE RootTopic_Topic (ROOTTOPIC_ID BIGINT, SUBTOPICS_ID BIGINT)
 DISCONNECT
 /*C16*/SET SCHEMA PUBLIC
 CONNECT USER SA
-CREATE TABLE Topic (id BIGINT NOT NULL, keywords VARCHAR(255), shortTitle VARCHAR(255), title VARCHAR(255), teaser VARCHAR(255), THUMBNAIL_ID BIGINT, PRIMARY KEY (id))
 DISCONNECT
 /*C17*/SET SCHEMA PUBLIC
 CONNECT USER SA
-CREATE TABLE Topic_Article (TOPIC_ID BIGINT, ELEMENTS_ID BIGINT)
 DISCONNECT
 /*C18*/SET SCHEMA PUBLIC
 CONNECT USER SA
-CREATE TABLE Topic_Container (TOPIC_ID BIGINT, RELATEDCONTAINERS_ID BIGINT)
 DISCONNECT
 /*C19*/SET SCHEMA PUBLIC
 CONNECT USER SA
-CREATE TABLE Topic_Topic (TOPIC_ID BIGINT, SUBTOPICS_ID BIGINT)
 DISCONNECT
 /*C20*/SET SCHEMA PUBLIC
 CONNECT USER SA
-CREATE INDEX I_CNTNTPC_CONTAINER_ID ON Container_Topic (CONTAINER_ID)
 DISCONNECT
 /*C21*/SET SCHEMA PUBLIC
 CONNECT USER SA
-CREATE INDEX I_CNTNTPC_ELEMENT ON Container_Topic (CONTENTS_ID)
 DISCONNECT
 /*C22*/SET SCHEMA PUBLIC
 CONNECT USER SA
-CREATE INDEX I_ROTTOPC_LOGO ON RootTopic (LOGO_ID)
 DISCONNECT
 /*C23*/SET SCHEMA PUBLIC
 CONNECT USER SA
-CREATE INDEX I_ROTTOPC_THUMBNAIL ON RootTopic (THUMBNAIL_ID)
 DISCONNECT
 /*C24*/SET SCHEMA PUBLIC
 CONNECT USER SA
-CREATE INDEX I_RTTPNKS_ELEMENT ON RootTopicBottomLinks (BOTTOMLINKS_ID)
 DISCONNECT
 /*C25*/SET SCHEMA PUBLIC
 CONNECT USER SA
-CREATE INDEX I_RTTPNKS_ROOTTOPIC_ID ON RootTopicBottomLinks (ROOTTOPIC_ID)
 DISCONNECT
 /*C26*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_RTTPCSS_ELEMENT ON RootTopicCSS (CSS_ID)
-DISCONNECT
-/*C27*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_RTTPCSS_ROOTTOPIC_ID ON RootTopicCSS (ROOTTOPIC_ID)
-DISCONNECT
-/*C28*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_RTTPCJS_ELEMENT ON RootTopicJS (JS_ID)
-DISCONNECT
-/*C29*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_RTTPCJS_ROOTTOPIC_ID ON RootTopicJS (ROOTTOPIC_ID)
-DISCONNECT
-/*C30*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_RTTPTCL_ELEMENT ON RootTopic_Article (ELEMENTS_ID)
-DISCONNECT
-/*C31*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_RTTPTCL_ROOTTOPIC_ID ON RootTopic_Article (ROOTTOPIC_ID)
-DISCONNECT
-/*C32*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_RTTPTNR_ELEMENT ON RootTopic_Container (RELATEDCONTAINERS_ID)
-DISCONNECT
-/*C33*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_RTTPTNR_ROOTTOPIC_ID ON RootTopic_Container (ROOTTOPIC_ID)
-DISCONNECT
-/*C34*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_RTTPTPC_ELEMENT ON RootTopic_Topic (SUBTOPICS_ID)
-DISCONNECT
-/*C35*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_RTTPTPC_ROOTTOPIC_ID ON RootTopic_Topic (ROOTTOPIC_ID)
-DISCONNECT
-/*C36*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_TOPIC_THUMBNAIL ON Topic (THUMBNAIL_ID)
-DISCONNECT
-/*C37*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_TPC_TCL_ELEMENT ON Topic_Article (ELEMENTS_ID)
-DISCONNECT
-/*C38*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_TPC_TCL_TOPIC_ID ON Topic_Article (TOPIC_ID)
-DISCONNECT
-/*C39*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_TPC_TNR_ELEMENT ON Topic_Container (RELATEDCONTAINERS_ID)
-DISCONNECT
-/*C40*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_TPC_TNR_TOPIC_ID ON Topic_Container (TOPIC_ID)
-DISCONNECT
-/*C41*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_TPC_TPC_ELEMENT ON Topic_Topic (SUBTOPICS_ID)
-DISCONNECT
-/*C42*/SET SCHEMA PUBLIC
-CONNECT USER SA
-CREATE INDEX I_TPC_TPC_TOPIC_ID ON Topic_Topic (TOPIC_ID)
-DISCONNECT
-/*C43*/SET SCHEMA PUBLIC
-CONNECT USER SA
-SET AUTOCOMMIT FALSE
-SET AUTOCOMMIT TRUE
-DISCONNECT
-/*C44*/SET SCHEMA PUBLIC
-CONNECT USER SA
-INSERT INTO OPENJPA_SEQUENCE_TABLE VALUES(0,1)
-DISCONNECT
-/*C45*/SET SCHEMA PUBLIC
-CONNECT USER SA
-SET AUTOCOMMIT FALSE
-DELETE FROM OPENJPA_SEQUENCE_TABLE WHERE ID=0
-INSERT INTO OPENJPA_SEQUENCE_TABLE VALUES(0,51)
-COMMIT
-SET AUTOCOMMIT TRUE
-DISCONNECT
-/*C46*/SET SCHEMA PUBLIC
-CONNECT USER SA
-SET AUTOCOMMIT FALSE
-INSERT INTO CODE VALUES(1,'org.tangram.example.Topic','<html>\u000a<head>\u000a  <title>$self.title</title>\u000a  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />\u000a  <meta name="viewport" content="width=320, initial-scale=0.95" />  \u000a  <meta name="keywords" content="$self.keywords" />\u000a  <meta name="language" content="de" />\u000a#foreach($css in $self.rootTopic.css)\u000a  #include($css ''cssimport'')\u000a  \u000a#end\u000a  <style type="text/css" media="only screen and (min-width: 620px)">\u000a    .box { height: 300px; }\u000a  </style>\u000a  <style type="text/css" media="only screen and (max-width: 480px)">\u000a    body { padding: 0; }\u000a  </style>\u000a#foreach($js in $self.rootTopic.js)\u000a  #include($js ''jsimport'')\u000a  \u000a#end\u000a</head>\u000a<body>\u000a  <div class="header"><p><a #link($self.rootTopic true)>$self.rootTopic.shortTitle</a> - $self.title</p></div>\u000a<div class="infobox">\u00a9 2014 - <a href="http://github.com/mgoellnitz/tangram-examples/">Tangram Examples</a></div>\u000a  <div class="box" style="clear: both; width: 100%; height: 0px;"></div>\u000a#foreach($box in $self.subTopics)\u000a  <div class="box"><h3><a #link($box true)>$box.title</a></h3>\u000a    #include($box.teaser)\u000a    <ul>\u000a    #foreach($b in $box.subTopics)\u000a      <li><a #link($b true)>$b.title</a></li>\u000a    #end\u000a    </ul>\u000a  </div>\u000a#end\u000a  <hr style="clear: both;"/>\u000a  #include($self ''editor'')\u000a</body>\u000a</html>\u000a','text/html')
-INSERT INTO CODE VALUES(2,'org.tangram.example.Linkable.name','$self.class.simpleName: #if($self.title)$self.title#else$self.id#end','text/html')
-INSERT INTO CODE VALUES(3,'screen','body {\u000a  background-color: #405060;\u000a  color: #607080;\u000a  font-family: Arial, Helvetica;\u000a  padding-top: 5px;\u000a  padding-bottom: 5px;\u000a  padding-left: 10px;\u000a  padding-right: 10px;\u000a  vertical-align: bottom;\u000a}\u000a\u000adiv {\u000a  margin: 0;\u000a  padding: 0;\u000a}\u000a\u000ap {\u000a  margin: 0;\u000a  padding: 0;\u000a}\u000a\u000aa {\u000a  text-decoration: none;\u000a  color: #FFFFFF;\u000a}\u000a\u000aa:link { }\u000a\u000aa:visited { }\u000a\u000aa:hover { color: #909090; }\u000a\u000aa:focus { color: #0000FF; }\u000a\u000aa:active { color: #FF0000; }\u000a\u000a.header a {\u000a  color: #D0C080;\u000a}\u000a\u000a\u000ah1 { font-size: 14pt; }\u000a\u000a.header {\u000a  background-color: #FFFFFF;\u000a  color: #D0C080;\u000a  height: 60px;\u000a  font-size: 20pt;\u000a  font-weight: bold;\u000a  text-align: right;\u000a  vertical-align: bottom;\u000a  padding: 10px;\u000a}\u000a\u000a.infobox {\u000a  background-color: #D0C080;\u000a  height: 24px;\u000a  padding-top: 5px;\u000a  padding-left: 5px;\u000a  margin: 0;\u000a}\u000a\u000a.box {\u000a  padding: 5px;\u000a  width: 300px;\u000a  float: left;\u000a  color: #909090;\u000a}\u000a\u000a','text/css')
-INSERT INTO CODE VALUES(4,'org.tangram.example.Topic','package org.tangram.example.links;\u000a\u000aimport javax.servlet.http.HttpServletRequest;\u000aimport javax.servlet.http.HttpServletResponse;\u000aimport org.slf4j.Logger;\u000aimport org.slf4j.LoggerFactory;\u000a\u000aimport org.tangram.Constants;\u000aimport org.tangram.content.Content;\u000aimport org.tangram.content.BeanFactory;\u000aimport org.tangram.content.BeanFactoryAware;\u000aimport org.tangram.view.Utils;\u000aimport org.tangram.view.TargetDescriptor;\u000aimport org.tangram.link.Link;\u000aimport org.tangram.link.LinkHandler;\u000a\u000aimport org.tangram.example.RootTopic;\u000aimport org.tangram.example.Linkable;\u000aimport org.tangram.example.Topic;\u000aimport org.tangram.example.ImageData;\u000a\u000apublic class ExampleLinkScheme implements LinkHandler, BeanFactoryAware {\u000a  \u000a  private static Logger log = LoggerFactory.getLogger(ExampleLinkScheme.class);\u000a\u000a  private BeanFactory beanFactory;\u000a  \u000a  \u000a  public void setBeanFactory(BeanFactory factory) {\u000a    beanFactory = factory;\u000a  } // setBeanFactory()\u000a  \u000a  \u000a  public Set<String> getCustomViews() {\u000a    Set <String> result = new HashSet<String>();\u000a    result.add(Constants.DEFAULT_VIEW);\u000a    return result;\u000a  } // getCustomViews()\u000a\u000a\u000a  public Link createLink(HttpServletRequest request, HttpServletResponse response, Object bean, String action, String view) {    \u000a        Link result = null;\u000a        if ((action==null)&&(view==null)) {\u000a            if (bean instanceof RootTopic) {\u000a                result = new Link();\u000a                result.setUrl("/");\u000a            } else {\u000a                if ((bean instanceof Topic)||(bean instanceof ImageData)) {\u000a                    String title = "-";\u000a                    if (bean instanceof Linkable) {\u000a                        try {\u000a                            title = Utils.urlize(((Linkable)bean).getTitle());\u000a                        } catch (UnsupportedEncodingException uee) {\u000a                            log.error("createLink()", uee);\u000a                        } // try\u000a                    } // if\u000a                    String url = "/"+title+"/"+bean.id;\u000a                    if (bean instanceof Topic) {\u000a                      url = url+".html";\u000a                    } // if\u000a                    result = new Link();\u000a                    // result.addHandler("onclick", "pageload()");\u000a                    result.setUrl(url);\u000a                } // if\u000a            } // if\u000a        } // if\u000a        return result;\u000a  } // createLink()\u000a\u000a    \u000a  private TargetDescriptor rootDescriptor = null;;\u000a  \u000a  \u000a  public TargetDescriptor parseLink(String url, HttpServletResponse response) {\u000a    TargetDescriptor result = null;\u000a    if (url.equals("/")) {\u000a        try {\u000a            if (rootDescriptor==null) {\u000a                List<RootTopic> rs = beanFactory.listBeans(RootTopic.class, null);\u000a                RootTopic root = null;\u000a                if (rs.size()==1) {\u000a                    root = rs.get(0);\u000a                } else {\u000a                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Have "+rs.size()+" RootTopics in data store");\u000a                } // if\u000a                rootDescriptor = new TargetDescriptor(root, null, null);\u000a            } // if\u000a            result = rootDescriptor;\u000a        } catch (Exception e) {\u000a            result = new TargetDescriptor(e, null, null);\u000a        } // try/catch\u000a      } else {\u000a          Object bean  = null;\u000a          String[] elements = url.split("/");\u000a          String id = null;\u000a          for (String element : elements) {\u000a            if (element.indexOf(":") > 0) {\u000a              int idx = element.indexOf(".");\u000a              if (idx >= 0) {\u000a                element = element.substring(0, idx);\u000a              } // if\u000a              id = element;\u000a              bean = beanFactory.getBean(element);\u000a            } // if\u000a          } // for\u000a          if (bean != null) {\u000a              result = new TargetDescriptor(bean, null, null);\u000a          } else {\u000a              response.sendError(HttpServletResponse.SC_NOT_FOUND, "no content with id "+id+" in repository.");\u000a          } // if\u000a      } // if\u000a      return result;\u000a  } // parseLink()\u000a    \u000a} // ExampleLinkScheme\u000a','application/x-groovy')
-/*C47*/SET SCHEMA PUBLIC
-CONNECT USER SA
-SET AUTOCOMMIT FALSE
-DELETE FROM OPENJPA_SEQUENCE_TABLE WHERE ID=0
-INSERT INTO OPENJPA_SEQUENCE_TABLE VALUES(0,101)
-COMMIT
-SET AUTOCOMMIT TRUE
-DISCONNECT
-/*C48*/SET SCHEMA PUBLIC
-CONNECT USER SA
-SET AUTOCOMMIT FALSE
-DELETE FROM OPENJPA_SEQUENCE_TABLE WHERE ID=0
-INSERT INTO OPENJPA_SEQUENCE_TABLE VALUES(0,151)
-COMMIT
-SET AUTOCOMMIT TRUE
-DISCONNECT
-/*C46*/INSERT INTO TOPIC VALUES(51,NULL,'JDO','Java Data Object','',NULL)
-INSERT INTO TOPIC VALUES(52,NULL,'JPA','Java Persistence API','',NULL)
-INSERT INTO TOPIC VALUES(53,NULL,'EBean','EBean','',NULL)
-INSERT INTO TOPIC VALUES(54,NULL,'Model','Model','',NULL)
-INSERT INTO TOPIC VALUES(55,NULL,'JSP','Java Server Pages','',NULL)
-INSERT INTO TOPIC VALUES(56,'View, Velocity, Dynamic, Repository','Velocity','Apache Velocity','<p>Apache Velocity views are stored in a default model class &quot;Code&quot; and thus in the so called repository.</p>\u000a',NULL)
-INSERT INTO TOPIC VALUES(57,NULL,'View','View','<p>Tangram contains pluggable, object oriented viewing options with two prominent defaults.</p>\u000a',NULL)
-INSERT INTO TOPIC VALUES(58,NULL,'Spring','Spring Controller','',NULL)
-INSERT INTO TOPIC VALUES(59,NULL,'Generic Handlers','Tangram Link Handlers','',NULL)
-INSERT INTO TOPIC VALUES(60,NULL,'Servlet','Servlet','',NULL)
-INSERT INTO TOPIC VALUES(61,NULL,'Controller','Controller','',NULL)
-INSERT INTO ROOTTOPIC VALUES(101,'Tangram Example Website','Tangram','Home','',NULL,NULL)
-INSERT INTO TOPIC_TOPIC VALUES(54,51)
-INSERT INTO TOPIC_TOPIC VALUES(54,52)
-INSERT INTO TOPIC_TOPIC VALUES(54,53)
-INSERT INTO TOPIC_TOPIC VALUES(57,55)
-INSERT INTO TOPIC_TOPIC VALUES(57,56)
-INSERT INTO TOPIC_TOPIC VALUES(61,58)
-INSERT INTO TOPIC_TOPIC VALUES(61,59)
-INSERT INTO TOPIC_TOPIC VALUES(61,60)
-INSERT INTO ROOTTOPIC_TOPIC VALUES(101,54)
-INSERT INTO ROOTTOPIC_TOPIC VALUES(101,57)
-INSERT INTO ROOTTOPIC_TOPIC VALUES(101,61)
-INSERT INTO ROOTTOPICCSS VALUES(101,3)
-COMMIT
-SET AUTOCOMMIT TRUE
-DISCONNECT
-/*C49*/SET SCHEMA PUBLIC
-CONNECT USER SA
-DISCONNECT
-/*C50*/SET SCHEMA PUBLIC
-CONNECT USER SA
-DISCONNECT
-/*C51*/SET SCHEMA PUBLIC
-CONNECT USER SA
-DISCONNECT
-/*C52*/SET SCHEMA PUBLIC
-CONNECT USER SA
-DISCONNECT
-/*C53*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT

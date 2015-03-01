@@ -14,7 +14,7 @@ package org.tangram.example;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import org.tangram.feature.blob.MimedBlob;
+import org.tangram.content.blob.MimedBlob;
 
 @Entity
 // Annotation needed for OpenJPA

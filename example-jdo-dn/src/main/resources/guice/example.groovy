@@ -11,15 +11,13 @@
  */
 import com.google.inject.name.Names;
 import org.tangram.PersistentRestartCache
-import org.tangram.util.SetupUtils
-import org.tangram.components.ProtectionHook
 import org.tangram.controller.ControllerHook
 import org.tangram.controller.UniqueHostHook
-import org.tangram.security.GenericLoginSupport
-import org.tangram.security.LoginSupport
 import org.tangram.servlet.MeasureTimeFilter
 import org.tangram.servlet.PasswordFilter
 import org.tangram.util.DummyRestartCache
+import org.pac4j.core.client.Client
+import org.pac4j.openid.client.YahooOpenIdClient
 
 log.info "starting"
 String dispatcherPath = config.getProperty("dispatcherPath", "/s")
@@ -30,23 +28,21 @@ module.bindConstant().annotatedWith(Names.named("shiro.successUrl")).to(dispatch
 log.info "configuring persistent restart cache"
 module.bind(PersistentRestartCache.class).toInstance(new DummyRestartCache())
 
-log.info("configuring login support")
-String admins = config.getProperty("adminUsers", "")
-Set<String> adminUsers = SetupUtils.stringSetFromParameterString(admins)
-LoginSupport loginSupport = new GenericLoginSupport()
-loginSupport.setAdminUsers(adminUsers)
-module.bind(LoginSupport.class).toInstance(loginSupport)
+log.info("configuring name password mapping")
+Map<String,String> mapping = new HashMap<>()
+mapping.put('admin', 'admin')
+mapping.put('user', 'user')
+module.bind(module.stringStringMap).annotatedWith(Names.named("usernamePasswordMapping")).toInstance(mapping)
+
+log.info("configuring authentication clients")
+YahooOpenIdClient yahooOpenIdClient = new YahooOpenIdClient()
+yahooOpenIdClient.name='yahoo'
+module.addClient(yahooOpenIdClient)
 
 log.info("configuring controller hooks")
 ControllerHook uniqueHost = new UniqueHostHook()
+// set host
 module.addControllerHook(uniqueHost)
-ControllerHook protectionHook = new ProtectionHook()
-module.addControllerHook(protectionHook)
-
-PasswordFilter passwordFilter = new PasswordFilter()
-log.info("configureServlets() password filter {} for {}", passwordFilter, dispatcherPath)
-passwordFilter.setLoginSupport(loginSupport)
-module.filter(dispatcherPath+"/*").through(passwordFilter)
 
 log.info("configureServlets() measure time filter for {}", dispatcherPath)
 module.filter(dispatcherPath+"/*").through(new MeasureTimeFilter())

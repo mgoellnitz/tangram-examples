@@ -13,7 +13,7 @@ package org.tangram.example;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import org.tangram.feature.blob.MimedBlob;
+import org.tangram.content.blob.MimedBlob;
 
 
 @Entity

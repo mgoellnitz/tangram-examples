@@ -15,7 +15,7 @@ import com.google.appengine.api.datastore.Blob;
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
-import org.tangram.feature.blob.MimedBlob;
+import org.tangram.content.blob.MimedBlob;
 
 
 @PersistenceCapable

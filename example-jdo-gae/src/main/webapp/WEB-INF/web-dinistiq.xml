@@ -63,7 +63,7 @@
        of other configuration options taken. -->
   <filter>
     <filter-name>TangramProtections</filter-name>
-    <filter-class>org.tangram.components.dinistiq.TangramPasswordFilter</filter-class>
+    <filter-class>org.tangram.servlet.PasswordFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>TangramProtections</filter-name>
