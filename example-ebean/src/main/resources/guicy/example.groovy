@@ -27,8 +27,8 @@ module.bind(PersistentRestartCache.class).toInstance(new DummyRestartCache())
 
 log.info("configuring name password mapping")
 Map<String,String> mapping = new HashMap<>()
-mapping.put('admin', 'admin')
-mapping.put('user', 'user')
+mapping.put('admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918')
+mapping.put('user', '04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb')
 module.bind(module.stringStringMap).annotatedWith(Names.named("usernamePasswordMapping")).toInstance(mapping)
 
 log.info("configuring authentication clients")

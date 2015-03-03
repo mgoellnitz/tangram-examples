@@ -151,13 +151,13 @@ dependencies {
 
 jar {
   if (tangram_backend == 'spring') {
-    excludes = [ 'dinistiq/**', 'guice/**' ]
+    excludes = [ 'dinistiq/**', 'guicy/**' ]
   }
   if (tangram_backend == 'guicy') {
     excludes = [ 'dinistiq/**' ]
   }
   if (tangram_backend == 'dinistiq') {
-    excludes = [ 'guice/**' ]
+    excludes = [ 'guicy/**' ]
   }
   // Use backend specific persistence.xml for JPA 
   // In this example use the same pesistence.xml which was used for enhancing or weaving

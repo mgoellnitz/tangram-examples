@@ -17,7 +17,7 @@
   <display-name>Tangram JPA Example using OpenJPA, EclipseLink, Hibernate, or DataNucleus - Google Guice version</display-name>
 
   <listener>
-    <listener-class>org.tangram.guice.DefaultTangramContextListener</listener-class>
+    <listener-class>org.tangram.guicy.DefaultTangramContextListener</listener-class>
   </listener>
   <context-param>
     <param-name>tangram.dispatcher.path</param-name>
