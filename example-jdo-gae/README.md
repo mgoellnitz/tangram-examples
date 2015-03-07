@@ -1,6 +1,13 @@
 Google App Engine example or starting point
 ===========================================
 
+We only support Google App Engine (GAE) with the Java Data Object (JDO) persistence 
+api. It would be perfectly possible to introduce a tangram module for the Java Persistence 
+API (JPA) and to have common and separate code for both scenarios but since Google
+doesn't support the Java part of the GAE very well with contemporary API levels and
+versions we stopped our efforts and only support GAE for JDO to get a decent starting
+point for migration to other flavours of tangram.
+
 Prerequisites
 -------------
 

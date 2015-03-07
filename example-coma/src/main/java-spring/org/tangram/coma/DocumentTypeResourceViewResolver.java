@@ -9,6 +9,8 @@
  * California, 94041, USA.
  *
  */
+package org.tangram.coma;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;

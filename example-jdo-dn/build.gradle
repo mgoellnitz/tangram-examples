@@ -127,13 +127,13 @@ war {
   // see explanation in dependencies section when this will be needed alternatively for the line above
   // classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime + configurations.reallyNeeded
   if (tangram_backend == 'spring') {
-    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/shiro.ini', 'shiro/**' ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
   }
   if (tangram_backend == 'dinstiq') {
-    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml' ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**' ]
   }
   if (tangram_backend == 'guicy') {
-    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml', 'WEB-INF/shiro.ini' ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**' ]
   }
 }
 

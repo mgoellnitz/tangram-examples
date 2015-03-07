@@ -14,7 +14,7 @@ defaultTasks 'clean', 'build'
 def tangram_version = '1.0-SNAPSHOT'
 
 // Switch to have the options in one example project - optional external override
-def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
+def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring, dinistiq, guicy
 
 buildscript {
   repositories {
@@ -93,12 +93,6 @@ dependencies {
   // your container will have this for you
   providedCompile "$versions.servlet_api"
   providedCompile "$versions.jsp_api"
-  // dummies to keep IDEs calm about groovy scripts
-  providedCompile "com.google.inject:guice:$versions.guice"
-  if (tangram_backend == 'spring') {
-    providedCompile "tangram:tangram-servlet:$tangram_version"
-    compile "tangram:tangram-core:$tangram_version"
-  }
 }
 
 jar {
@@ -118,9 +112,9 @@ war {
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
-    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/shiro.ini', 'shiro/**' ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
   } else {
-    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml' ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**' ]
   }
 }
 

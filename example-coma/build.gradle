@@ -19,7 +19,7 @@ defaultTasks 'clean', 'build'
 def tangram_version = '1.0-SNAPSHOT'
 
 // Switch to have the options in one example project - optional external override
-def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
+def tangram_backend = project.hasProperty('backend') ? "$backend" : 'spring' // spring, dinistiq, guicy
 
 buildscript {
   repositories {
@@ -107,9 +107,9 @@ war {
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
-    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/shiro.ini', 'shiro/**' ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
   } else {
-    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml' ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
   }
   
   def examplesFile = new File("$projectDir/cap-examples.jar")

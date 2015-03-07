@@ -11,9 +11,10 @@
  
 -->
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd">
 
   <!-- non generics -->
 
@@ -22,27 +23,10 @@
   <!--
        Tangram supports spring request interceptors. As a default we use a password interceptor 
        for the security feature in core and a measure time interceptor for performance checks  
-  -->
-  
-  <!-- to make the whole application login protected this will be the list of read capable persons 
-  <bean name="allowedUsers" class="java.util.HashSet">
-    <constructor-arg>
-      <set>
-        <value>user</value>
-        <value>admin</value>
-      </set>
-    </constructor-arg>
-  </bean>
-  -->
-  
-  <bean name="adminUsers" class="java.util.HashSet">
-    <constructor-arg>
-      <set>
-        <value>admin</value>
-      </set>
-    </constructor-arg>
-  </bean>
+  -->  
     
+  <util:map id="usernamePasswordMapping" key-type="java.lang.String" value-type="java.lang.String"/>
+      
   <!--
   <bean id="persistentRestartCache" class="org.tangram.util.FileRestartCache">
     <property name="filename" value="${tangram.restart.cache.file}"/>

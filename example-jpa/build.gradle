@@ -17,7 +17,7 @@ def tangram_version = '1.0-SNAPSHOT'
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
 def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, hibernate, or datanucleus
 // JPA must be used without for Hibernate and can optionally be used without except for DataNucleus.
-def do_bytecode_transform = project.hasProperty('enhance') ? ("$enhance" == "true") : false 
+def do_bytecode_transform = project.hasProperty('enhance') ? true : false 
 
 buildscript {
   repositories {
@@ -177,13 +177,13 @@ war {
   webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
-    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/shiro.ini', 'shiro/**' ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
   }
   if (tangram_backend == 'dinstiq') {
-    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml' ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**' ]
   }
   if (tangram_backend == 'guicy') {
-    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml', 'WEB-INF/shiro.ini' ]
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**' ]
   }
 }
 

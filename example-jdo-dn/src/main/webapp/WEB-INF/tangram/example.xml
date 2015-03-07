@@ -10,31 +10,40 @@
   California, 94041, USA.
   
 -->
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd">
   
   <!--
        Tangram supports spring request interceptors. As a default we use a password interceptor 
        for the security feature in core and a measure time interceptor for performance checks  
   -->
   
+  <util:set id="loginProviders" value-type="java.lang.String">
+    <value>form</value>
+    <value>basic</value>
+    <value>yahoo</value>
+  </util:set>
+    
   <!-- to make the whole application login protected this will be the list of read capable persons 
-  <bean id="allowedUsers" class="java.util.HashSet">
-    <constructor-arg>
-      <set>
-        <value>user</value>
-        <value>admin</value>
-      </set>
-    </constructor-arg>
-  </bean>
+  <util:set id="allowedUsers" value-type="java.lang.String">
+    <value>form:user</value>
+  </util:set>
   -->
   
-  <bean id="adminUsers" class="java.util.HashSet">
-    <constructor-arg>
-      <set>
-        <value>admin</value>
-      </set>
-    </constructor-arg>
+  <util:set id="adminUsers" value-type="java.lang.String">
+    <value>form:admin</value>
+  </util:set>
+  
+  <util:map id="usernamePasswordMapping" key-type="java.lang.String" value-type="java.lang.String">
+    <entry key="user" value="04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb" />
+    <entry key="admin" value="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" />
+  </util:map>
+     
+  <!-- Example additional login client --> 
+  <bean id="yahooLogin" class="org.pac4j.openid.client.YahooOpenIdClient">
+    <property name="name" value="yahoo"/>
   </bean>
   
   <bean id="jdoConfigOverrides" class="java.util.HashMap">

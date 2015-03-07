@@ -71,10 +71,6 @@ dependencies {
   // your container will have this for you
   providedCompile "$versions.servlet_api"
   providedCompile "$versions.jsp_api"
-  // dummy to keep IDEs calm about groovy scripts
-  if (tangram_backend != 'guicy') {
-    // providedCompile "com.google.inject:guice:$versions.guice"
-  }
 }
 
 clean.doFirst {
@@ -87,7 +83,13 @@ clean.doFirst {
 
 jar {
   if (tangram_backend == 'spring') {
+    excludes = [ 'dinistiq/**', 'guicy/**' ]
+  }
+  if (tangram_backend == 'guicy') {
     excludes = [ 'dinistiq/**' ]
+  }
+  if (tangram_backend == 'dinistiq') {
+    excludes = [ 'guicy/**' ]
   }
 }
 
@@ -97,8 +99,12 @@ war {
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
     excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
-  } else {
-    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**', 'WEB-INF/security-*.xml' ]
+  }
+  if (tangram_backend == 'dinstiq') {
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**' ]
+  }
+  if (tangram_backend == 'guicy') {
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**' ]
   }
 }
 
