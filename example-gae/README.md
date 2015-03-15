@@ -18,17 +18,53 @@ Prerequisites
 CapeDwarf
 ---------
 
-This project is known not to work with the CapeDwarf Google App Engine Emulator.
-You will only be able to view the statistics status page /s/stats.
+This project on the CapeDwarf Google App Engine Emulator with some limitations:
 
 When building the example for CapeDwarf you will need to
 
-- use spring as a DI environment
-- to get rid of all META-INF/beans.xmlin the tangram-*.jars in build/war/WEB-INF/lib manually
+- Use the Springframework as a DI environment
+- Get rid of all META-INF/beans.xml in the tangram-*.jars in build/war/WEB-INF/lib manually
+- Don't use the GAE internal login with google accounts.
 
-After that preparation step the this example is startable but the login fails. 
-CapeDwarf CR5 even fails with the exception that the UserPrincipal implementing 
-class is not serializable.
+Some of the elements in the servlet module of tangram trigger the Weld CDI container
+beneath capedwarf. This renders dinistiq unusable while for Guice we deliberately
+chose to only support the GAE internal login facility.
+
+For some reason the internal login facility of the Google App Engine APIs doesn't 
+work but tangram now provides generic mechanisms for the use of other login providers.
+
+```xml
+  <!-- don't use gae internal login -->
+  <util:set id="loginProviders" value-type="java.lang.String">
+    <value>form</value>
+  </util:set>
+
+  <util:set id="adminUsers" value-type="java.lang.String">
+    <value>form:admin</value>
+  </util:set>
+  
+  <!-- copy some username password mapping from one of the other examples -->
+  <util:map id="usernamePasswordMapping" key-type="java.lang.String" value-type="java.lang.String">
+    <entry key="user" value="04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb" />
+    <entry key="admin" value="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" />
+  </util:map>
+  
+  <!-- Don't use the example defaults:
+  <util:set id="allowedUsers" value-type="java.lang.String">
+    <value>gae:test@example.com</value>
+    <value>form:admin</value>
+  </util:set>
+
+  <util:set id="adminUsers" value-type="java.lang.String">
+    <value>gae:test@example.com</value>
+    <value>form:admin</value>
+    <value>form:user</value>
+  </util:set>
+  -->
+```
+
+After these preparation steps this example should be startable and you should be able
+to use form based login as administrator with the username "admin".
 
 Local Build
 -----------
