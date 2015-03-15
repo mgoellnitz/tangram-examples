@@ -15,6 +15,8 @@ def tangram_version = '1.0-SNAPSHOT'
 
 // Switch to have the options in one example project - optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
+// If you compile tangram yourself, you might want to try your local repo
+def useLocalRepo = project.hasProperty('local')
 
 buildscript {
   repositories {
@@ -35,6 +37,9 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 repositories {
+  if (useLocalRepo) {
+    mavenLocal()
+  }
   // most of the usual stuff
   mavenCentral()
   // the tangram stuff

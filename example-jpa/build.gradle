@@ -18,6 +18,8 @@ def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // s
 def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, hibernate, or datanucleus
 // JPA must be used without for Hibernate and can optionally be used without except for DataNucleus.
 def do_bytecode_transform = project.hasProperty('enhance') ? true : false 
+// If you compile tangram yourself, you might want to try your local repo
+def useLocalRepo = project.hasProperty('local')
 
 buildscript {
   repositories {
@@ -43,6 +45,9 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 repositories {
+  if (useLocalRepo) {
+    mavenLocal()
+  }
   // most of the usual stuff
   mavenCentral()
   // the tangram stuff
