@@ -9,10 +9,9 @@
  * California, 94041, USA.
  * 
  */
-package org.tangram.gae.solution;
+package org.tangram.example;
 
 import javax.jdo.annotations.PersistenceCapable;
-
 import org.tangram.content.Content;
 import org.tangram.gae.GaeContent;
 

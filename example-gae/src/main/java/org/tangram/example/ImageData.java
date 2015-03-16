@@ -9,7 +9,7 @@
  * California, 94041, USA.
  *
  */
-package org.tangram.gae.solution;
+package org.tangram.example;
 
 import com.google.appengine.api.datastore.Blob;
 import javax.jdo.annotations.NotPersistent;

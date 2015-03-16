@@ -9,12 +9,12 @@
  * California, 94041, USA.
  * 
  */
-package org.tangram.gae.solution.test;
+package org.tangram.example.gae.test;
 
 import java.lang.reflect.Method;
 import org.junit.Assert;
 import org.junit.Test;
-import org.tangram.gae.solution.RootTopic;
+import org.tangram.example.RootTopic;
 
 public class EnhancerTest {
 

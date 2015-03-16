@@ -9,7 +9,7 @@
  * California, 94041, USA.
  *
  */
-package org.tangram.nucleus.solution.test;
+package org.tangram.example.nucleus.test;
 
 import java.lang.reflect.Method;
 import org.junit.Assert;

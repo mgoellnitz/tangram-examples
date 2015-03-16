@@ -9,25 +9,26 @@
  * California, 94041, USA.
  * 
  */
-package org.tangram.gae.solution;
+package org.tangram.example;
 
-import java.util.List;
-
+import com.google.appengine.api.datastore.Text;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 
 @PersistenceCapable
-public class Container extends Linkable {
+public class Article extends Linkable {
 
-    private List<Linkable> contents;
+    @Persistent
+    private Text text;
 
 
-    public List<Linkable> getContents() {
-        return contents;
+    public Text getText() {
+        return text;
     }
 
 
-    public void setContents(List<Linkable> contents) {
-        this.contents = contents;
+    public void setText(Text text) {
+        this.text = text;
     }
 
-} // Container
+} // Article
