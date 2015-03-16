@@ -32,7 +32,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
     private List<Topic> subTopics;
 
-    private List<Article> contents;
+    private List<Article> elements;
 
     private ImageData thumbnail;
 
@@ -64,13 +64,13 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     }
 
 
-    public List<Article> getContents() {
-        return contents;
+    public List<Article> getElements() {
+        return elements;
     }
 
 
-    public void setContents(List<Article> contents) {
-        this.contents = contents;
+    public void setElements(List<Article> elements) {
+        this.elements = elements;
     }
 
 
