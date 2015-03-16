@@ -1,13 +1,13 @@
 /**
- * 
+ *
  * Copyright (C) 2011-2015 Martin Goellnitz
- * 
- * This work is licensed under the Creative Commons Attribution 3.0 
- * Unported License. To view a copy of this license, visit 
- * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
- * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+ *
+ * This work is licensed under the Creative Commons Attribution 3.0
+ * Unported License. To view a copy of this license, visit
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View,
  * California, 94041, USA.
- * 
+ *
  */
 defaultTasks 'clean', 'build'
 
@@ -17,12 +17,15 @@ def tangram_version = '1.0-SNAPSHOT'
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
 def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, hibernate, or datanucleus
 // JPA must be used without for Hibernate and can optionally be used without except for DataNucleus.
-def do_bytecode_transform = project.hasProperty('enhance') ? true : false 
+def do_bytecode_transform = project.hasProperty('enhance') ? true : false
 // If you compile tangram yourself, you might want to try your local repo
 def useLocalRepo = project.hasProperty('local')
 
 buildscript {
   repositories {
+    if (project.hasProperty('local')) {
+      mavenLocal()
+    }
     mavenCentral()
     maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
   }
@@ -67,10 +70,10 @@ artifacts {
 
 dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"
-  
+
   // For Yahoo OpenID example
   compile "org.pac4j:pac4j-openid:$versions.pac4j"
-  
+
   /* OpenJPA */
   if (jpa_backend == 'openjpa') {
     if (do_bytecode_transform) {
@@ -82,7 +85,7 @@ dependencies {
       exclude group: 'asm'
     }
   }
-  
+
   /* EclipseLink */
   if (jpa_backend == 'eclipselink') {
     if (do_bytecode_transform) {
@@ -93,7 +96,7 @@ dependencies {
     compile "org.eclipse.persistence:org.eclipse.persistence.jpa:$versions.eclipselink"
     compile "$versions.persistence_api"
   }
-  
+
   // For JPA with Hibernate
   if (jpa_backend == 'hibernate') {
     if (do_bytecode_transform) {
@@ -103,11 +106,11 @@ dependencies {
     } else {
       compile "tangram:tangram-jpa:$tangram_version"
     }
-    compile "org.hibernate:hibernate-core:$versions.hibernate"  
-    compile "org.hibernate:hibernate-entitymanager:$versions.hibernate"        
+    compile "org.hibernate:hibernate-core:$versions.hibernate"
+    compile "org.hibernate:hibernate-entitymanager:$versions.hibernate"
     compile "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final"
   }
-    
+
   /* For JPA with DataNucleus */
   if (jpa_backend == 'datanucleus') {
     // DataNucleus does not work without byte-code transformation.
@@ -118,16 +121,16 @@ dependencies {
     compile "$versions.persistence_api"
     runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
   }
-  
+
   runtime "tangram:tangram-${tangram_backend}:$tangram_version"
-  
+
   webapp "tangram:tangram-editor:$tangram_version:war@war"
   runtime "tangram:tangram-editor:$tangram_version"
-  
+
   /* For the FTP Service
   runtime "tangram:tangram-ftp:$tangram_version"
    */
-  
+
   /* dinistiq */
   if (tangram_backend == 'dinistiq') {
   }
@@ -143,12 +146,12 @@ dependencies {
     // dummies for compile scope to keep IDEs calm about groovy scripts
     compile"tangram:tangram-${tangram_backend}:$tangram_version"
   }
-  
+
   runtime "hsqldb:hsqldb:1.8.0.10"
-  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
- 
+  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"
+
   testCompile "junit:junit:$versions.junit"
-  
+
   // your container will have this for you
   providedCompile "$versions.servlet_api"
   providedCompile "$versions.jsp_api"
@@ -164,12 +167,12 @@ jar {
   if (tangram_backend == 'dinistiq') {
     excludes = [ 'guicy/**' ]
   }
-  // Use backend specific persistence.xml for JPA 
+  // Use backend specific persistence.xml for JPA
   // In this example use the same pesistence.xml which was used for enhancing or weaving
   // For EclipseLink you might want to use two separate files though.
   def jpa_method = jpa_backend
   if (jpa_backend == 'openjpa') jpa_method='enhance'
-  if (jpa_backend == 'eclipselink') jpa_method='weave' 
+  if (jpa_backend == 'eclipselink') jpa_method='weave'
   into ('') {
     from "$project.projectDir/$jpa_method"
     include 'META-INF/persistence.xml'
@@ -179,7 +182,7 @@ jar {
 war {
   def index = jpa_backend.indexOf('i') > 0 ? jpa_backend.length()-4 : 4
   archiveName = "${project.name}-${jpa_backend[0]}${jpa_backend[index]}-${tangram_backend}.war"
-  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
+  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml")
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
     excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
