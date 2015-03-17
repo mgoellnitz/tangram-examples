@@ -1,71 +1,13 @@
-CREATE USER SA PASSWORD "" ADMIN
-/*C1*/SET SCHEMA PUBLIC
+/*C3*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT
-/*C2*/SET SCHEMA PUBLIC
+/*C4*/SET SCHEMA PUBLIC
 CONNECT USER SA
-CREATE TABLE CODE (ID BIGINT NOT NULL, ANNOTATION VARCHAR(255), CODE LONGVARCHAR, MIMETYPE VARCHAR(255), PRIMARY KEY (ID))
-CREATE TABLE ARTICLE (ID BIGINT NOT NULL, KEYWORDS VARCHAR(255), SHORTTITLE VARCHAR(255), TEXT LONGVARCHAR, TITLE VARCHAR(255), PRIMARY KEY (ID))
-CREATE TABLE CONTAINER (ID BIGINT NOT NULL, KEYWORDS VARCHAR(255), SHORTTITLE VARCHAR(255), TITLE VARCHAR(255), PRIMARY KEY (ID))
-CREATE TABLE IMAGEDATA (ID BIGINT NOT NULL, DATA LONGVARBINARY, HEIGHT VARCHAR(255), KEYWORDS VARCHAR(255), MIMETYPE VARCHAR(255), SHORTTITLE VARCHAR(255), TITLE VARCHAR(255), WIDTH VARCHAR(255), PRIMARY KEY (ID))
-CREATE TABLE ROOTTOPIC (ID BIGINT NOT NULL, KEYWORDS VARCHAR(255), SHORTTITLE VARCHAR(255), TEASER LONGVARCHAR, TITLE VARCHAR(255), LOGO_ID BIGINT, THUMBNAIL_ID BIGINT, PRIMARY KEY (ID))
-CREATE TABLE TOPIC (ID BIGINT NOT NULL, KEYWORDS VARCHAR(255), SHORTTITLE VARCHAR(255), TEASER LONGVARCHAR, TITLE VARCHAR(255), THUMBNAIL_ID BIGINT, PRIMARY KEY (ID))
-CREATE TABLE CONTAINER_TOPIC (Container_ID BIGINT NOT NULL, contents_ID BIGINT NOT NULL, PRIMARY KEY (Container_ID, contents_ID))
-CREATE TABLE RootTopicBottomLinks (RootTopic_ID BIGINT NOT NULL, bottomLinks_ID BIGINT NOT NULL, PRIMARY KEY (RootTopic_ID, bottomLinks_ID))
-CREATE TABLE RootTopicCSS (RootTopic_ID BIGINT NOT NULL, css_ID BIGINT NOT NULL, PRIMARY KEY (RootTopic_ID, css_ID))
-CREATE TABLE ROOTTOPIC_ARTICLE (RootTopic_ID BIGINT NOT NULL, elements_ID BIGINT NOT NULL, PRIMARY KEY (RootTopic_ID, elements_ID))
-CREATE TABLE RootTopicJS (RootTopic_ID BIGINT NOT NULL, js_ID BIGINT NOT NULL, PRIMARY KEY (RootTopic_ID, js_ID))
-CREATE TABLE ROOTTOPIC_CONTAINER (RootTopic_ID BIGINT NOT NULL, relatedContainers_ID BIGINT NOT NULL, PRIMARY KEY (RootTopic_ID, relatedContainers_ID))
-CREATE TABLE ROOTTOPIC_TOPIC (RootTopic_ID BIGINT NOT NULL, subTopics_ID BIGINT NOT NULL, PRIMARY KEY (RootTopic_ID, subTopics_ID))
-CREATE TABLE TOPIC_ARTICLE (Topic_ID BIGINT NOT NULL, elements_ID BIGINT NOT NULL, PRIMARY KEY (Topic_ID, elements_ID))
-CREATE TABLE TOPIC_CONTAINER (Topic_ID BIGINT NOT NULL, relatedContainers_ID BIGINT NOT NULL, PRIMARY KEY (Topic_ID, relatedContainers_ID))
-CREATE TABLE TOPIC_TOPIC (Topic_ID BIGINT NOT NULL, subTopics_ID BIGINT NOT NULL, PRIMARY KEY (Topic_ID, subTopics_ID))
-ALTER TABLE ROOTTOPIC ADD CONSTRAINT FK_ROOTTOPIC_THUMBNAIL_ID FOREIGN KEY (THUMBNAIL_ID) REFERENCES IMAGEDATA (ID)
-ALTER TABLE ROOTTOPIC ADD CONSTRAINT FK_ROOTTOPIC_LOGO_ID FOREIGN KEY (LOGO_ID) REFERENCES IMAGEDATA (ID)
-ALTER TABLE TOPIC ADD CONSTRAINT FK_TOPIC_THUMBNAIL_ID FOREIGN KEY (THUMBNAIL_ID) REFERENCES IMAGEDATA (ID)
-ALTER TABLE RootTopicCSS ADD CONSTRAINT FK_RootTopicCSS_css_ID FOREIGN KEY (css_ID) REFERENCES CODE (ID)
-ALTER TABLE RootTopicCSS ADD CONSTRAINT FK_RootTopicCSS_RootTopic_ID FOREIGN KEY (RootTopic_ID) REFERENCES ROOTTOPIC (ID)
-ALTER TABLE ROOTTOPIC_ARTICLE ADD CONSTRAINT FK_ROOTTOPIC_ARTICLE_elements_ID FOREIGN KEY (elements_ID) REFERENCES ARTICLE (ID)
-ALTER TABLE ROOTTOPIC_ARTICLE ADD CONSTRAINT FK_ROOTTOPIC_ARTICLE_RootTopic_ID FOREIGN KEY (RootTopic_ID) REFERENCES ROOTTOPIC (ID)
-ALTER TABLE RootTopicJS ADD CONSTRAINT FK_RootTopicJS_RootTopic_ID FOREIGN KEY (RootTopic_ID) REFERENCES ROOTTOPIC (ID)
-ALTER TABLE RootTopicJS ADD CONSTRAINT FK_RootTopicJS_js_ID FOREIGN KEY (js_ID) REFERENCES CODE (ID)
-ALTER TABLE ROOTTOPIC_CONTAINER ADD CONSTRAINT FK_ROOTTOPIC_CONTAINER_RootTopic_ID FOREIGN KEY (RootTopic_ID) REFERENCES ROOTTOPIC (ID)
-ALTER TABLE ROOTTOPIC_CONTAINER ADD CONSTRAINT FK_ROOTTOPIC_CONTAINER_relatedContainers_ID FOREIGN KEY (relatedContainers_ID) REFERENCES CONTAINER (ID)
-CREATE TABLE SEQUENCE (SEQ_NAME VARCHAR(50) NOT NULL, SEQ_COUNT NUMERIC(38), PRIMARY KEY (SEQ_NAME))
-INSERT INTO SEQUENCE VALUES('SEQ_GEN_TABLE',0)
 SET AUTOCOMMIT FALSE
-DELETE FROM SEQUENCE WHERE SEQ_NAME='SEQ_GEN_TABLE'
-INSERT INTO SEQUENCE VALUES('SEQ_GEN_TABLE',50)
-COMMIT
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-INSERT INTO CODE VALUES(1,'org.tangram.example.Topic','<html>\u000a<head>\u000a  <title>$self.title</title>\u000a  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />\u000a  <meta name="viewport" content="width=320, initial-scale=0.95" />  \u000a  <meta name="keywords" content="$self.keywords" />\u000a  <meta name="language" content="de" />\u000a#foreach($css in $self.rootTopic.css)\u000a  #include($css ''cssimport'')\u000a  \u000a#end\u000a  <style type="text/css" media="only screen and (min-width: 620px)">\u000a    .box { height: 300px; }\u000a  </style>\u000a  <style type="text/css" media="only screen and (max-width: 480px)">\u000a    body { padding: 0; }\u000a  </style>\u000a#foreach($js in $self.rootTopic.js)\u000a  #include($js ''jsimport'')\u000a  \u000a#end\u000a</head>\u000a<body>\u000a  <div class="header"><p><a #link($self.rootTopic true)>$self.rootTopic.shortTitle</a> - $self.title</p></div>\u000a<div class="infobox">\u00a9 2014 - <a href="http://github.com/mgoellnitz/tangram-examples/">Tangram Examples</a></div>\u000a  <div class="box" style="clear: both; width: 100%; height: 0px;"></div>\u000a#foreach($box in $self.subTopics)\u000a  <div class="box"><h3><a #link($box true)>$box.title</a></h3>\u000a    #include($box.teaser)\u000a    <ul>\u000a    #foreach($b in $box.subTopics)\u000a      <li><a #link($b true)>$b.title</a></li>\u000a    #end\u000a    </ul>\u000a  </div>\u000a#end\u000a  <hr style="clear: both;"/>\u000a  #include($self ''editor'')\u000a</body>\u000a</html>\u000a','text/html')
-INSERT INTO CODE VALUES(2,'org.tangram.example.Linkable.name','$self.class.simpleName: #if($self.title)$self.title#else$self.id#end','text/html')
-INSERT INTO CODE VALUES(3,'screen','body {\u000a  background-color: #405060;\u000a  color: #607080;\u000a  font-family: Arial, Helvetica;\u000a  padding-top: 5px;\u000a  padding-bottom: 5px;\u000a  padding-left: 10px;\u000a  padding-right: 10px;\u000a  vertical-align: bottom;\u000a}\u000a\u000adiv {\u000a  margin: 0;\u000a  padding: 0;\u000a}\u000a\u000ap {\u000a  margin: 0;\u000a  padding: 0;\u000a}\u000a\u000aa {\u000a  text-decoration: none;\u000a  color: #FFFFFF;\u000a}\u000a\u000aa:link { }\u000a\u000aa:visited { }\u000a\u000aa:hover { color: #909090; }\u000a\u000aa:focus { color: #0000FF; }\u000a\u000aa:active { color: #FF0000; }\u000a\u000a.header a {\u000a  color: #D0C080;\u000a}\u000a\u000a\u000ah1 { font-size: 14pt; }\u000a\u000a.header {\u000a  background-color: #FFFFFF;\u000a  color: #D0C080;\u000a  height: 60px;\u000a  font-size: 20pt;\u000a  font-weight: bold;\u000a  text-align: right;\u000a  vertical-align: bottom;\u000a  padding: 10px;\u000a}\u000a\u000a.infobox {\u000a  background-color: #D0C080;\u000a  height: 24px;\u000a  padding-top: 5px;\u000a  padding-left: 5px;\u000a  margin: 0;\u000a}\u000a\u000a.box {\u000a  padding: 5px;\u000a  width: 300px;\u000a  float: left;\u000a  color: #909090;\u000a}\u000a\u000a','text/css')
-INSERT INTO CODE VALUES(4,'org.tangram.example.Topic','package org.tangram.example.links;\u000a\u000aimport javax.servlet.http.HttpServletRequest;\u000aimport javax.servlet.http.HttpServletResponse;\u000aimport org.slf4j.Logger;\u000aimport org.slf4j.LoggerFactory;\u000a\u000aimport org.tangram.Constants;\u000aimport org.tangram.content.Content;\u000aimport org.tangram.content.BeanFactory;\u000aimport org.tangram.content.BeanFactoryAware;\u000aimport org.tangram.view.Utils;\u000aimport org.tangram.view.TargetDescriptor;\u000aimport org.tangram.link.Link;\u000aimport org.tangram.link.LinkHandler;\u000a\u000aimport org.tangram.example.RootTopic;\u000aimport org.tangram.example.Linkable;\u000aimport org.tangram.example.Topic;\u000aimport org.tangram.example.ImageData;\u000a\u000apublic class ExampleLinkScheme implements LinkHandler, BeanFactoryAware {\u000a  \u000a  private static Logger log = LoggerFactory.getLogger(ExampleLinkScheme.class);\u000a\u000a  private BeanFactory beanFactory;\u000a  \u000a  \u000a  public void setBeanFactory(BeanFactory factory) {\u000a    beanFactory = factory;\u000a  } // setBeanFactory()\u000a  \u000a  \u000a  public Set<String> getCustomViews() {\u000a    Set <String> result = new HashSet<String>();\u000a    result.add(Constants.DEFAULT_VIEW);\u000a    return result;\u000a  } // getCustomViews()\u000a\u000a\u000a  public Link createLink(HttpServletRequest request, HttpServletResponse response, Object bean, String action, String view) {    \u000a        Link result = null;\u000a        if ((action==null)&&(view==null)) {\u000a            if (bean instanceof RootTopic) {\u000a                result = new Link();\u000a                result.setUrl("/");\u000a            } else {\u000a                if ((bean instanceof Topic)||(bean instanceof ImageData)) {\u000a                    String title = "-";\u000a                    if (bean instanceof Linkable) {\u000a                        try {\u000a                            title = Utils.urlize(((Linkable)bean).getTitle());\u000a                        } catch (UnsupportedEncodingException uee) {\u000a                            log.error("createLink()", uee);\u000a                        } // try\u000a                    } // if\u000a                    String url = "/"+title+"/"+bean.id;\u000a                    if (bean instanceof Topic) {\u000a                      url = url+".html";\u000a                    } // if\u000a                    result = new Link();\u000a                    // result.addHandler("onclick", "pageload()");\u000a                    result.setUrl(url);\u000a                } // if\u000a            } // if\u000a        } // if\u000a        return result;\u000a  } // createLink()\u000a\u000a    \u000a  private TargetDescriptor rootDescriptor = null;;\u000a  \u000a  \u000a  public TargetDescriptor parseLink(String url, HttpServletResponse response) {\u000a    TargetDescriptor result = null;\u000a    if (url.equals("/")) {\u000a        try {\u000a            if (rootDescriptor==null) {\u000a                List<RootTopic> rs = beanFactory.listBeans(RootTopic.class, null);\u000a                RootTopic root = null;\u000a                if (rs.size()==1) {\u000a                    root = rs.get(0);\u000a                } else {\u000a                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Have "+rs.size()+" RootTopics in data store");\u000a                } // if\u000a                rootDescriptor = new TargetDescriptor(root, null, null);\u000a            } // if\u000a            result = rootDescriptor;\u000a        } catch (Exception e) {\u000a            result = new TargetDescriptor(e, null, null);\u000a        } // try/catch\u000a      } else {\u000a          Object bean  = null;\u000a          String[] elements = url.split("/");\u000a          String id = null;\u000a          for (String element : elements) {\u000a            if (element.indexOf(":") > 0) {\u000a              int idx = element.indexOf(".");\u000a              if (idx >= 0) {\u000a                element = element.substring(0, idx);\u000a              } // if\u000a              id = element;\u000a              bean = beanFactory.getBean(element);\u000a            } // if\u000a          } // for\u000a          if (bean != null) {\u000a              result = new TargetDescriptor(bean, null, null);\u000a          } else {\u000a              response.sendError(HttpServletResponse.SC_NOT_FOUND, "no content with id "+id+" in repository.");\u000a          } // if\u000a      } // if\u000a      return result;\u000a  } // parseLink()\u000a    \u000a} // ExampleLinkScheme\u000a','application/x-groovy')
-INSERT INTO ROOTTOPIC VALUES(16,'Tangram Example Website','Tangram','','Home',NULL,NULL)
-INSERT INTO TOPIC VALUES(9,NULL,'JSP','','Java Server Pages',NULL)
-INSERT INTO TOPIC VALUES(5,NULL,'JDO','','Java Data Object',NULL)
-INSERT INTO TOPIC VALUES(7,NULL,'EBean','','EBean',NULL)
-INSERT INTO TOPIC VALUES(6,NULL,'JPA','','Java Persistence API',NULL)
-INSERT INTO TOPIC VALUES(8,NULL,'Model','','Model',NULL)
-INSERT INTO TOPIC VALUES(10,'View, Velocity, Dynamic, Repository','Velocity','<p>Apache Velocity views are stored in a default model class &quot;Code&quot; and thus in the so called repository.</p>\u000a','Apache Velocity',NULL)
-INSERT INTO TOPIC VALUES(14,NULL,'Servlet','','Servlet',NULL)
-INSERT INTO TOPIC VALUES(15,NULL,'Controller','','Controller',NULL)
-INSERT INTO TOPIC VALUES(13,NULL,'Generic Handlers','','Tangram Link Handlers',NULL)
-INSERT INTO TOPIC VALUES(12,NULL,'Spring','','Spring Controller',NULL)
-INSERT INTO TOPIC VALUES(11,NULL,'View','<p>Tangram contains pluggable, object oriented viewing options with two prominent defaults.</p>\u000a','View',NULL)
-INSERT INTO ROOTTOPICCSS VALUES(16,3)
-INSERT INTO ROOTTOPIC_TOPIC VALUES(16,8)
-INSERT INTO ROOTTOPIC_TOPIC VALUES(16,11)
-INSERT INTO ROOTTOPIC_TOPIC VALUES(16,15)
-INSERT INTO TOPIC_TOPIC VALUES(8,5)
-INSERT INTO TOPIC_TOPIC VALUES(8,6)
-INSERT INTO TOPIC_TOPIC VALUES(8,7)
-INSERT INTO TOPIC_TOPIC VALUES(15,12)
-INSERT INTO TOPIC_TOPIC VALUES(15,13)
-INSERT INTO TOPIC_TOPIC VALUES(15,14)
-INSERT INTO TOPIC_TOPIC VALUES(11,9)
-INSERT INTO TOPIC_TOPIC VALUES(11,10)
+DELETE FROM ROOTTOPIC WHERE ID=1
+INSERT INTO ROOTTOPIC VALUES(1,'Tangram Example Website','Tangram','','Home',NULL,NULL)
+INSERT INTO ROOTTOPICCSS VALUES(1,21)
+INSERT INTO ROOTTOPICCSS VALUES(1,22)
+INSERT INTO ROOTTOPICCSS VALUES(1,23)
 COMMIT
 SET AUTOCOMMIT TRUE

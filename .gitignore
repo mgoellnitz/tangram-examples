@@ -4,8 +4,6 @@ velocity.log
 /create-references.sh
 /.gradle
 /.nb-gradle*
-/*/local-db/*
-/*/h2/*
 /*/.gradle
 /*/build
 /*/.settings
