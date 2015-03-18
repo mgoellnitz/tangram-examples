@@ -36,10 +36,11 @@ YahooOpenIdClient yahooOpenIdClient = new YahooOpenIdClient()
 yahooOpenIdClient.name='yahoo'
 module.addClient(yahooOpenIdClient)
 
-log.info("configuring controller hooks")
-ControllerHook uniqueHost = new UniqueHostHook()
-// set host
-module.addControllerHook(uniqueHost)
+// optional
+//log.info("configuring controller hooks")
+//ControllerHook uniqueHost = new UniqueHostHook()
+//uniqueHost.setHost('example.org')
+//module.addControllerHook(uniqueHost)
 
 log.info("configureServlets() measure time filter for {}", dispatcherPath)
 module.filter(dispatcherPath+"/*").through(new MeasureTimeFilter())

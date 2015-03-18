@@ -1,6 +1,6 @@
 /**
  *
- * Copyright (C) 2011-2013 Martin Goellnitz
+ * Copyright (C) 2011-2015 Martin Goellnitz
  *
  * This work is licensed under the Creative Commons Attribution 3.0
  * Unported License. To view a copy of this license, visit
@@ -14,6 +14,7 @@ package org.tangram.example;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -39,6 +40,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
     private ImageData thumbnail;
 
+    @Column(length = 1280)
     private char[] teaser;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "containerOf")
