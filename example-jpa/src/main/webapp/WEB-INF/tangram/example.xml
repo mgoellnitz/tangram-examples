@@ -117,7 +117,9 @@
              Hibernate config example. These should be added in any environment using Hibernate.
         -->     
         <entry key="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+        <!--
         <entry key="hibernate.hbm2ddl.auto" value="create-drop"/>
+        -->
         
         <!-- 
              hsqldb config example for DataNucleus. Content provided when run directly in the development environment.
