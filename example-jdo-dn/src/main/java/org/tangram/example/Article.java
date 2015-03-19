@@ -13,6 +13,7 @@ package org.tangram.example;
 
 import javax.jdo.annotations.PersistenceCapable;
 
+
 @PersistenceCapable
 public class Article extends Linkable {
 

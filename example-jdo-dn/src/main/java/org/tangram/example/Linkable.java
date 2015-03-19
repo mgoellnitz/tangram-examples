@@ -15,6 +15,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import org.tangram.content.Content;
 import org.tangram.nucleus.NucleusContent;
 
+
 @PersistenceCapable
 public abstract class Linkable extends NucleusContent {
 
@@ -57,8 +58,8 @@ public abstract class Linkable extends NucleusContent {
 
     @Override
     public int compareTo(Content o) {
-        return (o instanceof Linkable) ? ((getTitle()==null||((Linkable)o).getTitle()==null) ? 0 : getTitle().compareTo(
-                ((Linkable)o).getTitle())) : super.compareTo(o);
+        return (o instanceof Linkable) ? ((getTitle()==null||((Linkable) o).getTitle()==null) ? 0 : getTitle().compareTo(
+                ((Linkable) o).getTitle())) : super.compareTo(o);
     } // compareTo()
 
 

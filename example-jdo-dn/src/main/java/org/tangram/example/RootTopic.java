@@ -16,8 +16,18 @@ import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import org.tangram.nucleus.Code;
 
+
 @PersistenceCapable
-public class RootTopic extends Topic {
+public class RootTopic extends AbstractTopic {
+
+    @Join
+    private List<Topic> subTopics;
+
+    @Join
+    private List<Article> elements;
+
+    @Join
+    private List<Container> relatedContainers;
 
     @Join
     private List<Topic> bottomLinks;
@@ -29,6 +39,39 @@ public class RootTopic extends Topic {
     private List<Code> js;
 
     private ImageData logo;
+
+
+    @Override
+    public List<Topic> getSubTopics() {
+        return subTopics;
+    }
+
+
+    public void setSubTopics(List<Topic> subTopics) {
+        this.subTopics = subTopics;
+    }
+
+
+    @Override
+    public List<Article> getElements() {
+        return this.elements;
+    }
+
+
+    public void setElements(List<Article> elements) {
+        this.elements = elements;
+    }
+
+
+    @Override
+    public List<Container> getRelatedContainers() {
+        return relatedContainers;
+    }
+
+
+    public void setRelatedContainers(List<Container> relatedContainers) {
+        this.relatedContainers = relatedContainers;
+    }
 
 
     public List<Topic> getBottomLinks() {
