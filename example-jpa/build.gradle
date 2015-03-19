@@ -13,6 +13,9 @@ defaultTasks 'clean', 'build'
 
 def tangram_version = '1.0-SNAPSHOT'
 
+// When changing the database backend don't forget to switch the files
+// jpaConfigOverrides to point to the correct database file.
+
 // Some switches to have all options in one example project - with optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
 def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, hibernate, or datanucleus
