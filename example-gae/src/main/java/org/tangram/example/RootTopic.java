@@ -12,16 +12,20 @@
 package org.tangram.example;
 
 import java.util.List;
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import org.tangram.gae.Code;
 
 @PersistenceCapable
 public class RootTopic extends Topic {
 
+    @Join
     private List<Topic> bottomLinks;
 
+    @Join
     private List<Code> css;
 
+    @Join
     private List<Code> js;
 
     private ImageData logo;

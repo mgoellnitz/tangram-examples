@@ -14,6 +14,7 @@ package org.tangram.example;
 import com.google.appengine.api.datastore.Text;
 import java.util.ArrayList;
 import java.util.List;
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -30,8 +31,10 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
     private static final Logger LOG = LoggerFactory.getLogger(Topic.class);
 
+    @Join
     private List<Topic> subTopics;
 
+    @Join
     private List<Article> elements;
 
     private ImageData thumbnail;

@@ -1,0 +1,246 @@
+<?xml version="1.0" ?><list><RootTopic><title>Home</title><shortTitle>Tangram</shortTitle><keywords>Tangram Example Website</keywords><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"><Topic><title>Model</title><shortTitle>Model</shortTitle><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"><Topic><title>Java Data Object</title><shortTitle>JDO</shortTitle><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;Java Data Objects are arguably the most flexible Data Storing solution for persisting Java objects. We use the implementation of DataNucleus which also presents us a bridge to be used on the Google App Engine.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic><Topic><title>Java Persistence API</title><shortTitle>JPA</shortTitle><teaser><value></value></teaser></Topic><Topic><title>EBean</title><shortTitle>EBean</shortTitle><teaser><value></value></teaser></Topic></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;Since Tangam is in its core built around object oriented templating we obviously need some objects. Tangram solves this by presenting pluggable model solutions with ORM components of different flavours.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic><Topic><title>View</title><shortTitle>View</shortTitle><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"><Topic><title>Apache Velocity</title><shortTitle>Velocity</shortTitle><keywords>View, Velocity, Dynamic, Repository</keywords><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;Apache Velocity are the option to store view templates in the repository alongside the content elements of the site and thus liewise dynamically ediatble. Those views are stored in a default model class &amp;quot;Code&amp;quot; like CSS and JavaScript codes.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic><Topic><title>Java Server Pages</title><shortTitle>JSP</shortTitle><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;Java Server Pages are still the standard way to present web output and Tangram supports this and uses this internally. JSPs are supported through a small tag library for the interface with the rest of the view layer in Tangram.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;Tangram contains two built in view layer solutions.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic><Topic><title>Controller</title><shortTitle>Controller</shortTitle><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"><Topic><title>Tangram Link Handlers</title><shortTitle>Generic Handlers</shortTitle><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;Tangram comes with its own link handling facility which is portable accross all usage scenarios and flavours. Link handler instances can also be placed as code objects in the repository as Groovy code.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic><Topic><title>Spring Controller</title><shortTitle>Spring</shortTitle><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;When using Tangram together with the Springframework it is a natural match to use Spring&amp;#39;s @Controllers like Tangram does in this scenario itself internally. The only disadvantage is, that you will later have a lot of work left, when you need to migrate away from Spring depending on your deployment scenario or plattform used.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic><Topic><title>Servlet</title><shortTitle>Servlet</shortTitle><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;Since Java Servlets are the minimum and sometimes only consensus for web request handling, Tangram provides an integration with such scenarios. It is though not recommended to implement custom Servlets at such a low level. If nothing else is available at least stick to the internal Tangram Link Handler solution.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;Depending on the scenario and flavour of Tangram you are using, you have at least two options for the controller or url mapping facilities to use.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic><Topic><title>Dependency Injection</title><shortTitle>DI</shortTitle><keywords>DI, Dependency Injection</keywords><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"><Topic><title>Springframework</title><shortTitle>Spring</shortTitle><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;The Springframework is one of the prominent Dependency Injection solutions for Java and a main target for Tangram.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic><Topic><title>Google Guice</title><shortTitle>Guice</shortTitle><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;Tangram supports the use of Google Guice as the solution to glue the parts together and configure the components.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic><Topic><title>Dinistiq</title><shortTitle>Dinistiq</shortTitle><subTopics class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;The smalles possible footprint for Tangram applications can be achieved by use of the Dinistiq library. It is a custom development which started as a research part of Tangram to make the framework independent of a specific Dependecy Injection library or container and now is an independent project used for other applications as well.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value>&lt;p&gt;The Tangram bits and pieces arfe glued together by means of the Dependency Injection and Inversion of Controller pattern. This does still not mean that your are bound to a specific Dependency Injection library or container.&lt;/p&gt;
+</value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers></Topic></subTopics><elements class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></elements><teaser><value></value></teaser><relatedContainers class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></relatedContainers><bottomLinks class="org.apache.openjpa.util.java$util$ArrayList$proxy" resolves-to="list"></bottomLinks></RootTopic><Topic reference="../RootTopic/subTopics/Topic/subTopics/Topic"></Topic><Topic reference="../RootTopic/subTopics/Topic/subTopics/Topic[2]"></Topic><Topic reference="../RootTopic/subTopics/Topic/subTopics/Topic[3]"></Topic><Topic reference="../RootTopic/subTopics/Topic"></Topic><Topic reference="../RootTopic/subTopics/Topic[2]/subTopics/Topic[2]"></Topic><Topic reference="../RootTopic/subTopics/Topic[2]/subTopics/Topic"></Topic><Topic reference="../RootTopic/subTopics/Topic[2]"></Topic><Topic reference="../RootTopic/subTopics/Topic[3]/subTopics/Topic[2]"></Topic><Topic reference="../RootTopic/subTopics/Topic[3]/subTopics/Topic"></Topic><Topic reference="../RootTopic/subTopics/Topic[3]/subTopics/Topic[3]"></Topic><Topic reference="../RootTopic/subTopics/Topic[3]"></Topic><Topic reference="../RootTopic/subTopics/Topic[4]"></Topic><Topic reference="../RootTopic/subTopics/Topic[4]/subTopics/Topic"></Topic><Topic reference="../RootTopic/subTopics/Topic[4]/subTopics/Topic[2]"></Topic><Topic reference="../RootTopic/subTopics/Topic[4]/subTopics/Topic[3]"></Topic><Code><annotation>org.tangram.example.Topic</annotation><mimeType>text/html</mimeType><code><value>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;$self.title&lt;/title&gt;
+  &lt;meta http-equiv="content-type" content="text/html; charset=UTF-8" /&gt;
+  &lt;meta name="viewport" content="width=320, initial-scale=0.95" /&gt;  
+  &lt;meta name="keywords" content="$self.keywords" /&gt;
+  &lt;meta name="language" content="de" /&gt;
+#foreach($css in $self.rootTopic.css)
+  #include($css 'cssimport')
+  
+#end
+#foreach($js in $self.rootTopic.js)
+  #include($js 'jsimport')
+  
+#end
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="header"&gt;&lt;p&gt;&lt;a #link($self.rootTopic true)&gt;$self.rootTopic.shortTitle&lt;/a&gt; - $self.title&lt;/p&gt;&lt;/div&gt;
+&lt;div class="infobox"&gt;© 2015 - &lt;a href="http://github.com/mgoellnitz/tangram-examples/"&gt;Tangram Examples&lt;/a&gt;&lt;/div&gt;
+  &lt;div class="box" style="clear: both; width: 100%; height: 0px;"&gt;&lt;/div&gt;
+  &lt;div class="text"&gt;#include($self.teaser)&lt;/div&gt;
+#foreach($box in $self.subTopics)
+  &lt;div class="box"&gt;&lt;h3&gt;&lt;a #link($box true)&gt;$box.title&lt;/a&gt;&lt;/h3&gt;
+    #include($box.teaser)
+    &lt;ul&gt;
+    #foreach($b in $box.subTopics)
+      &lt;li&gt;&lt;a #link($b true)&gt;$b.title&lt;/a&gt;&lt;/li&gt;
+    #end
+    &lt;/ul&gt;
+  &lt;/div&gt;
+#end
+  &lt;hr style="clear: both;"/&gt;
+  #include($self 'editor')
+&lt;/body&gt;
+&lt;/html&gt;
+</value></code></Code><Code><annotation>org.tangram.example.Linkable.name</annotation><mimeType>text/html</mimeType><code><value>## This template overrides the default for the descriptive name of content items printed next to the ID and the editing buttons in the editor
+#if($self.class.simpleName.contains('$'))$self.class.superclass.simpleName#else$self.class.simpleName#end: #if($self.title)$self.title#else$self.id#end</value></code></Code><Code><annotation>org.tangram.example.Topic</annotation><mimeType>application/x-groovy</mimeType><code><value>package org.tangram.example.links;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.tangram.Constants;
+import org.tangram.content.Content;
+import org.tangram.content.BeanFactory;
+import org.tangram.content.BeanFactoryAware;
+import org.tangram.view.Utils;
+import org.tangram.view.TargetDescriptor;
+import org.tangram.link.Link;
+import org.tangram.link.LinkHandler;
+
+import org.tangram.example.RootTopic;
+import org.tangram.example.Linkable;
+import org.tangram.example.Topic;
+import org.tangram.example.ImageData;
+
+public class ExampleLinkScheme implements LinkHandler, BeanFactoryAware {
+  
+  private static Logger log = LoggerFactory.getLogger(ExampleLinkScheme.class);
+
+  private BeanFactory beanFactory;
+  
+  
+  public void setBeanFactory(BeanFactory factory) {
+    beanFactory = factory;
+  } // setBeanFactory()
+  
+  
+  public Set&lt;String&gt; getCustomViews() {
+    Set &lt;String&gt; result = new HashSet&lt;String&gt;();
+    result.add(Constants.DEFAULT_VIEW);
+    return result;
+  } // getCustomViews()
+
+
+  public Link createLink(HttpServletRequest request, HttpServletResponse response, Object bean, String action, String view) {    
+        Link result = null;
+        if ((action==null)&amp;&amp;(view==null)) {
+            if (bean instanceof RootTopic) {
+                result = new Link();
+                result.setUrl("/");
+            } else {
+                if ((bean instanceof Topic)||(bean instanceof ImageData)) {
+                    String title = "-";
+                    if (bean instanceof Linkable) {
+                        try {
+                            title = Utils.urlize(((Linkable)bean).getTitle());
+                        } catch (UnsupportedEncodingException uee) {
+                            log.error("createLink()", uee);
+                        } // try
+                    } // if
+                    String url = "/"+title+"/"+bean.id;
+                    if (bean instanceof Topic) {
+                      url = url+".html";
+                    } // if
+                    result = new Link();
+                    // result.addHandler("onclick", "pageload()");
+                    result.setUrl(url);
+                } // if
+            } // if
+        } // if
+        return result;
+  } // createLink()
+
+    
+  private TargetDescriptor rootDescriptor = null;;
+  
+  
+  public TargetDescriptor parseLink(String url, HttpServletResponse response) {
+    TargetDescriptor result = null;
+    if (url.equals("/")) {
+        try {
+            if (rootDescriptor==null) {
+                List&lt;RootTopic&gt; rs = beanFactory.listBeans(RootTopic.class, null);
+                RootTopic root = null;
+                if (rs.size()==1) {
+                    root = rs.get(0);
+                } else {
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Have "+rs.size()+" RootTopics in data store");
+                } // if
+                rootDescriptor = new TargetDescriptor(root, null, null);
+            } // if
+            result = rootDescriptor;
+        } catch (Exception e) {
+            result = new TargetDescriptor(e, null, null);
+        } // try/catch
+      } else {
+          Object bean  = null;
+          String[] elements = url.split("/");
+          String id = null;
+          for (String element : elements) {
+            if (element.indexOf(":") &gt; 0) {
+              int idx = element.indexOf(".");
+              if (idx &gt;= 0) {
+                element = element.substring(0, idx);
+              } // if
+              id = element;
+              bean = beanFactory.getBean(element);
+            } // if
+          } // for
+          if (bean != null) {
+              result = new TargetDescriptor(bean, null, null);
+          } else {
+              response.sendError(HttpServletResponse.SC_NOT_FOUND, "no content with id "+id+" in repository.");
+          } // if
+      } // if
+      return result;
+  } // parseLink()
+    
+} // ExampleLinkScheme
+</value></code></Code><Code><annotation>org.tangram.example.Linkable.description</annotation><mimeType>text/html</mimeType><code><value>## This template overrides the value printed for each items beneath references in the editor.
+#if($self.title)$self.title#else-#end</value></code></Code><Code><annotation>screen</annotation><mimeType>text/css</mimeType><code><value>body {
+  background-color: #506070;
+  color: #607080;
+  font-family: Arial, Helvetica;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: bottom;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+a:link { }
+
+a:visited { }
+
+a:hover { color: #909090; }
+
+a:focus { color: #0000FF; }
+
+a:active { color: #FF0000; }
+
+.header a {
+  color: #D0B080;
+}
+
+
+h1 { font-size: 14pt; }
+
+.header {
+  background-color: #FFFFFF;
+  color: #D0B080;
+  height: 60px;
+  font-size: 20pt;
+  font-weight: bold;
+  text-align: right;
+  vertical-align: bottom;
+  padding: 10px;
+}
+
+.infobox {
+  background-color: #D0B080;
+  height: 24px;
+  padding-top: 5px;
+  padding-left: 5px;
+  margin: 0;
+}
+
+.box {
+  padding: 5px;
+  width: 300px;
+  float: left;
+  color: #909090;
+}
+
+.text {
+  color: #FFFFE0;
+}
+
+.clear {
+  clear: both;
+}
+</value></code></Code><Code><annotation>only screen and (max-width: 480px)</annotation><mimeType>text/css</mimeType><code><value>body { 
+  padding: 0; 
+}</value></code></Code><Code><annotation>only screen and (max-width: 480px)</annotation><mimeType>text/css</mimeType><code><value>.box { 
+  height: 300px; 
+}</value></code></Code></list>
