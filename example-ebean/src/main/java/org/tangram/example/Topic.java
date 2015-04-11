@@ -15,7 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -28,6 +31,8 @@ import org.tangram.protection.ProtectedContent;
 
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorValue("Topic")
 public class Topic extends Linkable implements ProtectedContent, BeanFactoryAware {
 
     private static final Logger LOG = LoggerFactory.getLogger(Topic.class);

@@ -13,21 +13,26 @@ package org.tangram.example;
 
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import org.tangram.ebean.Code;
 
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorValue("RootTopic")
 public class RootTopic extends Topic {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bottomLinkOf")
     private List<Topic> bottomLinks;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codeOf")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Code> css;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codeOf")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Code> js;
 
     private ImageData logo;

@@ -13,12 +13,17 @@ package org.tangram.example;
 
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorValue("Container")
 public class Container extends Linkable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "contentOf")

@@ -12,11 +12,16 @@
 package org.tangram.example;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import org.tangram.content.blob.MimedBlob;
 
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorValue("ImageData")
 public class ImageData extends Linkable implements MimedBlob {
 
     @Column(length = 3000000)

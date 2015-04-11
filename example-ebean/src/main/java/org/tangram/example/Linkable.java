@@ -11,12 +11,12 @@
  */
 package org.tangram.example;
 
-import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 import org.tangram.content.Content;
 import org.tangram.ebean.EContent;
 
 
-@Entity
+@MappedSuperclass
 public abstract class Linkable extends EContent {
 
     private String title;
