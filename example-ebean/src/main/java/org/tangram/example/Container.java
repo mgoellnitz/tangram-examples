@@ -12,13 +12,11 @@
 package org.tangram.example;
 
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 
 @Entity
@@ -26,12 +24,8 @@ import javax.persistence.OneToMany;
 @DiscriminatorValue("Container")
 public class Container extends Linkable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contentOf")
+    @ManyToMany
     private List<Topic> contents;
-
-    // dummy references since EBean only supports bidirectional OneToMany relations
-    @ManyToOne
-    protected Topic containerOf;
 
 
     public List<Topic> getContents() {

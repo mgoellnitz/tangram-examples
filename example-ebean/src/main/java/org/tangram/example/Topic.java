@@ -13,14 +13,14 @@ package org.tangram.example;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,10 +37,11 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
     private static final Logger LOG = LoggerFactory.getLogger(Topic.class);
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subTopicOf")
+    @ManyToMany
+    @JoinTable(name = "subtopics", joinColumns = @JoinColumn(name="topic", referencedColumnName = "EBEAN_INTERNAL_ID"), inverseJoinColumns = @JoinColumn(name="subtopic", referencedColumnName = "EBEAN_INTERNAL_ID"))
     private List<Topic> subTopics;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "elementOf")
+    @ManyToMany
     private List<Article> elements;
 
     private ImageData thumbnail;
@@ -48,16 +49,8 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     @Column(length = 1280)
     private char[] teaser;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "containerOf")
+    @ManyToMany
     private List<Container> relatedContainers;
-
-    // dummy references since EBean only supports bidirectional OneToMany relations
-    @ManyToOne
-    protected Topic bottomLinkOf; // RootTopic.bottomLink
-    @ManyToOne
-    protected Topic subTopicOf; // Topic.subTopic
-    @ManyToOne
-    protected Topic contentOf; // Container.content
 
     @Transient
     private BeanFactory beanFactory;

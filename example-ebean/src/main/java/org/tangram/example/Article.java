@@ -15,7 +15,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -23,10 +23,6 @@ import javax.persistence.ManyToOne;
 public class Article extends Linkable {
 
     private char[] text;
-
-    // dummy references since EBean only supports bidirectional OneToMany relations
-    @ManyToOne
-    protected Topic elementOf;
 
 
     public char[] getText() {

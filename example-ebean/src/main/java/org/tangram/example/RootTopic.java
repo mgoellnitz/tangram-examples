@@ -12,12 +12,13 @@
 package org.tangram.example;
 
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import org.tangram.ebean.Code;
 
 
@@ -26,13 +27,16 @@ import org.tangram.ebean.Code;
 @DiscriminatorValue("RootTopic")
 public class RootTopic extends Topic {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bottomLinkOf")
+    @ManyToMany
+    @JoinTable(name = "bottomlinks", joinColumns = @JoinColumn(name="topic", referencedColumnName = "EBEAN_INTERNAL_ID"), inverseJoinColumns = @JoinColumn(name="link", referencedColumnName = "EBEAN_INTERNAL_ID"))
     private List<Topic> bottomLinks;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(name = "css")
     private List<Code> css;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(name = "js")
     private List<Code> js;
 
     private ImageData logo;
