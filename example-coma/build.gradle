@@ -1,13 +1,13 @@
 /**
- * 
+ *
  * Copyright (C) 2011-2015 Martin Goellnitz
- * 
- * This work is licensed under the Creative Commons Attribution 3.0 
- * Unported License. To view a copy of this license, visit 
- * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
- * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+ *
+ * This work is licensed under the Creative Commons Attribution 3.0
+ * Unported License. To view a copy of this license, visit
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View,
  * California, 94041, USA.
- * 
+ *
  */
 import org.gradle.api.file.FileCopyDetails
 import org.gradle.api.file.FileTree
@@ -25,7 +25,7 @@ def useLocalRepo = project.hasProperty('local')
 
 buildscript {
   repositories {
-    mavenCentral()
+    jcenter()
     maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
   }
   dependencies {
@@ -48,7 +48,7 @@ repositories {
     mavenLocal()
   }
   // most of the usual stuff
-  mavenCentral()
+  jcenter()
   // the tangram stuff
   maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
 }
@@ -77,14 +77,14 @@ dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"
   webapp "tangram:tangram-coma:$tangram_version:war@war"
   compile "tangram:tangram-coma:$tangram_version"
-  
+
   compile "tangram:tangram-${tangram_backend}:$tangram_version"
-  
-  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
+
+  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"
   runtime "mysql:mysql-connector-java:5.1.31"
-  
+
   testCompile "junit:junit:$versions.junit"
-  
+
   // your container will have this for you
   providedCompile "$versions.servlet_api"
   providedCompile "$versions.jsp_api"
@@ -109,16 +109,16 @@ jar {
  */
 war {
   archiveName = "${project.name}-${tangram_backend}.war"
-  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
+  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml")
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
     excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
   } else {
     excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
   }
-  
+
   def examplesFile = new File("$projectDir/cap-examples.jar")
- 
+
   if ((!examplesFile.exists()) && project.hasProperty("coremediaUsername")) {
     download {
       src 'https://releases.coremedia.com/cmv/16/cms/5.2.1456/cap-examples.jar'
@@ -128,12 +128,12 @@ war {
       password coremediaPassword
     }
   } // if
-  
+
   if (examplesFile.exists()) {
     FileTree cmexamples = zipTree("$projectDir/cap-examples.jar")
-  
+
     // complicated stuff until http://issues.gradle.org/browse/GRADLE-3025 gets solved
-    
+
     // map css into correct target path
     into('') {
       from cmexamples
@@ -148,7 +148,7 @@ war {
         } // if
       } // eachFile
     } // into
-    
+
     // map templates into correct target path for standard tangram file layout
     into('WEB-INF') {
       from cmexamples

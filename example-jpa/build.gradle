@@ -29,7 +29,7 @@ buildscript {
     if (project.hasProperty('local')) {
       mavenLocal()
     }
-    mavenCentral()
+    jcenter()
     maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
   }
   dependencies {
@@ -55,7 +55,7 @@ repositories {
     mavenLocal()
   }
   // most of the usual stuff
-  mavenCentral()
+  jcenter()
   // the tangram stuff
   maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
 }

@@ -1,13 +1,13 @@
 /**
- * 
+ *
  * Copyright (C) 2011-2015 Martin Goellnitz
- * 
- * This work is licensed under the Creative Commons Attribution 3.0 
- * Unported License. To view a copy of this license, visit 
- * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
- * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+ *
+ * This work is licensed under the Creative Commons Attribution 3.0
+ * Unported License. To view a copy of this license, visit
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View,
  * California, 94041, USA.
- * 
+ *
  */
 defaultTasks 'clean', 'build'
 
@@ -20,7 +20,7 @@ def useLocalRepo = project.hasProperty('local')
 
 buildscript {
   repositories {
-    mavenCentral()
+    jcenter()
     maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
   }
   dependencies {
@@ -41,7 +41,7 @@ repositories {
     mavenLocal()
   }
   // most of the usual stuff
-  mavenCentral()
+  jcenter()
   // the tangram stuff
   maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
 }
@@ -63,27 +63,27 @@ dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"
   compile "tangram:tangram-nucleus:$tangram_version"
   // e.g. rdbms of DataNucleus and any db driver you'd like and which is supported
-  runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"  
+  runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
 
   runtime "tangram:tangram-${tangram_backend}:$tangram_version"
-  
+
   // For MongoDB
   // runtime "org.datanucleus:datanucleus-mongodb:$versions.datanucleus"
   // Flat File Formats
   // runtime "org.datanucleus:datanucleus-xml:$versions.datanucleus"
   // runtime "org.datanucleus:datanucleus-odf:$versions.datanucleus"
   // runtime "org.datanucleus:datanucleus-excel:$versions.datanucleus"
-  
+
   // For Yahoo OpenID example
   compile "org.pac4j:pac4j-openid:$versions.pac4j"
-  
-  webapp "tangram:tangram-editor:$tangram_version:war@war"  
+
+  webapp "tangram:tangram-editor:$tangram_version:war@war"
   runtime "tangram:tangram-editor:$tangram_version"
 
   /* For the FTP Service
   runtime "tangram:tangram-ftp:$tangram_version"
    */
-    
+
   /* dinistiq */
   if (tangram_backend == 'dinistiq') {
   }
@@ -99,15 +99,15 @@ dependencies {
     // dummies for compile scope to keep IDEs calm about groovy scripts
     compile"tangram:tangram-${tangram_backend}:$tangram_version"
   }
-  
+
   // This fixes a problem with the WAR lib directory calculation needed for run@cloudbees:
   // reallyNeeded "org.ow2.asm:asm:4.0"
-  
+
   runtime "hsqldb:hsqldb:1.8.0.10"
-  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"  
-  
+  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"
+
   testCompile "junit:junit:$versions.junit"
-  
+
   // your container will have this for you
   providedCompile "$versions.servlet_api"
   providedCompile "$versions.jsp_api"
@@ -127,7 +127,7 @@ jar {
 
 war {
   archiveName = "${project.name}-${tangram_backend}.war"
-  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
+  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml")
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   // see explanation in dependencies section when this will be needed alternatively for the line above
   // classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime + configurations.reallyNeeded

@@ -1,13 +1,13 @@
 /**
- * 
+ *
  * Copyright (C) 2011-2015 Martin Goellnitz
- * 
- * This work is licensed under the Creative Commons Attribution 3.0 
- * Unported License. To view a copy of this license, visit 
- * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
- * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+ *
+ * This work is licensed under the Creative Commons Attribution 3.0
+ * Unported License. To view a copy of this license, visit
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View,
  * California, 94041, USA.
- * 
+ *
  */
 defaultTasks 'clean', 'build'
 
@@ -19,7 +19,7 @@ def useLocalRepo = project.hasProperty('local')
 
 buildscript {
   repositories {
-    mavenCentral()
+    jcenter()
     maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
   }
   dependencies {
@@ -39,7 +39,7 @@ repositories {
     mavenLocal()
   }
   // most of the usual stuff
-  mavenCentral()
+  jcenter()
   // the tangram stuff
   maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
 }
@@ -59,13 +59,13 @@ dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"
   webapp "tangram:tangram-gae:$tangram_version:war@war"
   compile "tangram:tangram-gae:$tangram_version"
-  
+
   webapp "tangram:tangram-editor:$tangram_version:war@war"
   runtime "tangram:tangram-editor:$tangram_version"
-  
+
   runtime "tangram:tangram-$tangram_backend:$tangram_version"
-  compile "org.slf4j:slf4j-jdk14:$versions.slf4j"  
-  
+  compile "org.slf4j:slf4j-jdk14:$versions.slf4j"
+
   testCompile "junit:junit:$versions.junit"
 
   // your container will have this for you
@@ -95,7 +95,7 @@ jar {
 
 war {
   archiveName = "${project.name}-${tangram_backend}.war"
-  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml") 
+  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml")
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
     excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
