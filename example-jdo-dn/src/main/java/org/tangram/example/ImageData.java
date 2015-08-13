@@ -11,6 +11,7 @@
  */
 package org.tangram.example;
 
+import javax.jdo.annotations.Column;
 import javax.jdo.annotations.PersistenceCapable;
 import org.tangram.content.blob.MimedBlob;
 
@@ -18,6 +19,7 @@ import org.tangram.content.blob.MimedBlob;
 @PersistenceCapable
 public class ImageData extends Linkable implements MimedBlob {
 
+    @Column(jdbcType = "blob")
     private byte[] data;
 
     private String mimeType;

@@ -35,7 +35,7 @@ buildscript {
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
     classpath 'tangram:gradle-plugin:1.0-SNAPSHOT'
-    classpath 'org.hibernate:hibernate-gradle-plugin:4.3.10.Final'
+    classpath 'org.hibernate:hibernate-gradle-plugin:4.3.11.Final'
   }
 }
 

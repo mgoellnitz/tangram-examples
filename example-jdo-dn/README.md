@@ -1,7 +1,7 @@
 Tangram JDO Example
 ===================
 
-Example with Java Data Objects as the persistence layer using DataNucleus Access 
+Example with Java Data Objects as the persistence layer using DataNucleus Access
 Plattform and Spring, Google Guice, or Dinistiq for the  Application Wire-up.
 
 Setup system
@@ -30,12 +30,12 @@ Call the editor and log in
 http://localhost:12380/example-jdo-dn/s/list
 ```
 
-The user is "admin" and password is "admin" as you might find in the config files 
+The user is "admin" and password is "admin" as you might find in the config files
 later - in default state the whole application is protected
 
 Create an instance of type "org.tangram.nucleus.solution.RootTopic"
 
-Create an instance of type Code with mime-type "text/html" and annotation 
+Create an instance of type Code with mime-type "text/html" and annotation
 "org.tangram.nucleus.solution.RootTopic"
 
 Call with your browser the URL
@@ -44,12 +44,20 @@ Call with your browser the URL
 http://localhost:12380/example-jdo-dn/s/id_RootTopic:1
 ```
 
+Example Content
+---------------
+
+For the JDO example you will have to apply one change to the freshly imported example content (example-content.xml):
+
+Rename the Groovy Code and Template annotations from org.tangram.example.Topic to org.tangram.example.AbstractTopic as
+mentioned in the code comment.
+
 Customize Database System to use
 --------------------------------
 
-Any configuration for the database system is done through the tangram config files - 
-not with a jdoconfig.xml - to jave the setup in one place. One for dinistiq and one 
-for spring. You will find many examples for database setup and target plattforms 
+Any configuration for the database system is done through the tangram config files -
+not with a jdoconfig.xml - to jave the setup in one place. One for dinistiq and one
+for spring. You will find many examples for database setup and target plattforms
 like cloudbees there.
 
 With hsqldb this tool might be helpfull:
