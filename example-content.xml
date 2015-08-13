@@ -15,16 +15,16 @@
 &lt;head&gt;
   &lt;title&gt;$self.title&lt;/title&gt;
   &lt;meta http-equiv="content-type" content="text/html; charset=UTF-8" /&gt;
-  &lt;meta name="viewport" content="width=320, initial-scale=0.95" /&gt;  
+  &lt;meta name="viewport" content="width=320, initial-scale=0.95" /&gt;
   &lt;meta name="keywords" content="$self.keywords" /&gt;
   &lt;meta name="language" content="de" /&gt;
 #foreach($css in $self.rootTopic.css)
   #include($css 'cssimport')
-  
+
 #end
 #foreach($js in $self.rootTopic.js)
   #include($js 'jsimport')
-  
+
 #end
 &lt;/head&gt;
 &lt;body&gt;
@@ -69,17 +69,17 @@ import org.tangram.example.Topic;
 import org.tangram.example.ImageData;
 
 public class ExampleLinkScheme implements LinkHandler, BeanFactoryAware {
-  
+
   private static Logger log = LoggerFactory.getLogger(ExampleLinkScheme.class);
 
   private BeanFactory beanFactory;
-  
-  
+
+
   public void setBeanFactory(BeanFactory factory) {
     beanFactory = factory;
   } // setBeanFactory()
-  
-  
+
+
   public Set&lt;String&gt; getCustomViews() {
     Set &lt;String&gt; result = new HashSet&lt;String&gt;();
     result.add(Constants.DEFAULT_VIEW);
@@ -87,7 +87,7 @@ public class ExampleLinkScheme implements LinkHandler, BeanFactoryAware {
   } // getCustomViews()
 
 
-  public Link createLink(HttpServletRequest request, HttpServletResponse response, Object bean, String action, String view) {    
+  public Link createLink(HttpServletRequest request, HttpServletResponse response, Object bean, String action, String view) {
         Link result = null;
         if ((action==null)&amp;&amp;(view==null)) {
             if (bean instanceof RootTopic) {
@@ -116,13 +116,13 @@ public class ExampleLinkScheme implements LinkHandler, BeanFactoryAware {
         return result;
   } // createLink()
 
-    
+
   private TargetDescriptor rootDescriptor = null;;
-  
-  
+
+
   public TargetDescriptor parseLink(String url, HttpServletResponse response) {
     TargetDescriptor result = null;
-    if (url.length() < 2) {
+    if (url.length() &lt; 2) {
         try {
             if (rootDescriptor==null) {
                 List&lt;RootTopic&gt; rs = beanFactory.listBeans(RootTopic.class, null);
@@ -160,7 +160,7 @@ public class ExampleLinkScheme implements LinkHandler, BeanFactoryAware {
       } // if
       return result;
   } // parseLink()
-    
+
 } // ExampleLinkScheme
 </code></Code><Code><annotation>org.tangram.example.Linkable.description</annotation><mimeType>text/html</mimeType><code>## This template overrides the value printed for each items beneath references in the editor.
 #if($self.title)$self.title#else-#end</code></Code><Code><annotation>screen</annotation><mimeType>text/css</mimeType><code>body {
@@ -239,8 +239,8 @@ h1 { font-size: 14pt; }
 .clear {
   clear: both;
 }
-</code></Code><Code><annotation>only screen and (max-width: 480px)</annotation><mimeType>text/css</mimeType><code>body { 
-  padding: 0; 
-}</code></Code><Code><annotation>only screen and (max-width: 480px)</annotation><mimeType>text/css</mimeType><code>.box { 
-  height: 300px; 
+</code></Code><Code><annotation>only screen and (max-width: 480px)</annotation><mimeType>text/css</mimeType><code>body {
+  padding: 0;
+}</code></Code><Code><annotation>only screen and (max-width: 480px)</annotation><mimeType>text/css</mimeType><code>.box {
+  height: 300px;
 }</code></Code></list>
