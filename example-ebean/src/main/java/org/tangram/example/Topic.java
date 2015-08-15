@@ -44,6 +44,8 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     @ManyToMany
     private List<Article> elements;
 
+    // TODO: For now transient until we resolve this
+    @Transient
     private ImageData thumbnail;
 
     @Column(length = 1280)
