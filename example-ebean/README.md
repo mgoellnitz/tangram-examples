@@ -11,8 +11,8 @@ The example is pre-configured to use an h2 database local to your development di
 Example Content
 ---------------
 
-The example content is imported into the h2 database but it cannot be imported right away from the example-content.xml
-file.
+After importing the example content (example-content.xml) it may be necessary to add the subtopic items to the root
+topic instance.
 
 Custom Data Model
 -----------------
