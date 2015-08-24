@@ -19,7 +19,7 @@ def tangram_version = '1.0-SNAPSHOT'
 // Some switches to have all options in one example project - with optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
 def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, hibernate, or datanucleus
-// JPA must be used without for Hibernate and can optionally be used without except for DataNucleus.
+// JPA can be used with or without byte code transformation except for DataNucleus where it is always necessary.
 def do_bytecode_transform = project.hasProperty('enhance') ? true : false
 // If you compile tangram yourself, you might want to try your local repo
 def useLocalRepo = project.hasProperty('local')
@@ -35,7 +35,7 @@ buildscript {
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
     classpath 'tangram:gradle-plugin:1.0-SNAPSHOT'
-    classpath 'org.hibernate:hibernate-gradle-plugin:4.3.11.Final'
+    classpath 'org.hibernate:hibernate-gradle-plugin:5.0.0.Final'
   }
 }
 
