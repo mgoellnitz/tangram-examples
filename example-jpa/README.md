@@ -1,7 +1,7 @@
 Tangram JPA Example
 ===================
 
-To be used with bytecode enhanced / woven or plain implementations for OpenJPA, 
+To be used with bytecode enhanced / woven or plain implementations for OpenJPA,
 EclipseLink, Hibernate or DataNucleus Access Plattform.
 
 Setup system
@@ -29,6 +29,17 @@ to select the implementation via the "jpa" property whith the possible values
 gradle -Pbackend=guicy -Pjpa=eclipselink clean build jettyRunWar
 ```
 
+Also the implementations allow or even require a byte code enhancement after compilation
+for the implementation of the active record pattern. While DataNucleus requires this, it
+can be activated optionally for EclipseLink, Hibernate, and OpenJPA.
+
+The byte code transformation - for most JPA systems called enhancing - can be switched off
+through the command line on building as well.
+
+```bash
+gradle -Pbackend=dinistiq -Pjpa=openjpa -Pnoenhance clean build jettyRunWar
+```
+
 First Input and Test
 --------------------
 
@@ -38,12 +49,12 @@ Call the editor and log in
 http://localhost:12380/example-jpa/s/list
 ```
 
-The user is "admin" and password is "admin" as you might find in the config files 
+The user is "admin" and password is "admin" as you might find in the config files
 later - in default state the whole application is protected
 
 Create an instance of type "org.tangram.jpa.solution.RootTopic"
 
-Create an instance of type Code with mime-type "text/html" and annotation 
+Create an instance of type Code with mime-type "text/html" and annotation
 "org.tangram.nucleus.solution.RootTopic"
 
 Call with your browser the URL
@@ -57,21 +68,21 @@ where xy is the numeric ID of the root topic.
 Customize JPA Implementation
 ----------------------------
 
-The tangram jpa jar comes with NO dependency for the implementations OpenJPA, 
-EclipseLink, or DataNucleus. 
+The tangram jpa jar comes with NO dependency for the implementations OpenJPA,
+EclipseLink, or DataNucleus.
 
-Any application using the module will have to add these dependencies itself. This 
+Any application using the module will have to add these dependencies itself. This
 also holds true, when you select any of the variations of the JPA module with
 byte-transformed/enhanced/woven (synonyms!) classes since they carry all the same
 set of dependencies.
 
-When changing the JPA backend, you have to prepare two things. The byte-code 
+When changing the JPA backend, you have to prepare two things. The byte-code
 transformation is implementation specific and carries different names as well.
-The persistence.xml despite the few things which need to be set here for tangram 
+The persistence.xml despite the few things which need to be set here for tangram
 (to have everything in one place most of the stuff - as with jdo - moved to
-a jpaConfigOverride element in the application configuration) it has to be 
+a jpaConfigOverride element in the application configuration) it has to be
 specific to the used implementation implementation as well. This cannot be achieved
-by different persistence units since elements required by one implementation interfere 
+by different persistence units since elements required by one implementation interfere
 with the persistence.xml reading of the other.
 
 The example has a property "jpa_backend" which tries to switch everything needed
@@ -82,9 +93,9 @@ build.gradle and make it fit your needs.
 Customize Database System to use
 --------------------------------
 
-Most configuration for the database system is done through the tangram config 
-files - not within the persistence.xml - to have the setup in one place as much 
-as possible. 
+Most configuration for the database system is done through the tangram config
+files - not within the persistence.xml - to have the setup in one place as much
+as possible.
 
 For spring the "jpaConfigOverrides" are placed in the example.xml bean configuration
 for the example application. For dinisiq the same set of values can be configured in

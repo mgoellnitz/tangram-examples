@@ -17,10 +17,10 @@ def tangram_version = '1.0-SNAPSHOT'
 // jpaConfigOverrides to point to the correct database file.
 
 // Some switches to have all options in one example project - with optional external override
-def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
+def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring, dinistiq, guicy
 def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, hibernate, or datanucleus
 // JPA can be used with or without byte code transformation except for DataNucleus where it is always necessary.
-def do_bytecode_transform = project.hasProperty('enhance') ? true : false
+def do_bytecode_transform = !project.hasProperty('noenhance')
 // If you compile tangram yourself, you might want to try your local repo
 def useLocalRepo = project.hasProperty('local')
 
@@ -35,7 +35,6 @@ buildscript {
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
     classpath 'tangram:gradle-plugin:1.0-SNAPSHOT'
-    classpath 'org.hibernate:hibernate-gradle-plugin:5.0.0.Final'
   }
 }
 
@@ -43,12 +42,12 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'tangram'
-if ((jpa_backend == 'hibernate') && (do_bytecode_transform)) {
-  apply plugin: 'hibernate'
-}
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+
+// A switch from the tangram plugin - true is the default
+enhancer.enabled=do_bytecode_transform
 
 repositories {
   if (useLocalRepo) {
@@ -77,16 +76,15 @@ dependencies {
   // For Yahoo OpenID example
   compile "org.pac4j:pac4j-openid:$versions.pac4j"
 
-  /* OpenJPA */
-  if (jpa_backend == 'openjpa') {
-    if (do_bytecode_transform) {
-      compile "tangram:tangram-jpa:$tangram_version:openjpa"
-    } else {
-      compile "tangram:tangram-jpa:$tangram_version"
-    }
-    compile ("org.apache.openjpa:openjpa:$versions.openjpa") {
-      exclude group: 'asm'
-    }
+  /* For JPA with DataNucleus */
+  if (jpa_backend == 'datanucleus') {
+    // DataNucleus does not work without byte-code transformation.
+    compile "tangram:tangram-jpa:$tangram_version:nucleus"
+    compile "org.datanucleus:datanucleus-api-jpa:$versions.datanucleus"
+    compile "org.datanucleus:datanucleus-core:$versions.datanucleus"
+    compile "$versions.jdo_api"
+    compile "$versions.persistence_api"
+    runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
   }
 
   /* EclipseLink */
@@ -103,9 +101,7 @@ dependencies {
   // For JPA with Hibernate
   if (jpa_backend == 'hibernate') {
     if (do_bytecode_transform) {
-      // There is no Hibernate ready byte-code transformed version of tangram-jpa.
-      // compile "tangram:tangram-jpa:$tangram_version:hibernate"
-      compile "tangram:tangram-jpa:$tangram_version"
+      compile "tangram:tangram-jpa:$tangram_version:hibernate"
     } else {
       compile "tangram:tangram-jpa:$tangram_version"
     }
@@ -114,15 +110,16 @@ dependencies {
     compile "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final"
   }
 
-  /* For JPA with DataNucleus */
-  if (jpa_backend == 'datanucleus') {
-    // DataNucleus does not work without byte-code transformation.
-    compile "tangram:tangram-jpa:$tangram_version:nucleus"
-    compile "org.datanucleus:datanucleus-api-jpa:$versions.datanucleus"
-    compile "org.datanucleus:datanucleus-core:$versions.datanucleus"
-    compile "$versions.jdo_api"
-    compile "$versions.persistence_api"
-    runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
+  /* OpenJPA */
+  if (jpa_backend == 'openjpa') {
+    if (do_bytecode_transform) {
+      compile "tangram:tangram-jpa:$tangram_version:openjpa"
+    } else {
+      compile "tangram:tangram-jpa:$tangram_version"
+    }
+    compile ("org.apache.openjpa:openjpa:$versions.openjpa") {
+      exclude group: 'asm'
+    }
   }
 
   runtime "tangram:tangram-${tangram_backend}:$tangram_version"
