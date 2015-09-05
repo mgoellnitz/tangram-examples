@@ -22,9 +22,6 @@ import org.pac4j.openid.client.YahooOpenIdClient
 log.info "starting"
 String dispatcherPath = config.getProperty("dispatcherPath", "/s")
 
-module.bindConstant().annotatedWith(Names.named("shiro.loginUrl")).to("/shiro/login.jsp")
-module.bindConstant().annotatedWith(Names.named("shiro.successUrl")).to(dispatcherPath+"/list")
-
 log.info "configuring persistent restart cache"
 module.bind(PersistentRestartCache.class).toInstance(new DummyRestartCache())
 
