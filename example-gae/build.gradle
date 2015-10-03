@@ -11,7 +11,7 @@
  */
 defaultTasks 'clean', 'build'
 
-def tangram_version = '1.0-SNAPSHOT'
+def tangram_version = '1.0.0'
 
 // Switch to have the options in one example project - optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq
@@ -20,10 +20,9 @@ def useLocalRepo = project.hasProperty('local')
 buildscript {
   repositories {
     jcenter()
-    maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
   }
   dependencies {
-    classpath 'tangram:gradle-plugin:1.0-SNAPSHOT'
+    classpath 'tangram:gradle-plugin:1.0.0'
   }
 }
 
@@ -38,10 +37,8 @@ repositories {
   if (useLocalRepo) {
     mavenLocal()
   }
-  // most of the usual stuff
+  // Everything we use can be found here
   jcenter()
-  // the tangram stuff
-  maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
 }
 
 configurations {

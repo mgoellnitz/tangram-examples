@@ -11,7 +11,7 @@
  */
 defaultTasks 'clean', 'build'
 
-def tangram_version = '1.0-SNAPSHOT'
+def tangram_version = '1.0.0'
 
 // When changing the database backend don't forget to switch the files
 // jpaConfigOverrides to point to the correct database file.
@@ -30,11 +30,10 @@ buildscript {
       mavenLocal()
     }
     jcenter()
-    maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
   }
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
-    classpath 'tangram:gradle-plugin:1.0-SNAPSHOT'
+    classpath 'tangram:gradle-plugin:1.0.0'
   }
 }
 
@@ -53,10 +52,8 @@ repositories {
   if (useLocalRepo) {
     mavenLocal()
   }
-  // most of the usual stuff
+  // Everything we use can be found here
   jcenter()
-  // the tangram stuff
-  maven { url "https://raw.githubusercontent.com/mgoellnitz/artifacts/master" }
 }
 
 configurations {
@@ -72,6 +69,7 @@ artifacts {
 
 dependencies {
   webapp "tangram:tangram-core:$tangram_version:war@war"
+  compile "tangram:tangram-core:$tangram_version"
 
   // For Yahoo OpenID example
   compile "org.pac4j:pac4j-openid:$versions.pac4j"
