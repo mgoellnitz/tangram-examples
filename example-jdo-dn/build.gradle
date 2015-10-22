@@ -9,8 +9,14 @@
  * California, 94041, USA.
  *
  */
-plugins {
-  id "tangram.gradle.plugin" version "1.0.0"
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    // Cannot work with the version labels from the tangram plugin here
+    classpath 'tangram:gradle-plugin:1.0.0'
+  }
 }
 
 def tangram_version = '1.0.0'

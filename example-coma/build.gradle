@@ -19,12 +19,10 @@ buildscript {
     jcenter()
   }
   dependencies {
+    // Cannot work with the version labels from the tangram plugin here
+    classpath 'tangram:gradle-plugin:1.0.0'
     classpath 'de.undercouch:gradle-download-task:2.0.0'
   }
-}
-
-plugins {
-  id "tangram.gradle.plugin" version "1.0.0"
 }
 
 def tangram_version = '1.0.0'
