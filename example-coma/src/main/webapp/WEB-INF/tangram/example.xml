@@ -2,13 +2,13 @@
 <!--
 
  Copyright (C) 2011-2015 Martin Goellnitz
- 
- This work is licensed under the Creative Commons Attribution 3.0 
- Unported License. To view a copy of this license, visit 
- http://creativecommons.org/licenses/by/3.0/ or send a letter to 
- Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+
+ This work is licensed under the Creative Commons Attribution 3.0
+ Unported License. To view a copy of this license, visit
+ http://creativecommons.org/licenses/by/3.0/ or send a letter to
+ Creative Commons, 444 Castro Street, Suite 900, Mountain View,
  California, 94041, USA.
- 
+
 -->
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
@@ -19,22 +19,16 @@
   <!-- non generics -->
 
   <context:component-scan base-package="org.tangram.example.menusite" />
-  
+
   <!--
-       Tangram supports spring request interceptors. As a default we use a password interceptor 
-       for the security feature in core and a measure time interceptor for performance checks  
-  -->  
-    
-  <util:map id="usernamePasswordMapping" key-type="java.lang.String" value-type="java.lang.String"/>
-      
-  <!--
-  <bean id="persistentRestartCache" class="org.tangram.util.FileRestartCache">
-    <property name="filename" value="${tangram.restart.cache.file}"/>
-  </bean>
+       Tangram supports spring request interceptors. As a default we use a password interceptor
+       for the security feature in core and a measure time interceptor for performance checks.
   -->
-  
+
+  <util:map id="usernamePasswordMapping" key-type="java.lang.String" value-type="java.lang.String"/>
+
   <bean id="persistentRestartCache" class="org.tangram.util.DummyRestartCache" />
-  
+
   <bean id="beanFactory" class="org.tangram.coma.ComaBeanFactory">
     <property name="dbDriver" value="${coma.db.driver}" />
     <property name="dbUrl" value="${coma.db.url}" />
