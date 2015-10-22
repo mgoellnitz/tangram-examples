@@ -41,9 +41,6 @@ defaultTasks 'clean', 'build'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-// A switch from the tangram plugin - true is the default
-enhancer.enabled=do_bytecode_transform
-
 repositories {
   if (useLocalRepo) {
     mavenLocal()
