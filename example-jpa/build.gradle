@@ -35,11 +35,15 @@ def useLocalRepo = project.hasProperty('local')
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'jetty'
+apply plugin: 'tangram'
 
 defaultTasks 'clean', 'build'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+
+// A switch from the tangram plugin - true is the default
+enhancer.enabled=do_bytecode_transform
 
 repositories {
   if (useLocalRepo) {
