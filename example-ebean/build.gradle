@@ -9,7 +9,9 @@
  * California, 94041, USA.
  *
  */
-defaultTasks 'clean', 'build'
+plugins {
+  id "tangram.gradle.plugin" version "1.0.0"
+}
 
 def tangram_version = '1.0.0'
 
@@ -18,19 +20,12 @@ def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // s
 // If you compile tangram yourself, you might want to try your local repo
 def useLocalRepo = project.hasProperty('local')
 
-buildscript {
-  repositories {
-    jcenter()
-  }
-  dependencies {
-    classpath 'tangram:gradle-plugin:1.0.0'
-  }
-}
-
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'tangram'
+
+defaultTasks 'clean', 'build'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7

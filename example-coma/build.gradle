@@ -14,7 +14,18 @@ import org.gradle.api.file.FileTree
 import org.gradle.api.file.RelativePath
 import de.undercouch.gradle.tasks.download.Download
 
-defaultTasks 'clean', 'build'
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'de.undercouch:gradle-download-task:2.0'
+  }
+}
+
+plugins {
+  id "tangram.gradle.plugin" version "1.0.0"
+}
 
 def tangram_version = '1.0.0'
 
@@ -23,21 +34,13 @@ def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // s
 // If you compile tangram yourself, you might want to try your local repo
 def useLocalRepo = project.hasProperty('local')
 
-buildscript {
-  repositories {
-    jcenter()
-  }
-  dependencies {
-    classpath 'tangram:gradle-plugin:1.0.0'
-    classpath 'de.undercouch:gradle-download-task:1.0'
-  }
-}
-
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'tangram'
 apply plugin: 'download-task'
+
+defaultTasks 'clean', 'build'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
