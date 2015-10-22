@@ -19,7 +19,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'de.undercouch:gradle-download-task:2.0'
+    classpath 'de.undercouch:gradle-download-task:2.0.0'
   }
 }
 
@@ -38,7 +38,7 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'tangram'
-apply plugin: 'download-task'
+apply plugin: 'de.undercouch.download'
 
 defaultTasks 'clean', 'build'
 
