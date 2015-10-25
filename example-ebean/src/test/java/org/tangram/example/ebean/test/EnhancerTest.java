@@ -12,9 +12,9 @@
 package org.tangram.example.ebean.test;
 
 import java.lang.reflect.Method;
-import org.junit.Assert;
-import org.junit.Test;
 import org.tangram.example.RootTopic;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 
 public class EnhancerTest {
@@ -31,7 +31,7 @@ public class EnhancerTest {
                 flag = true;
             } // if
         } // for
-        Assert.assertTrue("Classes not enhanced - output unusable", flag);
+        Assert.assertTrue(flag, "Classes not enhanced - output unusable");
     } // testIsEnhanced()
 
 } // EnhancerTest

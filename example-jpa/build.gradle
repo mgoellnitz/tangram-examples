@@ -11,17 +11,18 @@
  */
 buildscript {
   repositories {
+    maven { url "http://oss.jfrog.org/artifactory/oss-snapshot-local" }
     jcenter()
   }
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
-    classpath 'tangram:gradle-plugin:1.0.0'
+    classpath 'tangram:gradle-plugin:1.1-SNAPSHOT'
   }
 }
 
-def tangram_version = '1.0.1'
+def tangram_version = '1.1-SNAPSHOT'
 
-// When using spring and you want to change the database backend, don't forget to 
+// When using spring and you want to change the database backend, don't forget to
 // change the entry to point to the correct database file.
 
 // Some switches to have all options in one example project - with optional external override
@@ -49,6 +50,7 @@ repositories {
   if (useLocalRepo) {
     mavenLocal()
   }
+  maven { url "http://oss.jfrog.org/artifactory/oss-snapshot-local" }
   // Everything we use can be found here
   jcenter()
 }
@@ -145,7 +147,7 @@ dependencies {
   runtime "hsqldb:hsqldb:1.8.0.10"
   runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"
 
-  testCompile "junit:junit:$versions.junit"
+  testCompile "org.testng:testng:$versions.testng"
 
   // your container will have this for you
   providedCompile "$versions.servlet_api"
@@ -154,6 +156,11 @@ dependencies {
 
 processResources {
   expand (jpa: "$jpa_backend")
+}
+
+test {
+  useTestNG() {
+  }
 }
 
 jar {

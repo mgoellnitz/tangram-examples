@@ -12,9 +12,9 @@
 package org.tangram.example.nucleus.test;
 
 import java.lang.reflect.Method;
-import org.junit.Assert;
-import org.junit.Test;
 import org.tangram.example.RootTopic;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 
 public class JdoEnhancerTest {
@@ -27,11 +27,11 @@ public class JdoEnhancerTest {
         Method[] methods = RootTopic.class.getMethods();
         boolean flag = false;
         for (Method method : methods) {
-            if (method.getName().startsWith("jdo")) {
+            if (method.getName().startsWith("dn")) {
                 flag = true;
             } // if
         } // for
-        Assert.assertTrue("Classes not enhanced - output unusable", flag);
+        Assert.assertTrue(flag, "Classes not enhanced - output unusable");
     } // testIsEnhanced()
 
 } // JdoEnhancerTest
