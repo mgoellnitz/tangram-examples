@@ -11,7 +11,7 @@
  */
 defaultTasks 'clean', 'build'
 
-def tangram_version = '1.0.0'
+def tangram_version = '1.0.1'
 
 // Switch to have the options in one example project - optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring or dinistiq

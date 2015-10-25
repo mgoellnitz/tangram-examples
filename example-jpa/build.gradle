@@ -19,10 +19,10 @@ buildscript {
   }
 }
 
-def tangram_version = '1.0.0'
+def tangram_version = '1.0.1'
 
-// When changing the database backend don't forget to switch the files
-// jpaConfigOverrides to point to the correct database file.
+// When using spring and you want to change the database backend, don't forget to 
+// change the entry to point to the correct database file.
 
 // Some switches to have all options in one example project - with optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring, dinistiq, guicy
@@ -152,15 +152,19 @@ dependencies {
   providedCompile "$versions.jsp_api"
 }
 
+processResources {
+  expand (jpa: "$jpa_backend")
+}
+
 jar {
   if (tangram_backend == 'spring') {
     excludes = [ 'dinistiq/**', 'guicy/**' ]
   }
   if (tangram_backend == 'guicy') {
-    excludes = [ 'dinistiq/**' ]
+    excludes = [ 'dinistiq/**', 'tangram/**' ]
   }
   if (tangram_backend == 'dinistiq') {
-    excludes = [ 'guicy/**' ]
+    excludes = [ 'guicy/**', 'tangram/**' ]
   }
   // Use backend specific persistence.xml for JPA
   // In this example use the same pesistence.xml which was used for enhancing or weaving

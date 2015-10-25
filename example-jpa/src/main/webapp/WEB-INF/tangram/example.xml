@@ -51,7 +51,17 @@
     <constructor-arg>
       <map>
         <!--
+             Generic hsqldb config example using property based file path. Content provided when run directly in the development environment.
+             
+        -->
+        <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+        <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:${db.base.path}/hsqldb/tangram"/>
+        <entry key="javax.persistence.jdbc.user" value="sa"/>
+        <entry key="javax.persistence.jdbc.password" value=""/>
+        
+        <!--
              hsqldb config example for DataNucleus. Content provided when run directly in the development environment.
+             
         <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:datanucleus/hsqldb/tangram"/>
         <entry key="javax.persistence.jdbc.user" value="sa"/>
@@ -122,11 +132,12 @@
 
         <!--
              hsqldb config example for OpenJPA. Content provided when run directly in the development environment.
-        -->
+             
         <entry key="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
         <entry key="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:openjpa/hsqldb/tangram"/>
         <entry key="javax.persistence.jdbc.user" value="sa"/>
         <entry key="javax.persistence.jdbc.password" value=""/>
+        -->
         <!--
              h2sql config example for OpenJPA.
 
