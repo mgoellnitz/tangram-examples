@@ -15,10 +15,10 @@ gradle build
 
 (Optionally deploy the created war file to a JSP/Servlet Container of your choice)
 
-Start this container of your choice or use integrated jetty
+Start this container of your choice or use integrated gretty plugin
 
 ```bash
-gradle jettyRunWar
+gradle appRun
 ```
 
 First Input and Test

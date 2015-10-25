@@ -10,23 +10,20 @@ comments of the build files you will additionally find the options to tweak the
 application to use the full bandwidth of flavours:
 
 * JPA, JDO, or EBean as Persistence APIs and automated Class-Files enhancing/weaving.
-* RDBMS, Office Files, Google App Engine, or MongoDB as the database.
+* RDBMS, Office Files, or MongoDB as the database.
 * Springframework, Dinistiq, or Google Guice as DI environments.
 
 The target platforms are
 
 * Local/Custom server
 * OpenShift
-* Google App Engine
 
-This would result in some 36 examples for every single one of the possible combinations.
+This would result in some 24 examples for every single one of the possible combinations.
 So some of the switches can be found in the gradle build files to change a spring
 example into a non-spring example. The ORM APIs all got their separate example
-while the target platforms should be handled within the storage solution chosen. -
-Always with the exception of the Google App Engine, which is very special in many
-respects.
+while the target platforms should be handled within the storage solution chosen.
 
-The examples are also meant as a starting point for your own projects.
+These examples are also meant as a starting point for your own projects.
 
 A
 
@@ -39,7 +36,7 @@ in this directory should do the job.
 Except for the Google App Engine one, all examples can be started via
 
 ```bash
-gradle jettyRunWar
+gradle appRunWar
 ```
 
 and are running as a default on port 12380 - unless you changed that. They don't
@@ -48,8 +45,8 @@ depend on anything else running on your system than tangram itself.
 Example Content
 ---------------
 
-Id you decide to try an empty database, you can use the exported version of the content in example-content.xml. Use the
-generic tangram importer at http://localhost:12380/<app>/importer and select the XML file and import it.
+If you decide to try an empty database, you can use the exported version of the 
+content in example-content.xml. Use the generic tangram importer at http://localhost:12380/<app>/importer and select the XML file and import it.
 
 Dependency Injection
 --------------------
@@ -84,6 +81,3 @@ the default (OpenJPA) from the build file by a simple
 ```bash
 gradle -Pjpa=openjpa build
 ```
-
-Also note that your will need to change the database configuration in the config files
-(jpaConfigOverrides) along with the change of the JPA implementation.

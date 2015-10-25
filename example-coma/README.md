@@ -1,18 +1,17 @@
 (Too) Simple CoreMedia Adaptor CoMA for Tangram
 ===============================================
 
-This example illustrates the use of the CoreMedia Adaptor of Tangram 
-(Now tested with CoreMedia 7) to view simple content models in a relatively direct 
+This example illustrates the use of the CoreMedia Adapter of Tangram 
+(Now tested with CoreMedia 8) to view simple content models in a relatively direct 
 manner - so with a very lean/little/no business logic.
 
 Running this application is a little more complicated than compiling and starting 
 like most of the other Tangram examples. This is due to the fact that we rely on 
 your CoreMedia CMS Database and Content being in place. CoMA is  no replacement 
-but an addendum to your existing CoreMedia CMS infrastructure in Versions CMS 2008 
-and CoreMedia 7! (We left out testing with Version 6)
+but an addendum to your existing CoreMedia CMS infrastructure in Versions CMS 2008, CoreMedia 7, or CoreMedia 8. (We left out testing with Version 6)
 
 There is not much code and no templates in this directory since the application
-we we is the very small example from CoreMedia, the MenuSite, which was last published 
+we use is the very small example from CoreMedia, the MenuSite, which was last published 
 with version CMS 2008 at
 
 https://releases.coremedia.com/cmv/16/cms/5.2.1456/cap-examples.jar

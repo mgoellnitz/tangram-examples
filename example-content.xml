@@ -76,9 +76,11 @@ h1 { font-size: 14pt; }
 }
 </code></Code><Code><annotation>only screen and (max-width: 480px)</annotation><mimeType>text/css</mimeType><code>body {
   padding: 0;
-}</code></Code><Code><annotation>only screen and (max-width: 480px)</annotation><mimeType>text/css</mimeType><code>.box {
+}
+
+.box {
   height: 300px;
-}</code></Code><Code><annotation>org.tangram.example.Topic</annotation><mimeType>text/html</mimeType><code>&lt;html&gt;
+}</code></Code><Code><annotation>only screen and (max-width: 480px)</annotation><mimeType>text/css</mimeType><code></code></Code><Code><annotation>org.tangram.example.Topic</annotation><mimeType>text/html</mimeType><code>&lt;html&gt;
 &lt;head&gt;
   &lt;!-- For JDO rename annotation to org.tangram.example.AbstractTopic --&gt;
   &lt;title&gt;$self.title&lt;/title&gt;
@@ -142,6 +144,8 @@ public class ExampleLinkScheme implements LinkHandler, BeanFactoryAware {
 
   private BeanFactory beanFactory;
 
+  private TargetDescriptor rootDescriptor = null;;
+
 
   public void setBeanFactory(BeanFactory factory) {
     beanFactory = factory;
@@ -156,77 +160,73 @@ public class ExampleLinkScheme implements LinkHandler, BeanFactoryAware {
 
 
   public Link createLink(HttpServletRequest request, HttpServletResponse response, Object bean, String action, String view) {
-        Link result = null;
-        if ((action==null)&amp;&amp;(view==null)) {
-            if (bean instanceof RootTopic) {
-                result = new Link();
-                result.setUrl("/");
-            } else {
-                if ((bean instanceof Topic)||(bean instanceof ImageData)) {
-                    String title = "-";
-                    if (bean instanceof Linkable) {
-                        try {
-                            title = Utils.urlize(((Linkable)bean).getTitle());
-                        } catch (UnsupportedEncodingException uee) {
-                            log.error("createLink()", uee);
-                        } // try
-                    } // if
-                    String url = "/"+title+"/"+bean.id;
-                    if (bean instanceof Topic) {
-                      url = url+".html";
-                    } // if
-                    result = new Link();
-                    // result.addHandler("onclick", "pageload()");
-                    result.setUrl(url);
-                } // if
-            } // if
+    Link result = null;
+    if ((action==null)&amp;&amp;(view==null)) {
+      if (bean instanceof RootTopic) {
+        result = new Link();
+        result.setUrl("/");
+      } else {
+        if ((bean instanceof Topic)||(bean instanceof ImageData)) {
+          String title = "-";
+          if (bean instanceof Linkable) {
+            try {
+              title = Utils.urlize(((Linkable)bean).getTitle());
+            } catch (UnsupportedEncodingException uee) {
+              log.error("createLink()", uee);
+            } // try
+          } // if
+          String url = "/"+title+"/"+bean.id;
+          if (bean instanceof Topic) {
+            url = url+".html";
+          } // if
+          result = new Link();
+          // result.addHandler("onclick", "pageload()");
+          result.setUrl(url);
         } // if
-        return result;
+      } // if
+    } // if
+    return result;
   } // createLink()
-
-
-  private TargetDescriptor rootDescriptor = null;;
-
 
   public TargetDescriptor parseLink(String url, HttpServletResponse response) {
     TargetDescriptor result = null;
     if (url.length() &lt; 2) {
-        try {
-            if (rootDescriptor==null) {
-                List&lt;RootTopic&gt; rs = beanFactory.listBeans(RootTopic.class, null);
-                RootTopic root = null;
-                if (rs.size()==1) {
-                    root = rs.get(0);
-                } else {
-                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Have "+rs.size()+" RootTopics in data store");
-                } // if
-                rootDescriptor = new TargetDescriptor(root, null, null);
-            } // if
-            result = rootDescriptor;
-        } catch (Exception e) {
-            result = new TargetDescriptor(e, null, null);
-        } // try/catch
-      } else {
-          Object bean  = null;
-          String[] elements = url.split("/");
-          String id = null;
-          for (String element : elements) {
-            if (element.indexOf(":") &gt; 0) {
-              int idx = element.indexOf(".");
-              if (idx &gt;= 0) {
-                element = element.substring(0, idx);
-              } // if
-              id = element;
-              bean = beanFactory.getBean(element);
-            } // if
-          } // for
-          if (bean != null) {
-              result = new TargetDescriptor(bean, null, null);
+      try {
+        if (rootDescriptor==null) {
+          List&lt;RootTopic&gt; rs = beanFactory.listBeans(RootTopic.class, null);
+          RootTopic root = null;
+          if (rs.size()==1) {
+            root = rs.get(0);
           } else {
-              response.sendError(HttpServletResponse.SC_NOT_FOUND, "no content with id "+id+" in repository.");
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Have "+rs.size()+" RootTopics in data store");
           } // if
+          rootDescriptor = new TargetDescriptor(root, null, null);
+        } // if
+        result = rootDescriptor;
+      } catch (Exception e) {
+        result = new TargetDescriptor(e, null, null);
+      } // try/catch
+    } else {
+      Object bean  = null;
+      String[] elements = url.split("/");
+      String id = null;
+      for (String element : elements) {
+        if (element.indexOf(":") &gt; 0) {
+          int idx = element.indexOf(".");
+          if (idx &gt;= 0) {
+            element = element.substring(0, idx);
+          } // if
+          id = element;
+          bean = beanFactory.getBean(element);
+        } // if
+      } // for
+      if (bean != null) {
+        result = new TargetDescriptor(bean, null, null);
+      } else {
+        response.sendError(HttpServletResponse.SC_NOT_FOUND, "no content with id "+id+" in repository.");
       } // if
-      return result;
+    } // if
+    return result;
   } // parseLink()
 
 } // ExampleLinkScheme
@@ -246,7 +246,7 @@ public class ExampleLinkScheme implements LinkHandler, BeanFactoryAware {
 </teaser></Topic><Topic><title>Tangram Link Handlers</title><shortTitle>Generic Handlers</shortTitle><teaser>&lt;p&gt;Tangram comes with its own link handling - or &amp;quot;URL routing&amp;quot; - facility which is portable accross all usage scenarios and flavours. Additionally link handler instances can be placed as code objects in the repository as Groovy codes, which is not possible for the alternatives. This way handlers can be introduced at runtime of the application and provide a flexible way for dynamic web applications.&lt;/p&gt;
 </teaser></Topic><Topic><title>Servlet</title><shortTitle>Servlet</shortTitle><teaser>&lt;p&gt;Since Java Servlets are the minimum and sometimes only consensus for web request handling, Tangram provides an integration with such scenarios. It is though not recommended to implement custom Servlets at such a low level. If nothing else is available at least stick to the internal Tangram Link Handler solution. If you would still like to take a look at it, see the Guice TangramServletModule, and the TangramDefautServer or TangramMetaServlet from the dinistiq integration.&lt;/p&gt;
 </teaser></Topic><Topic><title>Controller</title><shortTitle>Controller</shortTitle><subTopics resolves-to="list"><Topic reference="../../../Topic[9]"></Topic><Topic reference="../../../Topic[8]"></Topic><Topic reference="../../../Topic[10]"></Topic></subTopics><teaser>&lt;p&gt;Depending on the scenario and flavour of Tangram you are using, you still have at least two options for the controller or url mapping/routing facilities to use. One specific for that flavour (e.g. spring or guice DI solutions) and one generic Tangram way.&lt;/p&gt;
-</teaser></Topic><Topic><title>Dinistiq</title><shortTitle>Dinistiq</shortTitle><teaser>&lt;p&gt;The smalles possible footprint for Tangram applications can be achieved by use of the Dinistiq library. It is a custom development which started as a research part of Tangram to make the framework independent of a specific Dependecy Injection library or container and now is an independent project used for other applications as well.&lt;/p&gt;
+</teaser></Topic><Topic><title>Dinistiq</title><shortTitle>Dinistiq</shortTitle><teaser>&lt;p&gt;The smallest possible footprint for Tangram applications can be achieved by use of the Dinistiq library. It is a custom development which started as a research part of Tangram to make the framework independent of a specific Dependecy Injection library or container and now is an independent project used for other applications as well.&lt;/p&gt;
 
 &lt;p&gt;&amp;nbsp;&lt;/p&gt;
 </teaser></Topic><Topic><title>Springframework</title><shortTitle>Spring</shortTitle><teaser>&lt;p&gt;The Springframework is one of the prominent Dependency Injection solutions for Java and a main target for Tangram.&lt;/p&gt;

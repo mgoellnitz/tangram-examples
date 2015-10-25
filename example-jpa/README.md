@@ -18,7 +18,7 @@ gradle build
 Start this container of your choice or use integrated jetty
 
 ```bash
-gradle jettyRunWar
+gradle appRunWar
 ```
 
 Since the Tangram JPA module supports several implementations of JPA, it is possible
@@ -31,7 +31,7 @@ gradle -Pbackend=guicy -Pjpa=eclipselink clean build jettyRunWar
 
 Also the implementations allow or even require a byte code enhancement after compilation
 for the implementation of the active record pattern. While DataNucleus requires this, it
-can be activated optionally for EclipseLink, Hibernate, and OpenJPA.
+can be switched off optionally for EclipseLink, Hibernate, and OpenJPA.
 
 The byte code transformation - for most JPA systems called enhancing - can be switched off
 through the command line on building as well.
