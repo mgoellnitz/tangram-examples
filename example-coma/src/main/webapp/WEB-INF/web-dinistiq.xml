@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  
+
  Copyright (C) 2011-2015 Martin Goellnitz
- 
- This work is licensed under the Creative Commons Attribution 3.0 
- Unported License. To view a copy of this license, visit 
- http://creativecommons.org/licenses/by/3.0/ or send a letter to 
- Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
+
+ This work is licensed under the Creative Commons Attribution 3.0
+ Unported License. To view a copy of this license, visit
+ http://creativecommons.org/licenses/by/3.0/ or send a letter to
+ Creative Commons, 444 Castro Street, Suite 900, Mountain View,
  California, 94041, USA.
-  
+
 -->
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
-  
+
   <display-name>Tangram CoMA Example Application - not working dinistiq version</display-name>
 
   <!-- basic dinistiq web setup -->
@@ -27,15 +27,6 @@
       org.tangram.example.menusite
     </param-value>
   </context-param>
-  
-  <servlet>
-    <servlet-name>dinistiq</servlet-name>
-    <servlet-class>dinistiq.web.DinistiqServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>dinistiq</servlet-name>
-    <url-pattern>/servlet/*</url-pattern>
-  </servlet-mapping>
 
   <!-- TODO: Character Encoding Filter -->
 
@@ -51,7 +42,7 @@
     <filter-name>expiryFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
+
   <!-- tangram password filter -->
   <filter>
     <filter-name>TangramProtections</filter-name>
@@ -60,8 +51,8 @@
   <filter-mapping>
     <filter-name>TangramProtections</filter-name>
     <url-pattern>/servlet/*</url-pattern>
-  </filter-mapping>  
-  
+  </filter-mapping>
+
   <!-- tangram measure time filter -->
   <filter>
     <filter-name>TangramMeasureTime</filter-name>
@@ -76,8 +67,8 @@
   <filter-mapping>
     <filter-name>TangramMeasureTime</filter-name>
     <url-pattern>/servlet/*</url-pattern>
-  </filter-mapping>  
-  
+  </filter-mapping>
+
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
