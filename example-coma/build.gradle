@@ -13,6 +13,7 @@ import org.gradle.api.file.FileCopyDetails
 import org.gradle.api.file.FileTree
 import org.gradle.api.file.RelativePath
 import de.undercouch.gradle.tasks.download.Download
+import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
   repositories {
@@ -86,7 +87,7 @@ dependencies {
 
   compile "tangram:tangram-${tangram_backend}:$tangram_version"
 
-  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"
+  runtime "ch.qos.logback:logback-classic:$versions.logback"
   runtime "mysql:mysql-connector-java:5.1.36"
 
   testCompile "org.testng:testng:$versions.testng"
@@ -94,6 +95,10 @@ dependencies {
   // your container will have this for you
   providedCompile "$versions.servlet_api"
   providedCompile "$versions.jsp_api"
+}
+
+processResources {
+  filter(ReplaceTokens, tokens: [jpa: jpa_backend.toString(), app: project.name.toString()])
 }
 
 test {
@@ -181,9 +186,12 @@ war {
 
 gretty {
   servletContainer = "$servlet_container"
+  logDir = "./logs/$project.name" // '/var/logs/tangram'
+  logFileName = "$servlet_container"
+  consoleLogEnabled = false
+  httpsEnabled=true
   httpPort=12380
   httpsPort=12343
-  httpsEnabled=true
   servicePort=12390
   statusPort=12391
   webappCopy {

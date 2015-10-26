@@ -9,6 +9,8 @@
  * California, 94041, USA.
  *
  */
+import org.apache.tools.ant.filters.ReplaceTokens
+
 buildscript {
   repositories {
     maven { url "http://oss.jfrog.org/artifactory/oss-snapshot-local" }
@@ -149,7 +151,7 @@ dependencies {
   }
 
   runtime "hsqldb:hsqldb:1.8.0.10"
-  runtime "org.slf4j:slf4j-log4j12:$versions.slf4j"
+  runtime "ch.qos.logback:logback-classic:$versions.logback"
 
   testCompile "org.testng:testng:$versions.testng"
 
@@ -159,7 +161,7 @@ dependencies {
 }
 
 processResources {
-  expand (jpa: "$jpa_backend")
+  filter(ReplaceTokens, tokens: [jpa: jpa_backend.toString(), app: project.name.toString()])
 }
 
 test {
@@ -207,9 +209,12 @@ war {
 
 gretty {
   servletContainer = "$servlet_container"
+  logDir = "./logs/$project.name" // '/var/logs/tangram'
+  logFileName = "$servlet_container"
+  consoleLogEnabled = false
+  httpsEnabled=true
   httpPort=12380
   httpsPort=12343
-  httpsEnabled=true
   servicePort=12390
   statusPort=12391
   webappCopy {
