@@ -22,6 +22,7 @@ buildscript {
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
     classpath 'tangram:gradle-plugin:1.1-SNAPSHOT'
+    classpath 'org.akhikhl.gretty:gretty:1.2.4'
     classpath 'de.undercouch:gradle-download-task:2.0.0'
   }
 }
@@ -32,12 +33,15 @@ def tangram_version = '1.1-SNAPSHOT'
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
 // If you compile tangram yourself, you might want to try your local repo
 def useLocalRepo = project.hasProperty('local')
+// Swith the servlet container to be used by the gretty plugin
+def servlet_container = project.hasProperty('container') ? "$container" : 'jetty9' // jetty7, jetty8', jetty9, tomcat7, tomcat8
 
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'jetty'
 apply plugin: 'tangram'
 apply plugin: 'de.undercouch.download'
+// Use the plugin section to integrate this if you are not in a multiproject environment
+apply plugin: 'org.akhikhl.gretty'
 
 defaultTasks 'clean', 'build'
 
@@ -74,8 +78,10 @@ sourceSets {
 }
 
 dependencies {
-  webapp "tangram:tangram-core:$tangram_version:war@war"
-  webapp "tangram:tangram-coma:$tangram_version:war@war"
+  // You can also add the core webapp files instead them from the jar
+  // webapp "tangram:tangram-core:$tangram_version:war@war"
+  // You can also add the coma webapp files instead them from the jar
+  // webapp "tangram:tangram-coma:$tangram_version:war@war"
   compile "tangram:tangram-coma:$tangram_version"
 
   compile "tangram:tangram-${tangram_backend}:$tangram_version"
@@ -114,7 +120,7 @@ jar {
  */
 war {
   archiveName = "${project.name}-${tangram_backend}.war"
-  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml")
+  // web.xml is included by the gretty plugin to be able to use "appRun" and not only "appRunWar"
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
     excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
@@ -173,14 +179,20 @@ war {
   } // if
 }
 
-/** Optional step to debug things
-war.doLast {
-ant.unzip(src: war.archivePath, dest: "$buildDir/war")
+gretty {
+  servletContainer = "$servlet_container"
+  httpPort=12380
+  httpsPort=12343
+  httpsEnabled=true
+  servicePort=12390
+  statusPort=12391
+  webappCopy {
+    into ('WEB-INF') {
+      from "$project.projectDir/src/main/webapp/WEB-INF/web-${tangram_backend}.xml"
+      rename("web-${tangram_backend}.xml", "web.xml")
+    }
+  }
 }
- */
-
-stopPort = 12390
-httpPort = 12380
 
 // For the users of a the legacy IDE Eclipse
 // apply plugin: 'eclipse'

@@ -17,6 +17,7 @@ buildscript {
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
     classpath 'tangram:gradle-plugin:1.1-SNAPSHOT'
+    classpath 'org.akhikhl.gretty:gretty:1.2.4'
   }
 }
 
@@ -26,11 +27,14 @@ def tangram_version = '1.1-SNAPSHOT'
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
 // If you compile tangram yourself, you might want to try your local repo
 def useLocalRepo = project.hasProperty('local')
+// Swith the servlet container to be used by the gretty plugin
+def servlet_container = project.hasProperty('container') ? "$container" : 'jetty9' // jetty7, jetty8', jetty9, tomcat7, tomcat8
 
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'jetty'
 apply plugin: 'tangram'
+// Use the plugin section to integrate this if you are not in a multiproject environment
+apply plugin: 'org.akhikhl.gretty'
 
 defaultTasks 'clean', 'build'
 
@@ -58,7 +62,8 @@ artifacts {
 }
 
 dependencies {
-  webapp "tangram:tangram-core:$tangram_version:war@war"
+  // You can also add the core webapp files instead them from the jar
+  // webapp "tangram:tangram-core:$tangram_version:war@war"
   compile "tangram:tangram-ebean:$tangram_version"
 
   runtime "tangram:tangram-${tangram_backend}:$tangram_version"
@@ -67,7 +72,9 @@ dependencies {
   compile "org.pac4j:pac4j-openid:$versions.pac4j"
 
   // turn on editor
-  webapp "tangram:tangram-editor:$tangram_version:war@war"
+  // You can also add the editor webapp files
+  // webapp "tangram:tangram-editor:$tangram_version:local@war"
+  // webapp "tangram:tangram-editor:$tangram_version:war@war"
   runtime "tangram:tangram-editor:$tangram_version"
 
   /* For the FTP Service
@@ -119,7 +126,7 @@ jar {
 
 war {
   archiveName = "${project.name}-${tangram_backend}.war"
-  webXml = file("src/main/webapp/WEB-INF/web-${tangram_backend}.xml")
+  // web.xml is included by the gretty plugin to be able to use "appRun" and not only "appRunWar"
   classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
   if (tangram_backend == 'spring') {
     excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
@@ -128,8 +135,20 @@ war {
   }
 }
 
-stopPort = 12390
-httpPort = 12380
+gretty {
+  servletContainer = "$servlet_container"
+  httpPort=12380
+  httpsPort=12343
+  httpsEnabled=true
+  servicePort=12390
+  statusPort=12391
+  webappCopy {
+    into ('WEB-INF') {
+      from "$project.projectDir/src/main/webapp/WEB-INF/web-${tangram_backend}.xml"
+      rename("web-${tangram_backend}.xml", "web.xml")
+    }
+  }
+}
 
 // If you are still using eclipse, you might want to use these
 // apply plugin: 'eclipse'

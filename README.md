@@ -1,5 +1,4 @@
-Very small Examples for Tangram Usage
-=====================================
+# Very small Examples for Tangram Usage
 
 [![Build Status](https://api.travis-ci.org/mgoellnitz/tangram-examples.svg?branch=master)](https://travis-ci.org/mgoellnitz/tangram-examples)
 
@@ -42,14 +41,12 @@ gradle appRunWar
 and are running as a default on port 12380 - unless you changed that. They don't
 depend on anything else running on your system than tangram itself.
 
-Example Content
----------------
+## Example Content
 
-If you decide to try an empty database, you can use the exported version of the 
+If you decide to try an empty database, you can use the exported version of the
 content in example-content.xml. Use the generic tangram importer at http://localhost:12380/<app>/importer and select the XML file and import it.
 
-Dependency Injection
---------------------
+## Dependency Injection
 
 All of the examples have a switch in the build.gradle source code
 
@@ -63,8 +60,7 @@ Google Guice needs some more generic mimik to be likewise runtie configurable li
 with the Springframework and dinistiq so this flavour is called after the corresponding
 tangram module guicy.
 
-Build backend switches
-----------------------
+## Build backend switches
 
 The build files for gradle are a little bit more complicated than necessary to allow for
 the mentioned switches which are also build-time overridable by gradle properties. So you
@@ -80,4 +76,15 @@ the default (OpenJPA) from the build file by a simple
 
 ```bash
 gradle -Pjpa=openjpa build
+```
+
+## Servlet Container
+
+Since we moved to the gretty gradle plugin, we now can use more recent servlet containers,
+generate packaged applications, and switch the servlet container to use very easily.
+Of course this again is also available at the command line level with jetty9 being
+the default servlet container if you don't specify anything.
+
+```bash
+gradle -Pcontainer=tomcat7 build
 ```
