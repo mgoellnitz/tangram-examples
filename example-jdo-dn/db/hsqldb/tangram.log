@@ -1,8 +1,8 @@
-/*C3*/SET SCHEMA PUBLIC
+/*C2*/SET SCHEMA PUBLIC
 CONNECT USER SA
 SET AUTOCOMMIT FALSE
-CREATE TABLE DELETEME1439754888279\u000a(\u000a    UNUSED INTEGER NOT NULL\u000a)
-DROP TABLE DELETEME1439754888279
+CREATE TABLE DELETEME1445891494514\u000a(\u000a    UNUSED INTEGER NOT NULL\u000a)
+DROP TABLE DELETEME1445891494514
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
 SET AUTOCOMMIT TRUE
@@ -19,8 +19,6 @@ SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
-CREATE TABLE PASSWORDPROTECTION\u000a(\u000a    PASSWORDPROTECTION_ID BIGINT NOT NULL,\u000a    LOGIN VARCHAR(255) NULL,\u000a    PASSWORD VARCHAR(255) NULL,\u000a    DESCRIPTION VARCHAR(255) NULL,\u000a    PROTECTIONKEY VARCHAR(255) NULL,\u000a    CONSTRAINT PASSWORDPROTECTION_PK PRIMARY KEY (PASSWORDPROTECTION_ID)\u000a)
-CREATE TABLE ABSTRACTPROTECTION_PROTECTEDCONTENTS\u000a(\u000a    IDX INTEGER NOT NULL,\u000a    CONSTRAINT ABSTRACTPROTECTION_PROTECTEDCONTENTS_PK PRIMARY KEY (IDX)\u000a)
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
 SET AUTOCOMMIT TRUE
@@ -32,12 +30,13 @@ SET AUTOCOMMIT FALSE
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
 SET AUTOCOMMIT TRUE
-/*C4*/SET SCHEMA PUBLIC
-CONNECT USER SA
 SET AUTOCOMMIT FALSE
-DELETE FROM CODE WHERE CODE_ID=4
-INSERT INTO CODE VALUES(4,'org.tangram.example.AbstractTopic','<html>\u000d\u000a<head>\u000d\u000a  <!-- For JDO rename annotation to org.tangram.example.AbstractTopic -->\u000d\u000a  <title>$self.title</title>\u000d\u000a  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />\u000d\u000a  <meta name="viewport" content="width=320, initial-scale=0.95" />\u000d\u000a  <meta name="keywords" content="$self.keywords" />\u000d\u000a  <meta name="language" content="de" />\u000d\u000a#foreach($css in $self.rootTopic.css)\u000d\u000a  #include($css ''cssimport'')\u000d\u000a\u000d\u000a#end\u000d\u000a#foreach($js in $self.rootTopic.js)\u000d\u000a  #include($js ''jsimport'')\u000d\u000a\u000d\u000a#end\u000d\u000a</head>\u000d\u000a<body>\u000d\u000a  <div class="header"><p><a #link($self.rootTopic true)>$self.rootTopic.shortTitle</a> - $self.title</p></div>\u000d\u000a<div class="infobox">\u00a9 2015 - <a href="http://github.com/mgoellnitz/tangram-examples/">Tangram Examples</a></div>\u000d\u000a  <div class="box" style="clear: both; width: 100%; height: 0px;"></div>\u000d\u000a  <div class="text">#include($self.teaser)</div>\u000d\u000a#foreach($box in $self.subTopics)\u000d\u000a  <div class="box"><h3><a #link($box true)>$box.title</a></h3>\u000d\u000a    #include($box.teaser)\u000d\u000a    <ul>\u000d\u000a    #foreach($b in $box.subTopics)\u000d\u000a      <li><a #link($b true)>$b.title</a></li>\u000d\u000a    #end\u000d\u000a    </ul>\u000d\u000a  </div>\u000d\u000a#end\u000d\u000a  <hr style="clear: both;"/>\u000d\u000a  #include($self ''editor'')\u000d\u000a</body>\u000d\u000a</html>\u000d\u000a','text/html')
-COMMIT
 SET AUTOCOMMIT TRUE
-/*C3*/SET AUTOCOMMIT FALSE
+SET AUTOCOMMIT FALSE
+SET AUTOCOMMIT TRUE
+SET AUTOCOMMIT FALSE
+SET AUTOCOMMIT TRUE
+SET AUTOCOMMIT FALSE
+SET AUTOCOMMIT TRUE
+SET AUTOCOMMIT FALSE
 SET AUTOCOMMIT TRUE
