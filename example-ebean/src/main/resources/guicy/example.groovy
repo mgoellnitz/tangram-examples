@@ -15,7 +15,7 @@ import org.tangram.controller.ControllerHook
 import org.tangram.controller.UniqueHostHook
 import org.tangram.servlet.MeasureTimeFilter
 import org.tangram.servlet.PasswordFilter
-import org.tangram.util.DummyRestartCache
+import org.tangram.util.FileRestartCache
 import org.pac4j.core.client.Client
 import org.pac4j.openid.client.YahooOpenIdClient
 
@@ -23,7 +23,10 @@ log.info "starting"
 String dispatcherPath = config.getProperty("dispatcherPath", "/s")
 
 log.info "configuring persistent restart cache"
-module.bind(PersistentRestartCache.class).toInstance(new DummyRestartCache())
+PersistentRestartCache persistentRestartCache = new FileRestartCache()
+persistentRestartCache.filename='./tangram-cache-guicy.ser'
+persistentRestartCache.markerResourceName='org/tangram/example'
+module.bind(PersistentRestartCache.class).toInstance(persistentRestartCache)
 
 log.info("configuring name password mapping")
 Map<String,String> mapping = new HashMap<>()
