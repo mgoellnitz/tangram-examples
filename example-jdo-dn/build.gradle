@@ -123,7 +123,7 @@ dependencies {
 }
 
 processResources {
-  filter(ReplaceTokens, tokens: [jpa: jpa_backend.toString(), app: project.name.toString()])
+  filter(ReplaceTokens, tokens: [app: project.name.toString()])
 }
 
 test {

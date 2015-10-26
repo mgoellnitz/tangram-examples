@@ -6,6 +6,7 @@ velocity.log
 /.nb-gradle*
 /*/.gradle
 /*/build
+/*/logs
 /*/.settings
 /*/.classpath
 /*/.project
