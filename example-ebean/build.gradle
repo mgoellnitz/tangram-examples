@@ -30,6 +30,8 @@ def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // s
 def use_local_repo = project.hasProperty('local')
 // Swith the servlet container to be used by the gretty plugin
 def servlet_container = project.hasProperty('container') ? "$container" : 'jetty9' // jetty7, jetty8', jetty9, tomcat7, tomcat8
+// The log directory to be used by gretty and tangram itself - only suitable for development with this default
+def log_dir = "./build" // /var/log/tangram
 
 apply plugin: 'java'
 apply plugin: 'war'
@@ -109,7 +111,7 @@ dependencies {
 }
 
 processResources {
-  filter(ReplaceTokens, tokens: [app: project.name.toString()])
+  filter(ReplaceTokens, tokens: [app: project.name.toString(), logdir: log_dir.toString()])
 }
 
 test {

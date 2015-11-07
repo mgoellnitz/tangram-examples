@@ -26,6 +26,7 @@ buildscript {
 def tangram_version = '1.1-SNAPSHOT'
 // Some switches to have all options in one example project - with optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring, dinistiq, guicy
+// Select the JPA implementation optionally via command line
 def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, hibernate, or datanucleus
 // JPA can be used with or without byte code transformation except for DataNucleus where it is always necessary.
 def do_bytecode_transform = !project.hasProperty('noenhance')
@@ -33,6 +34,8 @@ def do_bytecode_transform = !project.hasProperty('noenhance')
 def use_local_repo = project.hasProperty('local')
 // Swith the servlet container to be used by the gretty plugin
 def servlet_container = project.hasProperty('container') ? "$container" : 'jetty9' // jetty7, jetty8', jetty9, tomcat7, tomcat8
+// The log directory to be used by gretty and tangram itself - only suitable for development with this default
+def log_dir = "./build" // /var/log/tangram
 
 apply plugin: 'java'
 apply plugin: 'war'
@@ -160,7 +163,7 @@ dependencies {
 }
 
 processResources {
-  filter(ReplaceTokens, tokens: [jpa: jpa_backend.toString(), app: project.name.toString()])
+  filter(ReplaceTokens, tokens: [jpa: jpa_backend.toString(), app: project.name.toString(), logdir: log_dir.toString()])
 }
 
 test {

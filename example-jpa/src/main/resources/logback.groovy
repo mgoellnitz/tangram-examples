@@ -12,7 +12,7 @@
 scan '45 seconds'
 
 String encoderPattern = '%-9date{HH:mm:ss} %-5level %logger{35}.%msg%n'
-String logDir = './logs/@app@'// "${System.getProperty('user.home')}/logs"
+String logDir = '@logdir@'
 String logFileName = "tangram-webapp"
 
 def appenders = []
@@ -39,7 +39,7 @@ appenders.add('CONSOLE')
 */
 
 root WARN, appenders
-logger "guice", INFO, appenders, false
+logger "guicy", INFO, appenders, false
 logger "dinistiq", WARN, appenders, false
 logger "org.tangram", DEBUG, appenders, false
 logger "org.springframework", WARN, appenders, false
