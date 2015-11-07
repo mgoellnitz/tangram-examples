@@ -29,11 +29,10 @@ buildscript {
 }
 
 def tangram_version = '1.1-SNAPSHOT'
-
 // Switch to have the options in one example project - optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
 // If you compile tangram yourself, you might want to try your local repo
-def useLocalRepo = project.hasProperty('local')
+def use_local_repo = project.hasProperty('local')
 // Swith the servlet container to be used by the gretty plugin
 def servlet_container = project.hasProperty('container') ? "$container" : 'jetty9' // jetty7, jetty8', jetty9, tomcat7, tomcat8
 
@@ -50,7 +49,7 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 repositories {
-  if (useLocalRepo) {
+  if (use_local_repo) {
     mavenLocal()
   }
   maven { url "http://oss.jfrog.org/artifactory/oss-snapshot-local" }
