@@ -211,7 +211,7 @@ war {
 
 gretty {
   servletContainer = "$servlet_container"
-  logDir = "./logs/$project.name" // '/var/logs/tangram'
+  logDir = "$log_dir"
   logFileName = "$servlet_container"
   consoleLogEnabled = false
   httpsEnabled=true
