@@ -1,0 +1,56 @@
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTAINER_TOPIC" nicht gefunden
+Table "CONTAINER_TOPIC" not found; SQL statement:
+alter table container_topic drop constraint if exists fk_container_topic_container [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTAINER_TOPIC" nicht gefunden
+Table "CONTAINER_TOPIC" not found; SQL statement:
+alter table container_topic drop constraint if exists fk_container_topic_topic [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "SUBTOPICS" nicht gefunden
+Table "SUBTOPICS" not found; SQL statement:
+alter table subtopics drop constraint if exists fk_subtopics_topic_1 [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "SUBTOPICS" nicht gefunden
+Table "SUBTOPICS" not found; SQL statement:
+alter table subtopics drop constraint if exists fk_subtopics_topic_2 [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "TOPIC_ARTICLE" nicht gefunden
+Table "TOPIC_ARTICLE" not found; SQL statement:
+alter table topic_article drop constraint if exists fk_topic_article_topic [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "TOPIC_ARTICLE" nicht gefunden
+Table "TOPIC_ARTICLE" not found; SQL statement:
+alter table topic_article drop constraint if exists fk_topic_article_article [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "TOPIC_CONTAINER" nicht gefunden
+Table "TOPIC_CONTAINER" not found; SQL statement:
+alter table topic_container drop constraint if exists fk_topic_container_topic [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "TOPIC_CONTAINER" nicht gefunden
+Table "TOPIC_CONTAINER" not found; SQL statement:
+alter table topic_container drop constraint if exists fk_topic_container_container [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "BOTTOMLINKS" nicht gefunden
+Table "BOTTOMLINKS" not found; SQL statement:
+alter table bottomlinks drop constraint if exists fk_bottomlinks_topic_1 [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "BOTTOMLINKS" nicht gefunden
+Table "BOTTOMLINKS" not found; SQL statement:
+alter table bottomlinks drop constraint if exists fk_bottomlinks_topic_2 [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CSS" nicht gefunden
+Table "CSS" not found; SQL statement:
+alter table css drop constraint if exists fk_css_topic [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CSS" nicht gefunden
+Table "CSS" not found; SQL statement:
+alter table css drop constraint if exists fk_css_code [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "JS" nicht gefunden
+Table "JS" not found; SQL statement:
+alter table js drop constraint if exists fk_js_topic [42102-174]
+12-15 17:34:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "JS" nicht gefunden
+Table "JS" not found; SQL statement:
+alter table js drop constraint if exists fk_js_code [42102-174]

@@ -19,7 +19,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
+import javax.persistence.ManyToOne;
 import org.tangram.ebean.Code;
 
 
@@ -40,8 +40,7 @@ public class RootTopic extends Topic {
     @JoinTable(name = "js")
     private List<Code> js;
 
-    // TODO: For now transient until we resolve this
-    @Transient
+    @ManyToOne
     private ImageData logo;
 
 

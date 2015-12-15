@@ -21,6 +21,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,6 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
     private static final Logger LOG = LoggerFactory.getLogger(Topic.class);
 
-    // https://github.com/ebean-orm/avaje-ebeanorm/issues/435
     @ManyToMany
     @JoinTable(name = "subtopics", joinColumns = @JoinColumn(name="topic", referencedColumnName = "EBEAN_INTERNAL_ID"), inverseJoinColumns = @JoinColumn(name="subtopic", referencedColumnName = "EBEAN_INTERNAL_ID"))
     private List<Topic> subTopics;
@@ -45,8 +45,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     @ManyToMany
     private List<Article> elements;
 
-    // TODO: For now transient until we resolve this
-    @Transient
+    @ManyToOne
     private ImageData thumbnail;
 
     @Column(length = 1280)
