@@ -13,5 +13,5 @@ velocity.log
 /*/private/cache
 /*/cap-examples.jar
 /example-coma/cap-examples.jar
-/example-ebean/tangram-create.sql
-/example-ebean/tangram-drop.sql
+/example-ebean/tangram-create-all.sql
+/example-ebean/tangram-drop-all.sql
