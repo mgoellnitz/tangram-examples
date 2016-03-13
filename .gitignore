@@ -15,3 +15,9 @@ velocity.log
 /example-coma/cap-examples.jar
 /example-ebean/tangram-create-all.sql
 /example-ebean/tangram-drop-all.sql
+/example-ebean/tangram-create.sql
+/example-ebean/tangram-drop.sql
+/example-coma/.nb-gradle/
+/example-ebean/.nb-gradle/
+/example-jdo-dn/.nb-gradle/
+/example-jpa/.nb-gradle/
