@@ -1,36 +1,62 @@
-/*C45*/SET SCHEMA PUBLIC
+/*C13*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT
-/*C46*/SET SCHEMA PUBLIC
+/*C14*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT
-/*C47*/SET SCHEMA PUBLIC
+/*C15*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT
-/*C48*/SET SCHEMA PUBLIC
+/*C16*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT
-/*C49*/SET SCHEMA PUBLIC
+/*C17*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT
-/*C50*/SET SCHEMA PUBLIC
+/*C18*/SET SCHEMA PUBLIC
+CONNECT USER SA
+SET AUTOCOMMIT FALSE
+DELETE FROM CODE WHERE ID=6
+INSERT INTO CODE VALUES(6,'org.tangram.example.Topic','package org.tangram.example.links;\u000d\u000a\u000d\u000aimport javax.servlet.http.HttpServletRequest;\u000d\u000aimport javax.servlet.http.HttpServletResponse;\u000d\u000aimport org.slf4j.Logger;\u000d\u000aimport org.slf4j.LoggerFactory;\u000d\u000a\u000d\u000aimport org.tangram.Constants;\u000d\u000aimport org.tangram.content.Content;\u000d\u000aimport org.tangram.content.BeanFactory;\u000d\u000aimport org.tangram.content.BeanFactoryAware;\u000d\u000aimport org.tangram.view.Utils;\u000d\u000aimport org.tangram.link.TargetDescriptor;\u000d\u000aimport org.tangram.link.Link;\u000d\u000aimport org.tangram.link.LinkHandler;\u000d\u000a\u000d\u000aimport org.tangram.example.RootTopic;\u000d\u000aimport org.tangram.example.Linkable;\u000d\u000aimport org.tangram.example.Topic;\u000d\u000aimport org.tangram.example.ImageData;\u000d\u000a\u000d\u000apublic class ExampleLinkScheme implements LinkHandler, BeanFactoryAware {\u000d\u000a\u000d\u000a  private static Logger log = LoggerFactory.getLogger(ExampleLinkScheme.class);\u000d\u000a\u000d\u000a  private BeanFactory beanFactory;\u000d\u000a\u000d\u000a  private TargetDescriptor rootDescriptor = null;;\u000d\u000a\u000d\u000a  public void setBeanFactory(BeanFactory factory) {\u000d\u000a    beanFactory = factory;\u000d\u000a  } // setBeanFactory()\u000d\u000a\u000d\u000a  public Set<String> getCustomViews() {\u000d\u000a    Set <String> result = new HashSet<String>();\u000d\u000a    result.add(Constants.DEFAULT_VIEW);\u000d\u000a    return result;\u000d\u000a  } // getCustomViews()\u000d\u000a\u000d\u000a  public Link createLink(HttpServletRequest request, HttpServletResponse response, Object bean, String action, String view) {\u000d\u000a    Link result = null;\u000d\u000a    if ((action==null)&&(view==null)) {\u000d\u000a      if (bean instanceof RootTopic) {\u000d\u000a        result = new Link();\u000d\u000a        result.setUrl("/");\u000d\u000a      } else {\u000d\u000a        if ((bean instanceof Topic)||(bean instanceof ImageData)) {\u000d\u000a          String title = "-";\u000d\u000a          if (bean instanceof Linkable) {\u000d\u000a            try {\u000d\u000a              title = Utils.urlize(((Linkable)bean).getTitle());\u000d\u000a            } catch (UnsupportedEncodingException uee) {\u000d\u000a              log.error("createLink()", uee);\u000d\u000a            } // try\u000d\u000a          } // if\u000d\u000a          String url = "/"+title+"/"+bean.id;\u000d\u000a          if (bean instanceof Topic) {\u000d\u000a            url = url+".html";\u000d\u000a          } // if\u000d\u000a          result = new Link();\u000d\u000a          // result.addHandler("onclick", "pageload()");\u000d\u000a          result.setUrl(url);\u000d\u000a        } // if\u000d\u000a      } // if\u000d\u000a    } // if\u000d\u000a    return result;\u000d\u000a  } // createLink()\u000d\u000a\u000d\u000a  public TargetDescriptor parseLink(String url, HttpServletResponse response) {\u000d\u000a    TargetDescriptor result = null;\u000d\u000a    if (url.length() < 2) {\u000d\u000a      try {\u000d\u000a        if (rootDescriptor==null) {\u000d\u000a          List<RootTopic> rs = beanFactory.listBeans(RootTopic.class, null);\u000d\u000a          RootTopic root = null;\u000d\u000a          if (rs.size()==1) {\u000d\u000a            root = rs.get(0);\u000d\u000a          } else {\u000d\u000a            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Have "+rs.size()+" RootTopics in data store");\u000d\u000a          } // if\u000d\u000a          rootDescriptor = new TargetDescriptor(root, null, null);\u000d\u000a        } // if\u000d\u000a        result = rootDescriptor;\u000d\u000a      } catch (Exception e) {\u000d\u000a        result = new TargetDescriptor(e, null, null);\u000d\u000a      } // try/catch\u000d\u000a    } else {\u000d\u000a      Object bean  = null;\u000d\u000a      String[] elements = url.split("/");\u000d\u000a      String id = null;\u000d\u000a      for (String element : elements) {\u000d\u000a        if (element.indexOf(":") > 0) {\u000d\u000a          int idx = element.indexOf(".");\u000d\u000a          if (idx >= 0) {\u000d\u000a            element = element.substring(0, idx);\u000d\u000a          } // if\u000d\u000a          id = element;\u000d\u000a          bean = beanFactory.getBean(element);\u000d\u000a        } // if\u000d\u000a      } // for\u000d\u000a      if (bean != null) {\u000d\u000a        result = new TargetDescriptor(bean, null, null);\u000d\u000a      } else {\u000d\u000a        response.sendError(HttpServletResponse.SC_NOT_FOUND, "no content with id "+id+" in repository.");\u000d\u000a      } // if\u000d\u000a    } // if\u000d\u000a    return result;\u000d\u000a  } // parseLink()\u000d\u000a\u000d\u000a} // ExampleLinkScheme\u000d\u000a','application/x-groovy',1457890131385)
+COMMIT
+SET AUTOCOMMIT TRUE
+DISCONNECT
+/*C19*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT
-/*C51*/SET SCHEMA PUBLIC
+/*C20*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT
-/*C52*/SET SCHEMA PUBLIC
+/*C21*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT
-/*C53*/SET SCHEMA PUBLIC
+/*C22*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT
-/*C54*/SET SCHEMA PUBLIC
+/*C23*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT
-/*C55*/SET SCHEMA PUBLIC
+/*C24*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT
-/*C56*/SET SCHEMA PUBLIC
+/*C25*/SET SCHEMA PUBLIC
+CONNECT USER SA
+DISCONNECT
+/*C26*/SET SCHEMA PUBLIC
+CONNECT USER SA
+DISCONNECT
+/*C27*/SET SCHEMA PUBLIC
+CONNECT USER SA
+DISCONNECT
+/*C28*/SET SCHEMA PUBLIC
+CONNECT USER SA
+DISCONNECT
+/*C29*/SET SCHEMA PUBLIC
+CONNECT USER SA
+DISCONNECT
+/*C30*/SET SCHEMA PUBLIC
+CONNECT USER SA
+DISCONNECT
+/*C31*/SET SCHEMA PUBLIC
 CONNECT USER SA
 DISCONNECT

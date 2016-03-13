@@ -129,7 +129,7 @@ import org.tangram.content.Content;
 import org.tangram.content.BeanFactory;
 import org.tangram.content.BeanFactoryAware;
 import org.tangram.view.Utils;
-import org.tangram.view.TargetDescriptor;
+import org.tangram.link.TargetDescriptor;
 import org.tangram.link.Link;
 import org.tangram.link.LinkHandler;
 
