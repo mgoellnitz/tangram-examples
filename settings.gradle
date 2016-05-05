@@ -9,4 +9,4 @@
  * California, 94041, USA.
  * 
  */
-include 'example-jpa', 'example-jdo-dn', 'example-ebean', 'example-coma'
+include 'example-morphia', 'example-jpa', 'example-jdo-dn', 'example-ebean', 'example-coma'

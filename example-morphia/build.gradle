@@ -1,0 +1,175 @@
+/**
+ *
+ * Copyright (C) 2011-2016 Martin Goellnitz
+ *
+ * This work is licensed under the Creative Commons Attribution 3.0
+ * Unported License. To view a copy of this license, visit
+ * http://creativecommons.org/licenses/by/3.0/ or send a letter to
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View,
+ * California, 94041, USA.
+ *
+ */
+import org.apache.tools.ant.filters.ReplaceTokens
+
+buildscript {
+  repositories {
+    maven { url "http://oss.jfrog.org/artifactory/oss-snapshot-local" }
+    jcenter()
+  }
+  dependencies {
+    // Cannot work with the version labels from the tangram plugin here
+    classpath 'tangram:gradle-plugin:1.1-SNAPSHOT'
+    classpath 'org.akhikhl.gretty:gretty:1.2.4'
+  }
+}
+
+def tangram_version = '1.1-SNAPSHOT'
+// Switch to have the options in one example project - optional external override
+def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
+// If you compile tangram yourself, you might want to try your local repo
+def use_local_repo = project.hasProperty('local')
+// Swith the servlet container to be used by the gretty plugin
+def servlet_container = project.hasProperty('container') ? "$container" : 'jetty9' // jetty7, jetty8', jetty9, tomcat7, tomcat8
+// The log directory to be used by gretty and tangram itself - only suitable for development with this default
+def log_dir = "./build" // /var/log/tangram
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'tangram'
+// Use the plugin section to integrate this if you are not in a multiproject environment
+apply plugin: 'org.akhikhl.gretty'
+
+defaultTasks 'clean', 'build'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+  if (use_local_repo) {
+    mavenLocal()
+  }
+  maven { url "http://oss.jfrog.org/artifactory/oss-snapshot-local" }
+  // Everything we use can be found here
+  jcenter()
+}
+
+configurations {
+  libs
+  // this is only relevant for spring scenarios since spring still uses jcl
+  all*.exclude module: 'commons-logging'
+  // see explanation in dependencies section when this will be necessary
+  // reallyNeeded
+}
+
+artifacts {
+  archives war
+  libs jar
+}
+
+dependencies {
+  // You can also add the core webapp files instead them from the jar
+  // webapp "tangram:tangram-core:$tangram_version:war@war"
+  compile "tangram:tangram-morphia:$tangram_version"
+
+  runtime "tangram:tangram-${tangram_backend}:$tangram_version"
+
+  // For Yahoo OpenID example
+  compile "org.pac4j:pac4j-openid:$versions.pac4j"
+
+  // You can also add the editor webapp files
+  // webapp "tangram:tangram-editor:$tangram_version:local@war"
+  // webapp "tangram:tangram-editor:$tangram_version:war@war"
+  runtime "tangram:tangram-editor:$tangram_version"
+
+  /* For the FTP Service
+  runtime "tangram:tangram-ftp:$tangram_version"
+   */
+
+  /* dinistiq */
+  if (tangram_backend == 'dinistiq') {
+  }
+  /* springframework */
+  if (tangram_backend == 'spring') {
+  }
+  /* Google Guice */
+  if (tangram_backend == 'guicy') {
+    compile ("com.mycila.guice.extensions:mycila-guice-jsr250:$versions.mycila_guice") {
+      exclude module: 'sisu-guice'
+    }
+    runtime "org.slf4j:jcl-over-slf4j:$versions.slf4j"
+    // dummies for compile scope to keep IDEs calm about groovy scripts
+    compile"tangram:tangram-${tangram_backend}:$tangram_version"
+  }
+
+  // This fixes a problem with the WAR lib directory calculation needed for run@cloudbees:
+  // reallyNeeded "org.ow2.asm:asm:4.0"
+
+  runtime "ch.qos.logback:logback-classic:$versions.logback"
+
+  testCompile "org.testng:testng:$versions.testng"
+
+  // your container will have this for you
+  providedCompile "$versions.servlet_api"
+  providedCompile "$versions.jsp_api"
+}
+
+processResources {
+  filter(ReplaceTokens, tokens: [app: project.name.toString(), logdir: log_dir.toString()])
+}
+
+test {
+  useTestNG() {
+  }
+}
+
+jar {
+  if (tangram_backend == 'spring') {
+    excludes = [ 'dinistiq/**', 'guicy/**' ]
+  }
+  if (tangram_backend == 'dinistiq') {
+    excludes = [ 'guicy/**' ]
+  }
+  if (tangram_backend == 'guicy') {
+    excludes = [ 'dinistiq/**' ]
+  }
+}
+
+war {
+  archiveName = "${project.name}-${tangram_backend}.war"
+  // web.xml is included by the gretty plugin to be able to use "appRun" and not only "appRunWar"
+  classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
+  // classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime + configurations.reallyNeeded
+  if (tangram_backend == 'spring') {
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml' ]
+  }
+  if (tangram_backend == 'dinstiq') {
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**' ]
+  }
+  if (tangram_backend == 'guicy') {
+    excludes = [ 'classes/**', 'WEB-INF/web*.xml', 'WEB-INF/tangram/**' ]
+  }
+}
+
+gretty {
+  contextPath=''
+  servletContainer = "$servlet_container"
+  logDir = "$log_dir"
+  logFileName = "$servlet_container"
+  consoleLogEnabled = false
+  httpsEnabled=true
+  httpPort=12380
+  httpsPort=12343
+  servicePort=12390
+  statusPort=12391
+  webappCopy {
+    into ('WEB-INF') {
+      from "$project.projectDir/src/main/webapp/WEB-INF/web-${tangram_backend}.xml"
+      rename("web-${tangram_backend}.xml", "web.xml")
+    }
+  }
+}
+
+// If you are still using eclipse, you might want to use these
+// apply plugin: 'eclipse'
+// Project specific default output directory
+// eclipse.classpath.conventionMapping.defaultOutputDir = { new File(project.projectDir, 'build/classes/main') }
