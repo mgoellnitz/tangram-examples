@@ -13,17 +13,18 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
   repositories {
+    // Only used for tangram snapshots
     maven { url "http://oss.jfrog.org/artifactory/oss-snapshot-local" }
     jcenter()
   }
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
-    classpath 'tangram:gradle-plugin:1.1-SNAPSHOT'
+    classpath 'tangram:gradle-plugin:1.1.0'
     classpath 'org.akhikhl.gretty:gretty:1.2.4'
   }
 }
 
-def tangram_version = '1.1-SNAPSHOT'
+def tangram_version = '1.1.0'
 // Some switches to have all options in one example project - with optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring, dinistiq, guicy
 // Select the JPA implementation optionally via command line
@@ -39,6 +40,7 @@ def log_dir = "./build" // /var/log/tangram
 
 apply plugin: 'java'
 apply plugin: 'war'
+// Use the plugin section to integrate this if you are not in a multiproject environment
 apply plugin: 'tangram'
 // Use the plugin section to integrate this if you are not in a multiproject environment
 apply plugin: 'org.akhikhl.gretty'
@@ -55,6 +57,7 @@ repositories {
   if (use_local_repo) {
     mavenLocal()
   }
+  // Only used for tangram snapshots
   maven { url "http://oss.jfrog.org/artifactory/oss-snapshot-local" }
   // Everything we use can be found here
   jcenter()
