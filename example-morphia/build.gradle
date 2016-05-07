@@ -37,7 +37,7 @@ def log_dir = "./build" // /var/log/tangram
 apply plugin: 'java'
 apply plugin: 'war'
 // Use the plugin section to integrate this if you are not in a multiproject environment
-apply plugin: 'tangram'
+apply plugin: 'tangram.tools'
 // Use the plugin section to integrate this if you are not in a multiproject environment
 apply plugin: 'org.akhikhl.gretty'
 
