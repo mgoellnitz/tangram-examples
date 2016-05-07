@@ -4,6 +4,10 @@ Tangram JPA Example
 To be used with bytecode enhanced / woven or plain implementations for OpenJPA,
 EclipseLink, Hibernate or DataNucleus Access Plattform.
 
+To support the easys switching between the different JPA implementations, appRun
+cannot be used since it does not allow the inclusion of the different needed
+configuration files on the fly. Use appRunWar in the examples as show below.
+
 Setup system
 ------------
 
@@ -26,7 +30,7 @@ to select the implementation via the "jpa" property whith the possible values
 "openjpa", "eclipselink", "hibernate", and "datanucleus". E.g.
 
 ```bash
-gradle -Pbackend=guicy -Pjpa=eclipselink clean build jettyRunWar
+gradle -Pbackend=guicy -Pjpa=eclipselink clean build appRunWar
 ```
 
 Also the implementations allow or even require a byte code enhancement after compilation

@@ -11,6 +11,10 @@ examples, since we cannot provide a "local" MongoDB in the workspace.
 You will have to prepare an external MongoDB database a fill in the 
 configuration for at least one of the Dependency Injection options.
 
+The system is pre-configured to use a read only database from the cloud, which
+is helpfull for showing the example content and to check that everything is running,
+bot not to do anything yourself.
+
 ## Setup system
 
 Build the example project
@@ -51,7 +55,7 @@ http://localhost:12380/example-morphia/s/id_RootTopic:1
 
 # Example Content
 
-For the Morphia example you will have to import  the examples content into your
+For the Morphia example you will have to import  the example content into your
 prepared database. (s.a.)
 
 Use the generic content importer

@@ -21,3 +21,4 @@ velocity.log
 /example-ebean/.nb-gradle/
 /example-jdo-dn/.nb-gradle/
 /example-jpa/.nb-gradle/
+/example-morphia/.nb-gradle/
