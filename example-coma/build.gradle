@@ -25,7 +25,7 @@ buildscript {
     // Cannot work with the version labels from the tangram plugin here
     classpath 'tangram:gradle-plugin:1.1.2'
     classpath 'org.akhikhl.gretty:gretty:1.2.4'
-    classpath 'de.undercouch:gradle-download-task:2.0.0'
+    classpath 'de.undercouch:gradle-download-task:3.0.0'
   }
 }
 
