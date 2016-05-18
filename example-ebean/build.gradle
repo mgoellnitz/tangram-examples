@@ -103,7 +103,7 @@ dependencies {
     compile"tangram:tangram-${tangram_backend}:$tangram_version"
   }
 
-  runtime "com.h2database:h2:1.3.174"
+  runtime "com.h2database:h2:$versions.h2db"
   runtime "ch.qos.logback:logback-classic:$versions.logback"
 
   testCompile "org.testng:testng:$versions.testng"
