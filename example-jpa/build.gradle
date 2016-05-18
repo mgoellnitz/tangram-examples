@@ -26,7 +26,7 @@ buildscript {
 
 def tangram_version = '1.1.2'
 // Some switches to have all options in one example project - with optional external override
-def tangram_backend = project.hasProperty('backend') ? "$backend" : 'dinistiq' // spring, dinistiq, guicy
+def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
 // Select the JPA implementation optionally via command line
 def jpa_backend = project.hasProperty('jpa') ? "$jpa" : 'openjpa' // openjpa, eclipselink, hibernate, or datanucleus
 // JPA can be used with or without byte code transformation except for DataNucleus where it is always necessary.
