@@ -42,6 +42,7 @@ root WARN, appenders
 logger "guicy", INFO, appenders, false
 logger "dinistiq", WARN, appenders, false
 logger "org.tangram", DEBUG, appenders, false
+logger "DataNucleus", DEBUG, appenders, false
 logger "org.springframework", WARN, appenders, false
 logger "org.springframework.beans", WARN, appenders, false
 logger "org.springframework.core.io.support.PathMatchingResourcePatternResolver", INFO, appenders, false

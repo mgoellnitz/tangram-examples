@@ -91,6 +91,7 @@ dependencies {
     compile "$versions.jdo_api"
     compile "$versions.persistence_api"
     runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
+    // runtime "org.slf4j:log4j-over-slf4j:$versions.slf4j"
   }
 
   /* EclipseLink */

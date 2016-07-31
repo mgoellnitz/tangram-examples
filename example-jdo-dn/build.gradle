@@ -75,6 +75,7 @@ dependencies {
   compile "tangram:tangram-nucleus:$tangram_version"
   // e.g. rdbms of DataNucleus and any db driver you'd like and which is supported
   runtime "org.datanucleus:datanucleus-rdbms:$versions.datanucleus"
+  // runtime "org.slf4j:log4j-over-slf4j:$versions.slf4j"
 
   runtime "tangram:tangram-${tangram_backend}:$tangram_version"
 
