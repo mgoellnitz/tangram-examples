@@ -19,12 +19,12 @@ buildscript {
   }
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
-    classpath 'tangram:gradle-plugin:1.1.2'
+    classpath 'tangram:gradle-plugin:1.2-SNAPSHOT'
     classpath 'org.akhikhl.gretty:gretty:1.2.4'
   }
 }
 
-def tangram_version = '1.1.2'
+def tangram_version = '1.2-SNAPSHOT'
 // Some switches to have all options in one example project - with optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
 // Select the JPA implementation optionally via command line
@@ -148,9 +148,6 @@ dependencies {
   }
   /* Google Guice */
   if (tangram_backend == 'guicy') {
-    compile ("com.mycila.guice.extensions:mycila-guice-jsr250:$versions.mycila_guice") {
-      exclude module: 'sisu-guice'
-    }
     runtime "org.slf4j:jcl-over-slf4j:$versions.slf4j"
     // dummies for compile scope to keep IDEs calm about groovy scripts
     compile"tangram:tangram-${tangram_backend}:$tangram_version"
