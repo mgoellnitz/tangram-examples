@@ -33,7 +33,7 @@ public abstract class AbstractTopic extends Linkable implements ProtectedContent
     private char[] teaser;
 
     @NotPersistent
-    private BeanFactory beanFactory;
+    private BeanFactory<?> beanFactory;
 
     @NotPersistent
     private RootTopic rootTopic = null;
@@ -75,7 +75,7 @@ public abstract class AbstractTopic extends Linkable implements ProtectedContent
 
 
     @Override
-    public void setBeanFactory(BeanFactory beanFactory) {
+    public void setBeanFactory(BeanFactory<?> beanFactory) {
         this.beanFactory = beanFactory;
     }
 

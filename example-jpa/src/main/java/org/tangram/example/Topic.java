@@ -53,7 +53,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     private List<Container> relatedContainers;
 
     @Transient
-    private BeanFactory beanFactory;
+    private BeanFactory<?> beanFactory;
 
     @Transient
     private RootTopic rootTopic = null;
@@ -116,7 +116,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
 
     @Override
-    public void setBeanFactory(BeanFactory beanFactory) {
+    public void setBeanFactory(BeanFactory<?> beanFactory) {
         this.beanFactory = beanFactory;
     }
 
@@ -195,7 +195,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     /*
      * ** Protections **
      */
-    
+
     @Override
     public List<? extends Content> getProtectionPath() {
         return getPath();
