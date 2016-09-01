@@ -47,8 +47,8 @@ apply plugin: 'org.akhikhl.gretty'
 
 defaultTasks 'clean', 'build'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 // A switch from the tangram plugin - true is the default
 enhancer.enabled=do_bytecode_transform

@@ -43,8 +43,8 @@ apply plugin: 'org.akhikhl.gretty'
 
 defaultTasks 'clean', 'build'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
   if (use_local_repo) {
@@ -86,8 +86,9 @@ dependencies {
   // runtime "org.datanucleus:datanucleus-odf:$versions.datanucleus"
   // runtime "org.datanucleus:datanucleus-excel:$versions.datanucleus"
 
-  // For Yahoo OpenID example
+  /* For Yahoo OpenID example
   compile "org.pac4j:pac4j-openid:$versions.pac4j"
+   */
 
   // You can also add the editor webapp files
   // webapp "tangram:tangram-editor:$tangram_version:local@war"
