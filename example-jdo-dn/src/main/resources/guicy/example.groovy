@@ -17,7 +17,7 @@ import org.tangram.servlet.MeasureTimeFilter
 import org.tangram.servlet.PasswordFilter
 import org.tangram.util.FileRestartCache
 import org.pac4j.core.client.Client
-import org.pac4j.openid.client.YahooOpenIdClient
+//import org.pac4j.openid.client.YahooOpenIdClient
 
 log.info "starting"
 String dispatcherPath = config.getProperty("dispatcherPath", "/s")
@@ -34,10 +34,10 @@ mapping.put('admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab4
 mapping.put('user', '04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb')
 module.bind(module.stringStringMap).annotatedWith(Names.named("usernamePasswordMapping")).toInstance(mapping)
 
-log.info("configuring authentication clients")
-YahooOpenIdClient yahooOpenIdClient = new YahooOpenIdClient()
-yahooOpenIdClient.name='yahoo'
-module.addClient(yahooOpenIdClient)
+//log.info("configuring authentication clients")
+//YahooOpenIdClient yahooOpenIdClient = new YahooOpenIdClient()
+//yahooOpenIdClient.name='yahoo'
+//module.addClient(yahooOpenIdClient)
 
 // optional
 //log.info("configuring controller hooks")

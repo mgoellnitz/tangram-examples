@@ -23,7 +23,9 @@
   <util:set id="loginProviders" value-type="java.lang.String">
     <value>form</value>
     <value>basic</value>
+    <!--
     <value>yahoo</value>
+    -->
   </util:set>
 
   <!-- to make the whole application login protected this will be the list of read capable persons
@@ -41,10 +43,11 @@
     <entry key="admin" value="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" />
   </util:map>
 
-  <!-- Example additional login client -->
+  <!-- Example additional login client 
   <bean id="yahooLogin" class="org.pac4j.openid.client.YahooOpenIdClient">
     <property name="name" value="yahoo"/>
   </bean>
+  -->
 
   <bean id="jdoConfigOverrides" class="java.util.HashMap">
     <constructor-arg>
