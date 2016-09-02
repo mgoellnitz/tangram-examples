@@ -24,7 +24,7 @@ buildscript {
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
     classpath 'tangram:gradle-plugin:1.2-SNAPSHOT'
-    classpath 'org.akhikhl.gretty:gretty:1.2.4'
+    classpath 'org.akhikhl.gretty:gretty:1.4.0'
     classpath 'de.undercouch:gradle-download-task:3.0.0'
   }
 }
