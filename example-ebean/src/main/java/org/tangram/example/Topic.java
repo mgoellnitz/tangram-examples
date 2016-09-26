@@ -22,6 +22,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Query;
 import javax.persistence.Transient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ import org.tangram.protection.ProtectedContent;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @DiscriminatorValue("Topic")
-public class Topic extends Linkable implements ProtectedContent, BeanFactoryAware {
+public class Topic extends Linkable implements ProtectedContent, BeanFactoryAware<Query> {
 
     private static final Logger LOG = LoggerFactory.getLogger(Topic.class);
 
@@ -55,7 +56,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     private List<Container> relatedContainers;
 
     @Transient
-    private BeanFactory<?> beanFactory;
+    private BeanFactory<Query> beanFactory;
 
     @Transient
     private RootTopic rootTopic = null;
@@ -117,7 +118,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     }
 
 
-    public void setBeanFactory(BeanFactory<?> beanFactory) {
+    public void setBeanFactory(BeanFactory<Query> beanFactory) {
         this.beanFactory = beanFactory;
     }
 

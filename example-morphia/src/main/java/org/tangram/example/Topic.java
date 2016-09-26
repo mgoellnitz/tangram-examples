@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Transient;
+import org.mongodb.morphia.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tangram.content.BeanFactory;
@@ -24,7 +25,7 @@ import org.tangram.protection.ProtectedContent;
 
 
 @Entity
-public class Topic extends Linkable implements ProtectedContent, BeanFactoryAware {
+public class Topic extends Linkable implements ProtectedContent, BeanFactoryAware<Query<?>> {
 
     private static final Logger LOG = LoggerFactory.getLogger(Topic.class);
 
@@ -39,7 +40,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     private List<Container> relatedContainers;
 
     @Transient
-    private BeanFactory<?> beanFactory;
+    private BeanFactory<Query<?>> beanFactory;
 
     @Transient
     private RootTopic rootTopic = null;
@@ -102,7 +103,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
 
     @Override
-    public void setBeanFactory(BeanFactory<?> beanFactory) {
+    public void setBeanFactory(BeanFactory<Query<?>> beanFactory) {
         this.beanFactory = beanFactory;
     }
 

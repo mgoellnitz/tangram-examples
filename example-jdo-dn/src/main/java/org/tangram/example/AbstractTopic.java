@@ -13,6 +13,7 @@ package org.tangram.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.jdo.Query;
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ import org.tangram.protection.ProtectedContent;
 
 
 @PersistenceCapable
-public abstract class AbstractTopic extends Linkable implements ProtectedContent, BeanFactoryAware {
+public abstract class AbstractTopic extends Linkable implements ProtectedContent, BeanFactoryAware<Query<?>> {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractTopic.class);
 
@@ -33,7 +34,7 @@ public abstract class AbstractTopic extends Linkable implements ProtectedContent
     private char[] teaser;
 
     @NotPersistent
-    private BeanFactory<?> beanFactory;
+    private BeanFactory<Query<?>> beanFactory;
 
     @NotPersistent
     private RootTopic rootTopic = null;
@@ -75,7 +76,7 @@ public abstract class AbstractTopic extends Linkable implements ProtectedContent
 
 
     @Override
-    public void setBeanFactory(BeanFactory<?> beanFactory) {
+    public void setBeanFactory(BeanFactory<Query<?>> beanFactory) {
         this.beanFactory = beanFactory;
     }
 

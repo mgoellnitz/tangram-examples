@@ -18,6 +18,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Query;
 import javax.persistence.Transient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ import org.tangram.protection.ProtectedContent;
 @Entity
 // Annotation needed for OpenJPA
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Topic extends Linkable implements ProtectedContent, BeanFactoryAware {
+public class Topic extends Linkable implements ProtectedContent, BeanFactoryAware<Query> {
 
     private static final Logger LOG = LoggerFactory.getLogger(Topic.class);
 
@@ -53,7 +54,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
     private List<Container> relatedContainers;
 
     @Transient
-    private BeanFactory<?> beanFactory;
+    private BeanFactory<Query> beanFactory;
 
     @Transient
     private RootTopic rootTopic = null;
@@ -116,7 +117,7 @@ public class Topic extends Linkable implements ProtectedContent, BeanFactoryAwar
 
 
     @Override
-    public void setBeanFactory(BeanFactory<?> beanFactory) {
+    public void setBeanFactory(BeanFactory<Query> beanFactory) {
         this.beanFactory = beanFactory;
     }
 
