@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-
- Copyright (C) 2011-2015 Martin Goellnitz
-
- This work is licensed under the Creative Commons Attribution 3.0
- Unported License. To view a copy of this license, visit
- http://creativecommons.org/licenses/by/3.0/ or send a letter to
- Creative Commons, 444 Castro Street, Suite 900, Mountain View,
+  
+ Copyright (C) 2015-2016 Martin Goellnitz
+ 
+ This work is licensed under the Creative Commons Attribution 3.0 
+ Unported License. To view a copy of this license, visit 
+ http://creativecommons.org/licenses/by/3.0/ or send a letter to 
+ Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
  California, 94041, USA.
-
+  
 -->
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-         version="2.5">
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
 
   <display-name>Tangram JPA Example using OpenJPA, EclipseLink, Hibernate, or DataNucleus - dinistiq version</display-name>
 
