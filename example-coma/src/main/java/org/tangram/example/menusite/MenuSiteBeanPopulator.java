@@ -1,6 +1,6 @@
 /**
  *
- * Copyright (C) 2011-2015 Martin Goellnitz
+ * Copyright (C) 2011-2017 Martin Goellnitz
  *
  * This work is licensed under the Creative Commons Attribution 3.0
  * Unported License. To view a copy of this license, visit
@@ -19,6 +19,7 @@ import javax.inject.Singleton;
 import org.tangram.coma.ComaBeanFactory;
 import org.tangram.coma.ComaBeanPopulator;
 import org.tangram.coma.ComaContent;
+import org.tangram.content.Content;
 
 @Named
 @Singleton
@@ -28,7 +29,6 @@ public class MenuSiteBeanPopulator implements ComaBeanPopulator {
     private ComaBeanFactory beanFactory;
 
     @Override
-    @SuppressWarnings("unchecked")
     public void populate(ComaContent content) {
         Collection<String> idCollection = beanFactory.listIds("Page", null, "id_", true);
         if (idCollection.size() > 0) {
@@ -42,8 +42,7 @@ public class MenuSiteBeanPopulator implements ComaBeanPopulator {
         if ("Category".equals(content.getDocumentType())) {
             String folderId = beanFactory.getChildId("/MenuSite/"+content.get("name"));
             idCollection = beanFactory.getChildrenIds(folderId, "Dish", null);
-            @SuppressWarnings("rawtypes")
-            Collection beanCollection = new ArrayList<>();
+            Collection<Content> beanCollection = new ArrayList<>();
             for (String id : idCollection) {
                 beanCollection.add(beanFactory.getBean(id));
             } // for
