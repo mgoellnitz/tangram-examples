@@ -43,7 +43,6 @@ comaTemplateResolver.setPackageName('com.coremedia.examples.cae.beans')
 module.addTemplateResolver(comaTemplateResolver)
 
 log.info "configuring bean factory"
-Set<String> basePackages = SystemUtils.stringSetFromParameterString(config.getProperty("basePackages", "org.tangram"))
 ComaBeanFactory beanFactory = new ComaBeanFactory()
 beanFactory.setParents(parents)
 beanFactory.setDbDriver(config.getProperty("coma.db.driver", "com.mysql.jdbc.Driver"))
