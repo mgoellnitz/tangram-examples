@@ -1,6 +1,6 @@
 /**
  *
- * Copyright (C) 2011-2016 Martin Goellnitz
+ * Copyright (C) 2011-2017 Martin Goellnitz
  *
  * This work is licensed under the Creative Commons Attribution 3.0
  * Unported License. To view a copy of this license, visit
@@ -92,7 +92,7 @@ dependencies {
   compile "tangram:tangram-${tangram_backend}:$tangram_version"
 
   runtime "ch.qos.logback:logback-classic:$versions.logback"
-  runtime "mysql:mysql-connector-java:5.1.40"
+  runtime "mysql:mysql-connector-java:5.1.41"
 
   testCompile "org.testng:testng:$versions.testng"
 
