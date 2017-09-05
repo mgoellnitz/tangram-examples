@@ -92,7 +92,7 @@ dependencies {
   compile "tangram:tangram-${tangram_backend}:$tangram_version"
 
   runtime "ch.qos.logback:logback-classic:$versions.logback"
-  runtime "mysql:mysql-connector-java:5.1.43"
+  runtime "mysql:mysql-connector-java:5.1.44"
 
   testCompile "org.testng:testng:$versions.testng"
 
