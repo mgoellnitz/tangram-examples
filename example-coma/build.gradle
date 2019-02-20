@@ -1,6 +1,6 @@
 /**
  *
- * Copyright (C) 2011-2017 Martin Goellnitz
+ * Copyright (C) 2011-2019 Martin Goellnitz
  *
  * This work is licensed under the Creative Commons Attribution 3.0
  * Unported License. To view a copy of this license, visit
@@ -24,7 +24,7 @@ buildscript {
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
     classpath 'tangram:gradle-plugin:1.2-SNAPSHOT'
-    classpath 'org.akhikhl.gretty:gretty:1.4.0'
+    classpath 'org.akhikhl.gretty:gretty:2.0.0'
     classpath 'de.undercouch:gradle-download-task:3.0.0'
   }
 }
