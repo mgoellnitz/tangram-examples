@@ -35,6 +35,6 @@ Custom Data Model
 -----------------
 
 Be aware, that you need to switch of DDL generation and applying after the first start.
-Otherwise the Database will be wiped on every startup. - It is switched of by default 
+Otherwise the Database will be wiped on every startup. - It is switched off by default 
 not to wipe the exampe content. See e.g. serverConfig.properties (using dinistiq)
 

@@ -41,7 +41,7 @@ The byte code transformation - for most JPA systems called enhancing - can be sw
 through the command line on building as well.
 
 ```bash
-gradle -Pbackend=dinistiq -Pjpa=openjpa -Pnoenhance clean build jettyRunWar
+gradle -Pbackend=dinistiq -Pjpa=openjpa -Pnoenhance clean build appRunWar
 ```
 
 First Input and Test

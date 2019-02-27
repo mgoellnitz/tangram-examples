@@ -19,12 +19,12 @@ buildscript {
   }
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
-    classpath 'tangram:gradle-plugin:1.2-SNAPSHOT'
+    classpath 'tangram:gradle-plugin:1.2.0'
     classpath 'org.akhikhl.gretty:gretty:2.0.0'
   }
 }
 
-def tangram_version = '1.2-SNAPSHOT'
+def tangram_version = '1.2.0'
 // Some switches to have all options in one example project - with optional external override
 def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // spring, dinistiq, guicy
 // Select the JPA implementation optionally via command line
@@ -85,7 +85,7 @@ dependencies {
   /* For JPA with DataNucleus */
   if (jpa_backend == 'datanucleus') {
     // DataNucleus does not work without byte-code transformation.
-    compile "tangram:tangram-jpa:$tangram_version:nucleus"
+    compile "tangram:tangram-jpa:$tangram_version:datanucleus"
     compile "org.datanucleus:datanucleus-api-jpa:$versions.datanucleus"
     compile "org.datanucleus:datanucleus-core:$versions.datanucleus"
     compile "$versions.jdo_api"
@@ -102,7 +102,6 @@ dependencies {
       compile "tangram:tangram-jpa:$tangram_version"
     }
     compile "org.eclipse.persistence:org.eclipse.persistence.jpa:$versions.eclipselink"
-    compile "$versions.persistence_api"
   }
 
   // For JPA with Hibernate
