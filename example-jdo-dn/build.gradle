@@ -20,7 +20,7 @@ buildscript {
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
     classpath 'tangram:gradle-plugin:1.2.0'
-    classpath 'org.akhikhl.gretty:gretty:2.0.0'
+    classpath 'org.gretty:gretty:2.3.1'
   }
 }
 
