@@ -43,7 +43,7 @@ apply plugin: 'war'
 // Use the plugin section to integrate this if you are not in a multiproject environment
 apply plugin: 'tangram.tools'
 // Use the plugin section to integrate this if you are not in a multiproject environment
-apply plugin: 'org.akhikhl.gretty'
+apply plugin: 'org.gretty'
 
 defaultTasks 'clean', 'build'
 

@@ -45,7 +45,7 @@ apply plugin: 'war'
 apply plugin: 'tangram.tools'
 apply plugin: 'de.undercouch.download'
 // Use the plugin section to integrate this if you are not in a multiproject environment
-apply plugin: 'org.akhikhl.gretty'
+apply plugin: 'org.gretty'
 
 defaultTasks 'clean', 'build'
 
