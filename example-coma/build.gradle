@@ -17,9 +17,9 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
   repositories {
+    jcenter()
     // Only used for tangram snapshots
     maven { url "http://oss.jfrog.org/artifactory/oss-snapshot-local" }
-    jcenter()
   }
   dependencies {
     // Cannot work with the version labels from the tangram plugin here
@@ -35,7 +35,7 @@ def tangram_backend = project.hasProperty('backend') ? "$backend" : 'guicy' // s
 // If you compile tangram yourself, you might want to try your local repo
 def use_local_repo = project.hasProperty('local')
 // Swith the servlet container to be used by the gretty plugin
-def servlet_container = project.hasProperty('container') ? "$container" : 'jetty9' // jetty7, jetty8', jetty9, tomcat7, tomcat8
+def servlet_container = project.hasProperty('container') ? "$container" : 'jetty9.4' // jetty7, jetty8', jetty9, jetty9.3, jetty9.4, tomcat7, tomcat8
 // The log directory to be used by gretty and tangram itself - only suitable for development with this default
 def log_dir = "./build" // /var/log/tangram
 
